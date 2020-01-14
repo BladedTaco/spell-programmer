@@ -5,8 +5,6 @@
 var _dir = 90 + image_angle;
 var _len = size*2;
 if (visible) {
-	spell.x = max_size
-	spell.y = max_size
 	x = max_size
 	y = max_size
 	_dir += spell.age
@@ -201,6 +199,15 @@ draw_set_colour(image_blend)
 draw_circle(x, y, size, true)
 draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, image_blend, 1)
 
+
+//draw connectors
+for (var i = 0; i <array_length_1d(connector_queue); i++) {
+	with (connector_queue[i]) {
+		draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
+	}
+}
+
+
 surface_reset_target();
 
 if (visible) {
@@ -211,6 +218,11 @@ if (visible) {
 	draw_clear_alpha(c_black, 0)
 }
 draw_surface(clip_surface, 0, 0)
+
+
+
+
+
 
 //draw capsule
 if (children_number > 0) {
@@ -238,26 +250,50 @@ if (children_number > 0) {
 
 
 //draw connectors
-	for (var i = 0; i <array_length_1d(connector_queue); i++) {
-		with (connector_queue[i]) {
-			draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
-		}
+for (var i = 0; i <array_length_1d(connector_queue); i++) {
+	with (connector_queue[i]) {
+		draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
 	}
-
-
+}
 
 if (visible) { //base trick tile
 	
 	//draw the spell
 	surface_reset_target();
+	
+	shader_set(shd_empty)
 	if (keyboard_check(vk_space)) {
+		//draw scaled with texture filtering
+		gpu_set_texfilter(true)
 		draw_surface_ext(spell_surface, 0, 0, mouse_x/500, mouse_x/500, 0, c_white, 1)
+		gpu_set_texfilter(false)
 	} else {
-		draw_surface(spell_surface, mouse_x - max_size, mouse_y - max_size)
+		//draw centered on mouse
+		draw_surface(spell_surface, spell.x - max_size, spell.y - max_size)
+		
+		with (obj_spell_part) {
+			if (point_in_circle(
+			mouse_x - (other.spell.x - other.max_size),
+			mouse_y - (other.spell.y - other.max_size),
+			x, y, size)) {
+				bubble_size += 10*(mouse_wheel_up() - mouse_wheel_down())
+				bubble_size = max(bubble_size, size)
+			}
+		}
+		if (point_in_circle(
+			mouse_x - (spell.x - max_size),
+			mouse_y - (spell.y - max_size),
+			x, y, size)) {
+				bubble_size += 10*(mouse_wheel_up() - mouse_wheel_down())
+				bubble_size = max(bubble_size, size)
+		}
 	}
+	shader_reset();
 }
 
 
-draw_text(50, 50, (mouse_x/200))
 
+
+
+draw_text(100, 100, (mouse_x/200))
 

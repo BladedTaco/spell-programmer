@@ -27,7 +27,7 @@ for (var i = 0; i < children_number; i++) {
 			} 
 		} else { //has children
 			//draw connector
-			_len = (other.size + size)*4;
+			_len = other.size*4 + bubble_size;
 			x = other.x + lengthdir_x(_len, _dir)
 			y = other.y + lengthdir_y(_len, _dir)
 			other.connector_queue[array_length_1d(other.connector_queue)] = id

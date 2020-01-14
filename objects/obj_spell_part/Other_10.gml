@@ -33,8 +33,10 @@ if (type = TYPE.COUNTER) {
 children_number = array_length_1d(children)
 if (children = -1) {
 	children_number = 0;	
-} else {
+	bubble_size = size;
+} else { //has children
 	//create each trick circle
+	bubble_size = 0;
 	for (var i = 0; i < children_number; i++) {
 		with (instance_create_depth(x, y, 0, obj_spell_part)) { //create it
 			index = other.children[i]; //give index
@@ -46,9 +48,12 @@ if (children = -1) {
 			if (size > other.size) {
 				other.size = size	
 			}
-			
+			if (children_number > 0) {
+				other.bubble_size += bubble_size
+			}
 		}
 	}
+	bubble_size += size*4;
 }
 
 

@@ -38,8 +38,9 @@ draw_set_halign(fa_center);
 draw_set_valign(fa_center);
 
 s=string_length(msg)
-
+gpu_set_texfilter(true)
 for(i=1;i<=s;i+=1)
 {
     draw_text_transformed(originx-lengthdir_x(radius,((i/s)*arc)+initdir)+2,originy+lengthdir_y(radius,((i/s)*arc)+initdir)+2,string_hash_to_newline(string_copy(msg,i,1)),1,1,((-i/s)*arc)-facing-initdir);
 }
+gpu_set_texfilter(false)

@@ -6,6 +6,8 @@ type = TYPE.BASIC
 name = ""
 value = 0;
 max_size = 0;
+size = 0;
+bubble_size = 0;
 children = []
 children_number = 0;
 base_size = 60;
@@ -25,5 +27,5 @@ zero_angle = 0;
 width = 4096
 height = 4096
 
-spell_surface = surface_create(width, height)
-clip_surface = surface_create(width, height)
+spell_surface = -1
+clip_surface = -1
