@@ -9,7 +9,7 @@ spell =
 [
 	[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]],
 	[SPELL.CONSTRUCT_VECTOR, "CONSTRUCT VECTOR", 0, [4, 5, 6]],
-	[SPELL.TEST, "TEST", 0, [4, 5, 6, 6, 6, 6, 6, 6, 6]],//[SPELL.CASTER, "CASTER", 0, -1],
+	[SPELL.CASTER, "CASTER", 0, -1],
 	[SPELL.TEST2, "TEST2", 0, [4, 5, 6, 6]],//[SPELL.MANA, "MANA SOURCE", 77, -1],
 	[SPELL.CONSTANT, "X", 0, -1],
 	[SPELL.CONSTANT, "Y", 0, -1],
