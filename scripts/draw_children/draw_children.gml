@@ -45,6 +45,15 @@ for (var i = 0; i < children_number; i++) {
 		//propogate max size
 		if (max_size > other.max_size) {
 			other.max_size = max_size	
+			//free surfaces so its redrawn
+			if (surface_exists(anticlockwise_surface)) {
+				surface_free(anticlockwise_surface)
+				anticlockwise_surface = -1;
+			}
+			if (surface_exists(clockwise_surface)) {
+				surface_free(clockwise_surface)
+				clockwise_surface = -1;
+			}
 		}
 	}
 	_dir += 360/children_number
