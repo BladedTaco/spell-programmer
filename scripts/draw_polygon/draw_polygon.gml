@@ -17,40 +17,29 @@ _dir = argument[3]
 _sides = argument[4]
 
 //other variables
-var _px, _py, i, _d;
-_px = [];
-_py = [];
+var i, _d;
 
 if (argument[5]) {//if filled
 	draw_primitive_begin(pr_trianglestrip) //set up primitive
 	for (i = 0; i < _sides; i++) {
 		_d = _dir + i*(360/_sides)
-		_px[i] = _x + lengthdir_x(_len, _d)
-		_py[i] = _y + lengthdir_y(_len, _d)
-		draw_vertex(_px[i], _py[i])
+		draw_vertex(_x + lengthdir_x(_len, _d), _y + lengthdir_y(_len, _d))
 		draw_vertex(x, y)
 	}
-	draw_vertex(_px[0], _py[0])
+	draw_vertex(_x + lengthdir_x(_len, _dir), _y + lengthdir_y(_len, _dir)) //draw start point
+	//draw the shape
 	draw_primitive_end();
 } else { //not filled
-	draw_primitive_begin(pr_linestrip) //set up primitive
+	var _t = 2
+	draw_primitive_begin(pr_trianglestrip) //set up primitive
 	for (i = 0; i < _sides; i++) {
 		_d = _dir + i*(360/_sides)
-		_px[i] = _x + lengthdir_x(_len, _d)
-		_py[i] = _y + lengthdir_y(_len, _d)
-		draw_vertex(_px[i], _py[i])
+		draw_vertex(_x + lengthdir_x(_len+_t, _d), _y + lengthdir_y(_len+_t, _d))
+		draw_vertex(_x + lengthdir_x(_len-_t, _d), _y + lengthdir_y(_len-_t, _d))
 	}
-	draw_vertex(_px[0], _py[0])
+	//draw initial corner
+	draw_vertex(_x + lengthdir_x(_len+_t, _dir), _y + lengthdir_y(_len+_t, _dir))
+	draw_vertex(_x + lengthdir_x(_len-_t, _dir), _y + lengthdir_y(_len-_t, _dir))
+	//draw the shape
 	draw_primitive_end();
-	
-	
-	
-	//draw_primitive_begin(pr_linestrip) //set up primitive
-	//for (i = 0; i < sides - 1; i++) {
-	//	draw_vertex((_px[i] + _px[i+1])/2, (_py[i] + _py[i+1])/2)
-	//}
-	//draw_vertex((_px[i] + _px[0])/2, (_py[i] + _py[0])/2)
-	//draw_vertex((_px[0] + _px[1])/2, (_py[0] + _py[1])/2)
-	
-	//draw_primitive_end();
 }

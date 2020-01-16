@@ -79,6 +79,14 @@
             }
         },
         {
+            "Key": "2f85ca13-6f2a-4757-ac18-e62b2bab6027",
+            "Value": {
+                "id": "0698de17-fed9-4d41-adc6-edd0291515f4",
+                "resourcePath": "scripts\\draw_circle_outline\\draw_circle_outline.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "3739c115-5f21-40c5-a8b2-dacfc5ff6a5b",
             "Value": {
                 "id": "3419a178-ce45-425f-a33c-23bb740bbeca",
@@ -448,7 +456,8 @@
         "4d9e6ded-1504-4996-a791-311fa3203e5d",
         "0639b468-28e8-4f5e-9fa2-c89c286f3b9c",
         "c1df6b06-5e71-4719-93f5-5884f7a1247d",
-        "f3806f18-b914-41aa-9045-d9098671e734"
+        "f3806f18-b914-41aa-9045-d9098671e734",
+        "2f85ca13-6f2a-4757-ac18-e62b2bab6027"
     ],
     "tutorial": ""
 }
