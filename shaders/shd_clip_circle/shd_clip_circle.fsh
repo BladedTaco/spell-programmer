@@ -22,11 +22,11 @@ void main() {
 		&& (((v_vPosition.x - u_alt_circle[0]) * (v_vPosition.x - u_alt_circle[0]))
 		+ ((v_vPosition.y - u_alt_circle[1]) * (v_vPosition.y - u_alt_circle[1]))
 		> u_alt_circle[2]*u_alt_circle[2])
-		//between the circles
-		&& ((v_vPosition.x + 10.0 > min(u_circle[0], u_alt_circle[0]))
-		&& (v_vPosition.y + 10.0 > min(u_circle[1], u_alt_circle[1]))
-		&& (v_vPosition.x - 10.0 < max(u_circle[0], u_alt_circle[0]))
-		&& (v_vPosition.y - 10.0 < max(u_circle[1], u_alt_circle[1]))) 
+		////between the circles
+		//&& ((v_vPosition.x + 15.0 > min(u_circle[0], u_alt_circle[0]))
+		//&& (v_vPosition.y + 15.0 > min(u_circle[1], u_alt_circle[1]))
+		//&& (v_vPosition.x - 15.0 < max(u_circle[0], u_alt_circle[0]))
+		//&& (v_vPosition.y - 15.0 < max(u_circle[1], u_alt_circle[1]))) 
 	);
 	
     gl_FragColor = col;

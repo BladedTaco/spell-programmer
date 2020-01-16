@@ -6,12 +6,48 @@
 
 
 if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface)) {
-	var _dir = image_angle;
-	shader_set(shd_empty)
-	draw_surface_ext(clockwise_surface, x - max_size/2, y - max_size/2, 1, 1, -_dir, c_white, 1)
-	draw_surface_ext(anticlockwise_surface, x - max_size/2, y - max_size/2, 1, 1, _dir, c_white, 1)
+	draw_children_new(false)
+	x = mouse_x
+	y = mouse_y
+	//set variables
+	var _dir = image_angle + spell.age*visible;
+	var _mid = max_size/2 + 2
+	var _x1, _y1, _x2, _y2;
+	//get offset to draw surfaces at
+	_x1 = _mid - lengthdir_x(sqrt(2)*(max_size+5),- _dir + 135)/2
+	_y1 = _mid - lengthdir_y(sqrt(2)*(max_size+5), -_dir + 135)/2
+	_x2 = _mid - lengthdir_x(sqrt(2)*(max_size+5), _dir + 135)/2
+	_y2 = _mid - lengthdir_y(sqrt(2)*(max_size+5), _dir + 135)/2
+	
+	//create circle surface and clear it
+	if (!surface_exists(circle_surface)) {
+		circle_surface = surface_create(max_size + 4, max_size + 4)	
+	}
+	surface_set_target(circle_surface)
+	draw_clear_alpha(c_black, 0)
+	
+	//set the shader and draw the surfaces
+	shader_set(shd_surface_empty)
+	draw_surface_ext(clockwise_surface, _x1, _y1, 1, 1, -_dir + 180, c_white, 1)
+	draw_surface_ext(anticlockwise_surface, _x2, _y2, 1, 1, _dir + 180, c_white, 1)
 	shader_reset();
-	draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, image_blend, 1)
+
+	//draw the sprite
+	draw_sprite_ext(sprite_index, 0, _mid, _mid, 1, 1, image_angle, image_blend, 1)
+	
+	//reset the draw target and draw the surface
+	surface_reset_target();
+	draw_surface(circle_surface, x - _mid, y - _mid)
+
+	//draw connectors
+	for (var i = 0; i <array_length_1d(connector_queue); i++) {
+		with (connector_queue[i]) {
+			draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
+		}
+	}
+	
+	
+	
 } else {
 	//handle surfaces
 	if (surface_exists(clockwise_surface)) {
@@ -36,19 +72,15 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 	real_x = x
 	real_y = y
 	
-	x = max_size/2 + 2
-	y = max_size/2 + 2
+	x = abs(max_size)/2 + 2
+	y = abs(max_size)/2 + 2
 	//clear surfaces and draw backing
 	surface_set_target(clockwise_surface)
 	draw_clear_alpha(c_black, 0)
 	draw_set_colour(COLOUR.EMPTY)
 	draw_circle(x, y, size, false)
-	surface_reset_target();
-	
-	surface_set_target(anticlockwise_surface)
-	draw_clear_alpha(c_black, 0)
-	draw_set_colour(COLOUR.EMPTY)
-	draw_circle(x, y, size, false)
+	draw_set_colour(image_blend)
+	draw_circle(x, y, size, true)
 	surface_reset_target();
 
 	//clear connector queue
@@ -135,11 +167,16 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 		
 		case TYPE.CONVERTER:
 		
-			surface_set_target(anticlockwise_surface);
+			surface_set_target(clockwise_surface);
 			//big back disc
 			draw_set_colour(COLOUR.EMPTY)
 			draw_circle(x, y, size*4 + 5, false)	
+			draw_set_colour(image_blend)
+			draw_circle(x, y, size*4, true)
 		
+			surface_reset_target()
+			
+			surface_set_target(anticlockwise_surface);
 			//name circle
 			draw_set_colour(image_blend)
 			draw_circle(x, y, size*2.6, false)
@@ -193,6 +230,10 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			draw_children(false); //draw child circles
 		
 		
+			if (!surface_exists(anticlockwise_surface)) {
+				exit;	
+			}
+			
 			//draw outer polygon
 		
 			//draw_polygon(x, y, size*(mouse_x/200), _dir, children_number, false)
@@ -224,7 +265,7 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 		
 		
 			//name
-			surface_set_target(anticlockwise_surface);
+			surface_set_target(clockwise_surface);
 			draw_set_colour(image_blend)
 			draw_text_circle_spaced(x, y, name + "   ", size - 30, 180, _dir)
 			draw_circle(x, y, size - 40, true)
@@ -234,6 +275,11 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			
 			//input text
 			surface_set_target(anticlockwise_surface);
+			draw_set_colour(COLOUR.SURFACE_EMPTY)
+			draw_polygon(x, y, size/cos(degtorad(180/children_number)), _dir + zero_angle + 180/children_number, children_number, true)
+			draw_set_colour(image_blend)
+			draw_polygon(x, y, size/cos(degtorad(180/children_number)), _dir + zero_angle + 180/children_number, children_number, false)
+			draw_circle(x, y, size, true)
 			for (var i = 0; i < input_number; i++) {
 				draw_set_colour(input_colour[i])
 				draw_text_circle(x, y, inputs[i] + "   ", size - 10, 180, -(_dir + zero_angle + (360/children_number)*i - (children_number-2)*180/children_number), 360/children_number, true)
@@ -246,105 +292,35 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			show_debug_message("unexpected type")
 		break;
 	}
-
-
-	//draw self
-	draw_set_colour(image_blend)
-	draw_circle(x, y, size, true)
-	draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, image_blend, 1)
-
-
-	//draw connectors
-	for (var i = 0; i <array_length_1d(connector_queue); i++) {
-		with (connector_queue[i]) {
-			draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
-		}
-	}
-	
 	x = real_x
 	y = real_y
 }
 
-if (visible) {
-	if (!surface_exists(spell_surface)) {
-		spell_surface = surface_create(width, height)
-	}
-	surface_set_target(spell_surface) 
-	draw_clear_alpha(c_black, 0)
-}
-//draw_surface(clip_surface, 0, 0)
 
 
 
 
+////draw capsule
+//if (children_number > 0) {
+//	draw_set_colour(image_blend)
+//	draw_circle(x, y, size*4, true)	
+//	if (type = TYPE.TRICK) {
+//		draw_set_colour(COLOUR.SPELL)
+//		draw_circle(x, y, max_size, true)
+//		shader_set(shd_fill)
+//		var uniform = shader_get_sampler_index(shd_fill, "u_sampler")
+//		texture_set_stage(uniform, surface_get_texture(clip_surface))
+//		uniform = shader_get_uniform(shd_fill, "u_circle")
+//		shader_set_uniform_f(uniform, x, y, max_size - 20)
+//		uniform = shader_get_uniform(shd_fill, "u_dir")
+//		shader_set_uniform_f(uniform, (_dir mod 360)/360)
+//		uniform = shader_get_uniform(shd_fill, "u_size")
+//		shader_set_uniform_f(uniform, 20)
+//		uniform = shader_get_uniform(shd_fill, "u_dim")
+//		shader_set_uniform_f(uniform, width, height)
 
-
-//draw capsule
-if (children_number > 0) {
-	draw_set_colour(image_blend)
-	draw_circle(x, y, size*4, true)	
-	if (type = TYPE.TRICK) {
-		draw_set_colour(COLOUR.SPELL)
-		draw_circle(x, y, max_size, true)
-		shader_set(shd_fill)
-		var uniform = shader_get_sampler_index(shd_fill, "u_sampler")
-		texture_set_stage(uniform, surface_get_texture(clip_surface))
-		uniform = shader_get_uniform(shd_fill, "u_circle")
-		shader_set_uniform_f(uniform, x, y, max_size - 20)
-		uniform = shader_get_uniform(shd_fill, "u_dir")
-		shader_set_uniform_f(uniform, (_dir mod 360)/360)
-		uniform = shader_get_uniform(shd_fill, "u_size")
-		shader_set_uniform_f(uniform, 20)
-		uniform = shader_get_uniform(shd_fill, "u_dim")
-		shader_set_uniform_f(uniform, width, height)
-
-		draw_rectangle(x - max_size, y - max_size, x + max_size, y + max_size, false)
-		shader_reset();
-	}
-}
-
-
-//draw connectors
-for (var i = 0; i <array_length_1d(connector_queue); i++) {
-	with (connector_queue[i]) {
-		draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
-	}
-}
-
-if (visible) { //base trick tile
-	
-	//draw the spell
-	surface_reset_target();
-	
-	shader_set(shd_empty)
-	if (keyboard_check(vk_space)) {
-		//draw scaled with texture filtering
-		gpu_set_texfilter(true)
-		draw_surface_ext(spell_surface, 0, 0, mouse_x/500, mouse_x/500, 0, c_white, 1)
-		gpu_set_texfilter(false)
-	} else {
-		//draw centered on mouse
-		draw_surface(spell_surface, spell.x - max_size, spell.y - max_size)
-		
-		with (obj_spell_part) {
-			if (point_in_circle(
-			mouse_x - (other.spell.x - other.max_size),
-			mouse_y - (other.spell.y - other.max_size),
-			x, y, size)) {
-				bubble_size += 10*(mouse_wheel_up() - mouse_wheel_down())
-				bubble_size = max(bubble_size, size)
-			}
-		}
-		if (point_in_circle(
-			mouse_x - (spell.x - max_size),
-			mouse_y - (spell.y - max_size),
-			x, y, size)) {
-				bubble_size += 10*(mouse_wheel_up() - mouse_wheel_down())
-				bubble_size = max(bubble_size, size)
-		}
-	}
-	shader_reset();
-}
-
-
+//		draw_rectangle(x - max_size, y - max_size, x + max_size, y + max_size, false)
+//		shader_reset();
+//	}
+//}
 draw_text(100, 100, (mouse_x/200))

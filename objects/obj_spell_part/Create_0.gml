@@ -29,7 +29,7 @@ real_y = 0;
 width = 4096
 height = 4096
 
-spell_surface = -1
 clip_surface = -1
 clockwise_surface = -1;
 anticlockwise_surface = -1;
+circle_surface = -1;

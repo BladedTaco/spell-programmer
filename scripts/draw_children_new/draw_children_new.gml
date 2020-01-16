@@ -15,22 +15,17 @@ for (var i = 0; i < children_number; i++) {
 				}
 				x = other.x + lengthdir_x(_len, _dir)
 				y = other.y + lengthdir_y(_len, _dir)
-				other.connector_queue[array_length_1d(other.connector_queue)] = id
 				
 			} else {
 				_len = other.size*4 - size*2; //nestle into triangle
 				x = other.x + lengthdir_x(_len, _dir)
 				y = other.y + lengthdir_y(_len, _dir)
-				if (size < other.size) {
-					other.connector_queue[array_length_1d(other.connector_queue)] = id
-				}
 			} 
 		} else { //has children
 			//draw connector
 			_len = other.size*4 + bubble_size;
 			x = other.x + lengthdir_x(_len, _dir)
 			y = other.y + lengthdir_y(_len, _dir)
-			other.connector_queue[array_length_1d(other.connector_queue)] = id
 		}
 		image_angle = _dir - 90
 		if (argument_count = 0) { //not skipped
@@ -40,23 +35,7 @@ for (var i = 0; i < children_number; i++) {
 				event_perform(ev_draw, 0)
 			}
 		}
-		//get max size
-		max_size = point_distance(x, y, parent.x, parent.y) + size*4*sign(children_number)
-		//propogate max size
-		if (max_size > other.max_size) {
-			other.max_size = max_size	
-			with (other) {
-			//free surfaces so its redrawn
-			if (surface_exists(anticlockwise_surface)) {
-				surface_free(anticlockwise_surface)
-				anticlockwise_surface = -1;
-			}
-			if (surface_exists(clockwise_surface)) {
-				surface_free(clockwise_surface)
-				clockwise_surface = -1;
-			}
-			}
-		}
+
 	}
 	_dir += 360/children_number
 }

@@ -25,5 +25,6 @@ enum COLOUR {
 	MANA = c_fuchsia,
 	ENTITY = c_green,
 	SPELL = c_ltgray,
-	EMPTY = $010101
+	EMPTY = $020202,	
+	SURFACE_EMPTY = $010101
 }
