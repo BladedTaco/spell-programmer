@@ -6,7 +6,6 @@
 
 
 if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface)) {
-	
 	if (visible) {
 		x = mouse_x
 		y = mouse_y
@@ -47,9 +46,10 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 	surface_reset_target();
 	
 	shader_set(shd_empty)
-	draw_surface(circle_surface, x - _mid, y - _mid)
+	draw_surface_ext(circle_surface, x - _mid*image_xscale, y - _mid*image_xscale, image_xscale, image_xscale, 0, c_white, 1)
 	shader_reset()
 	gpu_set_texfilter(true)
+	
 	
 	
 	for (i = 0; i < children_number; i++) {
@@ -58,14 +58,18 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 		}
 	}
 	
+	
 	//draw connectors
 	for (var i = 0; i < array_length_1d(connector_queue); i++) {
 		with (connector_queue[i]) {
-			draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
+			draw_connector(other.x, other.y, x, y, name, image_blend, size*image_xscale*(1 + 3*(children_number > 0)), other.size*other.image_xscale, _dir, 1/(1+other.level*0.5))
 		}
 	}
 	
 } else {
+	
+	image_xscale = 1/power(2, level)
+	
 	//handle surfaces
 	if (surface_exists(clockwise_surface)) {
 		surface_free(clockwise_surface)	
@@ -77,18 +81,9 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 	anticlockwise_surface = surface_create(max_size + 4, max_size + 4)
 	
 	
-	var _dir = 90// + image_angle;
+	var _dir = 90
 	var _len = size*2;
-	if (visible) {
-		x = max_size
-		y = max_size
-		_dir += spell.age
-	}
 
-
-	real_x = x
-	real_y = y
-	
 	x = abs(max_size)/2 + 2
 	y = abs(max_size)/2 + 2
 	//clear surfaces and draw backing
@@ -124,7 +119,7 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			draw_circle(x, y, size, false)
 			draw_set_colour(image_blend)
 			draw_circle_outline(x, y, size)
-			draw_text_circle_spaced(x, y, name + "   ", size - 10, 180, _dir)
+			draw_text_circle_spaced(x, y, name, size - 10, 180, _dir)
 			draw_circle_outline(x, y, size - 20)
 			
 			surface_reset_target();
@@ -159,7 +154,7 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 				draw_circle_curve(
 					x,y, size - 10 - o*20,
 					(_num/10)*64, _dir*_sign,
-					_num*36, 20, 1
+					_num*36, 22, 1
 				)
 				draw_circle_outline(x, y, size - o*20 - 20)
 				surface_reset_target();
@@ -171,7 +166,7 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			} else {
 				surface_set_target(clockwise_surface);
 			}
-			draw_text_circle_spaced(x, y, name + "   ", size - o*20 - 10, 180, -_dir*_sign)
+			draw_text_circle_spaced(x, y, name, size - o*20 - 10, 180, -_dir*_sign)
 			draw_circle_outline(x, y, size - o*20 - 20)
 			surface_reset_target();
 		break;
@@ -218,7 +213,7 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			//name
 			surface_set_target(clockwise_surface);
 			draw_set_colour(COLOUR.SPELL)
-			draw_text_circle_spaced(x, y, obj_spell.name + "   ", size*2.6 + 10, 180, _dir + 60)
+			draw_text_circle_spaced(x, y, obj_spell.name, size*2.6 + 10, 180, _dir + 60)
 
 
 			//name circle outer
@@ -228,7 +223,7 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			//icon outer
 			var _l, _d, _px, _py, _max;
 			_l = size*3.4
-			_max = floor((_l*3)/sprite_width)
+			_max = floor((_l*3)/sprite_width*image_xscale)
 			for (i = 0; i < _max; i++) {
 				_d = -_dir - 360*i/_max
 				_px = x + lengthdir_x(_l, _d)
@@ -238,12 +233,6 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 
 			surface_reset_target();
 		
-			//outer polygon (sized as triangle)
-			//draw_set_colour(COLOUR.EMPTY)
-			//draw_polygon(x, y, size*(mouse_x/200), _dir, children_number, true) //outer filled
-			//draw_triangle(_px[0], _py[0], _px[1], _py[1], _px[2], _py[2], false);		
-		
-		
 			draw_children(false); //draw child circles
 		
 		
@@ -252,27 +241,30 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			}
 			
 			//draw outer polygon
-		_dir = 92 //dont know why this is needed, but polygons are offset otherwise
+		var _d = 90 + zero_angle//dont know why this is needed, but polygons are offset otherwise
+		_l = cos(degtorad(180/children_number))
 			//draw_polygon(x, y, size*(mouse_x/200), _dir, children_number, false)
 			
 			draw_set_colour(COLOUR.EMPTY)
-			draw_polygon(x, y, size/cos(degtorad(180/children_number)), _dir + zero_angle + 180/children_number, children_number, true)
+			draw_polygon(x, y, size/_l, _d, children_number, true)
 		
 		
 			draw_set_colour(image_blend)
-			draw_polygon(x, y, size/cos(degtorad(180/children_number)), _dir + zero_angle + 180/children_number, children_number, false)
+			draw_polygon(x, y, size/_l, _d, children_number, false)
 			
 		
 			for (i = 0; i < children_number; i++) {
 				with (children[i]) {
 					if (children_number = 0) {
 						event_perform(ev_draw, 0)
-					
+						
+						get_rel_pos(other.id, i)
+						
 						surface_set_target(other.anticlockwise_surface);
 						draw_set_colour(COLOUR.EMPTY)
-						draw_polygon(x, y, size/cos(degtorad(180/other.children_number)), _dir + (360/other.children_number), other.children_number, true)
+						draw_polygon(x, y, size/_l, _d, other.children_number, true)
 						draw_set_colour(other.image_blend)
-						draw_polygon(x, y, size/cos(degtorad(180/other.children_number)), _dir + (360/other.children_number), other.children_number, false)
+						draw_polygon(x, y, size/_l, _d, other.children_number, false)
 						surface_reset_target()
 					} else {
 						event_perform(ev_draw, 0)	
@@ -284,7 +276,7 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			//name
 			surface_set_target(clockwise_surface);
 			draw_set_colour(image_blend)
-			draw_text_circle_spaced(x, y, name + "   ", size - 30, 180, _dir)
+			draw_text_circle_spaced(x, y, name, size - 30, 180, _dir)
 			draw_circle_outline(x, y, size - 40)
 			draw_circle_outline(x, y, size - 20)
 			surface_reset_target();
@@ -309,8 +301,6 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 			show_debug_message("unexpected type")
 		break;
 	}
-	x = real_x
-	y = real_y
 }
 
 

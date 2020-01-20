@@ -1,5 +1,5 @@
 //a shader to restrict drawing to an area
-varying vec2 v_vTexcoord;
+//varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 varying vec3 v_vPosition;
 //
@@ -9,7 +9,7 @@ uniform vec3 u_alt_circle;
 
 void main() {
 	
-	vec4 col = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
+	vec4 col = v_vColour;
 	
 	
 	//limit to within the circles

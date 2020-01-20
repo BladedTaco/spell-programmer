@@ -1,7 +1,7 @@
 //draw children(draw*)
 ///@param draw* - optional, skip drawing unless true
 
-var _dir = 90 + image_angle + spell.age*visible + zero_angle
+var _dir = 90 + image_angle + zero_angle
 var _len = size*2
 for (var i = 0; i < children_number; i++) {
 	with (children[i]) {

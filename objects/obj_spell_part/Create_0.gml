@@ -20,11 +20,11 @@ input_colour = [];
 input_number = 0;
 parent = noone; //the trick tile
 spell = noone; //the obj_spell
+creator = noone; //the previous tile
+level = 0;
 //width = room_width;
 //height = room_height;
 zero_angle = 0;
-real_x = 0;
-real_y = 0;
 
 width = 4096
 height = 4096

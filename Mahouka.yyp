@@ -71,6 +71,14 @@
             }
         },
         {
+            "Key": "10577e39-a84e-4111-bf3d-f199d3cffa67",
+            "Value": {
+                "id": "bcaa6e02-e963-4ddc-b3d2-010c2640d3d1",
+                "resourcePath": "scripts\\draw_connector_old\\draw_connector_old.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "17557c8d-36aa-42cc-b3d5-cdac64f953d8",
             "Value": {
                 "id": "b86dc9cf-592f-4edb-8321-b2ea2f248e72",
@@ -228,6 +236,22 @@
                 "id": "aa7ccd4e-d516-4221-8169-61ace4a2bf13",
                 "resourcePath": "scripts\\draw_text_circle\\draw_text_circle.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "8d8c5ed1-71ca-4d5a-9c78-30bad01e85bf",
+            "Value": {
+                "id": "155bcbb2-0ca5-4ac8-b51c-d809e3c4cce1",
+                "resourcePath": "scripts\\get_rel_pos\\get_rel_pos.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "8da7c374-47f6-48e6-bcbc-b93a5e1c2206",
+            "Value": {
+                "id": "766f0900-e67b-4ea1-9258-4a093a6cb8bf",
+                "resourcePath": "shaders\\shd_clip_circle_no_tex\\shd_clip_circle_no_tex.yy",
+                "resourceType": "GMShader"
             }
         },
         {
@@ -454,10 +478,12 @@
         "71d558d9-0d87-448b-beb3-4e5079802a92",
         "7f116a3e-93d2-4950-9b48-ac3dee310d42",
         "4d9e6ded-1504-4996-a791-311fa3203e5d",
+        "10577e39-a84e-4111-bf3d-f199d3cffa67",
         "0639b468-28e8-4f5e-9fa2-c89c286f3b9c",
         "c1df6b06-5e71-4719-93f5-5884f7a1247d",
         "f3806f18-b914-41aa-9045-d9098671e734",
-        "2f85ca13-6f2a-4757-ac18-e62b2bab6027"
+        "2f85ca13-6f2a-4757-ac18-e62b2bab6027",
+        "8d8c5ed1-71ca-4d5a-9c78-30bad01e85bf"
     ],
     "tutorial": ""
 }

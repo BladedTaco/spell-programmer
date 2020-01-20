@@ -1,6 +1,6 @@
 //draw children(draw*)
 ///@param draw* - optional, skip drawing unless true
-var _dir = 272 + image_angle + spell.age*visible + zero_angle
+var _dir = 270 + image_angle + spell.age*visible + zero_angle
 var _len = size*2
 for (var i = 0; i < children_number; i++) {
 	with (children[i]) {
@@ -12,17 +12,18 @@ for (var i = 0; i < children_number; i++) {
 					var _l = (size/cos(degtorad(180/other.children_number))	)*sin(degtorad(180/other.children_number)) //half side length
 					_len = sqrt(sqr(other.size*4) - sqr(_l)) - size; //nestle into 5-gon
 				}
-				x = other.x + lengthdir_x(_len, _dir)
-				y = other.y + lengthdir_y(_len, _dir)
+				x = other.x + lengthdir_x(_len*other.image_xscale, _dir)
+				y = other.y + lengthdir_y(_len*other.image_xscale, _dir)
 				
 			} else {
 				_len = other.size*4 - size*2; //nestle into triangle
-				x = other.x + lengthdir_x(_len, _dir)
-				y = other.y + lengthdir_y(_len, _dir)
+				x = other.x + lengthdir_x(_len*other.image_xscale, _dir)
+				y = other.y + lengthdir_y(_len*other.image_xscale, _dir)
 			} 
 		} else { //has children
 			//draw connector
-			_len = other.size*4 + bubble_size;
+			//_len = other.size*4 + bubble_size;
+			_len = other.size*4*other.image_xscale + bubble_size*image_xscale
 			x = other.x + lengthdir_x(_len, _dir)
 			y = other.y + lengthdir_y(_len, _dir)
 		}
@@ -34,7 +35,7 @@ for (var i = 0; i < children_number; i++) {
 				event_perform(ev_draw, 0)
 			}
 		}
-
+		
 	}
 	_dir += 360/children_number
 }
