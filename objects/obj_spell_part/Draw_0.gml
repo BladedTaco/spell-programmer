@@ -302,32 +302,3 @@ if (surface_exists(clockwise_surface) and surface_exists(anticlockwise_surface))
 		break;
 	}
 }
-
-
-
-
-
-////draw capsule
-//if (children_number > 0) {
-//	draw_set_colour(image_blend)
-//	draw_circle(x, y, size*4, true)	
-//	if (type = TYPE.TRICK) {
-//		draw_set_colour(COLOUR.SPELL)
-//		draw_circle(x, y, max_size, true)
-//		shader_set(shd_fill)
-//		var uniform = shader_get_sampler_index(shd_fill, "u_sampler")
-//		texture_set_stage(uniform, surface_get_texture(clip_surface))
-//		uniform = shader_get_uniform(shd_fill, "u_circle")
-//		shader_set_uniform_f(uniform, x, y, max_size - 20)
-//		uniform = shader_get_uniform(shd_fill, "u_dir")
-//		shader_set_uniform_f(uniform, (_dir mod 360)/360)
-//		uniform = shader_get_uniform(shd_fill, "u_size")
-//		shader_set_uniform_f(uniform, 20)
-//		uniform = shader_get_uniform(shd_fill, "u_dim")
-//		shader_set_uniform_f(uniform, width, height)
-
-//		draw_rectangle(x - max_size, y - max_size, x + max_size, y + max_size, false)
-//		shader_reset();
-//	}
-//}
-draw_text(100, 100, (mouse_x/200))
