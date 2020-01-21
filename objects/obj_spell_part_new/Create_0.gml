@@ -20,16 +20,17 @@ input_colour = [];
 input_number = 0;
 parent = noone; //the trick tile
 spell = noone; //the obj_spell
+creator = noone; //the previous tile
+level = 0;
 //width = room_width;
 //height = room_height;
 zero_angle = 0;
+life = 0
 
 width = 4096
 height = 4096
 
-spell_surface = -1
 clip_surface = -1
-
-
-anticlockwise_surface = -1
-clockwise_surface  = -1
+clockwise_surface = -1;
+anticlockwise_surface = -1;
+circle_surface = -1;

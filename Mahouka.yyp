@@ -55,6 +55,14 @@
             }
         },
         {
+            "Key": "0bb4e64d-08bb-4564-a801-6a2d02a450d4",
+            "Value": {
+                "id": "f95db61d-f362-4d66-b37f-48561b1945e8",
+                "resourcePath": "scripts\\get_rel_pos_new\\get_rel_pos_new.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "0de9416d-143c-4d4a-b426-0347ae46c866",
             "Value": {
                 "id": "563057ee-ad82-457e-806a-31f0bf32e20d",
@@ -92,6 +100,14 @@
                 "id": "0698de17-fed9-4d41-adc6-edd0291515f4",
                 "resourcePath": "scripts\\draw_circle_outline\\draw_circle_outline.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "3028c681-f8a1-41d3-b4d2-6fc2d800d6bb",
+            "Value": {
+                "id": "804a4b52-bb21-4514-913a-12b3e77f30a9",
+                "resourcePath": "objects\\obj_spell_part_new\\obj_spell_part_new.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -455,6 +471,14 @@
             }
         },
         {
+            "Key": "f7d1c040-543b-48c3-830b-124f39d1d1c5",
+            "Value": {
+                "id": "7e58fc68-1d88-4ac5-a18a-6d1cd47e06a9",
+                "resourcePath": "scripts\\draw_children_newer\\draw_children_newer.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "f9b5d383-d1fe-4d3c-a0e2-eaae267dfd02",
             "Value": {
                 "id": "2a7dfdc4-d6e9-4d2b-8705-86ff2472599c",
@@ -481,9 +505,11 @@
         "10577e39-a84e-4111-bf3d-f199d3cffa67",
         "0639b468-28e8-4f5e-9fa2-c89c286f3b9c",
         "c1df6b06-5e71-4719-93f5-5884f7a1247d",
+        "f7d1c040-543b-48c3-830b-124f39d1d1c5",
         "f3806f18-b914-41aa-9045-d9098671e734",
         "2f85ca13-6f2a-4757-ac18-e62b2bab6027",
-        "8d8c5ed1-71ca-4d5a-9c78-30bad01e85bf"
+        "8d8c5ed1-71ca-4d5a-9c78-30bad01e85bf",
+        "0bb4e64d-08bb-4564-a801-6a2d02a450d4"
     ],
     "tutorial": ""
 }

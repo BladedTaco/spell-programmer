@@ -36,7 +36,7 @@ if (children = -1) { //no children
 } else { //has children
 	//create each trick circle
 	for (var i = 0; i < children_number; i++) {
-		with (instance_create_depth(x, y, 0, obj_spell_part)) { //create it
+		with (instance_create_depth(x, y, 0, object_index)) { //create it
 			level = other.level + 1
 			index = other.children[i]; //give index
 			spell = other.spell

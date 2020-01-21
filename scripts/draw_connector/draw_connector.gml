@@ -1,4 +1,4 @@
-///@func draw_connector(x1, y1, x2, y2, text, colour, size, alt_size, age)
+///@func draw_connector(x1, y1, x2, y2, text, colour, size, alt_size, age, scale)
 ///@param x1
 ///@param y1
 ///@param x2
@@ -8,6 +8,7 @@
 ///@param size - the size of the endpoint circle
 ///@param alt_size - the size of the startpoint circle
 ///@param age - the age of the circle / animation index
+///@param scale - the scale of the connector
 ///@desc draws a connecting rod from point a to b
 
 var _x1, _y1, _x2, _y2, _x3, _y3, _string, _colour, _size, _alt_size, _age, _len, _dir, _off, _spd, _scl;

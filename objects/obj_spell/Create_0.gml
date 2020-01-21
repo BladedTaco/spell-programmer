@@ -25,7 +25,7 @@ spell =
 
 spell =
 [
-	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 12, 3]],
+	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 10, 3]],
 	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 5, 6]],
 	[SPELL.CASTER, "?CASTER?", 0, -1],
 	[SPELL.MANA, "?MANA?SOURCE?", 77, -1],
@@ -42,13 +42,14 @@ spell =
 	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
 ]
 
+
 var _s;
 
 //create each trick circle
 for (var i = 0; i < array_length_1d(spell); i++) {
 	_s = spell[i] //the tile
 	if (_s[2] = -1) { //is a trick tile
-		with (instance_create_depth(x - (room_width/4)*(i/3.5 - 1), y, 0, obj_spell_part)) { //create it
+		with (instance_create_depth(x - (room_width/4)*(i/3.5 - 1), y, 0, global.spell_part)) { //create it
 			x = room_width/2
 			y = room_height/2
 			index = i; //give index

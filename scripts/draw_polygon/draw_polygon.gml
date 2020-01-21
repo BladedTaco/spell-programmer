@@ -24,7 +24,7 @@ if (argument[5]) {//if filled
 	for (i = 0; i < _sides; i++) {
 		_d = _dir + i*(360/_sides)
 		draw_vertex(_x + lengthdir_x(_len, _d), _y + lengthdir_y(_len, _d))
-		draw_vertex(x, y)
+		draw_vertex(_x, _y)
 	}
 	draw_vertex(_x + lengthdir_x(_len, _dir), _y + lengthdir_y(_len, _dir)) //draw start point
 	//draw the shape

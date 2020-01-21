@@ -203,7 +203,7 @@ draw_sprite_ext(sprite_index, 0, x, y, 1, 1, image_angle, image_blend, 1)
 //draw connectors
 for (var i = 0; i <array_length_1d(connector_queue); i++) {
 	with (connector_queue[i]) {
-		draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
+		draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir, 1)
 	}
 }
 
@@ -252,7 +252,7 @@ if (children_number > 0) {
 //draw connectors
 for (var i = 0; i <array_length_1d(connector_queue); i++) {
 	with (connector_queue[i]) {
-		draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir)
+		draw_connector(other.x, other.y, x, y, string_replace(name, " ", ""), image_blend, size, other.size, _dir, 1)
 	}
 }
 
@@ -271,7 +271,7 @@ if (visible) { //base trick tile
 		//draw centered on mouse
 		draw_surface(spell_surface, spell.x - max_size, spell.y - max_size)
 		
-		with (obj_spell_part) {
+		with (object_index) {
 			if (point_in_circle(
 			mouse_x - (other.spell.x - other.max_size),
 			mouse_y - (other.spell.y - other.max_size),
