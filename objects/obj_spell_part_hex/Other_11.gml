@@ -5,3 +5,8 @@ for (var i = 0; i < children_number; i++) {
 		other.children[i] = id; //give id
 	}
 }
+
+if (type = TYPE.WIRE) {
+	name = children[0].name
+	image_blend = children[0].image_blend
+}

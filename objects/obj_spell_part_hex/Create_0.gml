@@ -9,6 +9,7 @@ max_size = 0;
 size = 0;
 bubble_size = 0;
 hex_size = 0;
+cell_size = 0;
 children = []
 children_number = 0;
 base_size = 60;

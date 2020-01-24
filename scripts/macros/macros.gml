@@ -5,7 +5,8 @@ enum TYPE {
 	TRICK,
 	CONVERTER,
 	COUNTER,
-	SHELL
+	SHELL,
+	WIRE
 }
 
 enum SPELL {
@@ -15,7 +16,8 @@ enum SPELL {
 	CONSTANT,
 	MANA,
 	TEST,
-	TEST2	
+	TEST2,
+	CONNECTOR
 }
 
 enum COLOUR {
@@ -25,6 +27,7 @@ enum COLOUR {
 	MANA = c_fuchsia,
 	ENTITY = c_green,
 	SPELL = c_ltgray,
+	SHELL = c_gray,
 	CONNECTOR = c_black,
 	EMPTY = $020202,	
 	SURFACE_EMPTY = $010101

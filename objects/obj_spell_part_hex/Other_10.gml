@@ -25,13 +25,18 @@ if (array_length_1d(_array) > 4) {
 	input_number = array_length_1d(inputs)
 }
 
-if (type = TYPE.COUNTER) {
-	size = base_size + string_length(string(value))*20
-}
-
 //get number of children
 children_number = array_length_1d(children)
 if (children = -1) { //no children
 	children_number = 0;
 }
 
+if (type = TYPE.COUNTER) {
+	size = base_size + string_length(string(value))*20
+} else if (children_number > 0) {
+	if (type = TYPE.WIRE) {
+		size -= 20
+	} else {
+		size += 20	
+	}
+}
