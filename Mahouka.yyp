@@ -327,6 +327,14 @@
             }
         },
         {
+            "Key": "b664144b-d77f-49c2-ab4c-97d0e0ed4796",
+            "Value": {
+                "id": "f60a7e40-a78c-4298-8a3c-4d2968c8b67a",
+                "resourcePath": "objects\\obj_spell_part_hex\\obj_spell_part_hex.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "bece4b93-ffa3-4c85-b3d6-29acc58869dc",
             "Value": {
                 "id": "dc65ebc5-c765-41ce-9318-6b65bf08bac7",

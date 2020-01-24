@@ -4,7 +4,7 @@ children = []; //init child array
 age = 0; //how long the circle has been visible
 name = "?JUMP?BOOST?" //spell name
 //vertically is each tile/circle
-//each circle is [TILE, NAME, VALUE, CHILDREN, TYPE]
+//each circle is [TILE, NAME, VALUE, INPUTS, TILE_POS]
 spell =
 [
 	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 2, 3]],
@@ -43,23 +43,69 @@ spell =
 ]
 
 
-var _s;
+spell =
+[
+	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 9, 2], [0,0]],
+	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [3, 4, 5], [1,1]],
+	[SPELL.MANA, "?MANA?SOURCE?", 77, -1, [3,-1]],
+	[SPELL.CONSTANT, "?X?", 0, -1, [0,2]],
+	[SPELL.CONSTANT, "?Y?", 0, -1, [2,2]],
+	[SPELL.CONSTANT, "?Z?", 1, -1, [3,1]],
+	[SPELL.CONSTANT, "?X?", 0, -1, [-1,1]],
+	[SPELL.CONSTANT, "?Y?", 0, -1, [-4,0]],
+	[SPELL.CONSTANT, "?Z?", 1, -1, [-4,2]],
+	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [6, 10, 7], [-2,0]],
+	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [6, 7, 8], [-3, 1]]
+	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
+]
 
-//create each trick circle
-for (var i = 0; i < array_length_1d(spell); i++) {
-	_s = spell[i] //the tile
-	if (_s[2] = -1) { //is a trick tile
-		with (instance_create_depth(x - (room_width/4)*(i/3.5 - 1), y, 0, global.spell_part)) { //create it
+
+if (global.spell_part != obj_spell_part_hex) {
+	var _s;
+
+	//create each trick circle
+	for (var i = 0; i < array_length_1d(spell); i++) {
+		_s = spell[i] //the tile
+		if (_s[2] = -1) { //is a trick tile
+			with (instance_create_depth(x - (room_width/4)*(i/3.5 - 1), y, 0, global.spell_part)) { //create it
+				x = room_width/2
+				y = room_height/2
+				index = i; //give index
+				spell = other.id
+				parent = id;
+				level = 0;
+				event_user(0) //get data
+				other.children[i] = id; //give id
+				visible = true;
+			}
+		}
+	}
+} else {
+	var _bubble = 0, _hex = 0;
+	//create each trick circle
+	for (var i = 0; i < array_length_1d(spell); i++) {
+		with (instance_create_depth(x, y, 0, global.spell_part)) { //create it
 			x = room_width/2
 			y = room_height/2
 			index = i; //give index
 			spell = other.id
-			parent = id;
 			level = 0;
-			event_user(0) //get data
 			other.children[i] = id; //give id
-			visible = true;
+			event_user(0) //get data
+			//get bubble size
+			if (size > _bubble) {
+				_bubble = size	
+			}
 		}
 	}
+	//calculate hex size
+	_hex = _bubble*2/sqrt(3)
+	//give bubble and hex size
+	for (i = 0; i < array_length_1d(children); i++) {
+		with (children[i]) {
+			event_user(1) //get children
+			bubble_size = _bubble
+			hex_size = _hex
+		}	
+	}
 }
-
