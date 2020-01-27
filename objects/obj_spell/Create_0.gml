@@ -4,6 +4,10 @@ children = []; //init child array
 children_number = 0;
 age = 0; //how long the circle has been visible
 name = "?JUMP?BOOST?" //spell name
+
+spell_surface = -1;
+size = 0;
+
 //vertically is each tile/circle
 //each circle is [TILE, NAME, VALUE, INPUTS, TILE_POS]
 spell =
@@ -83,7 +87,7 @@ if (global.spell_part != obj_spell_part_hex) {
 		}
 	}
 } else {
-	var _bubble = 0, _hex = 0;
+	var _bubble = 0, _hex = 0, _s;
 	children_number = array_length_1d(spell)
 	//create each trick circle
 	for (var i = 0; i < children_number; i++) {
@@ -99,6 +103,10 @@ if (global.spell_part != obj_spell_part_hex) {
 			if (size > _bubble) {
 				_bubble = size	
 			}
+			_s = other.spell[i] //the tile
+			if (_s[2] = -1) { //is a trick tile
+				other.sprite_index = sprite_index
+			}
 		}
 	}
 	//calculate hex size
@@ -110,6 +118,7 @@ if (global.spell_part != obj_spell_part_hex) {
 			bubble_size = _bubble
 			hex_size = _hex
 			cell_size = size*2/sqrt(3)
+			other.size = max(other.size, point_distance(0, 0, (bubble_size+6)*pos_x, (hex_size+6)*pos_y*1.5) + cell_size + 60)
 		}	
 	}
 }

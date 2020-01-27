@@ -28,7 +28,7 @@ enum COLOUR {
 	ENTITY = c_green,
 	SPELL = c_ltgray,
 	SHELL = c_gray,
-	CONNECTOR = c_black,
+	CONNECTOR = $020202,
 	EMPTY = $020202,	
 	SURFACE_EMPTY = $010101
 }

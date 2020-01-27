@@ -31,7 +31,7 @@ _scl = argument[9]
 _len = point_distance(_x1, _y1, _x2, _y2)
 _dir = point_direction(_x1, _y1, _x2, _y2)
 _off = string_width(_string)
-_spd = _off/60
+_spd = _off/90
 
 
 
