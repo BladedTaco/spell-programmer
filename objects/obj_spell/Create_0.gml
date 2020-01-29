@@ -66,59 +66,37 @@ spell =
 ]
 
 
-if (global.spell_part != obj_spell_part_hex) {
-	var _s;
-
-	//create each trick circle
-	for (var i = 0; i < array_length_1d(spell); i++) {
-		_s = spell[i] //the tile
+var _bubble = 0, _hex = 0, _s;
+children_number = array_length_1d(spell)
+//create each trick circle
+for (var i = 0; i < children_number; i++) {
+	with (instance_create_depth(x, y, 0, obj_spell_part_hex)) { //create it
+		x = room_width/2
+		y = room_height/2
+		index = i; //give index
+		spell = other.id
+		level = 0;
+		other.children[i] = id; //give id
+		event_user(0) //get data
+		//get bubble size
+		if (size > _bubble) {
+			_bubble = size	
+		}
+		_s = other.spell[i] //the tile
 		if (_s[2] = -1) { //is a trick tile
-			with (instance_create_depth(x - (room_width/4)*(i/3.5 - 1), y, 0, global.spell_part)) { //create it
-				x = room_width/2
-				y = room_height/2
-				index = i; //give index
-				spell = other.id
-				parent = id;
-				level = 0;
-				event_user(0) //get data
-				other.children[i] = id; //give id
-				visible = true;
-			}
+			other.sprite_index = sprite_index
 		}
 	}
-} else {
-	var _bubble = 0, _hex = 0, _s;
-	children_number = array_length_1d(spell)
-	//create each trick circle
-	for (var i = 0; i < children_number; i++) {
-		with (instance_create_depth(x, y, 0, global.spell_part)) { //create it
-			x = room_width/2
-			y = room_height/2
-			index = i; //give index
-			spell = other.id
-			level = 0;
-			other.children[i] = id; //give id
-			event_user(0) //get data
-			//get bubble size
-			if (size > _bubble) {
-				_bubble = size	
-			}
-			_s = other.spell[i] //the tile
-			if (_s[2] = -1) { //is a trick tile
-				other.sprite_index = sprite_index
-			}
-		}
-	}
-	//calculate hex size
-	_hex = _bubble*2/sqrt(3)
-	//give bubble and hex size
-	for (i = 0; i < children_number; i++) {
-		with (children[i]) {
-			event_user(1) //get children
-			bubble_size = _bubble
-			hex_size = _hex
-			cell_size = size*2/sqrt(3)
-			other.size = max(other.size, point_distance(0, 0, (bubble_size+6)*pos_x, (hex_size+6)*pos_y*1.5) + cell_size + 60)
-		}	
+}
+//calculate hex size
+_hex = _bubble*2/sqrt(3)
+//give bubble and hex size
+for (i = 0; i < children_number; i++) {
+	with (children[i]) {
+		event_user(1) //get children
+		bubble_size = _bubble
+		hex_size = _hex
+		cell_size = size*2/sqrt(3)
+		other.size = max(other.size, point_distance(0, 0, (bubble_size+6)*pos_x, (hex_size+6)*pos_y*1.5) + cell_size + 60)
 	}
 }

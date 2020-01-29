@@ -103,14 +103,6 @@
             }
         },
         {
-            "Key": "3028c681-f8a1-41d3-b4d2-6fc2d800d6bb",
-            "Value": {
-                "id": "804a4b52-bb21-4514-913a-12b3e77f30a9",
-                "resourcePath": "objects\\obj_spell_part_new\\obj_spell_part_new.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
             "Key": "3739c115-5f21-40c5-a8b2-dacfc5ff6a5b",
             "Value": {
                 "id": "3419a178-ce45-425f-a33c-23bb740bbeca",
@@ -255,14 +247,6 @@
             }
         },
         {
-            "Key": "8f84196b-b2e1-46b8-8aed-71193207eaec",
-            "Value": {
-                "id": "0d985c9c-cf79-4566-887e-55696c54a768",
-                "resourcePath": "objects\\obj_spell_part\\obj_spell_part.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
             "Key": "9b85d857-dd41-4013-8bda-dfcba1312098",
             "Value": {
                 "id": "6e64d6f1-2d8c-4e69-b1d9-37ff046d96da",
@@ -311,18 +295,18 @@
             }
         },
         {
+            "Key": "b2137d97-1ef8-49ca-a96c-42784cd2e9c5",
+            "Value": {
+                "id": "b8127105-f40d-4c6c-8fcb-ca61c55943a8",
+                "resourcePath": "timelines\\timeline0\\timeline0.yy",
+                "resourceType": "GMTimeline"
+            }
+        },
+        {
             "Key": "b664144b-d77f-49c2-ab4c-97d0e0ed4796",
             "Value": {
                 "id": "f60a7e40-a78c-4298-8a3c-4d2968c8b67a",
                 "resourcePath": "objects\\obj_spell_part_hex\\obj_spell_part_hex.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
-            "Key": "bece4b93-ffa3-4c85-b3d6-29acc58869dc",
-            "Value": {
-                "id": "dc65ebc5-c765-41ce-9318-6b65bf08bac7",
-                "resourcePath": "objects\\obj_spell_part_old\\obj_spell_part_old.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -476,14 +460,6 @@
                 "id": "1f7b4b51-b16b-46d2-b2b9-9d4b19dd854f",
                 "resourcePath": "extensions\\Draw_Text_In_A_Circle\\Draw_Text_In_A_Circle.yy",
                 "resourceType": "GMExtension"
-            }
-        },
-        {
-            "Key": "f6326178-ba6e-4980-a82f-c322f6a19cb0",
-            "Value": {
-                "id": "5fefa530-fa7e-41bb-bd14-1f47ef46a3a1",
-                "resourcePath": "objects\\obj_circle\\obj_circle.yy",
-                "resourceType": "GMObject"
             }
         },
         {

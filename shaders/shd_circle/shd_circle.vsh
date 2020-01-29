@@ -15,7 +15,7 @@ uniform float u_size;
 uniform float u_arc;
 uniform float u_spaced;
 
-const float tau = 3.1415*2.0;
+const float tau = 3.14159265358979*2.0;
 
 void main()
 {

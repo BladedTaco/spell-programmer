@@ -36,21 +36,21 @@
 				//get the number, direction of rotation, and string
 				var _num = real(string_char_at(string(value), o+1))
 				switch (string_length(string(value)) - o) {
-					case 1:	_str = "ONE "; break;
-					case 2:	_str = "TEN "; break;	
-					case 3:	_str = "HUN "; break;
-					case 4:	_str = "THO "; break;	
+					case 1:	_str = " ONE "; break;
+					case 2:	_str = " TEN "; break;	
+					case 3:	_str = " HUN "; break;
+					case 4:	_str = " THO "; break;	
 				}
 				
 				//draw the text fill
 				draw_text_circle(
 					x, y, string_repeat(_str, 10), size - 10 - o*20,
-					_dir*_sign, 360, false, false)
+					_dir*_sign, 360, true, false, true
 				)
 				//draw the fill bar
 				draw_circle_curve(
 					x,y, size - 10 - o*20,
-					(_num/10)*64, -_dir*_sign,
+					(_num/10)*64, _dir*_sign,
 					_num*36, 21, 1
 				)
 				//draw the ring
