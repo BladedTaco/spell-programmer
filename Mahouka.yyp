@@ -207,14 +207,6 @@
             }
         },
         {
-            "Key": "71d558d9-0d87-448b-beb3-4e5079802a92",
-            "Value": {
-                "id": "63ee2198-8552-4eaf-be0a-532d4c6ef1d2",
-                "resourcePath": "scripts\\draw_text_circle_spaced\\draw_text_circle_spaced.yy",
-                "resourceType": "GMScript"
-            }
-        },
-        {
             "Key": "71e22b7a-374b-4d38-9fef-80a8b6e983d9",
             "Value": {
                 "id": "ae1c5950-f59f-42ad-9cec-8d6f528ec85d",
@@ -244,14 +236,6 @@
                 "id": "7d56d90e-a9ff-40c9-ad97-329592755fe2",
                 "resourcePath": "views\\81ecfcb2-9826-402a-8aa7-c5013e1b2dca.yy",
                 "resourceType": "GMFolder"
-            }
-        },
-        {
-            "Key": "8a83da57-d123-40b0-9782-5db95877811d",
-            "Value": {
-                "id": "aa7ccd4e-d516-4221-8169-61ace4a2bf13",
-                "resourcePath": "scripts\\draw_text_circle\\draw_text_circle.yy",
-                "resourceType": "GMScript"
             }
         },
         {
@@ -439,6 +423,14 @@
             }
         },
         {
+            "Key": "ecda5946-1bac-4a85-92bb-e7db9804410b",
+            "Value": {
+                "id": "b25314c5-9292-4744-89b5-7c290ca782c4",
+                "resourcePath": "scripts\\draw_text_circle\\draw_text_circle.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "ee5ba75c-f94e-40a0-8d7c-56420b4fd0c9",
             "Value": {
                 "id": "4c2ab28e-efc8-4f83-8df5-016021fe3ba0",
@@ -451,6 +443,14 @@
             "Value": {
                 "id": "8a485fa9-7be6-4fc1-93a9-9530861d406b",
                 "resourcePath": "shaders\\shd_clip_no_tex\\shd_clip_no_tex.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
+            "Key": "f08d7c79-45f1-4d9f-875c-ef4b8c4109c3",
+            "Value": {
+                "id": "9a8971c8-7a7f-4497-b73a-6c61d3b1aefe",
+                "resourcePath": "shaders\\shd_circle\\shd_circle.yy",
                 "resourceType": "GMShader"
             }
         },
@@ -514,8 +514,7 @@
     "script_order": [
         "6eba5036-53f8-4982-b36b-e56826c644f0",
         "774f41f0-23eb-42d6-9243-4c1bb7801665",
-        "8a83da57-d123-40b0-9782-5db95877811d",
-        "71d558d9-0d87-448b-beb3-4e5079802a92",
+        "ecda5946-1bac-4a85-92bb-e7db9804410b",
         "7f116a3e-93d2-4950-9b48-ac3dee310d42",
         "4d9e6ded-1504-4996-a791-311fa3203e5d",
         "10577e39-a84e-4111-bf3d-f199d3cffa67",

@@ -20,7 +20,7 @@
 	switch (type) {
 		case TYPE.BASIC:
 			//draw name and its ring
-			draw_text_circle_spaced(x, y, name, size - 10, 180, _dir)
+			draw_text_circle(x, y, name, size - 10, _dir, 360, true)
 			draw_circle_outline(x, y, size - 20)
 		break;
 	
@@ -29,7 +29,7 @@
 			var _str, _sign = -1;
 			//draw the name and its ring
 			var o = string_length(string(value));
-			draw_text_circle_spaced(x, y, name, size - o*20 - 10, 180, _dir)
+			draw_text_circle(x, y, name, size - o*20 - 10, _dir, 360, true)
 			draw_circle_outline(x, y, size - o*20 - 20)
 			//for each ring
 			for (--o; o >= 0; o--) {
@@ -45,13 +45,13 @@
 				//draw the text fill
 				draw_text_circle(
 					x, y, string_repeat(_str, 10), size - 10 - o*20,
-					180, _dir*_sign
+					_dir*_sign, 360, false, false)
 				)
 				//draw the fill bar
 				draw_circle_curve(
 					x,y, size - 10 - o*20,
 					(_num/10)*64, -_dir*_sign,
-					_num*36, 22, 1
+					_num*36, 21, 1
 				)
 				//draw the ring
 				draw_circle_outline(x, y, size - o*20 - 20)
@@ -70,7 +70,7 @@
 		
 			//name and rings
 			draw_set_colour(image_blend)
-			draw_text_circle_spaced(x, y, name, size - 30, 180, _dir)
+			draw_text_circle(x, y, name, size - 30, _dir, 360, true, true)
 			draw_circle_outline(x, y, size - 40)
 			draw_circle_outline(x, y, size - 20)
 			
@@ -80,7 +80,7 @@
 			draw_circle_outline(x, y, size)
 			for (var i = 0; i < input_number; i++) {
 				draw_set_colour(input_colour[i])
-				draw_text_circle(x, y, inputs[i] + "   ", size - 10, 180, -(_dir + zero_angle + (360/children_number)*i - (children_number-2)*180/children_number), 360/children_number, true)
+				draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(_dir + zero_angle + (360/children_number)*i - (children_number-2)*180/children_number), 360/children_number, false, true)
 			}
 		break;
 	

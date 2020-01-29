@@ -1,20 +1,22 @@
 /// @description 
 if (global.spell_part = obj_spell_part_hex) {
+	//set dir
+	var _dir = age
+	draw_sprite_ext(spr_add_motion, 0, 25, 25, 1, 1, _dir, c_white, 1)
 	
+	//create and prep the surface
 	if (!surface_exists(spell_surface)) {
 		spell_surface = surface_create(room_width, room_height)	
 	}
-	
 	surface_set_target(spell_surface)
 	draw_clear_alpha(c_black, 0)
-	
-	//shell
-	var _dir = age
+
 	//name circle
 	draw_set_colour(c_black)
 	draw_circle(x, y, size + 90, false)
 	draw_set_colour(COLOUR.SPELL)
-	draw_text_circle_spaced(x, y, name, size + 10, 180, _dir + 60)
+	draw_text_circle(x, y, name, size + 10, _dir, 360, true, true)
+	draw_line(x, y, x+lengthdir_x(900, _dir), y+lengthdir_y(900, _dir))
 
 	//name circle outer
 	draw_set_colour(COLOUR.TRICK)
@@ -100,5 +102,4 @@ if (global.spell_part = obj_spell_part_hex) {
 	shader_set(shd_empty)
 	draw_surface(spell_surface, 0, 0)
 	shader_reset();
-	
 }
