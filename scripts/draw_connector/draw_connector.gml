@@ -67,12 +67,10 @@ shader_set_uniform_f(u_circle, _x2, _y2, _size - 1);
 draw_set_colour(_colour)
 draw_set_halign(fa_left)
 draw_set_valign(fa_middle)
-gpu_set_texfilter(false)
 draw_text_transformed(
 	_x1 - _scl*lengthdir_x(_age, _dir), _y1 - _scl*lengthdir_y(_age, _dir),
 	string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl),
 	_scl, _scl, _dir
 )
-gpu_set_texfilter(true)
 
 shader_reset();

@@ -58,13 +58,11 @@ _age = _age*_spd mod _off
 draw_set_colour(_colour)
 draw_set_halign(fa_left)
 draw_set_valign(fa_middle)
-gpu_set_texfilter(false)
 draw_text_transformed(
 	_x1 + lengthdir_x(_age - _off, _dir), _y1 + lengthdir_y(_age - _off, _dir),
 	string_repeat(_string, 1 + ceil((_len - _size)/_off)),
 	1, 1, _dir
 )
-gpu_set_texfilter(true)
 
 surface_reset_target()
 

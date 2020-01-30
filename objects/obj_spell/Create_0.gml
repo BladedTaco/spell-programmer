@@ -3,6 +3,7 @@
 children = []; //init child array
 children_number = 0;
 age = 0; //how long the circle has been visible
+sub_age = [0, 0, 0]; //half the age for slower moving things
 name = "?JUMP?BOOST?" //spell name
 
 spell_surface = -1;

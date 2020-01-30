@@ -1,6 +1,7 @@
 /// @description 
 //set dir
 var _dir = age
+var _sub_dir = sub_age
 draw_sprite_ext(spr_add_motion, 0, 25, 25, 1, 1, _dir, c_white, 1)
 	
 //create and prep the surface
@@ -14,7 +15,7 @@ draw_clear_alpha(c_black, 0)
 draw_set_colour(c_black)
 draw_circle(x, y, size + 90, false)
 draw_set_colour(COLOUR.SPELL)
-draw_text_circle(x, y, name, size + 10, -_dir, 360, true, true)
+draw_text_circle(x, y, name, size + 10, -_sub_dir[1], 360, true, true)
 
 //name circle outer
 draw_set_colour(COLOUR.TRICK)
@@ -26,7 +27,7 @@ var _l, _d, _px, _py, _max;
 _l = size + 55
 _max = floor((_l*3)/sprite_width)
 for (i = 0; i < _max; i++) {
-	_d = _dir - 360*i/_max
+	_d = _sub_dir[1] - 360*i/_max
 	_px = x + lengthdir_x(_l, _d)
 	_py = y + lengthdir_y(_l, _d)
 	draw_sprite_ext(sprite_index, image_index, _px, _py, 1, 1, _d - 90, image_blend, 1)
