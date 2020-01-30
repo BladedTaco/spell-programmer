@@ -53,7 +53,7 @@ spell =
 [
 	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 9, 11], [0,0]],
 	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [3, 4, 5], [1,1]],
-	[SPELL.MANA, "?MANA?SOURCE?", 77, -1, [3,-1]],
+	[SPELL.MANA, "?MANA?SOURCE?", 7, -1, [3,-1]],
 	[SPELL.CONSTANT, "?X?", 0, -1, [0,2]],
 	[SPELL.CONSTANT, "?Y?", 0, -1, [2,2]],
 	[SPELL.CONSTANT, "?Z?", 1, -1, [3,1]],
