@@ -10,6 +10,8 @@ uniform sampler2D u_sampler;
 uniform float u_dir;
 uniform vec2 u_dim;
 uniform float u_size;
+uniform float u_border;
+uniform float u_border_mul;
 
 
 vec4 pixel(float x_off, float y_off) {
@@ -32,7 +34,7 @@ void main()
 		
 	//not near anything on application surface
 	vec4 alt_col = texture2D(u_sampler, v_vPosition.xy/u_dim.xy);
-	float mul = u_size;
+	float mul = u_border;
 	//float a_mul = u_size*sqrt(2.0)/2.0;
 	float x_mul = mul*sqrt(3.0)/2.0;
 	float y_mul = mul*0.5;
@@ -77,9 +79,9 @@ void main()
 	
 	//add border
 	alt_col = vec4(0.0, 0.0, 0.0, 0.0);
-	mul *= 2.0;
-	x_mul *= 2.0;
-	y_mul *= 2.0;
+	mul *= u_border_mul;
+	x_mul *= u_border_mul;
+	y_mul *= u_border_mul;
 	//alt_col += pixel(mul, 0.0);
 	//alt_col += pixel(-mul, 0.0);
 	alt_col += pixel(0.0, mul);

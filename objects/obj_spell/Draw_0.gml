@@ -38,8 +38,8 @@ for (i = 0; i < _max; i++) {
 for (var i = 0; i < children_number; i++) {
 	with (children[i]) {
 		//update position
-		x = spell.x + (bubble_size+6)*pos_x
-		y = spell.y + (hex_size+6)*pos_y*1.5
+		x = spell.x + bubble_size*pos_x
+		y = spell.y + hex_size*pos_y*1.5
 			
 		//back polygon backing
 		draw_set_colour(COLOUR.EMPTY)
@@ -92,6 +92,10 @@ uniform = shader_get_uniform(shd_fill, "u_dir")
 shader_set_uniform_f(uniform, (age mod 360)/360)
 uniform = shader_get_uniform(shd_fill, "u_size")
 shader_set_uniform_f(uniform, 20)
+uniform = shader_get_uniform(shd_fill, "u_border")
+shader_set_uniform_f(uniform, 2)
+uniform = shader_get_uniform(shd_fill, "u_border_mul")
+shader_set_uniform_f(uniform, 6)
 uniform = shader_get_uniform(shd_fill, "u_dim")
 shader_set_uniform_f(uniform, room_width, room_height)
 draw_rectangle(x - size, y - size, x + size, y + size, false)

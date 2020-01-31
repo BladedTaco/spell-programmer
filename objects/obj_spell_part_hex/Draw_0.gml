@@ -38,8 +38,13 @@
 				switch (string_length(string(value)) - o) {
 					case 1:	_str = " ONE "; break;
 					case 2:	_str = " TEN "; break;	
-					case 3:	_str = " HUN "; break;
-					case 4:	_str = " THO "; break;	
+					case 3:	_str = " HUND "; break;
+					case 4:	_str = " THOUSAND "; break;	
+					case 5:	_str = " TEN?THOU "; break;	
+					case 6:	_str = " HUND?THOU "; break;	
+					case 7:	_str = " MILLION "; break;
+					case 8:	_str = " TEN?MILLION "; break;
+					default: _str = " PLEASE JUST STOP "; break;
 				}
 				
 				//draw the text fill

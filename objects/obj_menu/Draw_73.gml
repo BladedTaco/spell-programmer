@@ -2,7 +2,9 @@
 draw_self();
 
 draw_set_colour(c_black)
+draw_polygon(x, y, obj_spell.hex_size, 90, 6, false)
 draw_rectangle(x - 25, y - 25, x + 25, y + 25, false)
 draw_set_colour(c_white)
 draw_set_halign(fa_center)
 draw_text(x, y, string(pos_x) + "," + string(pos_y))
+draw_text(x, y + 25, string(value))

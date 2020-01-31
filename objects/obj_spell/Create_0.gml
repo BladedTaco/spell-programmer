@@ -5,6 +5,8 @@ children_number = 0;
 age = 0; //how long the circle has been visible
 sub_age = [0, 0, 0]; //half the age for slower moving things
 name = "?JUMP?BOOST?" //spell name
+bubble_size = 0;
+hex_size = 0;
 
 spell_surface = -1;
 size = 0;
@@ -53,7 +55,7 @@ spell =
 [
 	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 9, 11], [0,0]],
 	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [3, 4, 5], [1,1]],
-	[SPELL.MANA, "?MANA?SOURCE?", 7, -1, [3,-1]],
+	[SPELL.MANA, "?MANA?SOURCE?", 12345678, -1, [3,-1]],
 	[SPELL.CONSTANT, "?X?", 0, -1, [0,2]],
 	[SPELL.CONSTANT, "?Y?", 0, -1, [2,2]],
 	[SPELL.CONSTANT, "?Z?", 1, -1, [3,1]],
@@ -62,7 +64,12 @@ spell =
 	[SPELL.CASTER, "?CASTER?", 0, -1, [-4,2]],
 	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [6, 10, 7], [-2,0]],
 	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [6, 7, 8], [-3, 1]],
-	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [1,-1]]
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [1,-1]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [2,0]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [4,0]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [5,-1]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [4,-2]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [2,-2]]
 	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
 ]
 
@@ -81,7 +88,9 @@ for (var i = 0; i < children_number; i++) {
 		event_user(0) //get data
 		//get bubble size
 		if (size > _bubble) {
-			_bubble = size	
+			if (type != TYPE.COUNTER) {
+				_bubble = size	
+			}
 		}
 		_s = other.spell[i] //the tile
 		if (_s[2] = -1) { //is a trick tile
@@ -91,13 +100,15 @@ for (var i = 0; i < children_number; i++) {
 }
 //calculate hex size
 _hex = _bubble*2/sqrt(3)
+bubble_size = _bubble + 32
+hex_size = _hex + 32
 //give bubble and hex size
 for (i = 0; i < children_number; i++) {
 	with (children[i]) {
 		event_user(1) //get children
-		bubble_size = _bubble
-		hex_size = _hex
+		bubble_size = _bubble + 32
+		hex_size = _hex + 32
 		cell_size = size*2/sqrt(3)
-		other.size = max(other.size, point_distance(0, 0, (bubble_size+6)*pos_x, (hex_size+6)*pos_y*1.5) + cell_size + 60)
+		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
 	}
 }
