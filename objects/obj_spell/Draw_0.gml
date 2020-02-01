@@ -3,7 +3,7 @@
 var _dir = age
 var _sub_dir = sub_age
 draw_sprite_ext(spr_add_motion, 0, 25, 25, 1, 1, _dir, c_white, 1)
-	
+
 //create and prep the surface
 if (!surface_exists(spell_surface)) {
 	spell_surface = surface_create(room_width, room_height)	
@@ -105,3 +105,22 @@ shader_reset();
 shader_set(shd_empty)
 draw_surface(spell_surface, 0, 0)
 shader_reset();
+
+//draw noise effect
+//create noise surface
+if (!surface_exists(noise_surface)) {
+	noise_surface = surface_create(2048, 2048)	
+}
+surface_set_target(noise_surface)
+draw_clear_alpha(c_black, 0)
+shader_set(shd_random)
+var _uniform = shader_get_uniform(shd_random, "u_age")
+shader_set_uniform_f(_uniform, true_age)
+draw_rectangle(0, 0, 2048, 2048, false)
+//draw_sprite(spr_mana, 0, 0, 0)
+shader_reset()
+surface_reset_target();
+
+//manipulate noise surface
+
+draw_surface(noise_surface, 0, 0)

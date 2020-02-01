@@ -7,7 +7,9 @@ sub_age = [0, 0, 0]; //half the age for slower moving things
 name = "?JUMP?BOOST?" //spell name
 bubble_size = 0;
 hex_size = 0;
+true_age = 0;
 
+noise_surface = -1;
 spell_surface = -1;
 size = 0;
 

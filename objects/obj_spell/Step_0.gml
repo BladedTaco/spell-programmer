@@ -4,4 +4,5 @@ if (!keyboard_check(vk_shift)) {
 	sub_age[0] = (sub_age[0] + 1/2) mod 360
 	sub_age[1] = (sub_age[1] + 1/3) mod 360
 	sub_age[2] = (sub_age[2] + 1/4) mod 360
+	true_age++;
 }
