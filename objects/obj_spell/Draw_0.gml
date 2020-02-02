@@ -107,20 +107,68 @@ draw_surface(spell_surface, 0, 0)
 shader_reset();
 
 //draw noise effect
-//create noise surface
+
+//create noise surface if needed
 if (!surface_exists(noise_surface)) {
+	//create surface and clear it
 	noise_surface = surface_create(2048, 2048)	
+	surface_set_target(noise_surface)
+	draw_clear_alpha(c_black, 0)
+	//randomly populate the surface
+	shader_set(shd_perlin_noise)
+	draw_rectangle(0, 0, 2048, 2048, false)
+	shader_reset()
+	surface_reset_target();
 }
-surface_set_target(noise_surface)
+
+//create particle surface if needed
+if (!surface_exists(particle_surface)) {
+	particle_surface = surface_create(2048, 2048)	
+	surface_set_target(particle_surface)
+	draw_clear_alpha(c_black, 0)
+	shader_set(shd_random)
+	var _uniform = shader_get_uniform(shd_random, "u_age")
+	shader_set_uniform_f(_uniform, true_age)
+	_uniform = shader_get_uniform(shd_random, "u_alpha")
+	shader_set_uniform_f(_uniform, 0.95)
+	draw_rectangle(0, 0, 2048, 2048, false)
+	shader_reset()
+	surface_reset_target();
+}
+
+//create and clear surface
+if (!surface_exists(alt_particle_surface)) {
+	alt_particle_surface = surface_create(2048, 2048)	
+}
+surface_set_target(alt_particle_surface)
 draw_clear_alpha(c_black, 0)
-shader_set(shd_random)
-var _uniform = shader_get_uniform(shd_random, "u_age")
-shader_set_uniform_f(_uniform, true_age)
-draw_rectangle(0, 0, 2048, 2048, false)
-//draw_sprite(spr_mana, 0, 0, 0)
-shader_reset()
+draw_surface(particle_surface, 0, 0)
 surface_reset_target();
+
+surface_set_target(particle_surface)
+draw_clear_alpha(c_black, 0)
+
+gpu_set_texfilter(false)
+//draw the next iteration of the particle surface to the alt
+shader_set(shd_noise_movement)
+var _uniform = shader_get_sampler_index(shd_noise_movement, "s_noise")
+texture_set_stage(_uniform, surface_get_texture(noise_surface))
+_uniform = shader_get_sampler_index(shd_noise_movement, "s_particle")
+texture_set_stage(_uniform, surface_get_texture(alt_particle_surface))
+_uniform = shader_get_uniform(shd_noise_movement, "u_dim")
+shader_set_uniform_f(_uniform, 2048, 2048)
+draw_rectangle(0, 0, 2048, 2048, false)
+shader_reset();
+surface_reset_target();
+gpu_set_texfilter(true)
+
 
 //manipulate noise surface
 
-draw_surface(noise_surface, 0, 0)
+
+draw_surface_ext(noise_surface, x - 1024, y - 1024, 1, 1, 0, c_white, 0.45)
+draw_surface(particle_surface, x - 1024, y - 1024)
+
+if (mouse_check_button(mb_left)) {
+	surface_free(particle_surface)
+}	

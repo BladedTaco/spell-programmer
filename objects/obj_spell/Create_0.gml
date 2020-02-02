@@ -9,6 +9,8 @@ bubble_size = 0;
 hex_size = 0;
 true_age = 0;
 
+particle_surface = -1;
+alt_particle_surface = -1;
 noise_surface = -1;
 spell_surface = -1;
 size = 0;

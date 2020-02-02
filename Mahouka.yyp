@@ -87,6 +87,14 @@
             }
         },
         {
+            "Key": "15fd8070-7b44-4dc4-b86e-fdd19c428f1d",
+            "Value": {
+                "id": "7b7450bc-10e9-4e7e-9595-ffbc28d3465b",
+                "resourcePath": "shaders\\shd_noise_movement\\shd_noise_movement.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "17557c8d-36aa-42cc-b3d5-cdac64f953d8",
             "Value": {
                 "id": "b86dc9cf-592f-4edb-8321-b2ea2f248e72",
@@ -380,6 +388,14 @@
                 "id": "d25e09c0-189d-434f-a565-7eedfd0ca93f",
                 "resourcePath": "sprites\\spr_shell\\spr_shell.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "cbb1c538-a876-4814-962d-8479b97d264f",
+            "Value": {
+                "id": "df946f76-0298-46ac-8048-68d4d93cc44b",
+                "resourcePath": "shaders\\shd_perlin_noise\\shd_perlin_noise.yy",
+                "resourceType": "GMShader"
             }
         },
         {

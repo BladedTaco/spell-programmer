@@ -3,6 +3,7 @@
 //
 varying vec2 pos;
 uniform float u_age;
+uniform float u_alpha;
 vec2 new_pos;
 float angle;
 float len;
@@ -17,7 +18,7 @@ void main()
 {
 	
 	new_pos.x = pos.x - 1024.0;
-	new_pos.y = pos.y - 512.0;
+	new_pos.y = pos.y - 1024.0;
 	
 	len = sqrt(new_pos.x*new_pos.x + new_pos.y*new_pos.y);
 	angle = atan(new_pos.y, new_pos.x);
@@ -28,7 +29,7 @@ void main()
 		gold_noise(new_pos, 1.0),
 		gold_noise(new_pos, 2.0),
 		gold_noise(new_pos, 3.0),
-		1.0*float(gold_noise(new_pos, 4.0) > 0.95)
+		1.0*float(gold_noise(new_pos, 4.0) > u_alpha)
 	);
 }
 
