@@ -22,8 +22,8 @@ vec4 pixel(float x_off, float y_off) {
 void main()
 {
     vec4 col = noise(0.0, 0.0); //get the noise of the given pixel
-	vec4 outcol = pixel((col.r - 0.5)*col.b*5.0, (col.g - 0.5)*col.b*5.0);
-	outcol.a = 1.0;
+	vec4 outcol = pixel((col.r - 0.5)*col.b*10.0, (col.g - 0.5)*col.b*10.0);
+	outcol.a = 0.995*float(outcol.a > 0.5);
 	
 	gl_FragColor = outcol;
 }
