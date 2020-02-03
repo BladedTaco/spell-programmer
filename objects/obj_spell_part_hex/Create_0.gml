@@ -37,3 +37,5 @@ clip_surface = -1
 clockwise_surface = -1;
 anticlockwise_surface = -1;
 circle_surface = -1;
+
+radius = 1;

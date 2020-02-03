@@ -21,8 +21,8 @@ draw_text_circle(_cx, _cy, name, size + 10, -_sub_dir[1], 360, true, true)
 
 //name circle outer
 draw_set_colour(COLOUR.TRICK)
-draw_circle(_cx, _cy, size + 20, true)
-draw_circle(_cx, _cy, size + 90, true)
+draw_circle_outline(_cx, _cy, size + 20)
+draw_circle_outline(_cx, _cy, size + 90)
 	
 //icon outer
 var _l, _d, _px, _py, _max;
@@ -85,7 +85,7 @@ draw_clear_alpha(c_black, 0)
 	
 //do filling (not done on surface)
 draw_set_colour(COLOUR.SPELL)
-draw_circle(_cx, _cy, size, true)
+draw_circle_outline(_cx, _cy, size)
 shader_set(shd_fill)
 var uniform = shader_get_sampler_index(shd_fill, "u_sampler")
 texture_set_stage(uniform, surface_get_texture(spell_surface))
@@ -96,9 +96,9 @@ shader_set_uniform_f(uniform, (age mod 360)/360)
 uniform = shader_get_uniform(shd_fill, "u_size")
 shader_set_uniform_f(uniform, 20)
 uniform = shader_get_uniform(shd_fill, "u_border")
-shader_set_uniform_f(uniform, 2)
+shader_set_uniform_f(uniform, 4)
 uniform = shader_get_uniform(shd_fill, "u_border_mul")
-shader_set_uniform_f(uniform, 6)
+shader_set_uniform_f(uniform, 4)
 uniform = shader_get_uniform(shd_fill, "u_dim")
 shader_set_uniform_f(uniform, 2048, 2048)
 draw_rectangle(_cx - size, _cy - size, _cx + size, _cy + size, false)
@@ -149,7 +149,7 @@ shader_set(shd_random_alpha)
 var _uniform = shader_get_uniform(shd_random_alpha, "u_age")
 shader_set_uniform_f(_uniform, true_age)
 _uniform = shader_get_uniform(shd_random_alpha, "u_alpha")
-shader_set_uniform_f(_uniform, 0.98)
+shader_set_uniform_f(_uniform, 0.991)
 draw_surface(spell_surface, 0, 0)
 shader_reset();
 surface_reset_target();
@@ -185,11 +185,11 @@ surface_reset_target();
 //manipulate noise surface
 
 
-//draw_surface_ext(noise_surface, x - 1024, y - 1024, 1, 1, 0, c_white, 1)
-draw_surface_ext(alt_particle_surface, x - 1024, y - 1024, 1, 1, 0, c_white, 0.3)
+shader_set(shd_alpha)
+draw_surface(alt_particle_surface, x - 1024, y - 1024)
+shader_reset();
 	
 //draw the spell_surface
 shader_set(shd_empty)
 draw_surface(spell_surface, x - 1024, y - 1024)
 shader_reset();
-draw_surface_ext(alt_particle_surface, x - 1024, y - 1024, 1, 1, 0, c_white, 0.05)

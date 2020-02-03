@@ -33,6 +33,9 @@ if (children = -1) { //no children
 
 if (type = TYPE.COUNTER) {
 	size = base_size + string_length(string(value))*20
+	if (value >= 100) {
+		radius = 2;
+	}
 } else if (children_number > 0) {
 	if (type = TYPE.WIRE) {
 		size -= 20
