@@ -190,6 +190,6 @@ draw_surface(alt_particle_surface, x - 1024, y - 1024)
 shader_reset();
 	
 //draw the spell_surface
-shader_set(shd_empty)
+shader_set(shd_alpha_spell)
 draw_surface(spell_surface, x - 1024, y - 1024)
 shader_reset();

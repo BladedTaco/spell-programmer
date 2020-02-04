@@ -95,6 +95,14 @@
             }
         },
         {
+            "Key": "126f6704-6d4d-4aeb-b00e-9729079f96d5",
+            "Value": {
+                "id": "63717028-f221-4c43-8be2-d3d71380ba88",
+                "resourcePath": "shaders\\shd_alpha_spell\\shd_alpha_spell.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "15fd8070-7b44-4dc4-b86e-fdd19c428f1d",
             "Value": {
                 "id": "7b7450bc-10e9-4e7e-9595-ffbc28d3465b",
