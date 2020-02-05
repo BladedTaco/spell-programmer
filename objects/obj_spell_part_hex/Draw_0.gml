@@ -54,9 +54,9 @@
 				)
 				//draw the fill bar
 				draw_circle_curve(
-					x,y, size - 10 - o*20,
-					(_num/10)*64, _dir*_sign,
-					_num*36, 21, 1
+					x, y, size - 10 - o*20,
+					_dir*_sign,
+					_num*36, 21
 				)
 				//draw the ring
 				draw_circle_outline(x, y, size - o*20 - 20)

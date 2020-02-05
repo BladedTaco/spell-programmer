@@ -119,6 +119,14 @@
             }
         },
         {
+            "Key": "2c667068-569e-4d23-9e91-9d21652dadbc",
+            "Value": {
+                "id": "282f1645-5afd-44ac-b414-8cea9a5cf369",
+                "resourcePath": "shaders\\shd_arc\\shd_arc.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "2f85ca13-6f2a-4757-ac18-e62b2bab6027",
             "Value": {
                 "id": "0698de17-fed9-4d41-adc6-edd0291515f4",

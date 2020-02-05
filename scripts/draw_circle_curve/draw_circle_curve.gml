@@ -17,7 +17,7 @@ angadd — Angle of last circle's point (relative to ang).
 width — Width of circle (may be positive or negative).
 outline — 0 = curve, 1 = sector. 
 */
-
+/*
 var xx,yy,R,B,A,Aa,W,a,lp,lm,dp,dm,AAa,Wh,Out,i;
 xx=argument0
 yy=argument1
@@ -64,3 +64,23 @@ draw_vertex(xx+lengthdir_x(lp,AAa),yy+lengthdir_y(lp,AAa)) //Last point.
 //SECTOR
 }
 draw_primitive_end()
+
+
+//*/
+
+var _x, _y, _r, _w, _rad, _initdir, _arc;
+_x = argument[0]
+_y = argument[1]
+_r = argument[2]
+_initdir = (3600 - argument[3]) mod 360; //flip direction so its the correct direction in shader
+_arc = argument[4]
+_w = argument[5]/2
+_rad = _r + _w
+
+shader_set(shd_arc)
+var _uniform = shader_get_uniform(shd_arc, "u_circle")
+shader_set_uniform_f(_uniform, _x, _y, _rad)
+_uniform = shader_get_uniform(shd_arc, "u_arc")
+shader_set_uniform_f(_uniform, _r - _w, degtorad(_initdir), degtorad(_initdir + _arc))
+draw_rectangle(_x - _rad, _y - _rad, _x + _rad, _y + _rad, false)
+shader_reset()
