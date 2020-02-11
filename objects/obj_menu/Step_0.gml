@@ -18,3 +18,6 @@ if (instance_exists(child)) {
 		}
 	}
 }
+
+life++;
+
