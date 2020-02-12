@@ -26,5 +26,6 @@ if !(instance_exists(obj_menu)) {
 		pos_x = _mx
 		pos_y = _my
 		child = _child
+		event_user(0)
 	}
 }
