@@ -8,12 +8,17 @@ name = "?JUMP?BOOST?" //spell name
 bubble_size = 0;
 hex_size = 0;
 true_age = 0;
+x_diff = 0;
+y_diff = 0;
 
 particle_surface = -1;
 alt_particle_surface = -1;
 noise_surface = -1;
 spell_surface = -1;
 size = 0;
+surface_size = 4096//2048;
+half_surface_size = surface_size/2;
+
 
 //vertically is each tile/circle
 //each circle is [TILE, NAME, VALUE, INPUTS, TILE_POS]

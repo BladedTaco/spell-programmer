@@ -5,6 +5,7 @@ varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 varying vec2 pos;
 uniform float u_age;
+uniform float u_dim;
 float PI = 3.14159265358979026264;
 
 float rand(vec2 c){
@@ -12,7 +13,7 @@ float rand(vec2 c){
 }
  
 float noise(vec2 p, float freq ){
-	float unit = 2048.0/freq;
+	float unit = u_dim/freq;
 	vec2 ij = floor(p/unit);
 	vec2 xy = mod(p,unit)/unit;
 	//xy = 3.*xy*xy-2.*xy*xy*xy;
@@ -52,8 +53,8 @@ void main()
 	vec4 col = vec4(0.0, 0.0, 0.0, 1.0);
 	col = vec4(
 		5.0*pNoise(real_pos + vec2(u_age, u_age), 6),
-		5.0*pNoise(real_pos + vec2(2048.0 + u_age, 2048.0 - u_age), 2),
-		0.5 + pNoise(real_pos + vec2(-2048.0 - u_age, -2048.0 + u_age), 4),
+		5.0*pNoise(real_pos + vec2(u_dim + u_age, u_dim - u_age), 2),
+		0.5 + pNoise(real_pos + vec2(-u_dim - u_age, -u_dim + u_age), 4),
 		1.0
 	);
 	

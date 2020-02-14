@@ -11,8 +11,9 @@ menu_length = 6;
 
 parent = noone;
 child = noone;
-active = false;
+active = true;
 selected = 0;
+spell = noone;
 
 life = 0;
 image_alpha = 0

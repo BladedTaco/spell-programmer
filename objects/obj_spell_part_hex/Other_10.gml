@@ -31,12 +31,13 @@ if (children = -1) { //no children
 	children_number = 0;
 }
 
+size = base_size;
 if (type = TYPE.COUNTER) {
 	size = base_size + string_length(string(value))*20
 	if (value >= 100) {
 		radius = 2;
 	}
-} else if (children_number > 0) {
+} else if (type != TYPE.BASIC) {
 	if (type = TYPE.WIRE) {
 		size -= 20
 	} else {
