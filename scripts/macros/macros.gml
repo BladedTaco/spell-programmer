@@ -17,7 +17,8 @@ enum SPELL {
 	MANA,
 	TEST,
 	TEST2,
-	CONNECTOR
+	CONNECTOR,
+	EMPTY
 }
 
 enum COLOUR {
@@ -31,4 +32,22 @@ enum COLOUR {
 	CONNECTOR = $020202,
 	EMPTY = $020202,	
 	SURFACE_EMPTY = $010101
+}
+
+
+menu_options = ["Set Tile", "Set Output", "Set Value", "Set Name", "Move Tile", "Select Group"]
+
+enum MENU {
+	TIL,
+	OUT,
+	VAL,
+	NAM,
+	MOV,
+	SEL,
+	TILE_EMPTY,
+	TILE_CONNECTOR,
+	TILE_BASIC,
+	TILE_CONSTANT,
+	TILE_CONVERTER,
+	TILE_MANA
 }

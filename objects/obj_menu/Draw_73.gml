@@ -23,6 +23,9 @@ for (var i = 0; i < menu_length; i++) {
 		draw_set_colour(c_black)
 		draw_set_alpha(0.75)
 		draw_line_width(_x - 20 + 40*(i < 4), _y, _x + (min(life*life, 400)/400)*(30 + string_width(menu_options[i]))*2*((i < 4)-0.5), _y, 20)
+		if (point_in_circle(mouse_x, mouse_y, _x, _y, 20)) {
+			draw_set_colour(c_dkgray)
+		}
 		draw_circle(_x, _y, 20, false)
 		draw_set_alpha(1)
 		draw_set_colour(c_white)
