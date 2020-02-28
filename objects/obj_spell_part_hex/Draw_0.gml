@@ -85,7 +85,7 @@
 			draw_circle_outline(x, y, size)
 			for (var i = 0; i < input_number; i++) {
 				draw_set_colour(input_colour[i])
-				draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(_dir + zero_angle + (360/children_number)*i - (children_number-2)*180/children_number), 360/children_number, false, true)
+				draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(_dir + zero_angle + (360/input_number)*i - (input_number-2)*180/input_number), 360/input_number, false, true)
 			}
 		break;
 	

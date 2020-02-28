@@ -1,6 +1,4 @@
 /// @description get data
-
-
 var _array = obj_spell.spell
 
 _array = _array[index] //get spell
@@ -19,9 +17,12 @@ _array = obj_init.spell_data[tile]
 type = _array[0] 
 sprite_index = _array[1]
 image_blend = _array[2]
-if (array_length_1d(_array) > 4) {
-	inputs = _array[3]
-	input_colour = _array[4]
+if (name = "") { //give name if empty
+	name = _array[3]
+}
+if (array_length_1d(_array) > 5) {
+	inputs = _array[4]
+	input_colour = _array[5]
 	input_number = array_length_1d(inputs)
 }
 

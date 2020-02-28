@@ -31,7 +31,7 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.NAM: //set name
-	
+		child.name = choose("name 1", "1337 5347", "waga na wa san")
 	break;
 	
 	case MENU.MOV: //move tile
@@ -49,32 +49,32 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.TILE_TRICK: //connetor tile
-		set_tile(spell, pos_x, pos_y, SPELL.ADD_MOTION)
-		parent.active = true;
+		parent.child = set_tile(spell, pos_x, pos_y, SPELL.ADD_MOTION)
+		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	
 	case MENU.TILE_BASIC: //basic tile
-		set_tile(spell, pos_x, pos_y, SPELL.CASTER)
-		parent.active = true;
+		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CASTER)
+		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	
 	case MENU.TILE_CONSTANT: //constant tile
-		set_tile(spell, pos_x, pos_y, SPELL.CONSTANT)
-		parent.active = true;
+		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONSTANT)
+		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	
 	case MENU.TILE_CONVERTER: //converter tile
-		set_tile(spell, pos_x, pos_y, SPELL.CONSTRUCT_VECTOR)
-		parent.active = true;
+		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONSTRUCT_VECTOR)
+		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	
 	case MENU.TILE_MANA: //mana tile
-		set_tile(spell, pos_x, pos_y, SPELL.MANA)
-		parent.active = true;
+		parent.child = set_tile(spell, pos_x, pos_y, SPELL.MANA)
+		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	
