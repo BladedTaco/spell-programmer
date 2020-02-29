@@ -10,12 +10,28 @@
 	draw_set_colour(COLOUR.EMPTY)
 	draw_circle(x, y, size, false)
 	
+	if (colour_cycle) {
+		var i = _dir*colour_number div 360
+		var o = (_dir*colour_number mod 360)/360
+		//smooth out transitions
+		if (o < 0.5) {
+			o = o*o*o*o //o^4
+			o = 8*o //8o^4
+		} else {
+			o -= 1;
+			o = o*o*o*o //(o - 1)^4
+			o = 1 - 8*o //1 - 8(o - 1)^4
+		}
+		image_blend = merge_colour(colours[i], colours[i+1], o)
+	}
+	
 	//draw the sprite
 	draw_sprite_ext(sprite_index, 0, x, y, 1, 1, 0, image_blend, 1)
 	
 	//draw circle outline
 	draw_set_colour(image_blend)
 	draw_circle_outline(x, y, size)
+
 
 	switch (type) {
 		case TYPE.BASIC:

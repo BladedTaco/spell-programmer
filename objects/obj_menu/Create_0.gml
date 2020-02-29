@@ -7,6 +7,7 @@ menu_data = [MENU.TIL, MENU.OUT, MENU.VAL, MENU.NAM, MENU.MOV, MENU.SEL]
 menu_options = ["Set Tile", "Set Output", "Set Value", "Set Name", "Move Tile", "Select Group"]
 menu_sprite = [spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null]
 menu_active = [true, false, false, false, false, false];
+menu_angle = [0, 0, 0, 0, 0, 0];
 menu_length = 6;
 
 parent = noone;
@@ -17,3 +18,6 @@ spell = noone;
 
 life = 0;
 image_alpha = 0
+
+name = string(pos_x) + "," + string(pos_y)
+single = false; //only performs a single action

@@ -9,29 +9,26 @@ var _mx = argument[1]
 var _my = argument[2]
 
 with (argument[0]) { //with the spell object
-	var _spell = [];
-	var _pos = [];
-	var _child = noone;
+	//var _spell = [];
+	//var _pos = [];
+	//var _child = noone;
 	
-	for (var i = 0; i < children_number; i++) {
-		_spell = spell[i]
-		_pos = _spell[4]
-		if ((_pos[0] = _mx) and (_pos[1] = _my)) {
-			if (children[i] != noone) {
-				_child = children[i]
-				break;
-			}
-		}
-	}
+	//for (var i = 0; i < children_number; i++) {
+	//	_spell = spell[i]
+	//	_pos = _spell[4]
+	//	if ((_pos[0] = _mx) and (_pos[1] = _my)) {
+	//		if (children[i] != noone) {
+	//			_child = children[i]
+	//			break;
+	//		}
+	//	}
+	//}
 	
-	if (_child = noone) {
-		 i = children_number
-		 children_number += 1;
-		 children[i] = noone;
-	}
-	
-	
+	var _child = cell_data(id, _mx, _my)
+	var i = 0;
+
 	if (instance_exists(_child)) { //tile currently in space
+		i = _child.index //get index
 		//change the existing tile
 		if (argument[3] = SPELL.EMPTY) {
 			spell[i] = [argument[3], "NAME", 0, -1, [_mx, _my]]
@@ -89,6 +86,11 @@ with (argument[0]) { //with the spell object
 			return children[i] //return the given tile
 		}
 	} else { //no tile currently in space
+		//create a new entry
+		i = children_number;
+		children_number += 1;
+		children[i] = noone;
+		//check for error
 		if (argument[3] = SPELL.EMPTY) {
 			show_debug_message("DELETING EMPTY TILE")	
 			return noone

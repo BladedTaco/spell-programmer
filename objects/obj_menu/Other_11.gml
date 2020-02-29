@@ -19,11 +19,28 @@ switch (menu_data[selected]) {
 			menu_sprite = [spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null]
 			menu_active = [instance_exists(child), true, true, true, true, true];
 			menu_length = 6;
+			name = "TILE"
 		}
 	break;
 	
 	case MENU.OUT: //set output
-	//create a connector if necessary (no tile to output to)
+		//create child menu
+		active = false;
+		with (instance_create_depth(x, y, depth - 1, obj_menu)) {
+			pos_x = other.pos_x
+			pos_y = other.pos_y
+			spell = other.spell
+			child = other.child
+			parent = other.id		
+			menu_data = [MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT]
+			menu_options = ["[+1, -1]", "[+2, +0]", "[+1, +1]", "[-1, +1]", "[-2, +0]", "[-1, -1]"]
+			menu_sprite = [spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow]
+			menu_active = [true, true, true, true, true, true];
+			menu_angle = [330, 270, 210, 150, 90, 30];
+			menu_length = 6;
+			name = "OUTPUT"
+			image_angle = -30;
+		}
 	break;
 	
 	case MENU.VAL: //set value
@@ -78,6 +95,51 @@ switch (menu_data[selected]) {
 		instance_destroy();
 	break;
 	
+	case MENU.OUTPUT:
+		//create a connector if necessary (no tile to output to)
+		//selected //from 0 - 5
+		//["[+1, -1]", "[+2, +0]", "[+1, +1]", "[-1, +1]", "[-2, +0]", "[-1, -1]"]
+		//get the offset
+		var _mx, _my, _id;
+		switch (other.selected) {
+			case 0: _mx = 1; _my = -1; break;
+			case 1: _mx = 2; _my = 0; break;
+			case 2: _mx = 1; _my = 1; break;
+			case 3: _mx = -1; _my = 1; break;
+			case 4: _mx = -2; _my = 0; break;
+			case 5: _mx = -1; _my = -1; break;
+		}
+		//get the tile
+		_id = cell_data(spell, pos_x + _mx, pos_y + _my)
+		if (!instance_exists(_id)) { //create a connector if cell is empty
+			_id = set_tile(spell, pos_x + _mx, pos_y + _my, SPELL.CONNECTOR)
+			_id.name = child.name
+			_id.image_blend = child.image_blend
+			
+			//create child menu
+			with (instance_create_depth(x, y, depth - 1, obj_menu)) {
+				pos_x = _id.pos_x
+				pos_y = _id.pos_y
+				spell = other.spell
+				child = _id
+				parent = other.id		
+				menu_data = [MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT, MENU.OUTPUT]
+				menu_options = ["", "", "", "", "", ""]
+				menu_sprite = [spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow]
+				menu_active = [true, true, true, true, true, true];
+				menu_angle = [330, 270, 210, 150, 90, 30];
+				menu_length = 6;
+				name = "OUTPUT"
+				image_angle = -30;
+				x = spell.x + pos_x*spell.bubble_size
+				y = spell.y + pos_y*spell.hex_size*1.5
+				single = true;
+			}
+		
+		}
+		//add the connection
+		set_tile_output(spell, child, _id)
+	break;
 	
 	default: //not handled, show srror
 		show_debug_message("Unexpected Menu Option Type - obj_menu: " + string(menu_data[selected]))

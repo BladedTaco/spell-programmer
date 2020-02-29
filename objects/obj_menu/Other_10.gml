@@ -1,4 +1,4 @@
-/// @description handle menu option disabling
+/// @description handle base menu option disabling
 
 /*
 menu_options = ["Set Tile", "Set Output", "Set Value", "Set Name", "Move Tile", "Select Group"]
@@ -19,4 +19,4 @@ while (menu_active[menu_length - 1] == false) {
 	menu_length -= 1;	
 }
 
-
+name = string(pos_x) + "," + string(pos_y)
