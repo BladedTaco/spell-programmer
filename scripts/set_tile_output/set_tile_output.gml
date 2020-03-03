@@ -38,19 +38,25 @@ with (argument[0]) { //with the spell object
 			}
 		}
 		if (!_diff) {
-			_data[@ argument[2].children_number] = argument[1].index
+			//check for lööps brötha
+			if (!scr_check_for_loops(argument[0], argument[1], argument[2])) {
+				_data[@ argument[2].children_number] = argument[1].index
+				//set children
+				with (argument[2]) {
+					children[children_number] = argument[1].id
+					children_number++
+				}
+			}
+		}
+	} else { //create the first input
+		//check for lööps brötha
+		if (!scr_check_for_loops(argument[0], argument[1], argument[2])) {
+			_array[@ 3] = [argument[1].index]
 			//set children
 			with (argument[2]) {
 				children[children_number] = argument[1].id
 				children_number++
 			}
-		}
-	} else { //create the first input
-		_array[@ 3] = [argument[1].index]
-		//set children
-		with (argument[2]) {
-			children[children_number] = argument[1].id
-			children_number++
 		}
 	}
 	
