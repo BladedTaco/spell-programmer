@@ -82,6 +82,11 @@ for (var i = 0; i < children_number; i++) {
 	}
 }
 	
+for (i = 0; i < array_length_1d(wire_heads); i++) {
+	with (wire_heads[i]) {
+		draw_sprite(spr_menu_null, 0, x, y)	
+	}
+}
 	
 surface_reset_target();
 //create and clear surface

@@ -104,7 +104,6 @@ with (argument[0]) { //with the spell object
 			index = i; //give index
 			spell = other.id
 			level = 0;
-			other.children[i] = id; //give id
 			event_user(0) //get data
 			//get bubble size
 			if (size > other.bubble_size) {

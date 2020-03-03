@@ -80,10 +80,14 @@ spell =
 	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [4,0]],
 	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [5,-1]],
 	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [4,-2]],
-	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [2,-2]]
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [2], [2,-2]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [13], [6,0]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [17], [8,0]],
+	[SPELL.CONNECTOR, "?CONNECTOR?", 0, [18], [10,0]]
 	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
 ]
 
+wire_heads = []; //the heads of the different wire connectors
 
 var _bubble = 0, _hex = 0, _s;
 children_number = array_length_1d(spell)
@@ -123,3 +127,5 @@ for (i = 0; i < children_number; i++) {
 		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
 	}
 }
+
+event_user(0)
