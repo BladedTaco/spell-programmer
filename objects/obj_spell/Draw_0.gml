@@ -89,121 +89,124 @@ for (var i = 0; i < children_number; i++) {
 //}
 	
 surface_reset_target();
-//create and clear surface
-if (!surface_exists(alt_particle_surface)) {
-	alt_particle_surface = surface_create(surface_size, surface_size)	
-}
-surface_set_target(alt_particle_surface);
-draw_clear_alpha(c_black, 0)
-	
-//do filling (not done on surface)
-draw_set_colour(COLOUR.SPELL)
-draw_circle_outline(_cx, _cy, size)
-shader_set(shd_fill)
-var uniform = shader_get_sampler_index(shd_fill, "u_sampler")
-texture_set_stage(uniform, surface_get_texture(spell_surface))
-uniform = shader_get_uniform(shd_fill, "u_circle")
-shader_set_uniform_f(uniform, _cx, _cy, size - 20)
-uniform = shader_get_uniform(shd_fill, "u_dir")
-shader_set_uniform_f(uniform, (age mod 360)/360)
-uniform = shader_get_uniform(shd_fill, "u_size")
-shader_set_uniform_f(uniform, 20)
-uniform = shader_get_uniform(shd_fill, "u_border")
-shader_set_uniform_f(uniform, 4)
-uniform = shader_get_uniform(shd_fill, "u_border_mul")
-shader_set_uniform_f(uniform, 4)
-uniform = shader_get_uniform(shd_fill, "u_dim")
-shader_set_uniform_f(uniform, surface_size, surface_size)
-draw_rectangle(_cx - size, _cy - size, _cx + size, _cy + size, false)
-shader_reset();
-	
-	
-surface_reset_target();
-	
-surface_set_target(spell_surface)
-draw_surface(alt_particle_surface, 0, 0)
-surface_reset_target();
 
-
-//draw noise effect
-
-//create noise surface if needed
-if (!surface_exists(noise_surface)) {
-	//create surface and clear it
-	noise_surface = surface_create(surface_size, surface_size)	
-}
-surface_set_target(noise_surface)
-draw_clear_alpha(c_black, 0)
-//randomly populate the surface
-shader_set(shd_perlin_noise)
-var _uniform = shader_get_uniform(shd_perlin_noise, "u_age")
-shader_set_uniform_f(_uniform, true_age*3)
-_uniform = shader_get_uniform(shd_perlin_noise, "u_dim")
-shader_set_uniform_f(_uniform, surface_size)
-draw_rectangle(0, 0, surface_size, surface_size, false)
-shader_reset()
-surface_reset_target();
-
-
-//create particle surface if needed
-if (!surface_exists(particle_surface)) {
-	particle_surface = surface_create(surface_size, surface_size)	
-	surface_set_target(particle_surface)
+if (global.shaders) {
+	//create and clear surface
+	if (!surface_exists(alt_particle_surface)) {
+		alt_particle_surface = surface_create(surface_size, surface_size)	
+	}
+	surface_set_target(alt_particle_surface);
 	draw_clear_alpha(c_black, 0)
+	
+	//do filling (not done on surface)
+	draw_set_colour(COLOUR.SPELL)
+	draw_circle_outline(_cx, _cy, size)
+	shader_set(shd_fill)
+	var uniform = shader_get_sampler_index(shd_fill, "u_sampler")
+	texture_set_stage(uniform, surface_get_texture(spell_surface))
+	uniform = shader_get_uniform(shd_fill, "u_circle")
+	shader_set_uniform_f(uniform, _cx, _cy, size - 20)
+	uniform = shader_get_uniform(shd_fill, "u_dir")
+	shader_set_uniform_f(uniform, (age mod 360)/360)
+	uniform = shader_get_uniform(shd_fill, "u_size")
+	shader_set_uniform_f(uniform, 20)
+	uniform = shader_get_uniform(shd_fill, "u_border")
+	shader_set_uniform_f(uniform, 4)
+	uniform = shader_get_uniform(shd_fill, "u_border_mul")
+	shader_set_uniform_f(uniform, 4)
+	uniform = shader_get_uniform(shd_fill, "u_dim")
+	shader_set_uniform_f(uniform, surface_size, surface_size)
+	draw_rectangle(_cx - size, _cy - size, _cx + size, _cy + size, false)
+	shader_reset();
+	
+	
 	surface_reset_target();
+	
+	surface_set_target(spell_surface)
+	draw_surface(alt_particle_surface, 0, 0)
+	surface_reset_target();
+
+
+	//draw noise effect
+
+	//create noise surface if needed
+	if (!surface_exists(noise_surface)) {
+		//create surface and clear it
+		noise_surface = surface_create(surface_size, surface_size)	
+	}
+	surface_set_target(noise_surface)
+	draw_clear_alpha(c_black, 0)
+	//randomly populate the surface
+	shader_set(shd_perlin_noise)
+	var _uniform = shader_get_uniform(shd_perlin_noise, "u_age")
+	shader_set_uniform_f(_uniform, true_age*3)
+	_uniform = shader_get_uniform(shd_perlin_noise, "u_dim")
+	shader_set_uniform_f(_uniform, surface_size)
+	draw_rectangle(0, 0, surface_size, surface_size, false)
+	shader_reset()
+	surface_reset_target();
+
+
+	//create particle surface if needed
+	if (!surface_exists(particle_surface)) {
+		particle_surface = surface_create(surface_size, surface_size)	
+		surface_set_target(particle_surface)
+		draw_clear_alpha(c_black, 0)
+		surface_reset_target();
+	}
+
+
+
+	//draw the circle to the surface
+	surface_set_target(alt_particle_surface)
+	draw_clear_alpha(c_black, 0)
+	draw_surface_ext(particle_surface, -x_diff, -y_diff, 1, 1, 0, c_white, 0.99)
+
+	shader_set(shd_random_alpha)
+	var _uniform = shader_get_uniform(shd_random_alpha, "u_age")
+	shader_set_uniform_f(_uniform, true_age)
+	_uniform = shader_get_uniform(shd_random_alpha, "u_alpha")
+	shader_set_uniform_f(_uniform, 0.991)
+	draw_surface(spell_surface, 0, 0)
+	shader_reset();
+	surface_reset_target();
+
+	surface_set_target(particle_surface)
+
+	draw_clear_alpha(c_black, 0)
+
+
+	gpu_set_texfilter(false)
+	//draw the next iteration of the particle surface to the alt
+	shader_set(shd_noise_movement)
+	var _uniform = shader_get_sampler_index(shd_noise_movement, "s_noise")
+	texture_set_stage(_uniform, surface_get_texture(noise_surface))
+	_uniform = shader_get_sampler_index(shd_noise_movement, "s_particle")
+	texture_set_stage(_uniform, surface_get_texture(alt_particle_surface))
+	_uniform = shader_get_uniform(shd_noise_movement, "u_dim")
+	shader_set_uniform_f(_uniform, surface_size, surface_size)
+	draw_rectangle(0, 0, surface_size, surface_size, false)
+	shader_reset();
+	surface_reset_target();
+	gpu_set_texfilter(true)
+
+	surface_set_target(alt_particle_surface)
+	draw_clear_alpha(c_black, 0)
+	shader_set(shd_empty_threshold)
+	_uniform = shader_get_uniform(shd_empty_threshold, "u_num")
+	shader_set_uniform_f(_uniform, 0.1)
+	draw_surface(particle_surface, 0, 0)
+	shader_reset();
+	surface_reset_target();
+
+	//manipulate noise surface
+
+
+	shader_set(shd_alpha)
+	draw_surface(alt_particle_surface, x - half_surface_size, y - half_surface_size)
+	shader_reset();
 }
 
-
-
-//draw the circle to the surface
-surface_set_target(alt_particle_surface)
-draw_clear_alpha(c_black, 0)
-draw_surface_ext(particle_surface, -x_diff, -y_diff, 1, 1, 0, c_white, 0.99)
-
-shader_set(shd_random_alpha)
-var _uniform = shader_get_uniform(shd_random_alpha, "u_age")
-shader_set_uniform_f(_uniform, true_age)
-_uniform = shader_get_uniform(shd_random_alpha, "u_alpha")
-shader_set_uniform_f(_uniform, 0.991)
-draw_surface(spell_surface, 0, 0)
-shader_reset();
-surface_reset_target();
-
-surface_set_target(particle_surface)
-
-draw_clear_alpha(c_black, 0)
-
-
-gpu_set_texfilter(false)
-//draw the next iteration of the particle surface to the alt
-shader_set(shd_noise_movement)
-var _uniform = shader_get_sampler_index(shd_noise_movement, "s_noise")
-texture_set_stage(_uniform, surface_get_texture(noise_surface))
-_uniform = shader_get_sampler_index(shd_noise_movement, "s_particle")
-texture_set_stage(_uniform, surface_get_texture(alt_particle_surface))
-_uniform = shader_get_uniform(shd_noise_movement, "u_dim")
-shader_set_uniform_f(_uniform, surface_size, surface_size)
-draw_rectangle(0, 0, surface_size, surface_size, false)
-shader_reset();
-surface_reset_target();
-gpu_set_texfilter(true)
-
-surface_set_target(alt_particle_surface)
-draw_clear_alpha(c_black, 0)
-shader_set(shd_empty_threshold)
-_uniform = shader_get_uniform(shd_empty_threshold, "u_num")
-shader_set_uniform_f(_uniform, 0.1)
-draw_surface(particle_surface, 0, 0)
-shader_reset();
-surface_reset_target();
-
-//manipulate noise surface
-
-
-shader_set(shd_alpha)
-draw_surface(alt_particle_surface, x - half_surface_size, y - half_surface_size)
-shader_reset();
-	
 //draw the spell_surface
 shader_set(shd_alpha_spell)
 draw_surface(spell_surface, x - half_surface_size, y - half_surface_size)
