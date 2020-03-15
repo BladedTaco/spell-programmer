@@ -78,22 +78,27 @@ switch (menu_data[selected]) {
 	
 	case MENU.VAL_UP:
 		child.value += power(10, value)
-		name = string(child.value)
+		child.value = min(child.value, 999999)
+		name = string_replace(string_format(child.value, 6, 0), " ", "0")
 	break;
 	case MENU.VAL_BIG_UP:
 		child.value += 5*power(10, value)
-		name = string(child.value)
+		child.value = min(child.value, 999999)
+		name = string_replace(string_format(child.value, 6, 0), " ", "0")
 	break;
 	case MENU.VAL_DOWN:
 		child.value -= power(10, value)
-		name = string(child.value)
+		child.value = max(child.value, 0)
+		name = string_replace(string_format(child.value, 6, 0), " ", "0")
 	break;
 	case MENU.VAL_BIG_DOWN:
 		child.value -= 5*power(10, value)
-		name = string(child.value)
+		child.value = max(child.value, 0)
+		name = string_replace(string_format(child.value, 6, 0), " ", "0")
 	break;
 	case MENU.VAL_LEFT:
 		value += 1
+		value = min(value, 5)
 	break;
 	case MENU.VAL_RIGHT:
 		value -= 1
