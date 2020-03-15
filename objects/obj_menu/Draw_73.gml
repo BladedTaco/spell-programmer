@@ -13,6 +13,10 @@ draw_circle_outline(x, y, 30)
 draw_set_halign(fa_center)
 draw_text(x, y, name)
 
+if (value > -1) {
+	draw_text(x - value*16 + string_width(name)/2, y + 20, "^")
+}
+
 draw_set_halign(fa_left)
 var _x, _y, _dir, _sep;
 _sep = 60//360/menu_length

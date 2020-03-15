@@ -60,6 +60,7 @@ switch (menu_data[selected]) {
 			menu_length = 6;
 			name = string(child.value)
 			image_angle = -30;
+			value = 0
 		}
 	break;
 	
@@ -76,22 +77,27 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.VAL_UP:
-	
+		child.value += power(10, value)
+		name = string(child.value)
 	break;
 	case MENU.VAL_BIG_UP:
-	
+		child.value += 5*power(10, value)
+		name = string(child.value)
 	break;
 	case MENU.VAL_DOWN:
-	
+		child.value -= power(10, value)
+		name = string(child.value)
 	break;
 	case MENU.VAL_BIG_DOWN:
-	
+		child.value -= 5*power(10, value)
+		name = string(child.value)
 	break;
 	case MENU.VAL_LEFT:
-	
+		value += 1
 	break;
 	case MENU.VAL_RIGHT:
-	
+		value -= 1
+		value = max(value, 0)
 	break;
 	
 	case MENU.TILE_EMPTY: //remove tile

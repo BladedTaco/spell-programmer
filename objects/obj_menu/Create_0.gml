@@ -1,5 +1,5 @@
 /// @description 
-value = 0;
+value = -1;
 pos_x = 0;
 pos_y = 0;
 
@@ -21,5 +21,3 @@ image_alpha = 0
 
 name = string(pos_x) + "," + string(pos_y)
 single = false; //only performs a single action
-
-slot = 0;
