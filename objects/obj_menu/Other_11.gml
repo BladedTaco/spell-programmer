@@ -44,7 +44,23 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.VAL: //set value
-	
+		//create child menu
+		active = false;
+		with (instance_create_depth(x, y, depth - 1, obj_menu)) {
+			pos_x = other.pos_x
+			pos_y = other.pos_y
+			spell = other.spell
+			child = other.child
+			parent = other.id		
+			menu_data = [MENU.VAL_BIG_UP, MENU.VAL_RIGHT, MENU.VAL_BIG_DOWN, MENU.VAL_DOWN, MENU.VAL_LEFT, MENU.VAL_UP]
+			menu_options = ["+5", "Shift Right", "-5", "-1", "Shift Left", "+1"]
+			menu_sprite = [spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow, spr_menu_arrow]
+			menu_active = [true, true, true, true, true, true];
+			menu_angle = [0, 270, 180, 180, 90, 0];
+			menu_length = 6;
+			name = string(child.value)
+			image_angle = -30;
+		}
 	break;
 	
 	case MENU.NAM: //set name
@@ -56,6 +72,25 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.SEL: //select group
+	
+	break;
+	
+	case MENU.VAL_UP:
+	
+	break;
+	case MENU.VAL_BIG_UP:
+	
+	break;
+	case MENU.VAL_DOWN:
+	
+	break;
+	case MENU.VAL_BIG_DOWN:
+	
+	break;
+	case MENU.VAL_LEFT:
+	
+	break;
+	case MENU.VAL_RIGHT:
 	
 	break;
 	
