@@ -24,3 +24,4 @@ for (var i = 0; i < argument[1].children_number; i++) {
 }
 
 return false //no loops found
+
