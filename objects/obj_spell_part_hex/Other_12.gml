@@ -20,7 +20,11 @@ if (type = TYPE.WIRE) {
 			} else {
 				colours[0] = children[0].image_blend
 			}
-		
+			
+			if (array_length_1d(colours) = 0) {
+				colours[0] = c_white	
+			}
+			
 			//get base values
 			name = children[0].name
 			image_blend = colours[0]

@@ -14,7 +14,7 @@ draw_set_halign(fa_center)
 draw_text(x, y, name)
 
 if (value > -1) {
-	draw_text(x - value*string_width("0") + string_width(string_delete(name, 1, 1))/2, y + 20, "^")
+	draw_text(x - value*string_width("0") + string_width(string_delete(name, 1, 1))/2 - 1, y + 12, "^")
 }
 
 draw_set_halign(fa_left)

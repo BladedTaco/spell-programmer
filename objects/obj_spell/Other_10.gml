@@ -8,9 +8,13 @@ wire_heads = [];
 
 //get wires
 for (i = 0; i < children_number; i++) {
-	if (children[i].type == TYPE.WIRE) {
-		_wire[array_length_1d(_wire)] = children[i];
-		_wire_head[array_length_1d(_wire)-1] = true;
+	if (instance_exists(children[i])) {
+		if (children[i].type == TYPE.WIRE) {
+			_wire[array_length_1d(_wire)] = children[i];
+			_wire_head[array_length_1d(_wire)-1] = true;
+		}
+	} else {
+		show_debug_message("MISSING CHILD")
 	}
 }
 

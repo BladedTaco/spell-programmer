@@ -58,7 +58,7 @@ switch (menu_data[selected]) {
 			menu_active = [true, true, true, true, true, true];
 			menu_angle = [0, 270, 180, 180, 90, 0];
 			menu_length = 6;
-			name = string(child.value)
+			name = string_replace_all(string_format(child.value, 6 - 4*(child.radius <= 1), 0), " ", "0")
 			image_angle = -30;
 			value = 0
 		}
@@ -78,27 +78,27 @@ switch (menu_data[selected]) {
 	
 	case MENU.VAL_UP:
 		child.value += power(10, value)
-		child.value = min(child.value, 999999)
-		name = string_replace(string_format(child.value, 6, 0), " ", "0")
+		child.value = min(child.value, 999999 - 999900*(child.radius <= 1))
+		name = string_replace_all(string_format(child.value, 6 - 4*(child.radius <= 1), 0), " ", "0")
 	break;
 	case MENU.VAL_BIG_UP:
 		child.value += 5*power(10, value)
-		child.value = min(child.value, 999999)
-		name = string_replace(string_format(child.value, 6, 0), " ", "0")
+		child.value = min(child.value, 999999 - 999900*(child.radius <= 1))
+		name = string_replace_all(string_format(child.value, 6 - 4*(child.radius <= 1), 0), " ", "0")
 	break;
 	case MENU.VAL_DOWN:
 		child.value -= power(10, value)
 		child.value = max(child.value, 0)
-		name = string_replace(string_format(child.value, 6, 0), " ", "0")
+		name = string_replace_all(string_format(child.value, 6 - 4*(child.radius <= 1), 0), " ", "0")
 	break;
 	case MENU.VAL_BIG_DOWN:
 		child.value -= 5*power(10, value)
 		child.value = max(child.value, 0)
-		name = string_replace(string_format(child.value, 6, 0), " ", "0")
+		name = string_replace_all(string_format(child.value, 6 - 4*(child.radius <= 1), 0), " ", "0")
 	break;
 	case MENU.VAL_LEFT:
 		value += 1
-		value = min(value, 5)
+		value = min(value, 5 - 4*(child.radius <= 1))
 	break;
 	case MENU.VAL_RIGHT:
 		value -= 1
