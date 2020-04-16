@@ -40,7 +40,7 @@ if (type = TYPE.COUNTER) {
 	}
 } else if (type != TYPE.BASIC) {
 	if (type = TYPE.WIRE) {
-		size -= 20
+		size -= 15
 	} else {
 		size += 20	
 	}

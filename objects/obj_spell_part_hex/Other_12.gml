@@ -29,6 +29,15 @@ if (type = TYPE.WIRE) {
 			name = children[0].name
 			image_blend = colours[0]
 	
+			
+			// add in +'s when needed
+			if (children_number > 1) {
+				// remove +'s when unneeded
+				if (children[0].children_number > 1) {
+					name = string_delete(name, 1, 3)	
+				}
+				name = "?+?" + name
+			}
 			//get further values
 			for (var i = 1; i < children_number; i++) {
 				colour_cycle = true;

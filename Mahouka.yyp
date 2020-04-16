@@ -34,7 +34,7 @@
             "Key": "01983d77-985e-47f0-be6d-1ba945d00965",
             "Value": {
                 "id": "fa68b8b1-fe9e-44d5-9252-3645e4a66ca7",
-                "resourcePath": "sprites\\sprite9\\sprite9.yy",
+                "resourcePath": "sprites\\spr_hataraku_maou_sama\\spr_hataraku_maou_sama.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -84,6 +84,14 @@
                 "id": "563057ee-ad82-457e-806a-31f0bf32e20d",
                 "resourcePath": "notes\\compatibility_report_080120_1410401040.yy",
                 "resourceType": "GMNotes"
+            }
+        },
+        {
+            "Key": "10124c61-6619-4eb8-b41f-9b021fa70331",
+            "Value": {
+                "id": "5673fcea-9e46-44a6-b4ba-184229bfbc56",
+                "resourcePath": "views\\10124c61-6619-4eb8-b41f-9b021fa70331.yy",
+                "resourceType": "GMFolder"
             }
         },
         {
@@ -188,6 +196,14 @@
                 "id": "a016b46a-bf9b-4d17-ab71-0c18d9cd29f7",
                 "resourcePath": "views\\43e4e514-f18f-4029-afdf-58a67c4ab68b.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "462998fb-b638-422d-bf9c-8a017a8e7fd4",
+            "Value": {
+                "id": "0874edd9-82b8-4d47-be95-51df47a079f9",
+                "resourcePath": "sprites\\spr_useless\\spr_useless.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -348,6 +364,14 @@
                 "id": "74d8607b-dee4-4591-a784-227ceabf6979",
                 "resourcePath": "views\\9d2df549-bbef-4e9a-b225-061bdb124a88.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "9f66f67e-5ce1-445b-a3f9-edb2a01a7979",
+            "Value": {
+                "id": "6a528858-99a7-4114-98b6-c173f3fa8b84",
+                "resourcePath": "sprites\\sprite10\\sprite10.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -564,6 +588,14 @@
                 "id": "a6a47832-de47-4537-9e45-f7347d31b032",
                 "resourcePath": "views\\d61f8670-9410-4905-9bbe-dc4dbc0f83e1.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "dab13f38-d556-4155-9bbd-bddf340c54a9",
+            "Value": {
+                "id": "b3af86b8-33b0-4579-ac19-058eea453e23",
+                "resourcePath": "sprites\\sprite101\\sprite101.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

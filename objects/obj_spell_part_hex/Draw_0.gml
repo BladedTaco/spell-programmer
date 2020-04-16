@@ -34,6 +34,7 @@
 
 
 	switch (type) {
+		case TYPE.WIRE:
 		case TYPE.BASIC:
 			//draw name and its ring
 			draw_text_circle(x, y, name, size - 10, _dir, 360, true)
@@ -81,7 +82,6 @@
 		break;
 		
 		case TYPE.SHELL:
-		case TYPE.WIRE:
 		break;
 
 		case TYPE.TRICK:
