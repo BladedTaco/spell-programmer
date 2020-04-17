@@ -36,19 +36,27 @@ _spd = _off/90
 
 
 //set untextured shader
-shader_set(shd_clip_circle_no_tex)
-var u_circle = shader_get_uniform(shd_clip_circle_no_tex, "u_circle")
-shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
-u_circle = shader_get_uniform(shd_clip_circle_no_tex, "u_alt_circle")
+shader_set(shd_clip_circle_no_tex_rotate)
+var u_circle = shader_get_uniform(shd_clip_circle_no_tex_rotate, "u_alt_circle")
 shader_set_uniform_f(u_circle, _x2, _y2, _size - 1);
+u_circle = shader_get_uniform(shd_clip_circle_no_tex_rotate, "u_circle")
+shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
+u_circle = shader_get_uniform(shd_clip_circle_no_tex_rotate, "u_dir")
+shader_set_uniform_f(u_circle, -_dir)
+u_circle = shader_get_uniform(shd_clip_circle_no_tex_rotate, "v_circle")
+shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
+u_circle = shader_get_uniform(shd_clip_circle_no_tex_rotate, "v_dir")
+shader_set_uniform_f(u_circle, -_dir)	
+
 
 //draw connector
 draw_set_colour(_colour)
-draw_line_width(_x1, _y1, _x2, _y2, 24*_scl)
+draw_rectangle(_x1, _y1 - 12*_scl, _x1 + _len, _y1 + 12*_scl, false)
 
 //draw inner
 draw_set_colour(COLOUR.CONNECTOR)
-draw_line_width(_x1, _y1, _x2, _y2, 18*_scl)
+draw_rectangle(_x1, _y1 - 9*_scl, _x1 + _len, _y1 + 9*_scl, false)	
+		
 		
 //get age altered
 _age = _age*_spd mod _off
@@ -56,21 +64,38 @@ _age = _age*_spd mod _off
 shader_reset(); //reset shader
 
 //set textured shader
-shader_set(shd_clip_circle)
-var u_circle = shader_get_uniform(shd_clip_circle, "u_circle")
+shader_set(shd_clip_circle_rotate)
+var u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_circle")
 shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
-u_circle = shader_get_uniform(shd_clip_circle, "u_alt_circle")
+u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_alt_circle")
 shader_set_uniform_f(u_circle, _x2, _y2, _size - 1);
-
+u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_dir")
+shader_set_uniform_f(u_circle, -_dir)
+u_circle = shader_get_uniform(shd_clip_circle_rotate, "v_circle")
+shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
+u_circle = shader_get_uniform(shd_clip_circle_rotate, "v_dir")
+shader_set_uniform_f(u_circle, -_dir)
 
 //draw text
 draw_set_colour(_colour)
 draw_set_halign(fa_left)
 draw_set_valign(fa_middle)
-draw_text_transformed(
-	_x1 - _scl*lengthdir_x(_age, _dir), _y1 - _scl*lengthdir_y(_age, _dir),
-	string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl),
-	_scl, _scl, _dir
-)
+
+//flip text both ways if left half facing direction
+if (abs(_dir - 180) < 90) {
+	draw_set_halign(fa_right)
+	var _str = string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl)
+	draw_text_transformed(
+		_x1 - _scl*_age,  _y1 + 0.5,
+		_str, -_scl, -_scl, 0
+	)
+} else { //draw text normally
+	var _str = string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl)
+	draw_text_transformed(
+		_x1 - _scl*_age,  _y1 + 0.5,
+		_str, _scl, _scl, 0
+	)
+}
+
 
 shader_reset();

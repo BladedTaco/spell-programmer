@@ -54,7 +54,6 @@ for (var i = 0; i < children_number; i++) {
 		}
 	}
 }
-	
 //connectors
 for (var i = 0; i < children_number; i++) {
 	if (children[i] != noone) {
@@ -73,14 +72,21 @@ for (var i = 0; i < children_number; i++) {
 	
 	
 	
-for (var i = 0; i < children_number; i++) {
-	if (children[i] != noone) {
-		with (children[i]) {
-			//draw circle
-			event_perform(ev_draw, 0)
-		}
-	}
-}
+//var _str;
+//for (var i = 0; i < children_number; i++) {
+//	if (children[i] != noone) {
+//		with (children[i]) {
+//			//draw list
+//			_str = list_to_string(input_tile)
+//			draw_set_colour(c_gray)
+//			draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
+//			draw_set_colour(c_white)
+//			draw_text(x - size, y - size - 8, _str)
+//			//draw circle
+//			event_perform(ev_draw, 0)
+//		}
+//	}
+//}
 	
 //for (i = 0; i < array_length_1d(wire_heads); i++) {
 //	with (wire_heads[i]) {

@@ -2,6 +2,7 @@
 //draw_self();
 
 var _a = 0.5 + active*0.5 //reduce alpha if not active
+draw_set_alpha(_a)
 draw_set_colour(c_black)
 draw_polygon(x, y, obj_spell.hex_size, 90, 6, false)
 draw_set_colour(c_black)

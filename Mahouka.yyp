@@ -159,6 +159,14 @@
             }
         },
         {
+            "Key": "34cb1b34-bf4e-44b4-b560-4c6d4364c6da",
+            "Value": {
+                "id": "7552fa5e-af95-471b-8bd4-1020b9b34ddf",
+                "resourcePath": "shaders\\shd_clip_circle_rotate\\shd_clip_circle_rotate.yy",
+                "resourceType": "GMShader"
+            }
+        },
+        {
             "Key": "3739c115-5f21-40c5-a8b2-dacfc5ff6a5b",
             "Value": {
                 "id": "3419a178-ce45-425f-a33c-23bb740bbeca",
@@ -211,6 +219,14 @@
             "Value": {
                 "id": "cb1a623c-dd14-458c-be68-f21c89800b29",
                 "resourcePath": "sprites\\spr_mana\\spr_mana.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "4a38549d-f1ff-48cb-85fe-aa7ee285c6e6",
+            "Value": {
+                "id": "47089a69-3ccc-459f-a88f-6d4061ebafeb",
+                "resourcePath": "sprites\\spr_menu_circle\\spr_menu_circle.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -340,6 +356,14 @@
                 "id": "766f0900-e67b-4ea1-9258-4a093a6cb8bf",
                 "resourcePath": "shaders\\shd_clip_circle_no_tex\\shd_clip_circle_no_tex.yy",
                 "resourceType": "GMShader"
+            }
+        },
+        {
+            "Key": "9275c17c-e2e4-485b-9960-66dc2fb4d949",
+            "Value": {
+                "id": "a5c25bab-3d81-426f-a327-92fea62537ec",
+                "resourcePath": "scripts\\scr_get_wireless_inputs\\scr_get_wireless_inputs.yy",
+                "resourceType": "GMScript"
             }
         },
         {
@@ -476,6 +500,14 @@
                 "id": "1963ebbd-21b9-4712-9a0f-97ae2b46d5a2",
                 "resourcePath": "objects\\obj_spell\\obj_spell.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "c47033ba-9e91-4c28-85de-646c414c84be",
+            "Value": {
+                "id": "e0e571df-b015-455a-87d6-bd5f73f74bfd",
+                "resourcePath": "shaders\\shd_clip_circle_no_tex_rotate\\shd_clip_circle_no_tex_rotate.yy",
+                "resourceType": "GMShader"
             }
         },
         {
@@ -671,6 +703,14 @@
             }
         },
         {
+            "Key": "f67ca47f-8691-408c-860c-8aa5eb6ccbf1",
+            "Value": {
+                "id": "aa043646-7e18-4b90-a1ac-bd64bcb9a142",
+                "resourcePath": "scripts\\list_to_string\\list_to_string.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "f7d1c040-543b-48c3-830b-124f39d1d1c5",
             "Value": {
                 "id": "7e58fc68-1d88-4ac5-a18a-6d1cd47e06a9",
@@ -713,7 +753,9 @@
         "55072c88-3c90-4003-804d-486bc37a283a",
         "808042cf-4db9-49fd-ae7a-db4a14a21d27",
         "a3ad2eff-e3a1-4679-aca4-b6a94b9e6a74",
-        "d5784c53-de00-4f6c-90dc-a4ff987e91d3"
+        "d5784c53-de00-4f6c-90dc-a4ff987e91d3",
+        "9275c17c-e2e4-485b-9960-66dc2fb4d949",
+        "f67ca47f-8691-408c-860c-8aa5eb6ccbf1"
     ],
     "tutorial": ""
 }

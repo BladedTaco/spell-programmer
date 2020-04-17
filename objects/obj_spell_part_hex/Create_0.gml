@@ -20,6 +20,7 @@ connector_queue = [];
 inputs = [];
 input_colour = [];
 input_number = 0;
+input_tile = ds_list_create();
 parent = noone; //the trick tile
 spell = noone; //the obj_spell
 creator = noone; //the previous tile

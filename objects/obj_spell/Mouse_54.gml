@@ -25,8 +25,6 @@ if !(instance_exists(obj_menu)) {
 	
 	var _child = cell_data(id, _mx, _my)
 	
-	show_debug_message(_child)
-	
 	//create the menu object
 	with (instance_create_depth(x + _mx*bubble_size, y + _my*hex_size*1.5, 0, obj_menu)) {
 		pos_x = _mx
