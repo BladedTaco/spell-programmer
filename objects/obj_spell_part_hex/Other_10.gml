@@ -1,17 +1,29 @@
 /// @description get data
 var _array = obj_spell.spell
 
-_array = _array[index] //get spell
+_array = _array[| index] //get spell
 
 tile = _array[0]
 name = _array[1]
 value = _array[2]
-children = _array[3]
+if (ds_exists(_array[3], ds_type_list)) {
+	children = ds_list_create()
+	ds_list_copy(children, _array[3])
+} else {
+	children = -1;	
+}
 var _pos = _array[4]
 pos_x = _pos[0]
 pos_y = _pos[1]
 
+ds_list_copy(input_tile, _array[5]) // input tile inputs as indexes
+
 //get tile data
+if (tile > SPELL.CONNECTOR) {
+	show_debug_message("REDUCING SPELL")
+	show_debug_message(list_to_string(obj_spell.spell))
+	tile = SPELL.CONNECTOR
+}
 _array = obj_init.spell_data[tile]
 
 type = _array[0] 
@@ -30,9 +42,10 @@ if (array_length_1d(_array) > 5) {
 }
 
 //get number of children
-children_number = array_length_1d(children)
-if (children = -1) { //no children
-	children_number = 0;
+if (ds_exists(children, ds_type_list)) {
+	children_number = ds_list_size(children)
+} else {
+	children_number = 0;	
 }
 
 size = base_size;

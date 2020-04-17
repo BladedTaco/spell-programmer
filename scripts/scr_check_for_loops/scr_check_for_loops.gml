@@ -13,15 +13,13 @@ if (argument[1].children_number <= 0) {
 
 //check if any children connect recursively
 for (var i = 0; i < argument[1].children_number; i++) {
-	if (instance_exists(argument[1].children[i])) {
-		//check if they connect
-		if (argument[1].children[i] == argument[2].id) { //the source fathers the destination
-			return true
-		}
-		//check their children
-		if (scr_check_for_loops(argument[0], argument[1].children[i], argument[2])) {
-			return true	//loop found
-		}
+	//check if they connect
+	if (argument[1].children[| i] == argument[2].id) { //the source fathers the destination
+		return true
+	}
+	//check their children
+	if (scr_check_for_loops(argument[0], argument[1].children[| i], argument[2])) {
+		return true	//loop found
 	}
 }
 

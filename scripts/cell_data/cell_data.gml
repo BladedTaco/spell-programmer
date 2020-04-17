@@ -28,13 +28,11 @@ with (argument[0]) {
 	var _child = noone;
 	
 	for (var i = 0; i < children_number; i++) {
-		_spell = spell[i]
+		_spell = spell[| i]
 		_pos = _spell[4]
 		if ((_pos[0] = argument[1]) and (_pos[1] = argument[2])) {
-			if (children[i] != noone) {
-				_child = children[i]
-				break;
-			}
+			_child = children[| i]
+			break;
 		}
 	}
 }

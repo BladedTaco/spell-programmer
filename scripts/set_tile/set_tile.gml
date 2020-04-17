@@ -9,20 +9,6 @@ var _mx = argument[1]
 var _my = argument[2]
 
 with (argument[0]) { //with the spell object
-	//var _spell = [];
-	//var _pos = [];
-	//var _child = noone;
-	
-	//for (var i = 0; i < children_number; i++) {
-	//	_spell = spell[i]
-	//	_pos = _spell[4]
-	//	if ((_pos[0] = _mx) and (_pos[1] = _my)) {
-	//		if (children[i] != noone) {
-	//			_child = children[i]
-	//			break;
-	//		}
-	//	}
-	//}
 	
 	var _child = cell_data(id, _mx, _my)
 	var i = 0;
@@ -31,25 +17,27 @@ with (argument[0]) { //with the spell object
 		i = _child.index //get index
 		//change the existing tile
 		if (argument[3] = SPELL.EMPTY) {
-			spell[i] = [argument[3], "NAME", 0, -1, [_mx, _my]]
+			var _s = spell[| i]
+			ds_list_destroy(_s[3])
+			spell[| i] = [argument[3], "NAME", 0, ds_list_create(), [_mx, _my]]
 			//empty tile and spell data from slot
-			children[i] = noone;
+			ds_list_delete(children, i)
 			instance_destroy(_child)
 			if (i == children_number - 1) {
 				children_number--	
 			}
 			size = 10;
 			for (i = 0; i < children_number; i++) {
-				with (children[i]) {
+				with (children[| i]) {
 					other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)	
 				}
 			}
 			return noone; //return no tile
 		} else {
 			//only update type and name
-			var _s = spell[i]
+			var _s = spell[| i]
 			_s[@ 0] = argument[3]
-			with (children[i]) {
+			with (children[| i]) {
 				value = 0
 				//get tile data
 				tile = argument[3]
@@ -83,23 +71,22 @@ with (argument[0]) { //with the spell object
 				cell_size = size*2/sqrt(3)
 				other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
 			}
-			return children[i] //return the given tile
+			return children[| i] //return the given tile
 		}
 	} else { //no tile currently in space
 		//create a new entry
 		i = children_number;
 		children_number += 1;
-		children[i] = noone;
 		//check for error
 		if (argument[3] = SPELL.EMPTY) {
 			show_debug_message("DELETING EMPTY TILE")	
 			return noone
 		}
 		//change/make the entry
-		spell[i] = [argument[3], "", 0, -1, [_mx, _my]]
+		ds_list_add(spell, [argument[3], "", 0, -1, [_mx, _my]])
 		//make a new tile
 		with (instance_create_depth(0, 0, 0, obj_spell_part_hex)) {
-			other.children[i] = id //give id
+			ds_list_add(other.children, id) //give id
 			//copypasta
 			index = i; //give index
 			spell = other.id
@@ -118,9 +105,10 @@ with (argument[0]) { //with the spell object
 			cell_size = size*2/sqrt(3)
 			other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
 			//update entry
-			other.spell[i] = [argument[3], name, value, -1, [_mx, _my]] 
+			children = ds_list_create()
+			other.spell[| i] = [argument[3], name, value, ds_list_create(), [_mx, _my]] 
 		}
-		return children[i]
+		return children[| i]
 	}
 }
 

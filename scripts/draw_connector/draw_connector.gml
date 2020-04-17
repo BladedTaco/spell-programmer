@@ -89,6 +89,7 @@ if (abs(_dir - 180) < 90) {
 		_x1 - _scl*_age,  _y1 + 0.5,
 		_str, -_scl, -_scl, 0
 	)
+	draw_set_halign(fa_left)
 } else { //draw text normally
 	var _str = string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl)
 	draw_text_transformed(

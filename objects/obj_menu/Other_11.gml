@@ -228,11 +228,13 @@ switch (menu_data[selected]) {
 		var _index;
 		var _child = child.id
 		var _menu = id
-		var _c;
+		var _c, _s;
 		with (parent.child) {
 			_index = ds_list_find_index(input_tile, other.child)
 			if (_index = _menu.selected) { //already in this spot in the list
 				ds_list_replace(input_tile, _index, noone)	
+				_s = spell.spell[| index]
+				ds_list_replace(_s[5], _index, noone)	
 				_menu.menu_sprite[_menu.selected] = spr_menu_null
 			} else { // not in this spot in the list
 				//replace previous
@@ -243,6 +245,8 @@ switch (menu_data[selected]) {
 					}
 				}
 				ds_list_replace(input_tile, _menu.selected, _child)
+				_s = spell.spell[| index]
+				ds_list_replace(_s[5], _menu.selected, _child.index)
 				_menu.menu_sprite[_menu.selected] = spr_menu_circle
 			}
 		}

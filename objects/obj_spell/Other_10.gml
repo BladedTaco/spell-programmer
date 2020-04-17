@@ -8,13 +8,9 @@ wire_heads = [];
 
 //get wires
 for (i = 0; i < children_number; i++) {
-	if (instance_exists(children[i])) {
-		if (children[i].type == TYPE.WIRE) {
-			_wire[array_length_1d(_wire)] = children[i];
-			_wire_head[array_length_1d(_wire)-1] = true;
-		}
-	} else {
-		show_debug_message("MISSING CHILD")
+	if (children[| i].type == TYPE.WIRE) {
+		_wire[array_length_1d(_wire)] = children[| i];
+		_wire_head[array_length_1d(_wire)-1] = true;
 	}
 }
 
@@ -25,7 +21,7 @@ for (i = array_length_1d(_wire) - 1; i >= 0; i--) { //for each wire
 		with (_wire[i]) {
 			for (o = array_length_1d(_wire) - 1; o >= 0; o--) { //for each wire
 				for (j = 0; j < children_number; j++) { //for each child
-					if (_wire[o] = children[j]) { //child to be removed
+					if (_wire[o] = children[| j]) { //child to be removed
 						_wire_head[o] = false; //remove from head list
 					}
 				}

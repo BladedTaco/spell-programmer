@@ -38,33 +38,27 @@ for (i = 0; i < _max; i++) {
 	
 //hexagons
 for (var i = 0; i < children_number; i++) {
-	if (children[i] != noone) {
-		with (children[i]) {
-			//update position
-			x = other.half_surface_size + bubble_size*pos_x
-			y = other.half_surface_size + hex_size*pos_y*1.5
+	with (children[| i]) {
+		//update position
+		x = other.half_surface_size + bubble_size*pos_x
+		y = other.half_surface_size + hex_size*pos_y*1.5
 			
-			//back polygon backing
-			draw_set_colour(COLOUR.EMPTY)
-			draw_polygon(x, y, cell_size, 90, 6, true)
+		//back polygon backing
+		draw_set_colour(COLOUR.EMPTY)
+		draw_polygon(x, y, cell_size, 90, 6, true)
 			
-			//front polygon
-			draw_set_colour(image_blend)
-			draw_polygon(x, y, cell_size, 90, 6, false)
-		}
+		//front polygon
+		draw_set_colour(image_blend)
+		draw_polygon(x, y, cell_size, 90, 6, false)
 	}
 }
 //connectors
 for (var i = 0; i < children_number; i++) {
-	if (children[i] != noone) {
-		with (children[i]) {
-			//draw connectors
-			for (var o = 0; o < children_number; o++) {
-				if (children[o] != noone) {
-					with (children[o]) {
-						draw_connector(other.x, other.y, x, y, name, image_blend, size, other.size, spell.age, 1)
-					}
-				}
+	with (children[| i]) {
+		//draw connectors
+		for (var o = 0; o < children_number; o++) {
+			with (children[| o]) {
+				draw_connector(other.x, other.y, x, y, name, image_blend, size, other.size, spell.age, 1)
 			}
 		}
 	}
@@ -72,21 +66,40 @@ for (var i = 0; i < children_number; i++) {
 	
 	
 	
-//var _str;
-//for (var i = 0; i < children_number; i++) {
-//	if (children[i] != noone) {
-//		with (children[i]) {
-//			//draw list
-//			_str = list_to_string(input_tile)
-//			draw_set_colour(c_gray)
-//			draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
-//			draw_set_colour(c_white)
-//			draw_text(x - size, y - size - 8, _str)
-//			//draw circle
-//			event_perform(ev_draw, 0)
-//		}
-//	}
-//}
+var _str;
+for (var i = 0; i < children_number; i++) {
+	with (children[| i]) {
+		//draw circle
+		event_perform(ev_draw, 0)
+	}
+}
+	
+	
+var _str;
+for (var i = 0; i < children_number; i++) {
+	with (children[| i]) {
+		//draw list
+		_str = list_to_string(input_tile)
+		draw_set_colour(c_gray)
+		draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
+		draw_set_colour(c_white)
+		draw_text(x - size, y - size - 8, _str)
+		//draw list
+		_str = list_to_string(children)
+		draw_set_colour(c_gray)
+		draw_rectangle(x - size, y - size - 30, x - size + string_width(_str), y - size-15, false)
+		draw_set_colour(c_white)
+		draw_text(x - size, y - size - 23, _str)
+		//draw list
+		_str = string(id)
+		draw_set_colour(c_gray)
+		draw_rectangle(x - size, y - size - 45, x - size + string_width(_str), y - size-30, false)
+		draw_set_colour(c_white)
+		draw_text(x - size, y - size - 38, _str)
+	}
+}
+	
+
 	
 //for (i = 0; i < array_length_1d(wire_heads); i++) {
 //	with (wire_heads[i]) {
@@ -220,3 +233,10 @@ shader_reset();
 
 x_diff = 0;
 y_diff = 0;
+
+if (keyboard_check(vk_shift)) {
+	draw_set_colour(c_white)
+	draw_set_halign(fa_left)
+	draw_set_valign(fa_top)
+	draw_text(10, 100, list_to_string(spell, true, true))
+}

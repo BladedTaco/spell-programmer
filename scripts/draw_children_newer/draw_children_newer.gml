@@ -3,7 +3,7 @@
 var _dir = 270 + image_angle + spell.age*visible + zero_angle
 var _len = size*2
 for (var i = 0; i < children_number; i++) {
-	with (children[i]) {
+	with (children[| i]) {
 		if (children_number = 0) { //no children
 			if (other.children_number > 3) {
 				if (other.zero_angle = 0) {

@@ -5,7 +5,7 @@ var _len = size*2
 var i = argument[1]
 with (argument[0]) {
 	var _dir = 90  + zero_angle + i*360/children_number
-	with (children[i]) {
+	with (children[| i]) {
 		if (children_number = 0) { //no children
 			if (other.children_number > 3) {
 				if (other.zero_angle = 0) {
