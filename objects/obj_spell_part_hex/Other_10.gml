@@ -36,9 +36,6 @@ if (array_length_1d(_array) > 5) {
 	inputs = _array[4]
 	input_colour = _array[5]
 	input_number = array_length_1d(inputs)
-	for (var i = input_number; i > 0; i--) {
-		input_tile[| i-1] = 0
-	}
 }
 
 //get number of children

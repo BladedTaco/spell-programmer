@@ -69,7 +69,6 @@ switch (menu_data[selected]) {
 		active = false;
 		var _menu = id;
 		var _tile = scr_get_wireless_inputs(child)
-		var _i;
 		for (var m = 0; m < ds_list_size(_tile); m++) { //for each entry
 			with (_tile[| m]) {
 				with (instance_create_depth(other.x, other.y, other.depth - 1, obj_menu)) {
@@ -82,12 +81,11 @@ switch (menu_data[selected]) {
 					parent = _menu	
 					menu_options = _menu.child.inputs
 					menu_length = array_length_1d(menu_options)
-					_i = ds_list_find_index(_menu.child.input_tile, other.id)
 					for (var i = 0; i < menu_length; i++) {
 						menu_active[i] = (other.image_blend == _menu.child.input_colour[i])
 						_destroy = min(_destroy, !menu_active[i]) //destroy on no valid inputs
 						menu_sprite[i] = spr_menu_null
-						if (_i = i) { //already in list
+						if (_menu.child.input_tile[| i] = other.id) { //already in list
 							menu_sprite[i] = spr_menu_circle	
 						}
 						menu_angle[i] = 0
@@ -225,29 +223,28 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.INPUT: //toggle input
-		var _index;
+		var _index = selected;
 		var _child = child.id
 		var _menu = id
 		var _c, _s;
 		with (parent.child) {
-			_index = ds_list_find_index(input_tile, other.child)
-			if (_index = _menu.selected) { //already in this spot in the list
+			if (_child = input_tile[| _index]) { //already in this spot in the list
 				ds_list_replace(input_tile, _index, noone)	
 				_s = spell.spell[| index]
 				ds_list_replace(_s[5], _index, noone)	
-				_menu.menu_sprite[_menu.selected] = spr_menu_null
+				_menu.menu_sprite[_index] = spr_menu_null
 			} else { // not in this spot in the list
 				//replace previous
-				_c = input_tile[| _menu.selected]
+				_c = input_tile[| _index]
 				with (obj_menu) {
 					if (child.id = _c) {
-						menu_sprite[_menu.selected] = spr_menu_null
+						menu_sprite[_index] = spr_menu_null
 					}
 				}
-				ds_list_replace(input_tile, _menu.selected, _child)
+				ds_list_replace(input_tile, _index, _child)
 				_s = spell.spell[| index]
-				ds_list_replace(_s[5], _menu.selected, _child.index)
-				_menu.menu_sprite[_menu.selected] = spr_menu_circle
+				ds_list_replace(_s[5], _index, _child.index)
+				_menu.menu_sprite[_index] = spr_menu_circle
 			}
 		}
 	break;
