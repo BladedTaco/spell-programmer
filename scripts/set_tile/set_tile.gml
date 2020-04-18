@@ -19,7 +19,7 @@ with (argument[0]) { //with the spell object
 		if (argument[3] = SPELL.EMPTY) {
 			var _s = spell[| i]
 			ds_list_destroy(_s[3])
-			spell[| i] = [argument[3], "NAME", 0, ds_list_create(), [_mx, _my]]
+			spell[| i] = [argument[3], "NAME", 0, ds_list_create(), [_mx, _my], ds_list_create()]
 			//empty tile and spell data from slot
 			ds_list_delete(children, i)
 			instance_destroy(_child)
@@ -83,7 +83,7 @@ with (argument[0]) { //with the spell object
 			return noone
 		}
 		//change/make the entry
-		ds_list_add(spell, [argument[3], "", 0, -1, [_mx, _my]])
+		ds_list_add(spell, [argument[3], "", 0, -1, [_mx, _my], -1])
 		//make a new tile
 		with (instance_create_depth(0, 0, 0, obj_spell_part_hex)) {
 			ds_list_add(other.children, id) //give id
@@ -106,7 +106,7 @@ with (argument[0]) { //with the spell object
 			other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
 			//update entry
 			children = ds_list_create()
-			other.spell[| i] = [argument[3], name, value, ds_list_create(), [_mx, _my]] 
+			other.spell[| i] = [argument[3], name, value, ds_list_create(), [_mx, _my], ds_list_create()] 
 		}
 		return children[| i]
 	}

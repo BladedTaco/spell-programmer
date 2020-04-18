@@ -32,7 +32,6 @@
 	draw_set_colour(image_blend)
 	draw_circle_outline(x, y, size)
 
-
 	switch (type) {
 		case TYPE.WIRE:
 		case TYPE.BASIC:

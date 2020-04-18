@@ -16,7 +16,9 @@ var _pos = _array[4]
 pos_x = _pos[0]
 pos_y = _pos[1]
 
-ds_list_copy(input_tile, _array[5]) // input tile inputs as indexes
+if (ds_exists(_array[3], ds_type_list)) {
+	ds_list_copy(input_tile, _array[5]) // input tile inputs as indexes
+}
 
 //get tile data
 if (tile > SPELL.CONNECTOR) {

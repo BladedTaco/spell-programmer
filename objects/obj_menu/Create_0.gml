@@ -4,7 +4,7 @@ pos_x = 0;
 pos_y = 0;
 
 menu_data = [MENU.TIL, MENU.OUT, MENU.VAL, MENU.NAM, MENU.MOV, MENU.SEL]
-menu_options = ["Set Tile", "Set Output", "Set Value", "Set Name", "Move Tile", "Select Group"]
+menu_options = ["Set Tile", "Set Output", "Set Value", "Set Ports", "Move Tile", "Select Group"]
 menu_sprite = [spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null]
 menu_active = [true, false, false, false, false, false];
 menu_angle = [0, 0, 0, 0, 0, 0];
