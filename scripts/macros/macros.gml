@@ -26,7 +26,7 @@ enum COLOUR {
 	VECTOR = c_aqua,
 	TRICK = c_white,
 	MANA = c_fuchsia,
-	ENTITY = c_green,
+	ENTITY = c_lime,
 	SPELL = c_ltgray,
 	SHELL = c_gray,
 	CONNECTOR = $020202,

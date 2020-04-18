@@ -158,13 +158,16 @@ if (global.shaders) {
 	//randomly populate the surface
 	shader_set(shd_perlin_noise)
 	var _uniform = shader_get_uniform(shd_perlin_noise, "u_age")
-	shader_set_uniform_f(_uniform, true_age*3)
+	shader_set_uniform_f(_uniform, true_age/3)
 	_uniform = shader_get_uniform(shd_perlin_noise, "u_dim")
 	shader_set_uniform_f(_uniform, surface_size)
 	draw_rectangle(0, 0, surface_size, surface_size, false)
 	shader_reset()
 	surface_reset_target();
 
+	if (keyboard_check(vk_space)) {
+		draw_surface(noise_surface, 0, 0)
+	}
 
 	//create particle surface if needed
 	if (!surface_exists(particle_surface)) {
@@ -204,6 +207,8 @@ if (global.shaders) {
 	texture_set_stage(_uniform, surface_get_texture(alt_particle_surface))
 	_uniform = shader_get_uniform(shd_noise_movement, "u_dim")
 	shader_set_uniform_f(_uniform, surface_size, surface_size)
+	_uniform = shader_get_uniform(shd_noise_movement, "mul")
+	shader_set_uniform_f(_uniform, 6)
 	draw_rectangle(0, 0, surface_size, surface_size, false)
 	shader_reset();
 	surface_reset_target();
@@ -226,10 +231,12 @@ if (global.shaders) {
 	shader_reset();
 }
 
-//draw the spell_surface
-shader_set(shd_alpha_spell)
-draw_surface(spell_surface, x - half_surface_size, y - half_surface_size)
-shader_reset();
+if (!mouse_check_button(mb_middle)) {
+	//draw the spell_surface
+	shader_set(shd_alpha_spell)
+	draw_surface(spell_surface, x - half_surface_size, y - half_surface_size)
+	shader_reset();
+}
 
 x_diff = 0;
 y_diff = 0;
