@@ -279,6 +279,14 @@
             }
         },
         {
+            "Key": "5a86cc86-9663-4cbc-963a-1e4b5cbe4c13",
+            "Value": {
+                "id": "af169357-8eb1-4bf2-b416-acc032ced950",
+                "resourcePath": "sprites\\writeup\\writeup.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "5b7a0a09-e748-44d4-b40f-235c74b8760e",
             "Value": {
                 "id": "59d62ffe-7a2d-46df-a690-1aa36f71386d",
