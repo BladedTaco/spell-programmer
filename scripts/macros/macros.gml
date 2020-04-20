@@ -29,6 +29,7 @@ enum COLOUR {
 	ENTITY = c_lime,
 	SPELL = c_ltgray,
 	SHELL = c_gray,
+	WIRE = $cfcfcf,
 	CONNECTOR = $020202,
 	EMPTY = $020202,	
 	SURFACE_EMPTY = $010101
@@ -44,8 +45,9 @@ enum MENU {
 	NAM,
 	MOV,
 	SEL,
-	TILE_EMPTY,
 	TILE_TRICK,
+	TILE_EMPTY,
+	TILE_META,
 	TILE_BASIC,
 	TILE_CONSTANT,
 	TILE_CONVERTER,

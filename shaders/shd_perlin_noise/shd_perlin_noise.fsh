@@ -9,6 +9,8 @@ uniform float u_dim;
 
 const float res = 60.0;
 
+//uniform vec3 u_smooth;
+
 /*algorithm
 make a 1/res resolution grid
 get noise values by smoothing between 4 nearest pixels (gpu interpolation?)
@@ -36,6 +38,13 @@ vec3 noise(vec3 pos, float seed) {
 	pos = pos/res;
 	vec3 f_pos = floor(pos);
 	pos = fract(pos);
+	
+	////smoothstep
+	//vec3 smooth = u_smooth.xyz;
+	//if(smooth.x > 0.5) pos.x = smoothstep(0.0, 1.0, pos.x);
+	//if(smooth.y > 0.5) pos.y = smoothstep(0.0, 1.0, pos.y); 
+	//if(smooth.z > 0.5) pos.z = smoothstep(0.0, 1.0, pos.z); 
+	
 	return mix(
 		mix(
 			mix(n(f_pos.xy + vec2(0.0, 0.0), seed + 10.5), n(f_pos.xy + vec2(1.0, 0.0), seed + 10.5), pos.x),

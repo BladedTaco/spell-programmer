@@ -14,18 +14,11 @@ with (argument[0]) { //with the spell object
 	var i = 0;
 
 	if (instance_exists(_child)) { //tile currently in space
-		i = _child.index //get index
 		//change the existing tile
 		if (argument[3] = SPELL.EMPTY) {
-			var _s = spell[| i]
-			ds_list_destroy(_s[3])
-			spell[| i] = [argument[3], "NAME", 0, ds_list_create(), [_mx, _my], ds_list_create()]
-			//empty tile and spell data from slot
-			ds_list_delete(children, i)
+			//destroy the child (it handles its own cleanup)
 			instance_destroy(_child)
-			if (i == children_number - 1) {
-				children_number--	
-			}
+			//calculate new size 
 			size = 10;
 			for (i = 0; i < children_number; i++) {
 				with (children[| i]) {

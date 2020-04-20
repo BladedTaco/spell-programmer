@@ -38,9 +38,7 @@ with (argument[0]) { //with the spell object
 	//update wires
 	if (argument[2].type = TYPE.WIRE) {
 		//update wire heads
-		with (argument[0]) {
-			event_user(0)
-		}	
+		event_user(0)
 		for (i = 0; i < array_length_1d(wire_heads); i++) {
 			with (wire_heads[i]) {
 				event_user(2)	

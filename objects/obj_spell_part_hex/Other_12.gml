@@ -21,7 +21,7 @@ if (type = TYPE.WIRE) {
 		}
 			
 		if (array_length_1d(colours) = 0) {
-			colours[0] = c_white	
+			colours[0] = COLOUR.WIRE
 		}
 			
 		//get base values
@@ -62,6 +62,6 @@ if (type = TYPE.WIRE) {
 	} else { //empty connector
 		//no name, no colour
 		name = "?NONE?"
-		image_blend = COLOUR.SHELL
+		image_blend = COLOUR.WIRE
 	}
 }

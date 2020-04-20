@@ -14,8 +14,8 @@ switch (menu_data[selected]) {
 			spell = other.spell
 			child = other.child
 			parent = other.id		
-			menu_data = [MENU.TILE_EMPTY, MENU.TILE_TRICK, MENU.TILE_BASIC, MENU.TILE_CONSTANT, MENU.TILE_CONVERTER, MENU.TILE_MANA]
-			menu_options = ["EMPTY", "TRICK", "BASIC", "CONSTANT", "CONVERTER", "MANA"]
+			menu_data = [MENU.TILE_EMPTY, MENU.TILE_META, MENU.TILE_BASIC, MENU.TILE_CONSTANT, MENU.TILE_CONVERTER, MENU.TILE_MANA]
+			menu_options = ["EMPTY", "META", "BASIC", "CONSTANT", "CONVERTER", "MANA"]
 			menu_sprite = [spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null]
 			menu_active = [instance_exists(child), true, true, true, true, true];
 			menu_length = 6;
@@ -142,12 +142,19 @@ switch (menu_data[selected]) {
 	
 	case MENU.TILE_EMPTY: //remove tile
 		set_tile(spell, pos_x, pos_y, SPELL.EMPTY)
+		//destroy menus
 		instance_destroy(parent)
 		instance_destroy();
 	break;
 	
-	case MENU.TILE_TRICK: //connetor tile
+	case MENU.TILE_TRICK: //trick tile
 		parent.child = set_tile(spell, pos_x, pos_y, SPELL.ADD_MOTION)
+		with (parent) { event_user(2) };
+		instance_destroy();
+	break;
+	
+	case MENU.TILE_META: //connetor tile (will be tiles that interact between circles, or are special or output time or such variables)
+		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONNECTOR)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;

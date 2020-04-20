@@ -18,7 +18,7 @@ spell_surface = -1;
 size = 0;
 surface_size = 4096//2048;
 half_surface_size = surface_size/2;
-
+update_wires = 0
 
 //vertically is each tile/circle
 //each circle is [TILE, NAME, VALUE, INPUTS, TILE_POS]
