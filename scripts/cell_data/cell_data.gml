@@ -7,7 +7,7 @@
 //with (argument[0]) {
 //	var _id = instance_nearest(
 //		x + argument[1]*bubble_size,
-//		y + argument[2]*hex_size*1.5,
+//		y + argument[2]*hex_size*HEX_MUL,
 //		obj_spell_part_hex
 //	)
 //	if (instance_exists(_id)) {

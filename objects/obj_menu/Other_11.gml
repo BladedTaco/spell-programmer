@@ -93,7 +93,7 @@ switch (menu_data[selected]) {
 					}
 					name = "INPUT"
 					x = spell.x + pos_x*spell.bubble_size
-					y = spell.y + pos_y*spell.hex_size*1.5
+					y = spell.y + pos_y*spell.hex_size*HEX_MUL
 					if (_destroy) {
 						instance_destroy();	
 					}
@@ -220,7 +220,7 @@ switch (menu_data[selected]) {
 				name = "OUTPUT"
 				image_angle = -30;
 				x = spell.x + pos_x*spell.bubble_size
-				y = spell.y + pos_y*spell.hex_size*1.5
+				y = spell.y + pos_y*spell.hex_size*HEX_MUL
 				single = true;
 			}
 		

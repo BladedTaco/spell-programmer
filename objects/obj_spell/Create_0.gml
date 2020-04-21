@@ -116,17 +116,19 @@ for (var i = 0; i < children_number; i++) {
 	}
 }
 //calculate hex size
+//_hex = _bubble*2/sqrt(3)
+_bubble += 32 // add border
 _hex = _bubble*2/sqrt(3)
-bubble_size = _bubble + 32
-hex_size = _hex + 32
+bubble_size = _bubble
+hex_size = _hex
 //give bubble and hex size
 for (i = 0; i < children_number; i++) {
 	with (children[| i]) {
 		event_user(1) //get children
-		bubble_size = _bubble + 32
-		hex_size = _hex + 32
+		bubble_size = _bubble
+		hex_size = _hex
 		cell_size = size*2/sqrt(3)
-		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
+		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
 	}
 }
 

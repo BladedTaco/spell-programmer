@@ -22,7 +22,7 @@ with (argument[0]) { //with the spell object
 			size = 10;
 			for (i = 0; i < children_number; i++) {
 				with (children[| i]) {
-					other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)	
+					other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)	
 				}
 			}
 			return noone; //return no tile
@@ -62,7 +62,7 @@ with (argument[0]) { //with the spell object
 					}
 				}
 				cell_size = size*2/sqrt(3)
-				other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
+				other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
 			}
 			return children[| i] //return the given tile
 		}
@@ -96,7 +96,7 @@ with (argument[0]) { //with the spell object
 			bubble_size = other.bubble_size 
 			hex_size = other.hex_size 
 			cell_size = size*2/sqrt(3)
-			other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*1.5) + cell_size + 60)
+			other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
 			//update entry
 			children = ds_list_create()
 			other.spell[| i] = [argument[3], name, value, ds_list_create(), [_mx, _my], ds_list_create()] 

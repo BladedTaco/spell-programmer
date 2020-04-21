@@ -41,7 +41,7 @@ for (var i = 0; i < children_number; i++) {
 	with (children[| i]) {
 		//update position
 		x = other.half_surface_size + bubble_size*pos_x
-		y = other.half_surface_size + hex_size*pos_y*1.5
+		y = other.half_surface_size + hex_size*pos_y*HEX_MUL
 			
 		//back polygon backing
 		draw_set_colour(COLOUR.EMPTY)
@@ -246,4 +246,16 @@ if (keyboard_check(vk_shift)) {
 	draw_set_halign(fa_left)
 	draw_set_valign(fa_top)
 	draw_text(10, 100, list_to_string(spell, true, true))
+}
+
+
+
+if (children_number > 0) {
+	var _m = mouse_to_tile(id)
+	var _mx = _m[0]
+	var _my = _m[1]
+	draw_set_colour(c_white)
+	draw_set_alpha(0.5)
+	draw_polygon(x + _mx*bubble_size, y + _my*hex_size*HEX_MUL, hex_size, 90, 6, true)
+	draw_set_alpha(1)
 }

@@ -1,4 +1,4 @@
-
+#macro HEX_MUL 1.5
 //spell circle types
 enum TYPE {
 	BASIC,

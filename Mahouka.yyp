@@ -431,6 +431,14 @@
             }
         },
         {
+            "Key": "a30a02cd-d9ba-423a-8962-f88e0a95ac8d",
+            "Value": {
+                "id": "b85081e2-fe43-4e23-a0ba-6c3bb7517528",
+                "resourcePath": "scripts\\mouse_to_tile\\mouse_to_tile.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "a3ad2eff-e3a1-4679-aca4-b6a94b9e6a74",
             "Value": {
                 "id": "4741c728-3249-4a7a-b914-ac3569fa25f0",
@@ -772,7 +780,8 @@
         "d5784c53-de00-4f6c-90dc-a4ff987e91d3",
         "9275c17c-e2e4-485b-9960-66dc2fb4d949",
         "f67ca47f-8691-408c-860c-8aa5eb6ccbf1",
-        "082f0591-4bfb-4ca0-822c-1403c8aa9198"
+        "082f0591-4bfb-4ca0-822c-1403c8aa9198",
+        "a30a02cd-d9ba-423a-8962-f88e0a95ac8d"
     ],
     "tutorial": ""
 }
