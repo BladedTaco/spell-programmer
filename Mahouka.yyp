@@ -79,6 +79,14 @@
             }
         },
         {
+            "Key": "091bb28f-30dc-4e83-8149-e75c3049b759",
+            "Value": {
+                "id": "ce6d68e2-f8d8-479a-a990-944b908e0c64",
+                "resourcePath": "views\\091bb28f-30dc-4e83-8149-e75c3049b759.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "0bb4e64d-08bb-4564-a801-6a2d02a450d4",
             "Value": {
                 "id": "f95db61d-f362-4d66-b37f-48561b1945e8",
@@ -340,14 +348,6 @@
                 "id": "607875f1-84e3-42c9-a3b4-a1e10ebea3c5",
                 "resourcePath": "scripts\\draw_circle_curve\\draw_circle_curve.yy",
                 "resourceType": "GMScript"
-            }
-        },
-        {
-            "Key": "7b77cb8f-9cdd-48d7-9da5-946b244b707d",
-            "Value": {
-                "id": "74e5ae17-7c7a-4aa6-9099-b1b7b018ac3d",
-                "resourcePath": "fonts\\fnt_runic\\fnt_runic.yy",
-                "resourceType": "GMFont"
             }
         },
         {
@@ -668,6 +668,14 @@
                 "id": "a6a47832-de47-4537-9e45-f7347d31b032",
                 "resourcePath": "views\\d61f8670-9410-4905-9bbe-dc4dbc0f83e1.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "d6b3d005-f68d-4e80-bead-20f970c1c268",
+            "Value": {
+                "id": "2f4fa2ef-b8d8-404d-b51a-0a7be5fe043b",
+                "resourcePath": "sprites\\spr_fnt_space\\spr_fnt_space.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

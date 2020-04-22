@@ -35,7 +35,7 @@ if (type = TYPE.WIRE) {
 			if (children[| 0].children_number > 1) {
 				name = string_delete(name, 1, 3)	
 			}
-			name = "?+?" + name
+			name = " + " + name
 		}
 		//get further values
 		for (var i = 1; i < children_number; i++) {
@@ -54,14 +54,14 @@ if (type = TYPE.WIRE) {
 				colours[array_length_1d(colours)] = children[| i].image_blend
 			}
 			//get iterative values
-			name += "?+?" + children[| i].name
+			name += " + " + children[| i].name
 		}
 		//handle colour cycling variables
 		colours[array_length_1d(colours)] = colours[0]
 		colour_number = array_length_1d(colours) - 1
 	} else { //empty connector
 		//no name, no colour
-		name = "?NONE?"
+		name = " NONE "
 		image_blend = COLOUR.WIRE
 	}
 }

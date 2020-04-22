@@ -106,4 +106,4 @@ with (argument[0]) { //with the spell object
 }
 
 
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [6, 7, 8], [-3, 1]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [6, 7, 8], [-3, 1]],

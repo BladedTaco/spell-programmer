@@ -4,7 +4,7 @@ children = ds_list_create(); //init child array
 children_number = 0;
 age = 0; //how long the circle has been visible
 sub_age = [0, 0, 0]; //half the age for slower moving things
-name = "?JUMP?BOOST?" //spell name
+name = " JUMP BOOST " //spell name
 bubble_size = 0;
 hex_size = 0;
 true_age = 0;
@@ -24,38 +24,38 @@ update_wires = 0
 //each circle is [TILE, NAME, VALUE, INPUTS, TILE_POS]
 //spell =
 //[
-//	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 2, 3]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 5, 6]],
-//	[SPELL.CASTER, "?CASTER?", 0, -1],
-//	[SPELL.TEST2, "?TEST2?", 0, [4, 5, 7, 7, 6, 6]],//[SPELL.MANA, "MANA SOURCE", 77, -1],
-//	[SPELL.CONSTANT, "?X?", 0, -1],
-//	[SPELL.CONSTANT, "?Y?", 0, -1],
-//	[SPELL.CONSTANT, "?Z?", 1, -1],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 8, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 5, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [10, 11, 12]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 5, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 5, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 5, 6]]
+//	[SPELL.ADD_MOTION, " ADD MOTION ", -1, [1, 2, 3]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
+//	[SPELL.CASTER, " CASTER ", 0, -1],
+//	[SPELL.TEST2, " TEST2 ", 0, [4, 5, 7, 7, 6, 6]],//[SPELL.MANA, "MANA SOURCE", 77, -1],
+//	[SPELL.CONSTANT, " X ", 0, -1],
+//	[SPELL.CONSTANT, " Y ", 0, -1],
+//	[SPELL.CONSTANT, " Z ", 1, -1],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 8, 6]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [10, 11, 12]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]]
 //	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
 //]
 
 //spell =
 //[
-//	[SPELL.ADD_MOTION, "?ADD?MOTION?", -1, [1, 10, 3]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 5, 6]],
-//	[SPELL.CASTER, "?CASTER?", 0, -1],
-//	[SPELL.MANA, "?MANA?SOURCE?", 77, -1],
-//	[SPELL.CONSTANT, "?X?", 0, -1],
-//	[SPELL.CONSTANT, "?Y?", 0, -1],
-//	[SPELL.CONSTANT, "?Z?", 1, -1],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 13, 13]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 10, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [10, 11, 12]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [1, 1, 1]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 10, 10]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 11, 11]],
-//	[SPELL.CONSTRUCT_VECTOR, "?CONSTRUCT?VECTOR?", 0, [4, 12, 12]]
+//	[SPELL.ADD_MOTION, " ADD MOTION ", -1, [1, 10, 3]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
+//	[SPELL.CASTER, " CASTER ", 0, -1],
+//	[SPELL.MANA, " MANA SOURCE ", 77, -1],
+//	[SPELL.CONSTANT, " X ", 0, -1],
+//	[SPELL.CONSTANT, " Y ", 0, -1],
+//	[SPELL.CONSTANT, " Z ", 1, -1],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 13, 13]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 10, 6]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [10, 11, 12]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [1, 1, 1]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 10, 10]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 11, 11]],
+//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 12, 12]]
 //	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
 //]
 
@@ -64,26 +64,26 @@ update_wires = 0
 //each circle is [TILE, NAME, VALUE, CONNECTIONS, TILE_POS, INPUTS]
 spell = ds_list_create()
 ds_list_add(spell, 
-	[SPELL.ADD_MOTION,			"?ADD?MOTION?",			-1,			new_ds_list(1, 9, 11),	[0,0],	new_ds_list(9, -1, 2)],
-	[SPELL.CONSTRUCT_VECTOR,	"?CONSTRUCT?VECTOR?",	0,			new_ds_list(3, 4, 5),	[1,1],	new_ds_list(-1, -1, -1)],
-	[SPELL.MANA,				"?MANA?SOURCE?",		12345678,	ds_list_create(),		[3,-1],	ds_list_create()],
-	[SPELL.CONSTANT,			"?X?",					0,			ds_list_create(),		[0,2],	ds_list_create()],
-	[SPELL.CONSTANT,			"?Y?",					0,			ds_list_create(),		[2,2],	ds_list_create()],
-	[SPELL.CONSTANT,			"?Z?",					1,			ds_list_create(),		[3,1],	ds_list_create()],
-	[SPELL.CONSTANT,			"?X?",					0,			ds_list_create(),		[-1,1],	ds_list_create()],
-	[SPELL.CONSTANT,			"?Y?",					0,			ds_list_create(),		[-4,0],	ds_list_create()],
-	[SPELL.CASTER,				"?CASTER?",				0,			ds_list_create(),		[-4,2],	ds_list_create()],
-	[SPELL.CONSTRUCT_VECTOR,	"?CONSTRUCT?VECTOR?",	0,			new_ds_list(6, 10, 7),	[-2,0],	new_ds_list(7, 6, 7)],
-	[SPELL.CONSTRUCT_VECTOR,	"?CONSTRUCT?VECTOR?",	0,			new_ds_list(6, 7, 8),	[-3, 1],new_ds_list(-1, -1, -1)],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(2),			[1,-1],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(2),			[2,0],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(2),			[4,0],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(2),			[5,-1],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(2),			[4,-2],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(2),			[2,-2],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(13),		[6,0],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(17),		[8,0],	ds_list_create()],
-	[SPELL.CONNECTOR,			"?CONNECTOR?",			0,			new_ds_list(18),		[10,0],	ds_list_create()]
+	[SPELL.ADD_MOTION,			" ADD MOTION ",			-1,			new_ds_list(1, 9, 11),	[0,0],	new_ds_list(9, -1, 2)],
+	[SPELL.CONSTRUCT_VECTOR,	" CONSTRUCT VECTOR ",	0,			new_ds_list(3, 4, 5),	[1,1],	new_ds_list(-1, -1, -1)],
+	[SPELL.MANA,				" MANA SOURCE ",		12345678,	ds_list_create(),		[3,-1],	ds_list_create()],
+	[SPELL.CONSTANT,			" X ",					0,			ds_list_create(),		[0,2],	ds_list_create()],
+	[SPELL.CONSTANT,			" Y ",					0,			ds_list_create(),		[2,2],	ds_list_create()],
+	[SPELL.CONSTANT,			" Z ",					1,			ds_list_create(),		[3,1],	ds_list_create()],
+	[SPELL.CONSTANT,			" X ",					0,			ds_list_create(),		[-1,1],	ds_list_create()],
+	[SPELL.CONSTANT,			" Y ",					0,			ds_list_create(),		[-4,0],	ds_list_create()],
+	[SPELL.CASTER,				" CASTER ",				0,			ds_list_create(),		[-4,2],	ds_list_create()],
+	[SPELL.CONSTRUCT_VECTOR,	" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 10, 7),	[-2,0],	new_ds_list(7, 6, 7)],
+	[SPELL.CONSTRUCT_VECTOR,	" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 7, 8),	[-3, 1],new_ds_list(-1, -1, -1)],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(2),			[1,-1],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(2),			[2,0],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(2),			[4,0],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(2),			[5,-1],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(2),			[4,-2],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(2),			[2,-2],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(13),		[6,0],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(17),		[8,0],	ds_list_create()],
+	[SPELL.CONNECTOR,			" CONNECTOR ",			0,			new_ds_list(18),		[10,0],	ds_list_create()]
 )
 
 	

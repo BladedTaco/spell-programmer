@@ -13,7 +13,7 @@ const float res = 60.0;
 
 /*algorithm
 make a 1/res resolution grid
-get noise values by smoothing between 4 nearest pixels (gpu interpolation?)
+get noise values by smoothing between 4 nearest pixels (gpu interpolation )
 then smooth by a second grid
 move the grids along z space
 

@@ -13,9 +13,9 @@ for (i = 0; i < ds_list_size(input_tile); i++) {
 		with (spell.children[| input_tile[| i]]) {
 			other.input_tile[| i] = id; //give id
 			if (connector_name = " ") {
-				connector_name = "?" + other.inputs[i] + "??+?"
+				connector_name = " " + other.inputs[i] + "  + "
 			} else {
-				connector_name += other.inputs[i] + "??+?"
+				connector_name += other.inputs[i] + "  + "
 			}
 		}
 	}
