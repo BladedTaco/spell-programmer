@@ -254,6 +254,10 @@ switch (menu_data[selected]) {
 				_menu.menu_sprite[_index] = spr_menu_circle
 			}
 		}
+		//recalculate connectors
+		with (spell) {
+			event_user(1)	
+		}
 	break;
 	
 	default: //not handled, show srror

@@ -58,7 +58,7 @@ for (var i = 0; i < children_number; i++) {
 		//draw connectors
 		for (var o = 0; o < children_number; o++) {
 			with (children[| o]) {
-				draw_connector(other.x, other.y, x, y, connector_name, image_blend, size, other.size, spell.age, 1)
+				draw_connector(other.x, other.y, x, y, connector_name[o], image_blend, size, other.size, spell.age, 1)
 			}
 		}
 	}
@@ -75,37 +75,41 @@ for (var i = 0; i < children_number; i++) {
 }
 	
 	
-var _str;
-for (var i = 0; i < children_number; i++) {
-	with (children[| i]) {
-		//draw list
-		_str = list_to_string(input_tile)
-		draw_set_colour(c_gray)
-		draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
-		draw_set_colour(c_white)
-		draw_text(x - size, y - size - 8, _str)
-		//draw list
-		_str = list_to_string(children)
-		draw_set_colour(c_gray)
-		draw_rectangle(x - size, y - size - 30, x - size + string_width(_str), y - size-15, false)
-		draw_set_colour(c_white)
-		draw_text(x - size, y - size - 23, _str)
-		//draw list
-		_str = string(id)
-		draw_set_colour(c_gray)
-		draw_rectangle(x - size, y - size - 45, x - size + string_width(_str), y - size-30, false)
-		draw_set_colour(c_white)
-		draw_text(x - size, y - size - 38, _str)
+if (keyboard_check(vk_shift)) {
+	//draw each tiles data
+	var _str;
+	for (var i = 0; i < children_number; i++) {
+		with (children[| i]) {
+			//draw list
+			_str = list_to_string(input_tile)
+			draw_set_colour(c_gray)
+			draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
+			draw_set_colour(c_white)
+			draw_text(x - size, y - size - 8, _str)
+			//draw list
+			_str = list_to_string(children)
+			draw_set_colour(c_gray)
+			draw_rectangle(x - size, y - size - 30, x - size + string_width(_str), y - size-15, false)
+			draw_set_colour(c_white)
+			draw_text(x - size, y - size - 23, _str)
+			//draw list
+			_str = string(id)
+			draw_set_colour(c_gray)
+			draw_rectangle(x - size, y - size - 45, x - size + string_width(_str), y - size-30, false)
+			draw_set_colour(c_white)
+			draw_text(x - size, y - size - 38, _str)
+		}
+	}
+	//draw wire heads
+	for (i = 0; i < array_length_1d(wire_heads); i++) {
+		with (wire_heads[i]) {
+			draw_sprite(spr_menu_null, 0, x, y)	
+		}
 	}
 }
-	
 
 	
-//for (i = 0; i < array_length_1d(wire_heads); i++) {
-//	with (wire_heads[i]) {
-//		draw_sprite(spr_menu_null, 0, x, y)	
-//	}
-//}
+
 	
 surface_reset_target();
 
@@ -242,10 +246,16 @@ x_diff = 0;
 y_diff = 0;
 
 if (keyboard_check(vk_shift)) {
+	//draw the spell objects data
 	draw_set_colour(c_white)
 	draw_set_halign(fa_left)
 	draw_set_valign(fa_top)
-	draw_text(10, 100, list_to_string(spell, true, true))
+	draw_set_alpha(0.7)
+	_str = list_to_string(spell, true, true)
+	draw_rectangle(10, 100, 10 + string_width(_str), 100 + string_height(_str), false)
+	draw_set_alpha(1)
+	draw_set_colour(c_black)
+	draw_text(10, 100, _str)
 }
 
 

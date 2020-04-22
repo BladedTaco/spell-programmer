@@ -132,4 +132,8 @@ for (i = 0; i < children_number; i++) {
 	}
 }
 
+//get wire heads
 event_user(0)
+
+//get connector names
+event_user(1)

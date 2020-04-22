@@ -9,7 +9,7 @@ menu_active = [true, false, false, false, false, false];
 if (instance_exists(child)) {
 	menu_active[1] = child.type != TYPE.TRICK; //Set Output - not a trick tile
 	menu_active[2] = child.type = TYPE.COUNTER; //Set Value - Counters only
-	menu_active[3] = child.tile != TYPE.TRICK; //Set Name - Output only
+	menu_active[3] = (child.inputs != []); //Set Ports - Takes Inputs
 	menu_active[4] = true; //Move Tile - there is a child
 	menu_active[5] = true; //Select Group - there is a child
 }

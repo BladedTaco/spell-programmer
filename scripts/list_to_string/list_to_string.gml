@@ -26,7 +26,7 @@ if (argument_count > 1) {
 if (_deep) {
 	var _list = argument[0]
 	for (var i = 0; i < ds_list_size(_list); i++) {
-		_ret += _tab
+		_ret += string(i) + _tab
 		for (var o = 0; o < array_length_1d(_list[| i]); o++) {
 			_l = _list[| i]
 			if ((o == 3) or (o == 5)) {
@@ -41,7 +41,7 @@ if (_deep) {
 } else {
 	var _list = argument[0]
 	for (var i = 0; i < ds_list_size(_list); i++) {
-		_ret += _tab + string_replace_all(string_replace_all(string(_list[| i]), "{ { ", "["), " },  }", "]") + _sep
+		_ret += string(i) + _tab + string_replace_all(string_replace_all(string(_list[| i]), "{ { ", "["), " },  }", "]") + _sep
 	}	
 	return string_delete(_ret, string_length(_ret) - 1, 2) + _end
 }
