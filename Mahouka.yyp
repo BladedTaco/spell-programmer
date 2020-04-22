@@ -143,6 +143,14 @@
             }
         },
         {
+            "Key": "19a7def3-bfaa-4834-a9fe-162b10b43143",
+            "Value": {
+                "id": "90444de6-8f57-4a86-affd-20aa03508517",
+                "resourcePath": "sprites\\spr_fnt_runic_backup\\spr_fnt_runic_backup.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "2b778019-1f75-4b32-987c-874592a8c0d1",
             "Value": {
                 "id": "b6ae1128-c426-4b37-a3ed-ca6f4fd5df8d",
@@ -335,6 +343,14 @@
             }
         },
         {
+            "Key": "7b77cb8f-9cdd-48d7-9da5-946b244b707d",
+            "Value": {
+                "id": "74e5ae17-7c7a-4aa6-9099-b1b7b018ac3d",
+                "resourcePath": "fonts\\fnt_runic\\fnt_runic.yy",
+                "resourceType": "GMFont"
+            }
+        },
+        {
             "Key": "7f116a3e-93d2-4950-9b48-ac3dee310d42",
             "Value": {
                 "id": "56182003-0303-47f9-b41a-00cb7254b460",
@@ -372,6 +388,14 @@
                 "id": "766f0900-e67b-4ea1-9258-4a093a6cb8bf",
                 "resourcePath": "shaders\\shd_clip_circle_no_tex\\shd_clip_circle_no_tex.yy",
                 "resourceType": "GMShader"
+            }
+        },
+        {
+            "Key": "8fd6ea37-ca87-425d-9962-004ba1a60002",
+            "Value": {
+                "id": "d6e2d508-7c51-49ce-9a7d-253359b0e8ec",
+                "resourcePath": "sprites\\spr_fnt_runic\\spr_fnt_runic.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

@@ -4,6 +4,7 @@ index = -1;
 tile = SPELL.MANA
 type = TYPE.BASIC
 name = ""
+connector_name = " "
 value = 0;
 max_size = 0;
 size = 0;

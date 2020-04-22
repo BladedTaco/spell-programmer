@@ -221,7 +221,7 @@ switch (menu_data[selected]) {
 				image_angle = -30;
 				x = spell.x + pos_x*spell.bubble_size
 				y = spell.y + pos_y*spell.hex_size*HEX_MUL
-				single = true;
+				//single = true;
 			}
 		
 		}

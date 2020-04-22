@@ -5,6 +5,9 @@ var _a = 0.5 + active*0.5 //reduce alpha if not active
 draw_set_alpha(_a)
 draw_set_colour(c_black)
 draw_polygon(x, y, obj_spell.hex_size, 90, 6, false)
+draw_set_colour(c_ltgray + $4f4f4f)
+draw_set_alpha(_a*0.3)
+draw_polygon(x, y, obj_spell.hex_size, 90, 6, true)
 draw_set_colour(c_black)
 draw_set_alpha( _a * 0.75)
 draw_circle(x, y, 30, false)
@@ -28,9 +31,11 @@ for (var i = 0; i < menu_length; i++) {
 		_y = round(y + lengthdir_y(min(life*3, 60), _dir))
 		draw_set_colour(c_black)
 		draw_set_alpha( _a * 0.75)
-		draw_line_width(_x - 20 + 40*(i < 3), _y, _x + (min(life*life, 400)/400)*(30 + string_width(menu_options[i]))*2*((i < 3)-0.5), _y, 20)
-		if (active and point_in_circle(mouse_x, mouse_y, _x, _y, 20)) {
-			draw_set_colour(c_dkgray)
+		if (menu_options[i] != "") {
+			draw_line_width(_x - 20 + 40*(i < 3), _y, _x + (min(life*life, 400)/400)*(30 + string_width(menu_options[i]))*2*((i < 3)-0.5), _y, 20)
+			if (active and point_in_circle(mouse_x, mouse_y, _x, _y, 20)) {
+				draw_set_colour(c_dkgray)
+			}
 		}
 		draw_circle(_x, _y, 20, false)
 		draw_set_alpha( _a * 1)

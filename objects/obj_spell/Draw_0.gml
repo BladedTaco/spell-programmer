@@ -58,7 +58,7 @@ for (var i = 0; i < children_number; i++) {
 		//draw connectors
 		for (var o = 0; o < children_number; o++) {
 			with (children[| o]) {
-				draw_connector(other.x, other.y, x, y, name, image_blend, size, other.size, spell.age, 1)
+				draw_connector(other.x, other.y, x, y, connector_name, image_blend, size, other.size, spell.age, 1)
 			}
 		}
 	}

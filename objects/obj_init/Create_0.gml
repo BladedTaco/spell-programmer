@@ -25,3 +25,7 @@ show_debug_overlay(true)
 
 
 instance_create_depth(room_width/2, room_height/2, 0, obj_spell)
+
+
+font_replace_sprite(fnt_runic, spr_fnt_runic, 32, true, 0)
+draw_set_font(fnt_runic)
