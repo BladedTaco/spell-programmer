@@ -4,7 +4,7 @@ if (type = TYPE.WIRE) {
 	var _s = [];
 	
 	//reset colour array
-	colours = [];
+	colours = [COLOUR.WIRE];
 	
 	//get colours and names
 	for (var i = 0; i < _l; i++) {
@@ -19,7 +19,11 @@ if (type = TYPE.WIRE) {
 	connector_name = [name, name, name, name, name, name]	
 	colour_number = _l;
 	colour_cycle = (_l > 1)
-	if (colour_cycle) { colours[i] = colours[0] } //append the first colour to the list
+	if (colour_cycle) { 
+		colours[i] = colours[0] //append the first colour to the list
+	} else {
+		image_blend = colours[0]	
+	}
 	
 	for (i = 0; i < children_number; i++) {
 		if (children[| i].type == TYPE.WIRE) {

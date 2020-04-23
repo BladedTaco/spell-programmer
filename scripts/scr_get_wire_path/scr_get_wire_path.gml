@@ -26,6 +26,7 @@ while (true) { //repeat forever, it will exit itself
 	//check if its the right output
 	if (_list[| i] = _tile) {
 		//destory index list, return path list
+		ds_list_delete(_list, i) //remove the non-wire tile
 		ds_list_destroy(_index)
 		return _list	
 	} else { //go back up the tree until a new branch is found
