@@ -19,6 +19,7 @@ size = 0;
 surface_size = 4096//2048;
 half_surface_size = surface_size/2;
 update_wires = 0
+wire_heads = []; //the heads of the different wire connectors
 
 //vertically is each tile/circle
 //each circle is [TILE, NAME, VALUE, INPUTS, TILE_POS]
@@ -67,11 +68,11 @@ ds_list_add(spell,
 	[SPELL.ADD_MOTION,			" ADD MOTION ",			-1,			new_ds_list(1, 9, 11),	[0,0],	new_ds_list(9, -1, 2)],
 	[SPELL.CONSTRUCT_VECTOR,	" CONSTRUCT VECTOR ",	0,			new_ds_list(3, 4, 5),	[1,1],	new_ds_list(-1, -1, -1)],
 	[SPELL.MANA,				" MANA SOURCE ",		12345678,	ds_list_create(),		[3,-1],	ds_list_create()],
-	[SPELL.CONSTANT,			" X ",					0,			ds_list_create(),		[0,2],	ds_list_create()],
-	[SPELL.CONSTANT,			" Y ",					0,			ds_list_create(),		[2,2],	ds_list_create()],
-	[SPELL.CONSTANT,			" Z ",					1,			ds_list_create(),		[3,1],	ds_list_create()],
-	[SPELL.CONSTANT,			" X ",					0,			ds_list_create(),		[-1,1],	ds_list_create()],
-	[SPELL.CONSTANT,			" Y ",					0,			ds_list_create(),		[-4,0],	ds_list_create()],
+	[SPELL.CONSTANT,			" CONSTANT ",			0,			ds_list_create(),		[0,2],	ds_list_create()],
+	[SPELL.CONSTANT,			" CONSTANT ",			0,			ds_list_create(),		[2,2],	ds_list_create()],
+	[SPELL.CONSTANT,			" CONSTANT ",			1,			ds_list_create(),		[3,1],	ds_list_create()],
+	[SPELL.CONSTANT,			" CONSTANT ",			0,			ds_list_create(),		[-1,1],	ds_list_create()],
+	[SPELL.CONSTANT,			" CONSTANT ",			0,			ds_list_create(),		[-4,0],	ds_list_create()],
 	[SPELL.CASTER,				" CASTER ",				0,			ds_list_create(),		[-4,2],	ds_list_create()],
 	[SPELL.CONSTRUCT_VECTOR,	" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 10, 7),	[-2,0],	new_ds_list(7, 6, 7)],
 	[SPELL.CONSTRUCT_VECTOR,	" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 7, 8),	[-3, 1],new_ds_list(-1, -1, -1)],
@@ -89,7 +90,6 @@ ds_list_add(spell,
 	
 
 
-wire_heads = []; //the heads of the different wire connectors
 
 var _bubble = 0, _hex = 0, _s;
 children_number = ds_list_size(spell)

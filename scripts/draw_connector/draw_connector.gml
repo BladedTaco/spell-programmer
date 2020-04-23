@@ -23,6 +23,9 @@ _y2 = argument[3]
 _x3 = min(_x1, _x2) - _s
 _y3 = min(_y1, _y2) - _s
 _string = argument[4]
+if (_string = "") {
+	_string = " "	
+}
 _colour = argument[5]
 _size = argument[6]
 _alt_size = argument[7]

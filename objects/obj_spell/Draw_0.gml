@@ -58,7 +58,7 @@ for (var i = 0; i < children_number; i++) {
 		//draw connectors
 		for (var o = 0; o < children_number; o++) {
 			with (children[| o]) {
-				draw_connector(other.x, other.y, x, y, connector_name[o], image_blend, size, other.size, spell.age, 1)
+				draw_connector(other.x, other.y, x, y, other.connector_name[o], image_blend, size, other.size, spell.age, 1)
 			}
 		}
 	}
@@ -80,20 +80,20 @@ if (keyboard_check(vk_shift)) {
 	var _str;
 	for (var i = 0; i < children_number; i++) {
 		with (children[| i]) {
-			//draw list
+			//draw input list
 			_str = list_to_string(input_tile)
 			draw_set_colour(c_gray)
 			draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
 			draw_set_colour(c_white)
 			draw_text(x - size, y - size - 8, _str)
-			//draw list
+			//draw children list
 			_str = list_to_string(children)
 			draw_set_colour(c_gray)
 			draw_rectangle(x - size, y - size - 30, x - size + string_width(_str), y - size-15, false)
 			draw_set_colour(c_white)
 			draw_text(x - size, y - size - 23, _str)
-			//draw list
-			_str = string(id)
+			//draw name
+			_str = string(index) + ": " + string(id)
 			draw_set_colour(c_gray)
 			draw_rectangle(x - size, y - size - 45, x - size + string_width(_str), y - size-30, false)
 			draw_set_colour(c_white)

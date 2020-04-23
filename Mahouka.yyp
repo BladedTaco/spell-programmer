@@ -583,6 +583,14 @@
             }
         },
         {
+            "Key": "c8020caf-8a29-419f-92e3-ffe0e3c0cb74",
+            "Value": {
+                "id": "caf3b752-15b2-49cd-bc47-3d3962f6a1fe",
+                "resourcePath": "scripts\\scr_get_wire_path\\scr_get_wire_path.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "c94554fb-1e3b-439d-8988-94ec59aaebb4",
             "Value": {
                 "id": "e9c627cd-4024-4ad5-b707-62bfdf447efb",
@@ -703,6 +711,14 @@
             }
         },
         {
+            "Key": "e7c15298-c5ce-4eca-acd2-dff3f1e49099",
+            "Value": {
+                "id": "0f236be5-102a-4d7c-b07b-adbb36ac0163",
+                "resourcePath": "scripts\\new_ds_list_size\\new_ds_list_size.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "ecda5946-1bac-4a85-92bb-e7db9804410b",
             "Value": {
                 "id": "b25314c5-9292-4744-89b5-7c290ca782c4",
@@ -789,6 +805,14 @@
                 "resourcePath": "shaders\\shd_clip\\shd_clip.yy",
                 "resourceType": "GMShader"
             }
+        },
+        {
+            "Key": "fdecb986-8f48-4a75-8a8b-467c8968952a",
+            "Value": {
+                "id": "18126dd4-1d7d-4ad5-b0ce-a06d780fb5ff",
+                "resourcePath": "scripts\\array_concat\\array_concat.yy",
+                "resourceType": "GMScript"
+            }
         }
     ],
     "script_order": [
@@ -811,9 +835,12 @@
         "a3ad2eff-e3a1-4679-aca4-b6a94b9e6a74",
         "d5784c53-de00-4f6c-90dc-a4ff987e91d3",
         "9275c17c-e2e4-485b-9960-66dc2fb4d949",
+        "c8020caf-8a29-419f-92e3-ffe0e3c0cb74",
         "f67ca47f-8691-408c-860c-8aa5eb6ccbf1",
         "082f0591-4bfb-4ca0-822c-1403c8aa9198",
-        "a30a02cd-d9ba-423a-8962-f88e0a95ac8d"
+        "a30a02cd-d9ba-423a-8962-f88e0a95ac8d",
+        "e7c15298-c5ce-4eca-acd2-dff3f1e49099",
+        "fdecb986-8f48-4a75-8a8b-467c8968952a"
     ],
     "tutorial": ""
 }

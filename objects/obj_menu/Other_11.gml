@@ -65,7 +65,7 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.NAM: //set name
-		child.name = choose("name 1", "1337 5347", "waga na wa san")
+		//child.name = choose("name 1", "1337 5347", "waga na wa san")
 		active = false;
 		var _menu = id;
 		var _tile = scr_get_wireless_inputs(child)

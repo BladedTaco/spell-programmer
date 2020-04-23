@@ -27,44 +27,9 @@ with (argument[0]) { //with the spell object
 			}
 			return noone; //return no tile
 		} else {
-			//only update type and name
-			var _s = spell[| i]
-			_s[@ 0] = argument[3]
-			with (children[| i]) {
-				value = 0
-				//get tile data
-				tile = argument[3]
-				var _array = obj_init.spell_data[tile]
-
-				_s[@ 1] = _array[3]
-				type = _array[0] 
-				sprite_index = _array[1]
-				image_blend = _array[2]
-				name = _array[3]
-				if (array_length_1d(_array) > 5) {
-					inputs = _array[4]
-					input_colour = _array[5]
-					input_number = array_length_1d(inputs)
-				}
-			
-				//handle size
-				size = base_size;
-				if (type = TYPE.COUNTER) {
-					size = base_size + string_length(string(value))*20
-					if (value >= 100) {
-						radius = 2;
-					}
-				} else if (type != TYPE.BASIC) {
-					if (type = TYPE.WIRE) {
-						size -= 20
-					} else {
-						size += 20	
-					}
-				}
-				cell_size = size*2/sqrt(3)
-				other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
-			}
-			return children[| i] //return the given tile
+			//delete tile, then replace
+			set_tile(argument[0], argument[1], argument[2], SPELL.EMPTY)
+			return set_tile(argument[0], argument[1], argument[2], argument[3])
 		}
 	} else { //no tile currently in space
 		//create a new entry
@@ -99,7 +64,8 @@ with (argument[0]) { //with the spell object
 			other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
 			//update entry
 			children = ds_list_create()
-			other.spell[| i] = [argument[3], name, value, ds_list_create(), [_mx, _my], ds_list_create()] 
+			input_tile = new_ds_list_size(noone, input_number)
+			other.spell[| i] = [argument[3], name, value, ds_list_create(), [_mx, _my], new_ds_list_size(-1, input_number)] 
 		}
 		return children[| i]
 	}

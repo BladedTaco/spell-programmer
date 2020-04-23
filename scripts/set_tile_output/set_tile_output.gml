@@ -35,6 +35,8 @@ with (argument[0]) { //with the spell object
 		}
 	}
 	
+	//recalculate all connectors
+	event_user(1)	
 	//update wires
 	if (argument[2].type = TYPE.WIRE) {
 		//update wire heads
