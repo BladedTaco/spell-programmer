@@ -15,7 +15,6 @@ if (type = TYPE.WIRE) {
 	
 	//redefine variables
 	name = array_concat(_s, "+", " ")
-	//connector_name = ["", "", "", "", "", ""]	
 	connector_name = [name, name, name, name, name, name]	
 	colour_number = _l;
 	colour_cycle = (_l > 1)

@@ -40,7 +40,7 @@ for (i = 0; i < children_number; i++) {
 						for (j = 0; j < other.input_number; j++) {
 							if (other.input_tile[| j] == id) {
 								other.connector_name[o] += other.inputs[j] + " + "
-								show_debug_message(other.connector_name[o])
+								//show_debug_message(other.connector_name[o])
 							}
 						}
 						other.connector_name[o] = string_delete(other.connector_name[o], string_length(other.connector_name[o])-2, 3) + " "

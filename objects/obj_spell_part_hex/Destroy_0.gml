@@ -81,3 +81,11 @@ with (spell) {
 	//update wires next frame
 	update_wires = 2
 }
+
+if (type = TYPE.WIRE) {
+	with (spell) {
+		check_ports(id)
+		//recalculate all connectors and update wires
+		event_user(1)	
+	}
+}

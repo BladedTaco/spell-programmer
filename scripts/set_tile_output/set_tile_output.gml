@@ -35,17 +35,18 @@ with (argument[0]) { //with the spell object
 		}
 	}
 	
-	//recalculate all connectors
+	//recalculate all connectors and update wires
 	event_user(1)	
 	//update wires
 	if (argument[2].type = TYPE.WIRE) {
-		//update wire heads
+		//update wire heads |Slightly inefficient, wire paths done twice
 		event_user(0)
 		for (i = 0; i < array_length_1d(wire_heads); i++) {
 			with (wire_heads[i]) {
 				event_user(2)	
 			}
 		}
+		if (_diff) check_ports(id)
 	}
 }
 
