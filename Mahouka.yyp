@@ -623,6 +623,14 @@
             }
         },
         {
+            "Key": "cd6f0711-5344-4686-a8b8-bd599b2f7afe",
+            "Value": {
+                "id": "587147fc-928b-4359-80ed-295d6d91f8ab",
+                "resourcePath": "scripts\\cell_distance\\cell_distance.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "d09a6441-7ab1-4f9b-b5e2-8ba8824a4ba2",
             "Value": {
                 "id": "aa899e37-1d5c-4d79-88f6-955bbeb5a421",
@@ -743,6 +751,14 @@
             }
         },
         {
+            "Key": "eec71fff-ceb4-4ddd-84d8-7a181b20c771",
+            "Value": {
+                "id": "4eb221df-2b00-4e81-b20d-db3bc3cb6b6a",
+                "resourcePath": "scripts\\scr_reposition_tile\\scr_reposition_tile.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "efabb609-2b44-4cd9-bd0b-f429e77e96cd",
             "Value": {
                 "id": "c446508c-c741-4252-b5ce-f199db4d09e6",
@@ -858,7 +874,9 @@
         "a30a02cd-d9ba-423a-8962-f88e0a95ac8d",
         "e7c15298-c5ce-4eca-acd2-dff3f1e49099",
         "fdecb986-8f48-4a75-8a8b-467c8968952a",
-        "168c90ef-6c2c-4f7e-aaa1-f26046b5bd98"
+        "168c90ef-6c2c-4f7e-aaa1-f26046b5bd98",
+        "eec71fff-ceb4-4ddd-84d8-7a181b20c771",
+        "cd6f0711-5344-4686-a8b8-bd599b2f7afe"
     ],
     "tutorial": ""
 }

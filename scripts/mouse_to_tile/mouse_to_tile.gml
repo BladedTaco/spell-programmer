@@ -25,17 +25,17 @@ with (argument[0]) { //with the spell object
 	_p2 = point_distance(_x, _y, (_tx - 1)*_scl,	(_ty - 1)*HEX_MUL) //up left
 	_p3 = point_distance(_x, _y, (_tx + 1)*_scl,	(_ty - 1)*HEX_MUL) //up right
 
-	//if (debug_mode) {
-	//	draw_set_colour(c_black)
-	//	draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, 5)
-	//	draw_text(x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, _p1)
-	//	draw_set_colour(c_lime)
-	//	draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5)
-	//	draw_text(x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p2)
-	//	draw_set_colour(c_yellow)
-	//	draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5)
-	//	draw_text(x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p3)
-	//}
+	if (keyboard_check(vk_shift)) {
+		draw_set_colour(c_black)
+		draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, 5)
+		draw_text(x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, _p1)
+		draw_set_colour(c_lime)
+		draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5)
+		draw_text(x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p2)
+		draw_set_colour(c_yellow)
+		draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5)
+		draw_text(x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p3)
+	}
 
 	//return the cell with the smallest distance
 	if ((_p1 < _p2) and (_p1 < _p3)) { //home

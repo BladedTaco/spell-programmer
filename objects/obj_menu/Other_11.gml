@@ -104,7 +104,22 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.MOV: //move tile
-	
+		//create child menu
+		active = false;
+		with (instance_create_depth(x, y, depth - 1, obj_menu)) {
+			left_click_action = true
+			single = true
+			pos_x = other.pos_x
+			pos_y = other.pos_y
+			spell = other.spell
+			child = other.child
+			parent = other.id
+			menu_active = [false, false, false, false, false, false];
+			menu_data[5] = MENU.MOVE_TILE
+			menu_length = 0;
+			name = "Move Tile"
+			selected = 0 //strictly empty tiles
+		}
 	break;
 	
 	case MENU.SEL: //select group
@@ -258,6 +273,19 @@ switch (menu_data[selected]) {
 		with (spell) {
 			event_user(1)	
 		}
+	break;
+	
+	case MENU.MOVE_TILE:
+		scr_reposition_tile(child, pos_x, pos_y)
+		with (parent) {
+			active = true
+			pos_x = other.pos_x
+			pos_y = other.pos_y
+			x = spell.x + pos_x*spell.bubble_size
+			y = spell.y + pos_y*spell.hex_size*HEX_MUL
+			name = string(pos_x) + "," + string(pos_y)
+		}
+		
 	break;
 	
 	default: //not handled, show srror

@@ -15,6 +15,7 @@ child = noone;
 active = true;
 selected = 0;
 spell = noone;
+left_click_action = false;
 
 life = 0;
 image_alpha = 0
