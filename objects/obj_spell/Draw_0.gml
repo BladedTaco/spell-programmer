@@ -7,6 +7,7 @@ draw_sprite_ext(spr_add_motion, 0, 25, 25, 1, 1, _dir, c_white, 1)
 //create and prep the surface
 if (!surface_exists(spell_surface)) {
 	spell_surface = surface_create(surface_size, surface_size)	
+	half_surface_size = surface_size/2
 }
 surface_set_target(spell_surface)
 draw_clear_alpha(c_black, 0)
@@ -43,8 +44,14 @@ for (var i = 0; i < children_number; i++) {
 		x = other.half_surface_size + bubble_size*pos_x
 		y = other.half_surface_size + hex_size*pos_y*HEX_MUL
 			
+		if (group_colour != COLOUR.EMPTY) {
+			//back polygon backing group colour
+			draw_set_colour(group_colour)
+			draw_polygon(x, y, hex_size + 100, 90, 6, true)
+		}
+		
 		//back polygon backing
-		draw_set_colour(COLOUR.EMPTY)
+		draw_set_colour(group_colour)
 		draw_polygon(x, y, cell_size, 90, 6, true)
 			
 		//front polygon
@@ -259,7 +266,7 @@ if (keyboard_check(vk_shift)) {
 }
 
 
-
+//highlight cell mouse is in
 if (children_number > 0) {
 	var _m = mouse_to_tile(id)
 	var _mx = _m[0]

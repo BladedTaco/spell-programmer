@@ -53,17 +53,19 @@ for (var i = 0; i < menu_length; i++) {
 	}
 }
 
+//draw group selection
 if (group > -1) {
 	if (ds_exists(group, ds_type_list)) {
 		draw_set_colour(c_dkgray)
 		for (i = 0; i < ds_list_size(group); i++) {
-			_x = group[i].x - spell.x
-			_y = group[i].y - spell.y
+			_x = spell.x + group[| i].pos_x*group[| i].bubble_size
+			_y = spell.y + group[| i].pos_y*group[| i].hex_size*HEX_MUL
 			draw_set_alpha(_a*0.35)
 			draw_circle(_x, _y, 20, false)
 			draw_set_alpha( _a * 1)
 			draw_circle_outline(_x, _y, 20)	
 			draw_set_alpha(1)
+			draw_sprite(spr_menu_circle, 0, _x, _y)
 		}
 		draw_set_colour(c_white)
 	}

@@ -36,7 +36,7 @@ enum COLOUR {
 }
 
 
-menu_options = ["Set Tile", "Set Output", "Set Value", "Set Name", "Move Tile", "Select Group"]
+menu_options = ["Set Tile", "Set Output", "Set Value", "Set Ports", "Move Tile", "Select Group"]
 
 enum MENU {
 	TIL,
@@ -62,7 +62,9 @@ enum MENU {
 	INPUT,
 	MOVE_TILE,
 	GROUP,
-	ADD_GROUP,
-	CANCEL_GROUP,
-	DELETE_GROUP,
+	MOVE_GROUP,
+	VAL_GROUP,
+	TILE_GROUP,
+	PACKAGE_GROUP,
+	LEVEL_GROUP
 }

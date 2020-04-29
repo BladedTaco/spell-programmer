@@ -131,36 +131,56 @@ switch (menu_data[selected]) {
 			spell = other.spell
 			child = other.child
 			parent = other.id		
-			menu_data = [, , , , , MENU.GROUP]
-			menu_options = []
-			menu_sprite = []
-			menu_active = [];
+			menu_data = [MENU.TILE_GROUP, MENU.PACKAGE_GROUP, MENU.VAL_GROUP, MENU.LEVEL_GROUP, MENU.MOVE_GROUP, MENU.GROUP]
+			menu_options = ["Set Tile", "Set Colour", "Set Value", "Move to New Circle", "Move Tile"]
+			menu_sprite = [spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null]
+			menu_active = [true, true, true, true, true];
 			menu_length = 5;
 			name = "GROUP"
 			left_click_action = 2
-			group = ds_list_create();
+			left_click_only = false;
+			group = new_ds_list(child);
 		}
 	break;
 	
-	case MENU.ADD_GROUP:
-	
-	break;
-	case MENU.CANCEL_GROUP:
-		parent.active = true;
-		// destroy gr
-		instance_destroy();
-	break;
-	case MENU.GROUP:
+	//menu group subroutines
+	case MENU.GROUP: //add or remove tile from group
 		var _id = cell_data(spell, pos_x, pos_y)
-		if (point_distance(mouse_x, mouse_y, _id.x - spell.x, _id.y - spell.y) < 30) {
-			if (ds_list_find_index(group, _id) > -1) {
-				// remove from group
-				ds_list_delete(group, _id)
-			} else {
-				//add to group
-				ds_list_add(group, _id)
+		var _p = -1;
+		if (instance_exists(_id)) {
+			if (point_distance(
+					mouse_x, mouse_y,
+					spell.x + _id.pos_x*_id.bubble_size,
+					spell.y + _id.pos_y*_id.hex_size*HEX_MUL
+				) < 30) {
+				_p = ds_list_find_index(group, _id)
+				if (_p > -1) {
+					// remove from group
+					ds_list_delete(group, _p)
+				} else {
+					//add to group
+					ds_list_add(group, _id)
+				}
 			}
 		}
+	break;
+	case MENU.MOVE_GROUP: //Move the tiles together as a group
+	
+	break;
+	case MENU.VAL_GROUP: //Change the tiles values together as a group
+	
+	break;
+	case MENU.TILE_GROUP: //Change all the tiles in the group
+	
+	break;
+	case MENU.PACKAGE_GROUP: //Add a colour region to all the tiles in the group
+		for (var i = 0; i < ds_list_size(group); i++) {
+			group[| i].group_colour = make_colour_hsv(random(256), 256, 256)
+			show_debug_message(group[| i].group_colour)
+		}
+	break;
+	case MENU.LEVEL_GROUP: //Split the group off into a new spell circle
+	
 	break;
 	
 	case MENU.VAL_UP:

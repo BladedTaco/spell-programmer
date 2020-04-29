@@ -16,6 +16,7 @@ active = true;
 selected = 0;
 spell = noone;
 left_click_action = false;
+left_click_only = true;
 
 life = 0;
 image_alpha = 0

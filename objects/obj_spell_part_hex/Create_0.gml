@@ -45,3 +45,4 @@ radius = 1;
 colours = [];
 colour_cycle = false;
 colour_number = 0;
+group_colour = COLOUR.EMPTY;
