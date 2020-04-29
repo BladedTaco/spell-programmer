@@ -117,13 +117,50 @@ switch (menu_data[selected]) {
 			menu_active = [false, false, false, false, false, false];
 			menu_data[5] = MENU.MOVE_TILE
 			menu_length = 0;
-			name = "Move Tile"
+			name = "MOVE"
 			selected = 0 //strictly empty tiles
 		}
 	break;
 	
 	case MENU.SEL: //select group
+		//create child menu
+		active = false;
+		with (instance_create_depth(x, y, depth - 1, obj_menu)) {
+			pos_x = other.pos_x
+			pos_y = other.pos_y
+			spell = other.spell
+			child = other.child
+			parent = other.id		
+			menu_data = [, , , , , MENU.GROUP]
+			menu_options = []
+			menu_sprite = []
+			menu_active = [];
+			menu_length = 5;
+			name = "GROUP"
+			left_click_action = 2
+			group = ds_list_create();
+		}
+	break;
 	
+	case MENU.ADD_GROUP:
+	
+	break;
+	case MENU.CANCEL_GROUP:
+		parent.active = true;
+		// destroy gr
+		instance_destroy();
+	break;
+	case MENU.GROUP:
+		var _id = cell_data(spell, pos_x, pos_y)
+		if (point_distance(mouse_x, mouse_y, _id.x - spell.x, _id.y - spell.y) < 30) {
+			if (ds_list_find_index(group, _id) > -1) {
+				// remove from group
+				ds_list_delete(group, _id)
+			} else {
+				//add to group
+				ds_list_add(group, _id)
+			}
+		}
 	break;
 	
 	case MENU.VAL_UP:
@@ -161,37 +198,31 @@ switch (menu_data[selected]) {
 		instance_destroy(parent)
 		instance_destroy();
 	break;
-	
 	case MENU.TILE_TRICK: //trick tile
 		parent.child = set_tile(spell, pos_x, pos_y, SPELL.ADD_MOTION)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
-	
 	case MENU.TILE_META: //connetor tile (will be tiles that interact between circles, or are special or output time or such variables)
 		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONNECTOR)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
-	
 	case MENU.TILE_BASIC: //basic tile
 		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CASTER)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
-	
 	case MENU.TILE_CONSTANT: //constant tile
 		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONSTANT)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
-	
 	case MENU.TILE_CONVERTER: //converter tile
 		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONSTRUCT_VECTOR)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
-	
 	case MENU.TILE_MANA: //mana tile
 		parent.child = set_tile(spell, pos_x, pos_y, SPELL.MANA)
 		with (parent) { event_user(2) };
@@ -285,7 +316,6 @@ switch (menu_data[selected]) {
 			y = spell.y + pos_y*spell.hex_size*HEX_MUL
 			name = string(pos_x) + "," + string(pos_y)
 		}
-		
 	break;
 	
 	default: //not handled, show srror

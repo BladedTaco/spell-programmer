@@ -22,5 +22,6 @@ image_alpha = 0
 
 name = string(pos_x) + "," + string(pos_y)
 single = false; //only performs a single action
+group = -1;
 
 //show_debug_message(id)

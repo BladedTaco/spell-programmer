@@ -1,4 +1,4 @@
-/// @description - check for selection
+/// @description check for selection
 
 if (active) { //if active
 	if (left_click_action) { //action handled by cell locations

@@ -53,4 +53,19 @@ for (var i = 0; i < menu_length; i++) {
 	}
 }
 
+if (group > -1) {
+	if (ds_exists(group, ds_type_list)) {
+		draw_set_colour(c_dkgray)
+		for (i = 0; i < ds_list_size(group); i++) {
+			_x = group[i].x - spell.x
+			_y = group[i].y - spell.y
+			draw_set_alpha(_a*0.35)
+			draw_circle(_x, _y, 20, false)
+			draw_set_alpha( _a * 1)
+			draw_circle_outline(_x, _y, 20)	
+			draw_set_alpha(1)
+		}
+		draw_set_colour(c_white)
+	}
+}
 //draw_set_halign(fa_center)
