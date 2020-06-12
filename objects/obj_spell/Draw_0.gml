@@ -276,3 +276,7 @@ if (children_number > 0) {
 	draw_polygon(x + _mx*bubble_size, y + _my*hex_size*HEX_MUL, hex_size, 90, 6, true)
 	draw_set_alpha(1)
 }
+
+//if keyboard_check_pressed(vk_up) {
+//	surface_save(spell_surface, "output.png")
+//}

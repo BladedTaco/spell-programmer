@@ -1,6 +1,6 @@
 /// @description get wire data
 if (type = TYPE.WIRE) {
-	if (ds_exists(input_tile, ds_type_list)) {
+	if (ds_exists(input_tile, ds_type_list) and ds_exists(children, ds_type_list)) {
 		var _l = ds_list_size(input_tile)
 		var _s = [];
 	
@@ -25,12 +25,19 @@ if (type = TYPE.WIRE) {
 			image_blend = colours[0]	
 		}
 	
+		children_number = ds_list_size(children) // TODO workaround
+	
 		for (i = 0; i < children_number; i++) {
-			if (children[| i].type == TYPE.WIRE) {
-				with (children[| i]) {
-					event_user(2)
-					other.connector_name[i] = name
+			if instance_exists(children[| i]) { 
+				if (children[| i].type == TYPE.WIRE) {
+					with (children[| i]) {
+						event_user(2)
+						other.connector_name[i] = name
+					}
 				}
+			} else {
+				show_debug_message("MISSING CHILD")
+				
 			}
 		}
 	
