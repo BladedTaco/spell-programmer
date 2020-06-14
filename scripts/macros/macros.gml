@@ -1,4 +1,13 @@
 #macro HEX_MUL 1.5
+
+#macro DEBUG_MODE false
+#macro debug:DEBUG_MODE true
+#macro SHADERS true
+#macro no_shaders:SHADERS false
+
+global.debug = DEBUG_MODE
+global.shaders = SHADERS
+
 //spell circle types
 enum TYPE {
 	BASIC,

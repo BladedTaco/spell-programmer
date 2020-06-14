@@ -1,11 +1,8 @@
 /// @description 
+macros()
+
 draw_set_circle_precision(64)
 
-if (display_get_width() > 2000) {
-	global.shaders = true;	
-} else {
-	global.shaders = false;	
-}
 //create spells
 //structure is [TYPE, SPRITE, COLOUR, DEFAULT NAME, INPUTS*, INPUT_COLOURS*]
 spell_data = 

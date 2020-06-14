@@ -59,6 +59,7 @@ for (var i = 0; i < children_number; i++) {
 		draw_polygon(x, y, cell_size, 90, 6, false)
 	}
 }
+
 //connectors
 for (var i = 0; i < children_number; i++) {
 	with (children[| i]) {
@@ -82,7 +83,7 @@ for (var i = 0; i < children_number; i++) {
 }
 	
 	
-if (keyboard_check(vk_shift)) {
+if (keyboard_check(vk_shift) and global.debug) {
 	//draw each tiles data
 	var _str;
 	for (var i = 0; i < children_number; i++) {
@@ -242,7 +243,7 @@ if (global.shaders) {
 	shader_reset();
 }
 
-if (!mouse_check_button(mb_middle)) {
+if !(mouse_check_button(mb_middle) and global.debug) {
 	//draw the spell_surface
 	shader_set(shd_alpha_spell)
 	draw_surface(spell_surface, x - half_surface_size, y - half_surface_size)
@@ -252,7 +253,7 @@ if (!mouse_check_button(mb_middle)) {
 x_diff = 0;
 y_diff = 0;
 
-if (keyboard_check(vk_shift)) {
+if (keyboard_check(vk_shift) and global.debug) {
 	//draw the spell objects data
 	draw_set_colour(c_white)
 	draw_set_halign(fa_left)

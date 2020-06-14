@@ -4,7 +4,9 @@
     "mvc": "1.0",
     "IsDnDProject": false,
     "configs": [
-        
+        "default",
+        "default;debug",
+        "default;no_shaders"
     ],
     "option_ecma": false,
     "parentProject": {
