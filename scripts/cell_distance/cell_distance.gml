@@ -4,6 +4,7 @@
 ///@param c2_x - the second cells x position
 ///@param c2_y - the second cells y position
 ///@desc returns the distance betweent the two cells
+<<<<<<< HEAD
 function cell_distance() {
 
 
@@ -13,3 +14,10 @@ function cell_distance() {
 
 
 }
+=======
+
+
+return	max(ceil(abs(argument[0] - argument[2])/2), abs(argument[1] - argument[3]),
+			ceil(-abs(argument[0] - argument[2])/2 + abs(argument[1] - argument[3]))
+		)
+>>>>>>> master
