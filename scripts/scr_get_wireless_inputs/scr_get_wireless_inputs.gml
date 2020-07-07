@@ -1,7 +1,7 @@
 ///@func scr_get_wireless_inputs(tile)
 ///@param tile - an obj_spell_hex instance
 ///@desc gives all the inputs of a tile shortcircuiting wires as a ds_list that must be destroyed later
-<<<<<<< HEAD
+
 function scr_get_wireless_inputs() {
 
 	//declare variables
@@ -37,7 +37,7 @@ function scr_get_wireless_inputs() {
 
 
 }
-=======
+
 
 //declare variables
 var _list = ds_list_create()
@@ -69,4 +69,4 @@ for (i = 0; i < ds_list_size(_list) - 1; i++) {
 
 //return the list
 return _list
->>>>>>> master
+

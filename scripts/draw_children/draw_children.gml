@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 function draw_children() {
 	//draw children(draw*)
 	///@param draw* - optional, skip drawing unless true
@@ -65,7 +65,7 @@ function draw_children() {
 
 
 
-=======
+
 //draw children(draw*)
 ///@param draw* - optional, skip drawing unless true
 
@@ -127,5 +127,5 @@ for (var i = 0; i < children_number; i++) {
 		}
 	}
 	_dir += 360/children_number
->>>>>>> master
+
 }

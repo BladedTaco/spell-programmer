@@ -6,7 +6,7 @@
 ///@param sides - the amount of sides
 ///@param fill - if the polygon should be filled or an outline
 ///@desc draws a polygon with the given parameters
-<<<<<<< HEAD
+
 function draw_polygon() {
 
 
@@ -48,7 +48,7 @@ function draw_polygon() {
 
 
 }
-=======
+
 
 
 //argument variables
@@ -86,4 +86,4 @@ if (argument[5]) {//if filled
 	//draw the shape
 	draw_primitive_end();
 }
->>>>>>> master
+

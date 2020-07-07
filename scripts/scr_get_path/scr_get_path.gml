@@ -2,7 +2,7 @@
 ///@param head - an obj_spell_hex wire instance
 ///@param tile - an obj_spell_hex instance (Can't be a wire)
 ///@desc gives the path from the head to the tile through wires as a ds_list that must be destroyed later
-<<<<<<< HEAD
+
 function scr_get_path() {
 	// This is done via a Depth-First Search Algorithm
 	// Copied from scr_get_wire_path()
@@ -48,7 +48,7 @@ function scr_get_path() {
 
 
 }
-=======
+
 // This is done via a Depth-First Search Algorithm
 // Copied from scr_get_wire_path()
 
@@ -90,4 +90,4 @@ while (true) { //repeat forever, it will exit itself
 		_index[| i] += 1 //increase branch index
 	}
 }
->>>>>>> master
+

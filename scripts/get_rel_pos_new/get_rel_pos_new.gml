@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 function get_rel_pos_new() {
 	//draw children(draw*)
 	///@param draw* - optional, skip drawing unless true
@@ -36,7 +36,7 @@ function get_rel_pos_new() {
 
 
 
-=======
+
 //draw children(draw*)
 ///@param draw* - optional, skip drawing unless true
 
@@ -69,5 +69,5 @@ with (argument[0]) {
 			//y = other.y + lengthdir_y(_len, _dir)
 		}
 	}
->>>>>>> master
+
 }

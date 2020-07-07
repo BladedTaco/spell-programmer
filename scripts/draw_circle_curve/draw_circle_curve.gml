@@ -5,7 +5,7 @@
 /// @param initdir - the direction the arc starts from
 /// @param arc - the angle size of the arc
 /// @param width - the width of the arc
-<<<<<<< HEAD
+
 function draw_circle_curve() {
 
 
@@ -29,7 +29,7 @@ function draw_circle_curve() {
 
 
 }
-=======
+
 
 
 var _x, _y, _r, _w, _rad, _initdir, _arc;
@@ -48,4 +48,4 @@ _uniform = shader_get_uniform(shd_arc, "u_arc")
 shader_set_uniform_f(_uniform, _r - _w, degtorad(_initdir), degtorad(_initdir + _arc))
 draw_rectangle(_x - _rad, _y - _rad, _x + _rad, _y + _rad, false)
 shader_reset()
->>>>>>> master
+

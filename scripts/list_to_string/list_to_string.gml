@@ -3,7 +3,7 @@
 ///@param multiline* - if the list should be one entry per line, defaults to false
 ///@param deep* - for spell table drawing
 ///@desc returns a string composed of the values in a ds list
-<<<<<<< HEAD
+
 function list_to_string() {
 
 	var _ret = "["
@@ -60,7 +60,7 @@ function list_to_string() {
 
 
 }
-=======
+
 
 var _ret = "["
 var _sep = ", "
@@ -113,4 +113,4 @@ if (_deep) {
 	}	
 	return string_delete(_ret, string_length(_ret) - 1, 2) + _end
 }
->>>>>>> master
+

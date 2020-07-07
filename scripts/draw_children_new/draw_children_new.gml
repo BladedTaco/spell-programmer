@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 function draw_children_new() {
 	//draw children(draw*)
 	///@param draw* - optional, skip drawing unless true
@@ -44,7 +44,7 @@ function draw_children_new() {
 
 
 
-=======
+
 //draw children(draw*)
 ///@param draw* - optional, skip drawing unless true
 var _dir = 270 + image_angle + spell.age*visible + zero_angle
@@ -85,5 +85,5 @@ for (var i = 0; i < children_number; i++) {
 		
 	}
 	_dir += 360/children_number
->>>>>>> master
+
 }

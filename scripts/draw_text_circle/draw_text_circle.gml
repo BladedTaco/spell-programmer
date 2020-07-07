@@ -9,7 +9,7 @@
 ///@param centered* - (true) if it should be centered on the initdir (true), or start from (false)
 ///@param keep_string* - (false) if the base string should be used for centering
 ///@desc using a shader, draws the string in a circular arc with the given parameters
-<<<<<<< HEAD
+
 function draw_text_circle() {
 
 	//define localvars
@@ -34,7 +34,7 @@ function draw_text_circle() {
 					if (argument[8]) {
 						_str = argument[2]
 					}
-=======
+
 
 //define localvars
 var _str = argument[2], _arc = 1, _dir = -argument[4], _spaced = false;
@@ -57,12 +57,12 @@ if (argument_count > 5) {
 			if (argument_count > 8) {
 				if (argument[8]) {
 					_str = argument[2]
->>>>>>> master
+
 				}
 			}
 		}
 	}
-<<<<<<< HEAD
+
 	
 	//set the shader and its uniforms
 	shader_set(shd_circle)
@@ -85,7 +85,7 @@ if (argument_count > 5) {
 
 
 }
-=======
+
 }
 	
 //set the shader and its uniforms
@@ -106,4 +106,4 @@ draw_text(argument[0], argument[1], _str)
 	
 //reset shader
 shader_reset();
->>>>>>> master
+

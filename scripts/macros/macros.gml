@@ -1,7 +1,7 @@
-<<<<<<< HEAD
+
 function macros() {
-=======
->>>>>>> master
+
+
 #macro HEX_MUL 1.5
 
 #macro DEBUG_MODE false
@@ -9,7 +9,7 @@ function macros() {
 #macro SHADERS true
 #macro no_shaders:SHADERS false
 
-<<<<<<< HEAD
+
 	global.debug = DEBUG_MODE
 	global.shaders = SHADERS
 
@@ -85,7 +85,7 @@ function macros() {
 
 
 
-=======
+
 global.debug = DEBUG_MODE
 global.shaders = SHADERS
 
@@ -157,5 +157,5 @@ enum MENU {
 	TILE_GROUP,
 	PACKAGE_GROUP,
 	LEVEL_GROUP
->>>>>>> master
+
 }

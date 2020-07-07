@@ -3,7 +3,7 @@
 ///@param new_cell_x - the x position of the cell to move the tile to
 ///@param new_cell_y - the y position of the cell to move the tile to
 ///@desc Moves the tile to the given position, trimming outputs as needed
-<<<<<<< HEAD
+
 function scr_reposition_tile() {
 	var i, o, _s, _tiles;
 
@@ -45,7 +45,7 @@ function scr_reposition_tile() {
 								set_tile_output(spell, id, other.id)
 								break;
 							}
-=======
+
 var i, o, _s, _tiles;
 
 with (argument[0]) {
@@ -85,13 +85,13 @@ with (argument[0]) {
 						if (other.children[| o] == id) {
 							set_tile_output(spell, id, other.id)
 							break;
->>>>>>> master
+
 						}
 					}
 				}
 			}
 		}
-<<<<<<< HEAD
+
 		//remove port connections that can no longer be made
 		check_ports(spell)
 	}
@@ -99,10 +99,10 @@ with (argument[0]) {
 
 
 }
-=======
+
 	}
 	//remove port connections that can no longer be made
 	check_ports(spell)
 }
 		//ds_list_add(spell, [argument[3], "", 0, -1, [_mx, _my], -1])
->>>>>>> master
+

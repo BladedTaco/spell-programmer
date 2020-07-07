@@ -1,7 +1,7 @@
 ///@func check_ports(spell)
 ///@param spell - the spell object to check
 ///@desc check all ports and removes entries that dont connect
-<<<<<<< HEAD
+
 function check_ports() {
 
 	var _lst, _s;
@@ -23,7 +23,7 @@ function check_ports() {
 
 
 }
-=======
+
 
 var _lst, _s;
 with (argument[0]) {
@@ -41,4 +41,4 @@ with (argument[0]) {
 		}
 	}
 }
->>>>>>> master
+

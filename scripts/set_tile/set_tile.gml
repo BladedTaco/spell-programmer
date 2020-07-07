@@ -4,7 +4,7 @@
 ///@param cell_y - the y position of the cell
 ///@param tile - the type of tile to set to the cell
 ///@desc handles changing or removing tiles from a given cell, returns the tile id
-<<<<<<< HEAD
+
 function set_tile() {
 
 	var _mx = argument[1]
@@ -78,7 +78,7 @@ function set_tile() {
 
 
 }
-=======
+
 
 var _mx = argument[1]
 var _my = argument[2]
@@ -148,4 +148,4 @@ with (argument[0]) { //with the spell object
 
 
 //	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [6, 7, 8], [-3, 1]],
->>>>>>> master
+

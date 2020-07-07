@@ -1,7 +1,7 @@
 ///@func mouse_to_tile(spell)
 ///@param spell - the spell object to check against
 ///@desc gives the tile the mouse is currently in for the given spell object
-<<<<<<< HEAD
+
 function mouse_to_tile() {
 
 	var _x, _y, _tx, _ty;
@@ -51,7 +51,7 @@ function mouse_to_tile() {
 
 
 }
-=======
+
 
 var _x, _y, _tx, _ty;
 
@@ -97,4 +97,4 @@ with (argument[0]) { //with the spell object
 		return [_tx + 1, _ty - 1]
 	}
 }
->>>>>>> master
+

@@ -3,7 +3,7 @@
 ///@param source - the tile to set the output of
 ///@param dest - the tile to input into
 ///@desc sets the output of one tile into another, or removes it if it exists
-<<<<<<< HEAD
+
 function set_tile_output() {
 
 	with (argument[0]) { //with the spell object
@@ -56,7 +56,7 @@ function set_tile_output() {
 
 
 }
-=======
+
 
 with (argument[0]) { //with the spell object
 	//add the input into the spell array
@@ -104,4 +104,4 @@ with (argument[0]) { //with the spell object
 	}
 }
 
->>>>>>> master
+

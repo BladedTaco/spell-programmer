@@ -4,7 +4,7 @@
 ///@param cell_y - the y position of the cell
 ///@param wire - what wires should return
 ///@desc returns whether there is a tile in the cell, use with spell object
-<<<<<<< HEAD
+
 function cell_empty() {
 
 	var _id = cell_data(argument[0], argument[1], argument[2])
@@ -17,7 +17,7 @@ function cell_empty() {
 
 
 }
-=======
+
 
 var _id = cell_data(argument[0], argument[1], argument[2])
 if (instance_exists(_id)) {
@@ -26,4 +26,4 @@ if (instance_exists(_id)) {
 	}
 }
 return instance_exists(_id)
->>>>>>> master
+

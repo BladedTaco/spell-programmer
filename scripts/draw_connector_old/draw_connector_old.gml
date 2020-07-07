@@ -9,7 +9,7 @@
 ///@param alt_size - the size of the startpoint circle
 ///@param age - the age of the circle / animation index
 ///@desc draws a connecting rod from point a to b
-<<<<<<< HEAD
+
 function draw_connector_old() {
 
 	var _x1, _y1, _x2, _y2, _x3, _y3, _string, _colour, _size, _alt_size, _age, _len, _dir, _off, _spd;
@@ -89,7 +89,7 @@ function draw_connector_old() {
 
 
 }
-=======
+
 
 var _x1, _y1, _x2, _y2, _x3, _y3, _string, _colour, _size, _alt_size, _age, _len, _dir, _off, _spd;
 
@@ -165,4 +165,4 @@ draw_surface(_surf, min(_x1, _x2) - _s, min(_y1, _y2) - _s)
 surface_free(_surf)
 
 shader_reset();
->>>>>>> master
+

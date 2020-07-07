@@ -3,7 +3,7 @@
 ///@param source - the tile to set the output of
 ///@param dest - the tile to input into
 ///@desc returns whether creating the given connection causes any loops
-<<<<<<< HEAD
+
 function scr_check_for_loops() {
 
 	//source has no links, no loops
@@ -31,7 +31,7 @@ function scr_check_for_loops() {
 
 
 }
-=======
+
 
 //source has no links, no loops
 if (argument[1].children_number <= 0) {
@@ -54,4 +54,4 @@ for (var i = 0; i < argument[1].children_number; i++) {
 
 return false //no loops found
 
->>>>>>> master
+

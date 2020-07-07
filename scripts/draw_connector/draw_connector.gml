@@ -10,7 +10,7 @@
 ///@param age - the age of the circle / animation index
 ///@param scale - the scale of the connector
 ///@desc draws a connecting rod from point a to b
-<<<<<<< HEAD
+
 function draw_connector() {
 
 	var _x1, _y1, _x2, _y2, _x3, _y3, _string, _colour, _size, _alt_size, _age, _len, _dir, _off, _spd, _scl;
@@ -108,7 +108,7 @@ function draw_connector() {
 
 
 }
-=======
+
 
 var _x1, _y1, _x2, _y2, _x3, _y3, _string, _colour, _size, _alt_size, _age, _len, _dir, _off, _spd, _scl;
 
@@ -202,4 +202,4 @@ if (abs(_dir - 180) < 90) {
 
 
 shader_reset();
->>>>>>> master
+

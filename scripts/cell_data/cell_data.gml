@@ -3,7 +3,7 @@
 ///@param cell_x - the x position of the cell (neighbours are two apart)
 ///@param cell_y - the y position of the cell
 ///@desc returns the id of the tile in the cell, use with spell object
-<<<<<<< HEAD
+
 function cell_data() {
 
 	//with (argument[0]) {
@@ -43,7 +43,7 @@ function cell_data() {
 
 
 }
-=======
+
 
 //with (argument[0]) {
 //	var _id = instance_nearest(
@@ -79,4 +79,4 @@ with (argument[0]) {
 }
 
 return _child;
->>>>>>> master
+
