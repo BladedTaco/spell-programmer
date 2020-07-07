@@ -47,8 +47,6 @@ colour_cycle = false;
 colour_number = 0;
 group_colour = COLOUR.EMPTY;
 
-binary_counter = true
-
 
 //new_call = function(_num) {
 //	return _num	
