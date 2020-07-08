@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"shd_noise_water","path":"shaders/shd_noise_water/shd_noise_water.yy",},"order":22,},
     {"id":{"name":"spr_add_motion","path":"sprites/spr_add_motion/spr_add_motion.yy",},"order":0,},
     {"id":{"name":"spr_mana","path":"sprites/spr_mana/spr_mana.yy",},"order":1,},
     {"id":{"name":"spr_shell","path":"sprites/spr_shell/spr_shell.yy",},"order":2,},
@@ -9,6 +10,7 @@
     {"id":{"name":"spr_menu_null","path":"sprites/spr_menu_null/spr_menu_null.yy",},"order":6,},
     {"id":{"name":"spr_menu_circle","path":"sprites/spr_menu_circle/spr_menu_circle.yy",},"order":7,},
     {"id":{"name":"spr_menu_arrow","path":"sprites/spr_menu_arrow/spr_menu_arrow.yy",},"order":8,},
+    {"id":{"name":"scr_int_to_bin","path":"scripts/scr_int_to_bin/scr_int_to_bin.yy",},"order":30,},
     {"id":{"name":"spr_hataraku_maou_sama","path":"sprites/spr_hataraku_maou_sama/spr_hataraku_maou_sama.yy",},"order":0,},
     {"id":{"name":"spr_useless","path":"sprites/spr_useless/spr_useless.yy",},"order":1,},
     {"id":{"name":"sprite10","path":"sprites/sprite10/sprite10.yy",},"order":2,},

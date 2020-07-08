@@ -28,14 +28,20 @@ function mouse_to_tile() {
 
 		if (keyboard_check(vk_shift)) {
 			draw_set_colour(c_black)
-			draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, 5)
-			draw_text(x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, _p1)
+			draw_line_width(mouse_x, mouse_y,	
+						x + _tx*bubble_size,	   y + _ty*HEX_MUL*hex_size, 5
+			)
+			draw_text(	x + _tx*bubble_size,	   y + _ty*HEX_MUL*hex_size, _p1)
 			draw_set_colour(c_lime)
-			draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5)
-			draw_text(x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p2)
+			draw_line_width(mouse_x, mouse_y,	
+						x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5
+			)
+			draw_text(	x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p2)
 			draw_set_colour(c_yellow)
-			draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5)
-			draw_text(x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p3)
+			draw_line_width(mouse_x, mouse_y,	
+						x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, 5
+			)
+			draw_text(	x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size, _p3)
 		}
 
 		//return the cell with the smallest distance

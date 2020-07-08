@@ -40,45 +40,83 @@
 			draw_circle_outline(x, y, size - 20)
 		break;
 	
+		case TYPE.BIN_COUNTER:
 		case TYPE.COUNTER:
 			draw_set_colour(image_blend)
 			var _str, _sign = -1;
+			_str = "0"
 			//draw the name and its ring
 			var o = string_length(string(value));
+			o = 1
 			draw_text_circle(x, y, name, size - o*20 - 10, _dir, 360, true)
 			draw_circle_outline(x, y, size - o*20 - 20)
-			//for each ring
-			for (--o; o >= 0; o--) {
-				//get the number, direction of rotation, and string
-				var _num = real(string_char_at(string(value), o+1))
-				switch (string_length(string(value)) - o) {
-					case 1:	_str = " ONE "; break;
-					case 2:	_str = " TEN "; break;	
-					case 3:	_str = " HUND "; break;
-					case 4:	_str = " THOUSAND "; break;	
-					case 5:	_str = " TEN THOU "; break;	
-					case 6:	_str = " HUND THOU "; break;	
-					case 7:	_str = " MILLION "; break;
-					case 8:	_str = " TEN MILLION "; break;
-					default: _str = " PLEASE JUST STOP "; break;
+			
+			bin_value = scr_int_to_bin(value)
+			//show_debug_message(value)
+			//show_debug_message(bin_value)
+			
+			//draw the text fill
+			draw_text_circle(
+				x, y, string_repeat(_str, 10), size - 10 - o*20,
+				_dir*_sign, 360, true, false, true
+			)
+			
+			var _sz = 360/string_length(bin_value)
+			for (o = string_length(bin_value); o > 0; o--) {
+				if string_char_at(bin_value, o) == 1 {
+					//draw the fill bar
+					draw_circle_curve(
+						x, y, size - 10 - 20,
+						-o*_sz + _dir*_sign,
+						_sz, 21
+					)
 				}
-				
-				//draw the text fill
-				draw_text_circle(
-					x, y, string_repeat(_str, 10), size - 10 - o*20,
-					_dir*_sign, 360, true, false, true
-				)
-				//draw the fill bar
-				draw_circle_curve(
-					x, y, size - 10 - o*20,
-					_dir*_sign,
-					_num*36, 21
-				)
-				//draw the ring
-				draw_circle_outline(x, y, size - o*20 - 20)
-				_sign = -_sign
 			}
+			
+			//draw the ring
+			draw_circle_outline(x, y, size - o*20 - 20)
+			_sign = -_sign
+		
 		break;
+		//case TYPE.COUNTER:
+		//	draw_set_colour(image_blend)
+		//	var _str, _sign = -1;
+		//	//draw the name and its ring
+		//	var o = string_length(string(value));
+		//	draw_text_circle(x, y, name, size - o*20 - 10, _dir, 360, true)
+		//	draw_circle_outline(x, y, size - o*20 - 20)
+		//	//for each ring
+		//	for (--o; o >= 0; o--) {
+		//		//get the number, direction of rotation, and string
+		//		var _num = real(string_char_at(string(value), o+1))
+		//		switch (string_length(string(value)) - o) {
+		//			case 1:	_str = " ONE "; break;
+		//			case 2:	_str = " TEN "; break;	
+		//			case 3:	_str = " HUND "; break;
+		//			case 4:	_str = " THOUSAND "; break;	
+		//			case 5:	_str = " TEN THOU "; break;	
+		//			case 6:	_str = " HUND THOU "; break;	
+		//			case 7:	_str = " MILLION "; break;
+		//			case 8:	_str = " TEN MILLION "; break;
+		//			default: _str = " PLEASE JUST STOP "; break;
+		//		}
+				
+		//		//draw the text fill
+		//		draw_text_circle(
+		//			x, y, string_repeat(_str, 10), size - 10 - o*20,
+		//			_dir*_sign, 360, true, false, true
+		//		)
+		//		//draw the fill bar
+		//		draw_circle_curve(
+		//			x, y, size - 10 - o*20,
+		//			_dir*_sign,
+		//			_num*36, 21
+		//		)
+		//		//draw the ring
+		//		draw_circle_outline(x, y, size - o*20 - 20)
+		//		_sign = -_sign
+		//	}
+		//break;
 		
 		case TYPE.SHELL:
 		break;

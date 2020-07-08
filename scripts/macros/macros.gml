@@ -15,6 +15,7 @@ function macros() {
 		TRICK,
 		CONVERTER,
 		COUNTER,
+		BIN_COUNTER,
 		SHELL,
 		WIRE
 	}
