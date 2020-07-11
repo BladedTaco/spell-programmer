@@ -41,6 +41,7 @@ function macros() {
 		SPELL = c_ltgray,
 		SHELL = c_gray,
 		WIRE = $cfcfcf,
+		BLACK = $030303,
 		CONNECTOR = $020202,
 		EMPTY = $020202,	
 		SURFACE_EMPTY = $010101

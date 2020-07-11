@@ -1,10 +1,11 @@
-///@func draw_polygon(x, y, len, dir, sides, fill)
+///@func draw_polygon(x, y, len, dir, sides, fill, thickness*)
 ///@param x - the x-centre of the polygon
 ///@param y - the y-centre of the polygon
 ///@param len - the radius of the circle to be inscribed in
 ///@param dir - the direction of the first point
 ///@param sides - the amount of sides
 ///@param fill - if the polygon should be filled or an outline
+///@param thickness* - optional, how thick the lines are
 ///@desc draws a polygon with the given parameters
 function draw_polygon() {
 
@@ -32,6 +33,9 @@ function draw_polygon() {
 		draw_primitive_end();
 	} else { //not filled
 		var _t = 2
+		if argument_count > 6 {
+			_t = argument[6]	
+		}
 		draw_primitive_begin(pr_trianglestrip) //set up primitive
 		for (i = 0; i < _sides; i++) {
 			_d = _dir + i*(360/_sides)

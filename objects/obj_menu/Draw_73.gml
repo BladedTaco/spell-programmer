@@ -1,6 +1,12 @@
 /// @description 
 //draw_self();
 
+if keyboard_check_pressed(vk_shift) {
+	x += 2*spell.hex_size
+} else if keyboard_check_released(vk_shift) {
+	x -= 2*spell.hex_size
+}
+
 var _a = 0.5 + active*0.5 //reduce alpha if not active
 draw_set_alpha(_a)
 draw_set_colour(c_black)
