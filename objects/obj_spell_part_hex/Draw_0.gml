@@ -56,9 +56,10 @@
 			//show_debug_message(bin_value)
 			
 			//draw the fill bar
+			draw_set_colour( - image_blend)
 			var _sz = 360/string_length(bin_value)
-			for (o = string_length(bin_value); o > 0; o--) {
-				if string_char_at(bin_value, o) == 1 {
+			for (o = string_length(bin_value)-1; o >= 0; o--) {
+				if string_char_at(bin_value, o+1) == 1 {
 					//draw the fill bar
 					draw_set_colour(image_blend)
 					draw_circle_curve(
@@ -66,40 +67,41 @@
 						-o*_sz + _dir*_sign,
 						_sz, 21
 					)
+					//middle light
 					draw_set_colour( - image_blend)
 					draw_circle_curve(
 						x, y, size - 10,
 						-o*_sz + _dir*_sign,
-						_sz/5, 19
-					)
-					draw_circle_curve(
-						x, y, size - 10,
-						(-o-0.5)*_sz + _dir*_sign,
-						_sz/10, 10
+						_sz/2, 5
 					)
 				}
+				//starter
+				draw_circle_curve(
+					x, y, size - 10,
+					-o*_sz + _dir*_sign,
+					_sz/5, 19
+				)
 			}
 			
 			//draw the ring
 			draw_set_colour(image_blend)
-			draw_circle_outline(x, y, size - o*20 - 20)
+			draw_circle_outline(x, y, size - o*20 - 40)
 			_sign = -_sign
 			
-			//draw the text fill
-			draw_set_colour(c_white)
-			draw_text_circle(
-				x, y, bin_value, size - 10,
-				-_dir*_sign, 360, true, false, true, true
-			)
+			////draw the text fill
+			//draw_text_circle(
+			//	x, y, bin_value, size - 10,
+			//	-_dir*_sign + _sz/2, 360, true, false, true, true
+			//)
 			
 			//draw the start marker
 			var _x, _y;
-			_x = x + lengthdir_x(size - 7, -_dir*_sign)
-			_y = y + lengthdir_y(size - 7, -_dir*_sign)
+			_x = x + lengthdir_x(size - 7, 180 -_dir*_sign)
+			_y = y + lengthdir_y(size - 7, 180 -_dir*_sign)
 			draw_set_color(COLOUR.BLACK)
-			draw_polygon(_x, _y, 10, 180 - _dir*_sign, 3, false, 6)
-			draw_set_colour(image_blend)
-			draw_polygon(_x, _y, 10, 180 - _dir*_sign, 3, false)
+			draw_polygon(_x, _y, 16, -_dir*_sign, 3, true)
+			draw_set_colour(COLOUR.MARKER)
+			draw_polygon(_x, _y, 8, -_dir*_sign, 3, false, 4)
 		
 		break;
 		//case TYPE.COUNTER:

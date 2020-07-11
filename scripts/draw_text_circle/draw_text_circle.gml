@@ -59,8 +59,6 @@ function draw_text_circle() {
 	shader_set_uniform_f(uniform, _spaced)
 	uniform = shader_get_uniform(_shader, "u_len")
 	shader_set_uniform_f(uniform, string_length(_str))
-	uniform = shader_get_uniform(_shader, "u_width")
-	shader_set_uniform_f(uniform, string_width(_str))
 
 	//draw the text
 	draw_text(argument[0], argument[1], _str)
