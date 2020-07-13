@@ -58,7 +58,7 @@ switch (menu_data[selected]) {
 			menu_active = [true, true, true, true, true, true];
 			menu_angle = [0, 270, 180, 180, 90, 0];
 			menu_length = 6;
-			name = string_replace_all(string_format(child.value, 6 - 4*(child.radius <= 1), 0), " ", "0")
+			name = string_replace_all(string_format(child.value, 7 - 4*(child.radius <= 1), 0), " ", "0")
 			image_angle = -30;
 			value = 0
 		}

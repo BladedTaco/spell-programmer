@@ -16,10 +16,12 @@ draw_set_alpha(_a*0.3)
 draw_polygon(x, y, obj_spell.hex_size, 90, 6, true)
 draw_set_colour(c_black)
 draw_set_alpha( _a * 0.75)
-draw_circle(x, y, 30, false)
+//draw_circle(x, y, 30, false)
+draw_polygon(x, y, min(life*3, 60), image_angle + 90 + min(life*6*(life/20), 120), 6, true)
 draw_set_alpha( _a * 1)
 draw_set_colour(c_white)
-draw_circle_outline(x, y, 30)
+//draw_circle_outline(x, y, 30)
+draw_polygon(x, y, min(life*3, 60), image_angle + 90 + min(life*6*(life/20), 120), 6, false, 1)
 draw_set_halign(fa_center)
 draw_text(x, y, name)
 
@@ -32,6 +34,7 @@ var _x, _y, _dir, _sep;
 _sep = 60//360/menu_length
 for (var i = 0; i < menu_length; i++) {
 	if (menu_active[i]) {
+		//button circles
 		_dir = image_angle + min(life*6*(life/20), 120) - i*_sep - 30 //add a spin out animation
 		_x = round(x + lengthdir_x(min(life*3, 60), _dir))
 		_y = round(y + lengthdir_y(min(life*3, 60), _dir))
