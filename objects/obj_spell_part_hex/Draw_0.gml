@@ -74,6 +74,12 @@
 						-o*_sz + _dir*_sign,
 						_sz/2, 5
 					)
+					//text backing circle
+					draw_circle(
+						x + lengthdir_x(size - 10, 180 + _dir*_sign - (o+0.6)*_sz),
+						y + lengthdir_y(size - 10, 180 + _dir*_sign - (o+0.6)*_sz),
+						8, false
+					)
 				}
 				//starter
 				draw_circle_curve(
@@ -88,11 +94,12 @@
 			draw_circle_outline(x, y, size - o*20 - 40)
 			_sign = -_sign
 			
-			////draw the text fill
-			//draw_text_circle(
-			//	x, y, bin_value, size - 10,
-			//	-_dir*_sign + _sz/2, 360, true, false, true, true
-			//)
+			//draw the text fill
+			//draw_set_colour(-image_blend)
+			draw_text_circle(
+				x, y, bin_value, size - 10,
+				-_dir*_sign - _sz/2, 360, true, false, true, true
+			)
 			
 			//draw the start marker
 			var _x, _y;

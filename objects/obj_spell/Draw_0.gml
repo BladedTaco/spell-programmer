@@ -281,3 +281,24 @@ if (children_number > 0) {
 //if keyboard_check_pressed(vk_up) {
 //	surface_save(spell_surface, "output.png")
 //}
+
+
+////circle test debug
+//draw_text_circle(
+//				50, 100, "01234567", 40,	
+//				_dir, 360, true, false, true, true
+//			)
+//draw_text_circle(
+//				150, 100, "0123456789", 40,
+//				180, 360, true, false, true, true
+//			)
+			
+//draw_line(0, 100, 300, 100)
+//draw_line(50, 0, 50, 200)
+//draw_line(150, 0, 150, 200)
+
+//draw_line(0, 50, 150, 200) 
+//draw_line(0, 150, 150, 0) 
+
+//draw_line(100, 50, 250, 200) 
+//draw_line(100, 150, 250, 0) 

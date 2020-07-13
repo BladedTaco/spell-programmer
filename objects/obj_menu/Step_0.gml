@@ -13,7 +13,7 @@ if (instance_exists(child)) {
 		//other.value += keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left)
 		//other.value = clamp(other.value, 0, 10)
 		if (type = TYPE.COUNTER) {
-			size = base_size + 20 + string_length(string(scr_int_to_bin(value)))*5
+			size = COUNTER_SIZE
 			cell_size = size*2/sqrt(3)
 		}
 	}

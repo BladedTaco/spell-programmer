@@ -48,6 +48,9 @@ colour_number = 0;
 group_colour = COLOUR.EMPTY;
 
 binary_counter = true;
+small_max_val = power(2, 9) - 1;
+max_val = power(2, 23) - 1;
+
 
 
 //new_call = function(_num) {

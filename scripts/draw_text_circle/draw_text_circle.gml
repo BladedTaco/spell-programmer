@@ -66,6 +66,5 @@ function draw_text_circle() {
 	//reset shader
 	shader_reset();
 
-
 }
 

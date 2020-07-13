@@ -5,5 +5,6 @@ function string_spaced(_str){
 	for (var i = 1; i <= string_length(_str); i++) {
 		_out_str += string_char_at(_str, i) + " "
 	}
+	
 	return _out_str
 }

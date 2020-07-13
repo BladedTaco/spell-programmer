@@ -38,19 +38,19 @@ void main()
 	
 	//_x = _x + over*letter;
 	//_x = float(int(over))*(2.0*letter) + float(over > 0.0)*letter;
-	//_x = 0.0;
-	
+	//_x = 0.0;	
+			
 	//_x = _x - letter*is_over;
-	_x = float(int(0.5*_x/letter))*2.0*letter;
 	
+	_x = float(int(0.5*_x/letter))*2.0*letter;
 	
 	
 	_dir = u_dir - _x*_dir; //actual dir
 
 	//get the position
     vec4 object_space_pos = vec4( 
-		u_circle.x + _len*cos(_dir) + is_over*letter*cos(_dir + half_pi),
-		u_circle.y + _len*sin(_dir) + is_over*letter*sin(_dir + half_pi),
+		u_circle.x + _len*cos(_dir) + (is_over - 0.5)*letter*cos(_dir + half_pi),
+		u_circle.y + _len*sin(_dir) + (is_over - 0.5)*letter*sin(_dir + half_pi),
 		in_Position.z, 1.0
 	);
     gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * object_space_pos;
@@ -59,3 +59,4 @@ void main()
     v_vColour = in_Colour;
     v_vTexcoord = in_TextureCoord;
 }
+

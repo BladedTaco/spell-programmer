@@ -50,9 +50,9 @@ if (ds_exists(children, ds_type_list)) {
 size = base_size;
 if (type = TYPE.COUNTER) {
 	//size = base_size + string_length(string(value))*20
-	size = base_size + 20 + string_length(string(scr_int_to_bin(value)))*5
+	size = COUNTER_SIZE
 	// THIS IS ALSO IN OBJ_MENU.STEP
-	if (value >= 100) {
+	if (value >= small_max_val) {
 		radius = 2;
 	}
 } else if (type != TYPE.BASIC) {

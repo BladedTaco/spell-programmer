@@ -1,14 +1,20 @@
 function macros() {
-#macro HEX_MUL 1.5
 
+	#region macros
+#macro HEX_MUL 1.5
 #macro DEBUG_MODE false
 #macro debug:DEBUG_MODE true
 #macro SHADERS true
 #macro no_shaders:SHADERS false
+#macro COUNTER_SIZE (base_size + 20 + max(0, (string_length(string(scr_int_to_bin(value))) - 8)*10))
+#endregion macros
 
+	#region globals
 	global.debug = DEBUG_MODE
 	global.shaders = SHADERS
+	#endregion globals
 
+	#region enums
 	//spell circle types
 	enum TYPE {
 		BASIC,
@@ -49,8 +55,6 @@ function macros() {
 	}
 
 
-	menu_options = ["Set Tile", "Set Output", "Set Value", "Set Ports", "Move Tile", "Select Group"]
-
 	enum MENU {
 		TIL,
 		OUT,
@@ -81,7 +85,5 @@ function macros() {
 		PACKAGE_GROUP,
 		LEVEL_GROUP
 	}
-
-
-
+	#endregion enums
 }
