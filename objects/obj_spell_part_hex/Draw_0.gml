@@ -74,17 +74,16 @@
 						-o*_sz + _dir*_sign,
 						_sz/2, 5
 					)
-					
+					//text backing
 					draw_circle_curve(
 						x, y, size - 10,
 						-(o + 0.5)*_sz + _dir*_sign,
 						_sz/5, 16
 					)
-					////text backing circle
-					//draw_circle(
-					//	x + lengthdir_x(size - 10, 180 + _dir*_sign - (o+0.6)*_sz),
-					//	y + lengthdir_y(size - 10, 180 + _dir*_sign - (o+0.6)*_sz),
-					//	8, false
+					//draw_polygon(
+					//	x + lengthdir_x(size - 10, 180 + _dir*_sign - (o+0.605)*_sz),
+					//	y + lengthdir_y(size - 10, 180 + _dir*_sign - (o+0.605)*_sz),
+					//	10, _dir*_sign - (o+0.6)*_sz, 6, true
 					//)
 				}
 				//starter

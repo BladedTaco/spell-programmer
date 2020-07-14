@@ -137,3 +137,9 @@ event_user(0)
 
 //get connector names
 event_user(1)
+
+//create tools menu
+with (instance_create(room_width + 360, 110, obj_tools)) {
+	spell = other.id
+	active = true
+}
