@@ -1,5 +1,9 @@
 function macros() {
 
+#macro draw_later scr_draw_later(function () {
+	
+#macro end_draw_later })
+
 	#region macros
 #macro HEX_MUL 1.5
 #macro DEBUG_MODE false
@@ -85,5 +89,11 @@ function macros() {
 		PACKAGE_GROUP,
 		LEVEL_GROUP
 	}
+	
+	enum DRAG {
+		NONE,
+		CONNECTOR
+	}
+	
 	#endregion enums
 }

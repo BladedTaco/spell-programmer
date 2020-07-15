@@ -10,6 +10,23 @@ hex_size = 0;
 true_age = 0;
 x_diff = 0;
 y_diff = 0;
+movable = true;
+
+//drag variables
+drag_action = DRAG.NONE
+draw_queue = []
+draw_queue_size = 0
+drag_start_x = 0
+drag_start_y = 0
+drag_last_x = 0
+drag_last_y = 0
+drag_diff_x = 0
+drag_diff_y = 0
+drag_tile = noone
+drag_path = []
+drag_path_length = 0
+hover_time = 0
+hover_max = 30
 
 particle_surface = -1;
 alt_particle_surface = -1;

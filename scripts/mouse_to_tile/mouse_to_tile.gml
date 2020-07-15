@@ -1,8 +1,10 @@
-///@func mouse_to_tile(spell)
+///@func mouse_to_tile(spell, _gap*)
 ///@param spell - the spell object to check against
 ///@desc gives the tile the mouse is currently in for the given spell object
-function mouse_to_tile() {
-
+function mouse_to_tile(_spell, _gap) {
+	
+	_gap = is_undefined(_gap) ? 0 : _gap
+	
 	var _x, _y, _tx, _ty;
 
 	with (argument[0]) { //with the spell object
@@ -46,10 +48,25 @@ function mouse_to_tile() {
 
 		//return the cell with the smallest distance
 		if ((_p1 < _p2) and (_p1 < _p3)) { //home
+			if (_gap > 0) {
+				if !point_in_hex(mouse_x, mouse_y, x + _tx*bubble_size,	   y + _ty*HEX_MUL*hex_size,		hex_size - _gap, 90) {
+					return noone
+				}
+			}
 			return [_tx, _ty]
 		} else if ((_p2 < _p1) and (_p2 < _p3)) { //up left
+			if (_gap > 0) {
+				if !point_in_hex(mouse_x, mouse_y, x + (_tx - 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size,	hex_size - _gap, 90) {
+					return noone
+				}
+			}
 			return [_tx - 1, _ty - 1]
 		} else { //up right
+			if (_gap > 0) {
+				if !point_in_hex(mouse_x, mouse_y, x + (_tx + 1)*bubble_size, y + (_ty - 1)*HEX_MUL*hex_size,	hex_size - _gap, 90) {
+					return noone
+				}
+			}
 			return [_tx + 1, _ty - 1]
 		}
 	}

@@ -1,7 +1,6 @@
 {
   "bboxMode": 0,
   "collisionKind": 0,
-  "separateMasks": true,
   "type": 0,
   "origin": 0,
   "preMultiplyAlpha": false,
@@ -644,7 +643,7 @@
   ],
   "parent": {
     "name": "old font attempts",
-    "path": "folders/Sprites/old font attempts.yy",
+    "path": "folders/Extensions/Sprites/old font attempts.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_fnt_runic_backup",

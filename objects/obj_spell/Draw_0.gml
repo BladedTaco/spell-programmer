@@ -278,6 +278,27 @@ if (children_number > 0) {
 	draw_set_alpha(1)
 }
 
+while (draw_queue_size > 0) {
+	draw_queue_size -= 1
+	var f = draw_queue[draw_queue_size]
+	f()
+}
+
+for (var i = 0; i < drag_path_length; i++) {
+	drag_path[i].draw()	
+}
+//draw_set_colour(c_black)
+//for (var i = 0; i < 400; i++) {
+//	_px = mouse_x + (i%20)*4 - 40
+//	_py = mouse_y + (i div 20)*4 - 40
+//	if (point_in_hex(_px, _py, x, y, hex_size - 30, 90)) {
+//		draw_circle(_px, _py, 1, false)
+//	} else {
+//		draw_circle(_px, _py, 2, true)
+//	}
+//}
+
+
 //if keyboard_check_pressed(vk_up) {
 //	surface_save(spell_surface, "output.png")
 //}

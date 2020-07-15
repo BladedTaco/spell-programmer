@@ -1,7 +1,6 @@
 {
   "bboxMode": 0,
   "collisionKind": 0,
-  "separateMasks": true,
   "type": 0,
   "origin": 0,
   "preMultiplyAlpha": false,
@@ -90,7 +89,7 @@
   ],
   "parent": {
     "name": "wallpaper and rainmeter",
-    "path": "folders/Sprites/wallpaper and rainmeter.yy",
+    "path": "folders/Extensions/Sprites/wallpaper and rainmeter.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_hataraku_maou_sama",
