@@ -30,7 +30,9 @@ switch (drag_action) {
 				draw_circle_outline(x + drag_tile.pos_x*bubble_size, y + drag_tile.pos_y*hex_size*HEX_MUL, 40)
 				
 				var _other = get_mouse_tile(id)
-				if (_other != noone) and (_other != drag_tile) {
+				var _m = mouse_to_tile(id, 30)
+				if (_other != noone) and (cell_distance(drag_tile.pos_x, drag_tile.pos_y, _other.pos_x, _other.pos_y) == 1) {
+					// dragging to populated tile
 					hover_time++
 					draw_set_colour(_other.image_blend)
 					draw_circle_curve(mouse_x, mouse_y, 20, 90, 360*hover_time/hover_max, 20)	
@@ -41,13 +43,33 @@ switch (drag_action) {
 							drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20
 						)
 						drag_path_length++
+						drag_path_length_max = drag_path_length
+						obj_tools.set_context()
+						
 						
 						//switch active tile
 						drag_tile = _other
+					}
+				} else if drag_empty and (_m != noone) and (cell_distance(drag_tile.pos_x, drag_tile.pos_y, _m[0], _m[1]) == 1) {
+					// dragging to empty tile
+					hover_time++
+					draw_set_colour(COLOUR.CONNECTOR)
+					draw_circle_curve(mouse_x, mouse_y, 20, 90, 360*hover_time/hover_max, 20)	
+					if (hover_time == hover_max) {
+						//create new tile
+						_other = set_tile(id, _m[0], _m[1], SPELL.CONNECTOR)
+						//add connector to path
+						drag_path[drag_path_length] = new connector(
+							_other, drag_tile,
+							drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20
+						)
+						drag_path_length++
+						drag_path_length_max = drag_path_length
+						obj_tools.set_context()
 						
-						//create buttons if needed
-						obj_tools.buttons[6].visible = true
-						obj_tools.buttons[7].visible = true
+						
+						//switch active tile
+						drag_tile = _other
 					}
 				} else {
 					hover_time = 0	

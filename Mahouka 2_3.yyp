@@ -126,6 +126,7 @@
     {"folderPath":"folders/Notes.yy","order":6,"resourceVersion":"1.0","name":"Notes","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Extensions.yy","order":5,"resourceVersion":"1.0","name":"Extensions","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Scripts/structs.yy","order":33,"resourceVersion":"1.0","name":"structs","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Extensions/Sprites.yy","order":0,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},

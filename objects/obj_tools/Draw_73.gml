@@ -7,11 +7,24 @@ draw_set_colour(c_dkgray)
 draw_polygon(x, y, 600, 90, 6, false, 2)
 draw_set_alpha(1.0)
 
+//draw buttons
 var i, _b;
 for (i = 0; i < array_length(buttons); i++) {
 	_b = buttons[i]
 	with (_b) {
-		_b.update()
-		_b.draw()
+		update()
+		draw()
+	}
+}
+
+//draw context menu buttons
+if (context >= 0) {
+	var _c = context
+	for (i = 0; i < array_length(context_buttons[_c]); i++) {
+		_b = context_buttons[_c][i]
+		with (_b) {
+			update()
+			draw()
+		}
 	}
 }

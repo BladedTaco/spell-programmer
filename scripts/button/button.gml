@@ -1,6 +1,6 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function button(_x, _y, _sprite, _col, _message, _action, _size, _facing) constructor {
+function button(_x, _y, _sprite, _col, _message, _action, _size, _facing, _active_check) constructor {
 	if (false) return argument[0]
 	//used to avoid the wrong number of arguments error
 	x = _x;
@@ -10,8 +10,9 @@ function button(_x, _y, _sprite, _col, _message, _action, _size, _facing) constr
 	image_blend = _col// function, called on click
 	action = is_undefined(_action) ? function () { show_debug_message("Click: " + string(self)) } : _action
 	size = is_undefined(_size) ? 40 : _size
-	dir = 90
 	side = is_undefined(_facing) ? -1 : _facing
+	active_check = is_undefined(_active_check) ? function () { return active } : _active_check
+	dir = 90
 	blend = 1
 	name_length = string_width(name)
 	active = false
@@ -69,6 +70,26 @@ function button(_x, _y, _sprite, _col, _message, _action, _size, _facing) constr
 	static rename = function (_name) {
 		name = _name
 		name_length = string_width(name)
+	}
+	
+	static toggle = function (_override) {
+		///@param *_override - force on or off instead of toggle
+		_override = is_undefined(_override) ? !active : _override
+		if _override {
+			//activate
+			active = true
+			image_blend = active_colour	
+		} else {
+			//deactivate
+			active = false
+			image_blend = base_colour
+		}
+	}
+	
+	//placeholder i guess
+	static init = function () {
+		toggle(active_check())
+		visible = true
 	}
 	
 	static toString = function () {

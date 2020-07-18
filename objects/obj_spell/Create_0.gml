@@ -25,6 +25,8 @@ drag_diff_y = 0
 drag_tile = noone
 drag_path = []
 drag_path_length = 0
+drag_path_length_max = 0
+drag_empty = false
 hover_time = 0
 hover_max = 30
 
