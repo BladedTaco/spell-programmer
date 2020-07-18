@@ -161,4 +161,5 @@ event_user(1)
 with (instance_create(room_width + 360, 110, obj_tools)) {
 	spell = other.id
 	active = true
+	event_user(0)
 }

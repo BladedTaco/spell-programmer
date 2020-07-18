@@ -8,10 +8,10 @@ function button(_x, _y, _sprite, _col, _message, _action, _size, _facing, _activ
 	sprite_index = _sprite
 	name = _message
 	image_blend = _col// function, called on click
-	action = is_undefined(_action) ? function () { show_debug_message("Click: " + string(self)) } : _action
+	action = is_undefined(_action) ? function () { show_debug_message("Click: " + string(self)) } :  method(self, _action)
 	size = is_undefined(_size) ? 40 : _size
 	side = is_undefined(_facing) ? -1 : _facing
-	active_check = is_undefined(_active_check) ? function () { return active } : _active_check
+	active_check = is_undefined(_active_check) ? function () { return active } : method(self, _active_check)
 	dir = 90
 	blend = 1
 	name_length = string_width(name)
@@ -19,6 +19,8 @@ function button(_x, _y, _sprite, _col, _message, _action, _size, _facing, _activ
 	visible = true
 	active_colour = merge_colour(image_blend, c_black, 0.7)
 	base_colour = image_blend
+	spell = other.spell
+	show_debug_message(spell)
 	
 	static update = function() {
 		//@desc call to update the buttons look	
