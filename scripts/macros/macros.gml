@@ -1,6 +1,6 @@
 function macros() {
 
-#macro draw_later scr_draw_later(function () {
+#macro draw_later func_draw_later(function () {
 	
 #macro end_draw_later })
 
