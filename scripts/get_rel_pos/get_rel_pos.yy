@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "looks unused",
+    "path": "folders/Scripts/looks unused.yy",
   },
   "resourceVersion": "1.0",
   "name": "get_rel_pos",

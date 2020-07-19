@@ -68,7 +68,7 @@ switch (menu_data[selected]) {
 		//child.name = choose("name 1", "1337 5347", "waga na wa Megumin")
 		active = false;
 		var _menu = id;
-		var _tile = scr_get_wireless_inputs(child)
+		var _tile = get_wireless_inputs(child)
 		for (var m = 0; m < ds_list_size(_tile); m++) { //for each entry
 			with (_tile[| m]) {
 				with (instance_create_depth(other.x, other.y, other.depth - 1, obj_menu)) {
@@ -327,7 +327,7 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.MOVE_TILE:
-		scr_reposition_tile(child, pos_x, pos_y)
+		reposition_tile(child, pos_x, pos_y)
 		with (parent) {
 			active = true
 			pos_x = other.pos_x

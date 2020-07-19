@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "Drawing Functions",
+    "path": "folders/Scripts/Drawing Functions.yy",
   },
   "resourceVersion": "1.0",
   "name": "draw_polygon",

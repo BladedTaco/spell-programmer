@@ -1,5 +1,6 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+///@func scr_draw_later(func)
+///@param func - the function containing the logic to draw later
+///@desc adds the function to the draw queue, shouldnt be called directly, use draw_later & end_draw_later
 function scr_draw_later(_func){
 	draw_queue[draw_queue_size] = _func
 	draw_queue_size += 1

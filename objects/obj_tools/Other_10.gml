@@ -44,6 +44,13 @@ context_buttons =
 		[ //Draw Connectors
 			new button(50,	50 + _sz, spr_menu_circle, $30af40, "Accept"
 				,function(){ 
+					with (spell) {
+						for (var i = drag_path_length - 1; i >= 0 ; i--) {
+							set_tile_output(id, drag_path[i].source, drag_path[i].dest)
+						}
+						drag_path_length = 0
+						drag_path_length_max = 0
+					}
 					other.set_context(-1)
 				}, 30, 1
 			),

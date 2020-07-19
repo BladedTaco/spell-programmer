@@ -21,7 +21,7 @@ for (i = 0; i < children_number; i++) {
 					_str = []
 					for (j = 0; j < other.input_number; j++) {
 						_str[j] = ""
-						_lst = scr_get_wire_path(id, other.input_tile[| j])
+						_lst = get_wire_path(id, other.input_tile[| j])
 						for (k = 0; k < ds_list_size(_lst); k++) {
 							ds_list_add(_lst[| k].input_tile, other.id)
 							_lst[| k].inputs[array_length_1d(_lst[| k].inputs)] = j

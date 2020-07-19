@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Drawing Functions",
-    "path": "folders/Scripts/Drawing Functions.yy",
+    "name": "Script Collections",
+    "path": "folders/Scripts/Script Collections.yy",
   },
   "resourceVersion": "1.0",
-  "name": "draw_text_circle",
+  "name": "func_tile_retrieval",
   "tags": [],
   "resourceType": "GMScript",
 }

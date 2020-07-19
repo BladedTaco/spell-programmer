@@ -67,9 +67,13 @@ switch (drag_action) {
 						drag_path_length_max = drag_path_length
 						obj_tools.set_context()
 						
+						//set wire properties
+						_other.image_blend = drag_tile.image_blend
+						_other.name = drag_tile.name
 						
 						//switch active tile
 						drag_tile = _other
+						
 					}
 				} else {
 					hover_time = 0	
