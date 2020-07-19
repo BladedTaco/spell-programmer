@@ -6,7 +6,7 @@
     "path": "folders/Scripts/Script Collections.yy",
   },
   "resourceVersion": "1.0",
-  "name": "func_cell",
+  "name": "scr_strings",
   "tags": [],
   "resourceType": "GMScript",
 }

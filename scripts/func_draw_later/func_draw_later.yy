@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Script Collections",
-    "path": "folders/Scripts/Script Collections.yy",
+    "name": "Macros++",
+    "path": "folders/Scripts/Macros++.yy",
   },
   "resourceVersion": "1.0",
-  "name": "func_sanitize",
+  "name": "func_draw_later",
   "tags": [],
   "resourceType": "GMScript",
 }

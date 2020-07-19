@@ -6,7 +6,7 @@
     "path": "folders/Scripts/Script Collections.yy",
   },
   "resourceVersion": "1.0",
-  "name": "func_paths",
+  "name": "scr_passthroughs",
   "tags": [],
   "resourceType": "GMScript",
 }
