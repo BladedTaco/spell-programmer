@@ -146,48 +146,46 @@ function set_tile_output() {
 ///@param source - the tile to set the output of
 ///@param dest - the tile to input into
 ///@desc sets the output of one tile into another, forcing the connection if it doesnt create loops
+///yes, nö lööps brötha
 function force_tile_output(_spell, _source, _dest) {
 	with (_spell) { //with the spell object
 		//add the input into the spell array
 		var _array, _data, _diff;
 		_array = spell[| _dest.index]
 		_data = _array[3]
-		_diff = false;
 		//remove any existing connections between the two tiles
 		//source to dest
 		for (var i = _dest.children_number - 1; i >= 0; i--) {
 			if (_data[| i] == _source.index) { //connection already exists
-				_diff = true;
 				//remove the connection and children
 				ds_list_delete(_data, i)
 				with (_dest) {
 					children_number--
 					ds_list_delete(children, i)
 				}
+				break;
 			}
 		}
 		//dest to source
 		for (var i = _source.children_number - 1; i >= 0; i--) {
-			if (spell[| _source.index][| i] == _dest.index) { //connection already exists
-				_diff = true;
+			if (spell[| _source.index][3][| i] == _dest.index) { //connection already exists
 				//remove the connection and children
-				ds_list_delete(spell[| _source.index], i)
+				ds_list_delete(spell[| _source.index][3], i)
 				with (_source) {
 					children_number--
 					ds_list_delete(children, i)
 				}
+				break;
 			}
 		}
-		//if it doesnt already exist, create it
-		if (!_diff) {
-			//check for lööps brötha
-			if (!check_for_loops(_spell, _source, _dest)) {
-				ds_list_add(_data, _source.index)
-				//set children
-				with (_dest) {
-					ds_list_add(children, _source.id)
-					children_number++
-				}
+		//create the connection
+		//check for lööps brötha
+		if (!check_for_loops(_spell, _source, _dest)) {
+			ds_list_add(_data, _source.index)
+			//set children
+			with (_dest) {
+				ds_list_add(children, _source.id)
+				children_number++
 			}
 		}
 	

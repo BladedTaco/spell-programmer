@@ -1,5 +1,6 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description draw tools
+
+//draw upper right backing hexagon
 draw_set_colour(c_gray)
 draw_set_alpha(0.8)
 draw_polygon(x, y, 600, 90, 6, true)
@@ -19,6 +20,15 @@ for (i = 0; i < array_length(buttons); i++) {
 
 //draw context menu buttons
 if (context >= 0) {
+	
+	//draw upper left backing hexagon
+	draw_set_colour(c_gray)
+	draw_set_alpha(0.8)
+	draw_polygon(-400, -20, 600, 90, 6, true)
+	draw_set_colour(c_dkgray)
+	draw_polygon(-400, -20, 600, 90, 6, false, 2)
+	draw_set_alpha(1.0)
+	
 	var _c = context
 	for (i = 0; i < array_length(context_buttons[_c]); i++) {
 		_b = context_buttons[_c][i]

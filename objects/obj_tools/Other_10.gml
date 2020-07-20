@@ -16,7 +16,6 @@ buttons =
 				} else {
 					//deactivate
 					spell.movable = true
-					spell.drag_action = DRAG.NONE
 					other.set_context(-1)
 				}
 			}
@@ -39,10 +38,15 @@ buttons =
 	]
 
 
+var _x = 50
+var _y = 50
+var _sep = 15
+_sz = 1.5*30*2/sqrt(3)
+
 context_buttons =	
 	[
 		[ //Draw Connectors
-			new button(50,	50 + _sz, spr_menu_circle, $30af40, "Accept"
+			new button(_x - _sep,	_y + 0*_sz, spr_menu_circle, $30af40, "Accept"
 				,function(){ 
 					with (spell) {
 						//for (var i = drag_path_length - 1; i >= 0 ; i--) {
@@ -57,14 +61,14 @@ context_buttons =
 					other.set_context(-1)
 				}, 30, 1
 			),
-			new button(50,	90 + 2*_sz, spr_menu_null, c_red, "Discard"
+			new button(_x + _sep,	_y + 1*_sz, spr_menu_null, c_red, "Discard"
 				,function(){ 
 					spell.drag_path_length = 0 
 					spell.drag_path_length_max = 0 
 					other.set_context(-1)
 				}, 30, 1
 			),
-			new button(25,	90 + 3*_sz, spr_menu_arrow, c_fuchsia, "Undo"
+			new button(_x - _sep,	_y + 2*_sz, spr_menu_arrow, c_fuchsia, "Undo"
 				,function(){ 
 					if (spell.drag_path_length > 0) {
 						spell.drag_path_length -= 1 
@@ -73,7 +77,7 @@ context_buttons =
 					}
 				}, 30, 1, function () { return spell.drag_path_length <= 0 }
 			),
-			new button(75,	90 + 3*_sz, spr_menu_arrow, c_olive, "Redo"
+			new button(_x + _sep,	_y + 3*_sz, spr_menu_arrow, c_olive, "Redo"
 				,function(){ 
 					if (spell.drag_path_length < spell.drag_path_length_max) {
 						spell.drag_path_length += 1 
@@ -82,7 +86,7 @@ context_buttons =
 					}
 				}, 30, 1, function () { return spell.drag_path_length >= spell.drag_path_length_max }
 			),
-			new button(50,	90 + 4*_sz, spr_menu_null, c_red, "Wires"
+			new button(_x - _sep,	_y + 4*_sz, spr_menu_null, c_red, "Wires"
 				,function(){ 
 					//do stuff later
 					toggle()

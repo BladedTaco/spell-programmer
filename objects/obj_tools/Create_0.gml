@@ -17,5 +17,6 @@ set_context = function (_context) {
 		}
 	} else if (_context = -1) {
 		buttons[_c].toggle(false)
+		spell.drag_action = DRAG.NONE
 	}
 }
