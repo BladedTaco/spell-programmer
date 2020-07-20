@@ -3,6 +3,7 @@
 /// Functions:
 ///		set_tile
 ///		set_tile_output
+///		force_tile_output
 ///		reposition_tile
 
 //--------------------------------------------------------------------------------------------------
@@ -126,6 +127,74 @@ function set_tile_output() {
 		event_user(1)	
 		//update wires
 		if (argument[2].type = TYPE.WIRE) {
+			//update wire heads |Slightly inefficient, wire paths done twice
+			event_user(0)
+			for (i = 0; i < array_length_1d(wire_heads); i++) {
+				with (wire_heads[i]) {
+					event_user(2)	
+				}
+			}
+			if (_diff) check_ports(id)
+		}
+	}
+}
+
+//--------------------------------------------------------------------------------------------------
+
+///@func force_tile_output(spell, source, dest)
+///@param spell - the spell object
+///@param source - the tile to set the output of
+///@param dest - the tile to input into
+///@desc sets the output of one tile into another, forcing the connection if it doesnt create loops
+function force_tile_output(_spell, _source, _dest) {
+	with (_spell) { //with the spell object
+		//add the input into the spell array
+		var _array, _data, _diff;
+		_array = spell[| _dest.index]
+		_data = _array[3]
+		_diff = false;
+		//remove any existing connections between the two tiles
+		//source to dest
+		for (var i = _dest.children_number - 1; i >= 0; i--) {
+			if (_data[| i] == _source.index) { //connection already exists
+				_diff = true;
+				//remove the connection and children
+				ds_list_delete(_data, i)
+				with (_dest) {
+					children_number--
+					ds_list_delete(children, i)
+				}
+			}
+		}
+		//dest to source
+		for (var i = _source.children_number - 1; i >= 0; i--) {
+			if (spell[| _source.index][| i] == _dest.index) { //connection already exists
+				_diff = true;
+				//remove the connection and children
+				ds_list_delete(spell[| _source.index], i)
+				with (_source) {
+					children_number--
+					ds_list_delete(children, i)
+				}
+			}
+		}
+		//if it doesnt already exist, create it
+		if (!_diff) {
+			//check for lööps brötha
+			if (!check_for_loops(_spell, _source, _dest)) {
+				ds_list_add(_data, _source.index)
+				//set children
+				with (_dest) {
+					ds_list_add(children, _source.id)
+					children_number++
+				}
+			}
+		}
+	
+		//recalculate all connectors and update wires
+		event_user(1)	
+		//update wires
+		if (_dest.type = TYPE.WIRE) {
 			//update wire heads |Slightly inefficient, wire paths done twice
 			event_user(0)
 			for (i = 0; i < array_length_1d(wire_heads); i++) {
