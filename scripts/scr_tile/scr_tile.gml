@@ -141,14 +141,18 @@ function set_tile_output() {
 
 //--------------------------------------------------------------------------------------------------
 
-///@func force_tile_output(spell, source, dest)
+///@func force_tile_output(spell, source, dest, *unsafe, *weak)
 ///@param spell - the spell object
 ///@param source - the tile to set the output of
 ///@param dest - the tile to input into
+///@param unsafe - if loop checking should be ignored
+///@param weak - if recalculating wires and stuff should be ignored
 ///@desc sets the output of one tile into another, forcing the connection if it doesnt create loops
 ///yes, nö lööps brötha
 ///will trim any connections beforehand, so if the new connection cant be made, will remove the old one
-function force_tile_output(_spell, _source, _dest) {
+function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
+	_unsafe = is_undefined(_unsafe) ? false : _unsafe
+	_weak = is_undefined(_weak) ? false : _weak
 	with (_spell) { //with the spell object
 		//add the input into the spell array
 		var _array, _data, _diff;
@@ -185,7 +189,7 @@ function force_tile_output(_spell, _source, _dest) {
 		}
 		//create the connection
 		//check for lööps brötha
-		if (!check_for_loops(_source, _dest)) {
+		if (_unsafe or !check_for_loops(_source, _dest)) {
 			ds_list_add(_data, _source.index)
 			//set children
 			with (_dest) {
@@ -194,18 +198,20 @@ function force_tile_output(_spell, _source, _dest) {
 			}
 		}
 	
-		//recalculate all connectors and update wires
-		event_user(1)	
-		//update wires
-		if (_dest.type = TYPE.WIRE) {
-			//update wire heads |Slightly inefficient, wire paths done twice
-			event_user(0)
-			for (i = 0; i < array_length_1d(wire_heads); i++) {
-				with (wire_heads[i]) {
-					event_user(2)	
+		if (_weak) {
+			//recalculate all connectors and update wires
+			event_user(1)	
+			//update wires
+			if (_dest.type = TYPE.WIRE) {
+				//update wire heads |Slightly inefficient, wire paths done twice
+				event_user(0)
+				for (i = 0; i < array_length_1d(wire_heads); i++) {
+					with (wire_heads[i]) {
+						event_user(2)	
+					}
 				}
+				if (_diff) check_ports(id)
 			}
-			if (_diff) check_ports(id)
 		}
 	}
 }

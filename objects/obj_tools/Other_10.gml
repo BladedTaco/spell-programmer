@@ -15,7 +15,6 @@ buttons =
 					other.set_context(0)
 				} else {
 					//deactivate
-					spell.movable = true
 					other.set_context(-1)
 				}
 			}
@@ -49,14 +48,23 @@ context_buttons =
 			new button(_x - _sep,	_y + 0*_sz, spr_menu_circle, $30af40, "Accept"
 				,function(){ 
 					with (spell) {
-						//for (var i = drag_path_length - 1; i >= 0 ; i--) {
-						//	set_tile_output(id, drag_path[i].source, drag_path[i].dest)
-						//}
 						for (var i = 0; i < drag_path_length; i++) {
-							force_tile_output(id, drag_path[i].source, drag_path[i].dest)
+							force_tile_output(id, drag_path[i].source, drag_path[i].dest, true, true)
 						}
 						drag_path_length = 0
 						drag_path_length_max = 0
+						//COPYPASTA, TODO REFACTOR
+							//recalculate all connectors and update wires
+							event_user(1)	
+							//update wires
+							//update wire heads |Slightly inefficient, wire paths done twice
+							event_user(0)
+							for (i = 0; i < array_length(wire_heads); i++) {
+								with (wire_heads[i]) {
+									event_user(2)	
+								}
+							}
+							check_ports(id)
 					}
 					other.set_context(-1)
 				}, 30, 1

@@ -66,7 +66,7 @@ function check_for_loops(source, dest) {
 ///@param source - the tile to set the output of
 ///@param dest - the tile to input into
 ///@desc returns whether creating the given connection causes any loops, checking connector structs as well
-function check_for_loops_structs(source, dest, connectors) {
+function check_for_loops_structs(source, dest, connectors, connecter_number) {
 	//check if any children connect recursively
 	for (var i = 0; i < source.children_number; i++) {
 		//check if they connect
@@ -74,20 +74,20 @@ function check_for_loops_structs(source, dest, connectors) {
 			return true
 		}
 		//check their children
-		if (check_for_loops_structs(source.children[| i], dest, connectors)) {
+		if (check_for_loops_structs(source.children[| i], dest, connectors, connecter_number)) {
 			return true	//loop found
 		}
 	}
 	
 	//check if any structs connect recursively
-	for (i = 0; i < array_length(connectors); i++) {
+	for (i = 0; i < connecter_number; i++) {
 		if (connectors[@ i].dest == source) { //this tile
 			//check if they connect
 			if (connectors[@ i].source == dest.id) { //the source fathers the destination
 				return true
 			}
 			//check their children
-			if (check_for_loops_structs(connectors[@ i].source, dest, connectors)) {
+			if (check_for_loops_structs(connectors[@ i].source, dest, connectors, connecter_number)) {
 				return true	//loop found
 			}
 		}

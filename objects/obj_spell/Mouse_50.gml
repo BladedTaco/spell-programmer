@@ -33,7 +33,7 @@ switch (drag_action) {
 				var _m = mouse_to_tile(id, 30)
 				if (_other != noone) and (cell_distance(drag_tile.pos_x, drag_tile.pos_y, _other.pos_x, _other.pos_y) == 1) {
 					//check for lööps brötha
-					if ((hover_time >= 0) and check_for_loops_structs(drag_tile, _other, drag_path)) {
+					if ((hover_time == 0) and check_for_loops_structs(drag_tile, _other, drag_path, drag_path_length)) {
 						//loop found, show connection bad
 						hover_time = -infinity
 					}
