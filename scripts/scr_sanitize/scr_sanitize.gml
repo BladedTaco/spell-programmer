@@ -3,6 +3,7 @@
 /// Functions:
 ///		check_ports
 ///		check_for_loops
+///		check_for_loops_structs
 
 //--------------------------------------------------------------------------------------------------
 
@@ -31,31 +32,65 @@ function check_ports() {
 
 //--------------------------------------------------------------------------------------------------
 
-///@func check_for_loops(spell, source, dest)
-///@param spell - the spell object
+///@func check_for_loops(source, dest)
 ///@param source - the tile to set the output of
 ///@param dest - the tile to input into
 ///@desc returns whether creating the given connection causes any loops
-function check_for_loops() {
+function check_for_loops(source, dest) {
 
 	//source has no links, no loops
-	if (argument[1].children_number <= 0) {
+	if (source.children_number <= 0) {
 		return false //no loops
 	}
-
+	//the above is redundant but I dont wanna touch it in case it isnt
 
 
 	//check if any children connect recursively
-	for (var i = 0; i < argument[1].children_number; i++) {
+	for (var i = 0; i < source.children_number; i++) {
 		//check if they connect
-		if (argument[1].children[| i] == argument[2].id) { //the source fathers the destination
+		if (source.children[| i] == dest.id) { //the source fathers the destination
 			return true
 		}
 		//check their children
-		if (check_for_loops(argument[0], argument[1].children[| i], argument[2])) {
+		if (check_for_loops(source.children[| i], dest)) {
 			return true	//loop found
 		}
 	}
 
+	return false //no loops found
+}
+
+//--------------------------------------------------------------------------------------------------
+
+///@func check_for_loops_structs(source, dest)
+///@param source - the tile to set the output of
+///@param dest - the tile to input into
+///@desc returns whether creating the given connection causes any loops, checking connector structs as well
+function check_for_loops_structs(source, dest, connectors) {
+	//check if any children connect recursively
+	for (var i = 0; i < source.children_number; i++) {
+		//check if they connect
+		if (source.children[| i] == dest.id) { //the source fathers the destination
+			return true
+		}
+		//check their children
+		if (check_for_loops_structs(source.children[| i], dest, connectors)) {
+			return true	//loop found
+		}
+	}
+	
+	//check if any structs connect recursively
+	for (i = 0; i < array_length(connectors); i++) {
+		if (connectors[@ i].dest == source) { //this tile
+			//check if they connect
+			if (connectors[@ i].source == dest.id) { //the source fathers the destination
+				return true
+			}
+			//check their children
+			if (check_for_loops_structs(connectors[@ i].source, dest, connectors)) {
+				return true	//loop found
+			}
+		}
+	}
 	return false //no loops found
 }

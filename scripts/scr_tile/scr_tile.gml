@@ -113,7 +113,7 @@ function set_tile_output() {
 		//if it doesnt already exist, create it
 		if (!_diff) {
 			//check for lööps brötha
-			if (!check_for_loops(argument[0], argument[1], argument[2])) {
+			if (!check_for_loops(argument[1], argument[2])) {
 				ds_list_add(_data, argument[1].index)
 				//set children
 				with (argument[2]) {
@@ -147,18 +147,21 @@ function set_tile_output() {
 ///@param dest - the tile to input into
 ///@desc sets the output of one tile into another, forcing the connection if it doesnt create loops
 ///yes, nö lööps brötha
+///will trim any connections beforehand, so if the new connection cant be made, will remove the old one
 function force_tile_output(_spell, _source, _dest) {
 	with (_spell) { //with the spell object
 		//add the input into the spell array
 		var _array, _data, _diff;
 		_array = spell[| _dest.index]
 		_data = _array[3]
+		_diff = false // if a connection has been removed
 		//remove any existing connections between the two tiles
 		//source to dest
 		for (var i = _dest.children_number - 1; i >= 0; i--) {
 			if (_data[| i] == _source.index) { //connection already exists
 				//remove the connection and children
 				ds_list_delete(_data, i)
+				_diff = true
 				with (_dest) {
 					children_number--
 					ds_list_delete(children, i)
@@ -167,20 +170,22 @@ function force_tile_output(_spell, _source, _dest) {
 			}
 		}
 		//dest to source
-		for (var i = _source.children_number - 1; i >= 0; i--) {
-			if (spell[| _source.index][3][| i] == _dest.index) { //connection already exists
-				//remove the connection and children
-				ds_list_delete(spell[| _source.index][3], i)
-				with (_source) {
-					children_number--
-					ds_list_delete(children, i)
+		if (!_diff) { //there can only be a connection one way
+			for (var i = _source.children_number - 1; i >= 0; i--) {
+				if (spell[| _source.index][3][| i] == _dest.index) { //connection already exists
+					//remove the connection and children
+					ds_list_delete(spell[| _source.index][3], i)
+					with (_source) {
+						children_number--
+						ds_list_delete(children, i)
+					}
+					break;
 				}
-				break;
 			}
 		}
 		//create the connection
 		//check for lööps brötha
-		if (!check_for_loops(_spell, _source, _dest)) {
+		if (!check_for_loops(_source, _dest)) {
 			ds_list_add(_data, _source.index)
 			//set children
 			with (_dest) {

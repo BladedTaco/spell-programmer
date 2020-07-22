@@ -32,6 +32,11 @@ switch (drag_action) {
 				var _other = get_mouse_tile(id)
 				var _m = mouse_to_tile(id, 30)
 				if (_other != noone) and (cell_distance(drag_tile.pos_x, drag_tile.pos_y, _other.pos_x, _other.pos_y) == 1) {
+					//check for lööps brötha
+					if ((hover_time >= 0) and check_for_loops_structs(drag_tile, _other, drag_path)) {
+						//loop found, show connection bad
+						hover_time = -infinity
+					}
 					// dragging to populated tile
 					hover_time++
 					draw_set_colour(_other.image_blend)
@@ -77,6 +82,12 @@ switch (drag_action) {
 					}
 				} else {
 					hover_time = 0	
+				}
+				
+				//draw cross when can't connect
+				if (hover_time < 0) {
+					draw_set_colour(c_maroon)
+					draw_cross(mouse_x, mouse_y, 20, 3)
 				}
 				
 				//moved to regular draw event

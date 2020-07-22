@@ -72,6 +72,7 @@
     {"id":{"name":"obj_text","path":"objects/obj_text/obj_text.yy",},"order":0,},
     {"id":{"name":"rm_base","path":"rooms/rm_base/rm_base.yy",},"order":0,},
     {"id":{"name":"rm_testing","path":"rooms/rm_testing/rm_testing.yy",},"order":1,},
+    {"id":{"name":"draw_cross","path":"scripts/draw_cross/draw_cross.yy",},"order":9,},
     {"id":{"name":"compatibility_report_080120_140941941","path":"notes/compatibility_report_080120_140941941/compatibility_report_080120_140941941.yy",},"order":0,},
     {"id":{"name":"compatibility_report_080120_1410401040","path":"notes/compatibility_report_080120_1410401040/compatibility_report_080120_1410401040.yy",},"order":1,},
     {"id":{"name":"Advanced_circle_drawing","path":"extensions/Advanced_circle_drawing/Advanced_circle_drawing.yy",},"order":0,},
