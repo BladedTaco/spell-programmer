@@ -29,6 +29,7 @@
     {"id":{"name":"draw_children_new","path":"scripts/draw_children_new/draw_children_new.yy",},"order":1,},
     {"id":{"name":"draw_children_newer","path":"scripts/draw_children_newer/draw_children_newer.yy",},"order":2,},
     {"id":{"name":"draw_polygon","path":"scripts/draw_polygon/draw_polygon.yy",},"order":7,},
+    {"id":{"name":"spell_tile","path":"scripts/spell_tile/spell_tile.yy",},"order":2,},
     {"id":{"name":"draw_circle_outline","path":"scripts/draw_circle_outline/draw_circle_outline.yy",},"order":4,},
     {"id":{"name":"get_rel_pos","path":"scripts/get_rel_pos/get_rel_pos.yy",},"order":0,},
     {"id":{"name":"get_rel_pos_new","path":"scripts/get_rel_pos_new/get_rel_pos_new.yy",},"order":1,},
@@ -125,7 +126,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "23.1.1.169",
+    "IDEVersion": "23.1.1.174",
   },
   "resourceVersion": "1.3",
   "name": "Mahouka 2_3",
