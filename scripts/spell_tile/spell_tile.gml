@@ -28,14 +28,85 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	y = room_height / 2
 	spell = other.id
 	other.children[| index] = self
+	base_size = 30
+	size = 30
+	input_number = array_length(inputs)
+	children = -1
+	children_number = 0
+	input_tile = ds_list_create()
+	value = 0
+	
+	//maybe?
+	small_max_val = power(2, 9) - 1;
+	max_val = power(2, 23) - 1;
+	zero_angle = 0;
 	
 	//init
-	get_data()
+	//get_data()
 	
 	//handle size stuff
 
 	static get_data = function () {
-		//	
+		
+		var _array = spell.spell[| index] //get spell
+		
+		tile = _array[0]
+		name = _array[1]
+		value = _array[2]
+		
+		if (ds_exists(_array[3], ds_type_list)) {
+			children = ds_list_create()
+			ds_list_copy(children, _array[3]) //children as ids
+			ds_list_copy(input_tile, _array[5]) // input tile inputs as indexes
+			children_number = ds_list_size(children)
+		} else {
+			children = -1;	
+			children_number = 0;	
+		}
+		
+		pos_x = _array[4][0]
+		pos_y = _array[4][1]
+
+		get_size()
+	}
+	
+	static get_size = function () {
+		size = base_size;
+		if (type = TYPE.COUNTER) {
+			//size = base_size + string_length(string(value))*20
+			size = COUNTER_SIZE
+			// THIS IS ALSO IN OBJ_MENU.STEP
+			if (value >= small_max_val) {
+				radius = 2;
+			}
+		} else if (type != TYPE.BASIC) {
+			if (type = TYPE.WIRE) {
+				size -= 15
+			} else {
+				size += 20	
+			}
+		}
+	}
+	
+	static base_draw = function () {
+		//backing circle
+		draw_set_colour(COLOUR.EMPTY)
+		draw_circle(x, y, size, false)
+	
+		//draw the sprite
+		draw_sprite_ext(sprite_index, 0, x, y, 1, 1, 0, image_blend, 1)
+	
+		//draw circle outline
+		draw_set_colour(image_blend)
+		draw_circle_outline(x, y, size)
+	}
+	
+	static draw = function () {
+		base_draw()
+
+		//draw name and its ring
+		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)
+		draw_circle_outline(x, y, size - 20)
 	}
 
 	static toString = function () {
@@ -43,11 +114,16 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	}
 }
 
+
 function basic_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
 	type = TYPE.BASIC
 	
 	static draw = function () {
-		
+		base_draw()
+
+		//draw name and its ring
+		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)
+		draw_circle_outline(x, y, size - 20)
 	}
 }
 
@@ -56,7 +132,19 @@ function trick_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 	type = TYPE.TRICK
 	
 	static draw = function () {
-		
+		//name and rings
+		draw_set_colour(image_blend)
+		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
+		draw_circle_outline(x, y, size - 40)
+		draw_circle_outline(x, y, size - 20)
+			
+		//input text
+		draw_set_colour(image_blend)
+		draw_circle_outline(x, y, size)
+		for (var i = 0; i < input_number; i++) {
+			draw_set_colour(input_colour[i])
+			draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(spell.age + zero_angle + (360/input_number)*i - (input_number-2)*180/input_number), 360/input_number, false, true)
+		}
 	}
 }
 
@@ -65,7 +153,19 @@ function converter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _d
 	type = TYPE.CONVERTER
 	
 	static draw = function () {
-		
+		//name and rings
+		draw_set_colour(image_blend)
+		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
+		draw_circle_outline(x, y, size - 40)
+		draw_circle_outline(x, y, size - 20)
+			
+		//input text
+		draw_set_colour(image_blend)
+		draw_circle_outline(x, y, size)
+		for (var i = 0; i < input_number; i++) {
+			draw_set_colour(input_colour[i])
+			draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(spell.age + zero_angle + (360/input_number)*i - (input_number-2)*180/input_number), 360/input_number, false, true)
+		}
 	}
 }
 
@@ -83,16 +183,50 @@ function shell_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 	type = TYPE.SHELL
 	
 	static draw = function () {
-		
+		//name and rings
+		draw_set_colour(image_blend)
+		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
+		draw_circle_outline(x, y, size - 40)
+		draw_circle_outline(x, y, size - 20)
+			
+		//input text
+		draw_set_colour(image_blend)
+		draw_circle_outline(x, y, size)
+		for (var i = 0; i < input_number; i++) {
+			draw_set_colour(input_colour[i])
+			draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(spell.age + zero_angle + (360/input_number)*i - (input_number-2)*180/input_number), 360/input_number, false, true)
+		}
 	}
 }
 
 
 function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
 	type = TYPE.WIRE
+	colour_cycle = false
+	colour_number = 0
+	colours = []
 	
 	static draw = function () {
+		if (colour_cycle) {
+			var i = spell.age*colour_number div 360
+			var o = (spell.age*colour_number mod 360)/360
+			//smooth out transitions
+			if (o < 0.5) {
+				o = o*o*o*o //o^4
+				o = 8*o //8o^4
+			} else {
+				o -= 1;
+				o = o*o*o*o //(o - 1)^4
+				o = 1 - 8*o //1 - 8(o - 1)^4
+			}
+			image_blend = merge_colour(colours[i], colours[i+1], o)
+		}
 		
+		base_draw()
+
+		//draw name and its ring
+		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)
+		draw_circle_outline(x, y, size - 20)
 	}
 }
 

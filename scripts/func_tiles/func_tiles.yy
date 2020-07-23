@@ -6,7 +6,7 @@
     "path": "folders/Scripts/Macros++.yy",
   },
   "resourceVersion": "1.0",
-  "name": "tile_data",
+  "name": "func_tiles",
   "tags": [],
   "resourceType": "GMScript",
 }

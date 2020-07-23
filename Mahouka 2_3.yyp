@@ -18,7 +18,7 @@
     {"id":{"name":"sprite101","path":"sprites/sprite101/sprite101.yy",},"order":3,},
     {"id":{"name":"writeup","path":"sprites/writeup/writeup.yy",},"order":4,},
     {"id":{"name":"spr_fnt_runic","path":"sprites/spr_fnt_runic/spr_fnt_runic.yy",},"order":0,},
-    {"id":{"name":"tile_data","path":"scripts/tile_data/tile_data.yy",},"order":2,},
+    {"id":{"name":"func_tiles","path":"scripts/func_tiles/func_tiles.yy",},"order":2,},
     {"id":{"name":"spr_fnt_runic_backup","path":"sprites/spr_fnt_runic_backup/spr_fnt_runic_backup.yy",},"order":1,},
     {"id":{"name":"spr_fnt_space","path":"sprites/spr_fnt_space/spr_fnt_space.yy",},"order":2,},
     {"id":{"name":"macros","path":"scripts/macros/macros.yy",},"order":0,},

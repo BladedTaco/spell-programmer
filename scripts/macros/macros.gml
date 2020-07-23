@@ -11,6 +11,7 @@ function macros() {
 	#macro SHADERS true
 	#macro no_shaders:SHADERS false
 	#macro COUNTER_SIZE (base_size + 20 + max(0, (string_length(string(int_to_bin(value))) - 8)*10))
+	#macro SPELLS global.spells
 	#endregion macros
 
 	#region globals
