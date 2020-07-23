@@ -1,29 +1,32 @@
-function new_spell_tile(_px, _py, _index, _type) {
-		switch (_type) {
-			case SPELL.ADD_MOTION:
-			case SPELL.CASTER:
-			case SPELL.CONSTRUCT_VECTOR:
-			case SPELL.CONSTANT:
-			case SPELL.MANA:
-			case SPELL.TEST:
-			case SPELL.TEST2:
-			case SPELL.CONNECTOR:
-			case SPELL.EMPTY:
-		}
+///@functrion new_spell_tile(px, py, data, index)
+///@param px - the x coordinate in the hex grid
+///@param py - the y coordinate in the hex grid
+///@param data - the struct containing the tile data
+///@param *index - the index of the tile, if unset will be largest untaken
+///@desc creates and returns a new spell tile of the given paramaters
+function new_spell_tile(_px, _py, _data, _index) {
+	return new _data.type(_px, _py, _data, _index)
 }
 
 ///must be created by spell object
-function spell_tile(_px, _py, _index) constructor {
+function spell_tile(_px, _py, _data, _index) constructor {
 	pos_x = _px
 	pos_y = _py
-	index = _index
 	
+	index = is_undefined(_index) ? other.children_number : _index
+	
+	//pull info from _data
+	type =				undefined
+	sprite_index = 		_data.sprite_index 
+	image_blend = 		_data.image_blend 
+	name = 				_data.name 
+	inputs = 			_data.inputs 
+	input_colour = 		_data.input_colour 
 	
 	//default values
 	x = room_width / 2
 	y = room_height / 2
 	spell = other.id
-	//level = 0
 	other.children[| index] = self
 	
 	//init
@@ -40,9 +43,79 @@ function spell_tile(_px, _py, _index) constructor {
 	}
 }
 
-function wire() : spell_tile(/* ADD IN VARIABLES HERE */) constructor {
+function basic_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
+	type = TYPE.BASIC
 	
+	static draw = function () {
+		
+	}
 }
+
+
+function trick_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
+	type = TYPE.TRICK
+	
+	static draw = function () {
+		
+	}
+}
+
+
+function converter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
+	type = TYPE.CONVERTER
+	
+	static draw = function () {
+		
+	}
+}
+
+
+function counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
+	type = TYPE.COUNTER
+	
+	static draw = function () {
+		
+	}
+}
+
+
+function shell_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
+	type = TYPE.SHELL
+	
+	static draw = function () {
+		
+	}
+}
+
+
+function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
+	type = TYPE.WIRE
+	
+	static draw = function () {
+		
+	}
+}
+
+
+
+//function bin_counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
+//	type = TYPE.BIN_COUNTER
+//}
+
+
+//function __spell_add_motion(_px, _py, _index) : spell_tile(_px, _py, _index) constructor {
+//	type = TYPE.TRICK
+//	sprite_index = spr_add_motion
+//	image_blend = COLOUR.TRICK
+//	name = " ADD MOTION "
+//	inputs = ["DIRECTION", "TARGET", "MANA"]
+//	input_colour = [COLOUR.VECTOR, COLOUR.ENTITY, COLOUR.MANA]
+//}
+
+
+
+
+
 
 
 /*
