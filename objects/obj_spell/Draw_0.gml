@@ -78,7 +78,8 @@ var _str;
 for (var i = 0; i < children_number; i++) {
 	with (children[| i]) {
 		//draw circle
-		event_perform(ev_draw, 0)
+		//event_perform(ev_draw, 0)
+		draw()
 	}
 }
 	

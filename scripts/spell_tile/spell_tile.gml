@@ -28,30 +28,43 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	y = room_height / 2
 	spell = other.id
 	other.children[| index] = self
-	base_size = 30
-	size = 30
+	base_size = 60
+	size = base_size
 	input_number = array_length(inputs)
 	children = -1
 	children_number = 0
 	input_tile = ds_list_create()
 	value = 0
 	
+	//need to incorporate
+	bubble_size = size + 32
+	hex_size = bubble_size*2/sqrt(3)
+	cell_size = size*2/sqrt(3)
+	group_colour = COLOUR.EMPTY;	
+	
 	//maybe?
 	small_max_val = power(2, 9) - 1;
 	max_val = power(2, 23) - 1;
 	zero_angle = 0;
 	
-	//init
-	init(0)
-	
-	
-	static init = function () {
-		get_data()
-		get_children()
+	static get_size = function () {
+		size = base_size;
+		if (type = TYPE.COUNTER) {
+			//size = base_size + string_length(string(value))*20
+			size = COUNTER_SIZE
+			// THIS IS ALSO IN OBJ_MENU.STEP
+			if (value >= small_max_val) {
+				radius = 2;
+			}
+		} else if (type != TYPE.BASIC) {
+			if (type = TYPE.WIRE) {
+				size -= 15
+			} else {
+				size += 20	
+			}
+		}
 	}
 	
-	//handle size stuff
-
 	static get_data = function () {
 		
 		var _array = spell.spell[| index] //get spell
@@ -72,40 +85,112 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		
 		pos_x = _array[4][0]
 		pos_y = _array[4][1]
-
-		get_size()
 	}
 	
 	static get_children = function () {
 		//get the id of each child
 		for (var i = 0; i < children_number; i++) {
-			children[| i] = spell.children[| children[| i]].id
+			children[| i] = spell.children[| children[| i]]
 		}
 
 		//get the id of each input
 		for (i = 0; i < ds_list_size(input_tile); i++) {
 			if (input_tile[| i] > 0) {
-				input_tile[| i] = spell.children[| input_tile[| i]].id;
+				input_tile[| i] = spell.children[| input_tile[| i]];
 			}
 		}
 	}
 	
-	static get_size = function () {
-		size = base_size;
-		if (type = TYPE.COUNTER) {
-			//size = base_size + string_length(string(value))*20
-			size = COUNTER_SIZE
-			// THIS IS ALSO IN OBJ_MENU.STEP
-			if (value >= small_max_val) {
-				radius = 2;
+	
+	static set_size = function (_bubble) {
+		bubble_size = _bubble
+		hex_size = bubble_size*2/sqrt(3)
+		cell_size = size*2/sqrt(3)
+	}
+	
+	static destroy = function () {
+			//clear input list
+			ds_list_destroy(input_tile)
+			ds_list_destroy(children)
+			//remove from existing input lists
+			var _index, _s;
+			for (var i = 0; i < spell.children_number; i++) {
+				with (spell.children[| i]) {
+					if (self == other) continue;
+					//replace inputs with default
+					if (ds_exists(input_tile, ds_type_list)) {
+						_index = ds_list_find_index(input_tile, other.id)
+						while (_index > -1) {
+							ds_list_replace(input_tile, _index, noone)	
+							//remove from obj_spell as well
+							_s = spell.spell[| index]
+							ds_list_replace(_s[5], _index, -1) 
+							//get next index
+							_index = ds_list_find_index(input_tile, other.id)
+						}
+					}
+					//remove children
+					if (ds_exists(children, ds_type_list)) {
+						_index = ds_list_find_index(children, other.id)
+						while (_index > -1) { //for every child relationship found
+							//remove it
+							ds_list_delete(children, _index)	
+							children_number--
+							//remove from obj_spell as well
+							_s = spell.spell[| index]
+							ds_list_delete(_s[3], _index) //remove connection
+							_index = ds_list_find_index(children, other.id)
+						}
+					}
+					//decrease superior indices
+					if (index > other.index) {
+						index-- 
+					}
+				}
 			}
-		} else if (type != TYPE.BASIC) {
+
+			var _ds;
+			var _i = index;
+			//shift indexes down in spell
+			with (spell) {
+				//delete own entry
+				var _s = spell[| _i]
+				ds_list_destroy(_s[3])
+				ds_list_destroy(_s[5])
+				ds_list_delete(spell, _i)
+				ds_list_delete(children, _i)
+				children_number--
+				//handle all other entries
+				for (var i = 0; i < children_number; i++) {
+					_s = spell[| i] //get the tile data
+					//get the connections ds list
+					_ds = _s[3]
+					//reduce superior entries
+					for (var o = 0; o < ds_list_size(_ds); o++) {
+						if (_ds[| o] > _i) {
+							_ds[| o] -= 1	
+						}
+					}
+					//get the inputs ds list
+					_ds = _s[5]
+					//reduce superior entries
+					for (var o = 0; o < ds_list_size(_ds); o++) {
+						if (_ds[| o] > _i) {
+							_ds[| o] -= 1	
+						}
+					}
+				}
+				//update wires next frame
+				update_wires = 2
+			}
+
 			if (type = TYPE.WIRE) {
-				size -= 15
-			} else {
-				size += 20	
+				with (spell) {
+					check_ports(id)
+					//recalculate all connectors and update wires
+					event_user(1)	
+				}
 			}
-		}
 	}
 	
 	static base_draw = function () {
@@ -132,6 +217,11 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	static toString = function () {
 		return "Spell Tile '" + name + "' at {" + string(x) + ", " + string(y) + "}"
 	}
+	
+	
+	////init
+	//get_data()
+	//get_size()
 }
 
 
@@ -145,13 +235,20 @@ function basic_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)
 		draw_circle_outline(x, y, size - 20)
 	}
+	
+	//init
+	get_data()
+	get_size()
 }
 
 
 function trick_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
 	type = TYPE.TRICK
+	other.sprite_index = sprite_index
 	
 	static draw = function () {
+		base_draw()
+		
 		//name and rings
 		draw_set_colour(image_blend)
 		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
@@ -166,6 +263,10 @@ function trick_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 			draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(spell.age + zero_angle + (360/input_number)*i - (input_number-2)*180/input_number), 360/input_number, false, true)
 		}
 	}
+	
+	//init
+	get_data()
+	get_size()
 }
 
 
@@ -173,6 +274,7 @@ function converter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _d
 	type = TYPE.CONVERTER
 	
 	static draw = function () {
+		base_draw()
 		//name and rings
 		draw_set_colour(image_blend)
 		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
@@ -187,6 +289,10 @@ function converter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _d
 			draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(spell.age + zero_angle + (360/input_number)*i - (input_number-2)*180/input_number), 360/input_number, false, true)
 		}
 	}
+	
+	//init
+	get_data()
+	get_size()
 }
 
 
@@ -195,6 +301,7 @@ function bin_counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, 
 	bin_value = int_to_bin(value)
 	
 	static draw = function () {
+		base_draw()
 		draw_set_colour(image_blend)
 		var _str, _sign = -1;
 		_str = "0"
@@ -244,6 +351,10 @@ function bin_counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, 
 		draw_set_colour(COLOUR.MARKER)
 		draw_polygon(_x, _y, 8, -spell.age*_sign, 3, false, 4)
 	}
+	
+	//init
+	get_data()
+	get_size()
 }
 
 
@@ -251,6 +362,7 @@ function counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _dat
 	type = TYPE.COUNTER
 	
 	static draw = function () {
+		base_draw()
 		draw_set_colour(image_blend)
 		var _str, _sign = -1;
 		//draw the name and its ring
@@ -289,6 +401,10 @@ function counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _dat
 			_sign = -_sign
 		}
 	}
+	
+	//init
+	get_data()
+	get_size()
 }
 
 
@@ -296,6 +412,7 @@ function shell_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 	type = TYPE.SHELL
 	
 	static draw = function () {
+		base_draw()
 		//name and rings
 		draw_set_colour(image_blend)
 		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
@@ -310,6 +427,10 @@ function shell_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 			draw_text_circle(x, y, inputs[i] + "   ", size - 10, -(spell.age + zero_angle + (360/input_number)*i - (input_number-2)*180/input_number), 360/input_number, false, true)
 		}
 	}
+	
+	//init
+	get_data()
+	get_size()
 }
 
 
@@ -348,7 +469,7 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 			children_number = ds_list_size(children) // TODO workaround
 	
 			for (i = 0; i < children_number; i++) {
-				if instance_exists(children[| i]) { 
+				if is_struct(children[| i]) { 
 					if (children[| i].type == TYPE.WIRE) {
 						//with (children[| i]) {
 						//	get_wire_data()
@@ -391,6 +512,10 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)
 		draw_circle_outline(x, y, size - 20)
 	}
+	
+	//init
+	get_data()
+	get_size()
 }
 
 

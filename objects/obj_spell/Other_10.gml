@@ -16,7 +16,7 @@ for (i = 0; i < children_number; i++) {
 
 //get wire heads
 for (i = array_length_1d(_wire) - 1; i >= 0; i--) { //for each wire
-	if (instance_exists(_wire[i])) { //if it exists
+	if (is_struct(_wire[i])) { //if it exists
 		//remove all its children from the temp array
 		with (_wire[i]) {
 			for (o = array_length_1d(_wire) - 1; o >= 0; o--) { //for each wire

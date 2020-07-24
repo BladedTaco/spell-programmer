@@ -21,9 +21,9 @@ for (i = 0; i < children_number; i++) {
 					_str = []
 					for (j = 0; j < other.input_number; j++) {
 						_str[j] = ""
-						_lst = get_wire_path(id, other.input_tile[| j])
+						_lst = get_wire_path(self, other.input_tile[| j])
 						for (k = 0; k < ds_list_size(_lst); k++) {
-							ds_list_add(_lst[| k].input_tile, other.id)
+							ds_list_add(_lst[| k].input_tile, other)
 							_lst[| k].inputs[array_length_1d(_lst[| k].inputs)] = j
 						}
 						ds_list_destroy(_lst)
@@ -34,11 +34,11 @@ for (i = 0; i < children_number; i++) {
 					}
 					other.connector_name[o] = "  " + array_concat(_str, " + ", "")
 				} else {
-					if (ds_list_find_index(other.input_tile, id) > -1) { //in list
+					if (ds_list_find_index(other.input_tile, self) > -1) { //in list
 						other.connector_name[o] = " " //add initial one
 						//check for all values
 						for (j = 0; j < other.input_number; j++) {
-							if (other.input_tile[| j] == id) {
+							if (other.input_tile[| j] == self) {
 								other.connector_name[o] += other.inputs[j] + " + "
 								//show_debug_message(other.connector_name[o])
 							}
@@ -56,7 +56,8 @@ for (i = 0; i < children_number; i++) {
 // update wires
 for (i = 0; i < array_length_1d(wire_heads); i++) {
 	with (wire_heads[i]) { //with each tile
-		event_user(2)
+		get_wire_data()
+		//event_user(2)
 	}
 }
 
