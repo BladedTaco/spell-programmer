@@ -33,14 +33,10 @@ function cell_data() {
 	//return _id
 
 	with (argument[0]) {
-		var _spell = [];
-		var _pos = [];
 		var _child = noone;
 	
 		for (var i = 0; i < children_number; i++) {
-			_spell = spell[| i]
-			_pos = _spell[4]
-			if ((_pos[0] = argument[1]) and (_pos[1] = argument[2])) {
+			if ((spell[| i].pos_x = argument[1]) and (spell[| i].pos_y = argument[2])) {
 				_child = children[| i]
 				break;
 			}

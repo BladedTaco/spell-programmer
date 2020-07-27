@@ -213,38 +213,38 @@ switch (menu_data[selected]) {
 	break;
 	
 	case MENU.TILE_EMPTY: //remove tile
-		set_tile(spell, pos_x, pos_y, SPELL.EMPTY)
+		set_tile(spell, pos_x, pos_y, SPELLS.empty)
 		//destroy menus
 		instance_destroy(parent)
 		instance_destroy();
 	break;
 	case MENU.TILE_TRICK: //trick tile
-		parent.child = set_tile(spell, pos_x, pos_y, SPELL.ADD_MOTION)
+		parent.child = set_tile(spell, pos_x, pos_y, SPELLS.add_motion)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	case MENU.TILE_META: //connetor tile (will be tiles that interact between circles, or are special or output time or such variables)
-		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONNECTOR)
+		parent.child = set_tile(spell, pos_x, pos_y, SPELLS.wire)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	case MENU.TILE_BASIC: //basic tile
-		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CASTER)
+		parent.child = set_tile(spell, pos_x, pos_y, SPELLS.caster)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	case MENU.TILE_CONSTANT: //constant tile
-		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONSTANT)
+		parent.child = set_tile(spell, pos_x, pos_y, SPELLS.constant)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	case MENU.TILE_CONVERTER: //converter tile
-		parent.child = set_tile(spell, pos_x, pos_y, SPELL.CONSTRUCT_VECTOR)
+		parent.child = set_tile(spell, pos_x, pos_y, SPELLS.construct_vector)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
 	case MENU.TILE_MANA: //mana tile
-		parent.child = set_tile(spell, pos_x, pos_y, SPELL.MANA)
+		parent.child = set_tile(spell, pos_x, pos_y, SPELLS.mana_source)
 		with (parent) { event_user(2) };
 		instance_destroy();
 	break;
@@ -266,7 +266,7 @@ switch (menu_data[selected]) {
 		//get the tile
 		_id = cell_data(spell, pos_x + _mx, pos_y + _my)
 		if (!is_struct(_id)) { //create a connector if cell is empty
-			_id = set_tile(spell, pos_x + _mx, pos_y + _my, SPELL.CONNECTOR)
+			_id = set_tile(spell, pos_x + _mx, pos_y + _my, SPELLS.wire)
 			_id.name = child.name
 			_id.image_blend = child.image_blend
 			
@@ -303,8 +303,7 @@ switch (menu_data[selected]) {
 		with (parent.child) {
 			if (_child = input_tile[| _index]) { //already in this spot in the list
 				ds_list_replace(input_tile, _index, noone)	
-				_s = spell.spell[| index]
-				ds_list_replace(_s[5], _index, noone)	
+				ds_list_replace(spell.spell[| index].inputs, _index, noone)	
 				_menu.menu_sprite[_index] = spr_menu_null
 			} else { // not in this spot in the list
 				//replace previous
@@ -315,8 +314,7 @@ switch (menu_data[selected]) {
 					}
 				}
 				ds_list_replace(input_tile, _index, _child)
-				_s = spell.spell[| index]
-				ds_list_replace(_s[5], _index, _child.index)
+				ds_list_replace(spell.spell[| index].inputs, _index, _child.index)
 				_menu.menu_sprite[_index] = spr_menu_circle
 			}
 		}

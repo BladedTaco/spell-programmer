@@ -6,7 +6,7 @@
     "path": "folders/Scripts/structs.yy",
   },
   "resourceVersion": "1.0",
-  "name": "spell",
+  "name": "spell_part",
   "tags": [],
   "resourceType": "GMScript",
 }

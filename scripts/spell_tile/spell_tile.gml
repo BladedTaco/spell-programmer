@@ -38,7 +38,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	value = 0
 	
 	//need to incorporate
-	bubble_size = size + 32
+	bubble_size = size + BUBBLE
 	hex_size = bubble_size*2/sqrt(3)
 	cell_size = size*2/sqrt(3)
 	group_colour = COLOUR.EMPTY;	
@@ -48,14 +48,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	max_val = power(2, 23) - 1;
 	zero_angle = 0;
 	
-	//a function to handle bubble_size and so on
-	//make it call on init
-	//static bubble = function () {
-		
-	//}
-	
 	static update_spell = function () {
-		spell.spell[| index] = [data, name, value, ds_list_create(), [pos_x, pos_y], new_ds_list_size(-1, input_number)] 
+		spell.spell[| index] = new spell_part(data, name, value, [], [pos_x, pos_y], []) 
 	}
 	
 	static get_size = function () {
@@ -67,35 +61,48 @@ function spell_tile(_px, _py, _data, _index) constructor {
 			if (value >= small_max_val) {
 				radius = 2;
 			}
-		} else if (type != TYPE.BASIC) {
+		} else {
 			if (type = TYPE.WIRE) {
 				size -= 15
-			} else {
+			} else if (type != TYPE.BASIC) {
 				size += 20	
+			}
+			//handle bubble_size
+			if (size + BUBBLE > spell.bubble_size) {
+				spell.set_bubble(size + BUBBLE)
+			} else {
+				set_size(spell.bubble_size)	
 			}
 		}
 	}
 	
+	static set_size = function (_bubble) {
+		bubble_size = _bubble
+		hex_size = bubble_size*2/sqrt(3)
+		cell_size = size*2/sqrt(3)
+		spell.size = max(spell.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
+	}
+	
 	static get_data = function () {
 		
-		var _array = spell.spell[| index] //get spell
+		var _spell = spell.spell[| index] //get spell
 		
-		tile = _array[0]
-		name = _array[1]
-		value = _array[2]
+		tile = _spell.tile
+		name = _spell.name
+		value = _spell.value
 		
-		if (ds_exists(_array[3], ds_type_list)) {
+		if (ds_exists(_spell.children, ds_type_list)) {
 			children = ds_list_create()
-			ds_list_copy(children, _array[3]) //children as ids
-			ds_list_copy(input_tile, _array[5]) // input tile inputs as indexes
+			ds_list_copy(children, _spell.children) //children as ids
+			ds_list_copy(input_tile, _spell.inputs) // input tile inputs as indexes
 			children_number = ds_list_size(children)
 		} else {
 			children = -1;	
 			children_number = 0;	
 		}
 		
-		pos_x = _array[4][0]
-		pos_y = _array[4][1]
+		pos_x = _spell.pos_x
+		pos_y = _spell.pos_x
 	}
 	
 	static get_children = function () {
@@ -110,13 +117,6 @@ function spell_tile(_px, _py, _data, _index) constructor {
 				input_tile[| i] = spell.children[| input_tile[| i]];
 			}
 		}
-	}
-	
-	
-	static set_size = function (_bubble) {
-		bubble_size = _bubble
-		hex_size = bubble_size*2/sqrt(3)
-		cell_size = size*2/sqrt(3)
 	}
 	
 	static destroy = function () {
@@ -135,7 +135,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 							ds_list_replace(input_tile, _index, noone)	
 							//remove from obj_spell as well
 							_s = spell.spell[| index]
-							ds_list_replace(_s[5], _index, -1) 
+							ds_list_replace(_s.inputs, _index, -1) 
 							//get next index
 							_index = ds_list_find_index(input_tile, other.id)
 						}
@@ -149,7 +149,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 							children_number--
 							//remove from obj_spell as well
 							_s = spell.spell[| index]
-							ds_list_delete(_s[3], _index) //remove connection
+							ds_list_delete(_s.children, _index) //remove connection
 							_index = ds_list_find_index(children, other.id)
 						}
 					}
@@ -166,8 +166,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 			with (spell) {
 				//delete own entry
 				var _s = spell[| _i]
-				ds_list_destroy(_s[3])
-				ds_list_destroy(_s[5])
+				ds_list_destroy(_s.children)
+				ds_list_destroy(_s.inputs)
 				ds_list_delete(spell, _i)
 				ds_list_delete(children, _i)
 				children_number--
@@ -175,7 +175,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 				for (var i = 0; i < children_number; i++) {
 					_s = spell[| i] //get the tile data
 					//get the connections ds list
-					_ds = _s[3]
+					_ds = _s.children
 					//reduce superior entries
 					for (var o = 0; o < ds_list_size(_ds); o++) {
 						if (_ds[| o] > _i) {
@@ -183,7 +183,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 						}
 					}
 					//get the inputs ds list
-					_ds = _s[5]
+					_ds = _s.inputs
 					//reduce superior entries
 					for (var o = 0; o < ds_list_size(_ds); o++) {
 						if (_ds[| o] > _i) {
@@ -527,64 +527,4 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 	//init
 	get_data()
 	get_size()
-}
-
-
-
-//function bin_counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
-//	type = TYPE.BIN_COUNTER
-//}
-
-
-//function __spell_add_motion(_px, _py, _index) : spell_tile(_px, _py, _index) constructor {
-//	type = TYPE.TRICK
-//	sprite_index = spr_add_motion
-//	image_blend = COLOUR.TRICK
-//	name = " ADD MOTION "
-//	inputs = ["DIRECTION", "TARGET", "MANA"]
-//	input_colour = [COLOUR.VECTOR, COLOUR.ENTITY, COLOUR.MANA]
-//}
-
-
-
-
-
-
-
-/*
-	with (instance_create_depth(x, y, 0, obj_spell_part_hex)) { //create it
-		x = room_width/2
-		y = room_height/2
-		index = i; //give index
-		spell = other.id
-		level = 0;
-		other.children[| i] = id; //give id
-		event_user(0) //get data
-		//get bubble size
-		if (size > _bubble) {
-			if (type != TYPE.COUNTER) {
-				_bubble = size	
-			}
-		}
-		_s = other.spell[| i] //the tile
-		if (_s[2] = -1) { //is a trick tile
-			other.sprite_index = sprite_index
-		}
-	}
-}
-//calculate hex size
-//_hex = _bubble*2/sqrt(3)
-_bubble += 32 // add border
-_hex = _bubble*2/sqrt(3)
-bubble_size = _bubble
-hex_size = _hex
-//give bubble and hex size
-for (i = 0; i < children_number; i++) {
-	with (children[| i]) {
-		event_user(1) //get children
-		bubble_size = _bubble
-		hex_size = _hex
-		cell_size = size*2/sqrt(3)
-		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
-	}
 }

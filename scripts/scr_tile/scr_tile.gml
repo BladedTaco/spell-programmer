@@ -26,20 +26,20 @@ function set_tile() {
 
 		if (is_struct(_child)) { //tile currently in space
 			//change the existing tile
-			if (argument[3] = SPELL.EMPTY) {
+			if (argument[3] = SPELLS.empty) {
 				//destroy the child (it handles its own cleanup)
 				_child.destroy()
 				//calculate new size 
 				size = 10;
 				for (i = 0; i < children_number; i++) {
 					with (children[| i]) {
-						other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)	
+						get_size()
 					}
 				}
 				return noone; //return no tile
 			} else {
 				//delete tile, then replace
-				set_tile(argument[0], argument[1], argument[2], SPELL.EMPTY)
+				set_tile(argument[0], argument[1], argument[2], SPELLS.empty)
 				return set_tile(argument[0], argument[1], argument[2], argument[3])
 			}
 		} else { //no tile currently in space
@@ -47,7 +47,7 @@ function set_tile() {
 			i = children_number;
 			children_number += 1;
 			//check for error
-			if (argument[3] = SPELL.EMPTY) {
+			if (argument[3] = SPELLS.empty) {
 				show_debug_message("DELETING EMPTY TILE")	
 				return noone
 			}
@@ -60,7 +60,6 @@ function set_tile() {
 			return children[| i]
 		}
 	}
-	//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [6, 7, 8], [-3, 1]],
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -73,9 +72,8 @@ function set_tile() {
 function set_tile_output() {
 	with (argument[0]) { //with the spell object
 		//add the input into the spell array
-		var _array, _data, _diff;
-		_array = spell[| argument[2].index]
-		_data = _array[3]
+		var _data, _diff;
+		_data = spell[| argument[2].index].children
 		_diff = false;
 		//check if it already exists
 		for (var i = argument[2].children_number - 1; i >= 0; i--) {
@@ -134,9 +132,8 @@ function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
 	_weak = is_undefined(_weak) ? false : _weak
 	with (_spell) { //with the spell object
 		//add the input into the spell array
-		var _array, _data, _diff;
-		_array = spell[| _dest.index]
-		_data = _array[3]
+		var _data, _diff;
+		_data = spell[| _dest.index].children
 		_diff = false // if a connection has been removed
 		//remove any existing connections between the two tiles
 		//source to dest
@@ -155,9 +152,9 @@ function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
 		//dest to source
 		if (!_diff) { //there can only be a connection one way
 			for (var i = _source.children_number - 1; i >= 0; i--) {
-				if (spell[| _source.index][3][| i] == _dest.index) { //connection already exists
+				if (spell[| _source.index].children[| i] == _dest.index) { //connection already exists
 					//remove the connection and children
-					ds_list_delete(spell[| _source.index][3], i)
+					ds_list_delete(spell[| _source.index].children, i)
 					with (_source) {
 						children_number--
 						ds_list_delete(children, i)
@@ -203,7 +200,7 @@ function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
 ///@param new_cell_y - the y position of the cell to move the tile to
 ///@desc Moves the tile to the given position, trimming outputs as needed
 function reposition_tile() {
-	var i, o, _s, _tiles;
+	var i, o, _tiles;
 
 	with (argument[0]) {
 		//get surrounding tiles
@@ -217,13 +214,8 @@ function reposition_tile() {
 				]
 			
 		//move
-		pos_x = argument[1]
-		pos_y = argument[2]
-		_s = spell.spell[| index]
-		_s = _s[@ 4]
-		_s[@ 0] = pos_x
-		_s[@ 1] = pos_y
-	
+		spell.spell[| index].move(argument[1], argument[2])
+		
 		//trim outputs
 		for (i = 0; i < 6; i++) {
 			if (is_struct(_tiles[i])) {

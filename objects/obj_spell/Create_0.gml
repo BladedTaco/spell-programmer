@@ -41,145 +41,51 @@ update_wires = 0
 wire_heads = []; //the heads of the different wire connectors
 
 //vertically is each tile/circle
-//each circle is [TILE, NAME, VALUE, INPUTS, TILE_POS]
-//spell =
-//[
-//	[SPELL.ADD_MOTION, " ADD MOTION ", -1, [1, 2, 3]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
-//	[SPELL.CASTER, " CASTER ", 0, -1],
-//	[SPELL.TEST2, " TEST2 ", 0, [4, 5, 7, 7, 6, 6]],//[SPELL.MANA, "MANA SOURCE", 77, -1],
-//	[SPELL.CONSTANT, " X ", 0, -1],
-//	[SPELL.CONSTANT, " Y ", 0, -1],
-//	[SPELL.CONSTANT, " Z ", 1, -1],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 8, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [10, 11, 12]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]]
-//	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
-//]
 
-//spell =
-//[
-//	[SPELL.ADD_MOTION, " ADD MOTION ", -1, [1, 10, 3]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 5, 6]],
-//	[SPELL.CASTER, " CASTER ", 0, -1],
-//	[SPELL.MANA, " MANA SOURCE ", 77, -1],
-//	[SPELL.CONSTANT, " X ", 0, -1],
-//	[SPELL.CONSTANT, " Y ", 0, -1],
-//	[SPELL.CONSTANT, " Z ", 1, -1],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 13, 13]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 10, 6]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [10, 11, 12]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [1, 1, 1]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 10, 10]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 11, 11]],
-//	[SPELL.CONSTRUCT_VECTOR, " CONSTRUCT VECTOR ", 0, [4, 12, 12]]
-//	//[SPELL.ADD_MOTION, "ADD MOTION", -1, [1, 2, 3]]
-//]
-
-
-//vertically is each tile/circle
-//each circle is [TILE, NAME, VALUE, CONNECTIONS, TILE_POS, INPUTS]
-spell = ds_list_create()
-ds_list_add(spell, 
-	[SPELLS.add_motion,			/* SPELL.ADD_MOTION,		*/" ADD MOTION ",		-1,			new_ds_list(1, 9, 11),	[0,0],		new_ds_list(9, -1, 2)],
-	[SPELLS.construct_vector,	/* SPELL.CONSTRUCT_VECTOR,	*/" CONSTRUCT VECTOR ",	0,			new_ds_list(3, 4, 5),	[1,1],		new_ds_list(-1, -1, -1)],
-	[SPELLS.mana_source,		/* SPELL.MANA,				*/" MANA SOURCE ",		12345678,	ds_list_create(),		[3,-1],		ds_list_create()],
-	[SPELLS.constant,			/* SPELL.CONSTANT,			*/" CONSTANT ",			0,			ds_list_create(),		[0,2],		ds_list_create()],
-	[SPELLS.constant,			/* SPELL.CONSTANT,			*/" CONSTANT ",			0,			ds_list_create(),		[2,2],		ds_list_create()],
-	[SPELLS.constant,			/* SPELL.CONSTANT,			*/" CONSTANT ",			1,			ds_list_create(),		[3,1],		ds_list_create()],
-	[SPELLS.constant,			/* SPELL.CONSTANT,			*/" CONSTANT ",			0,			ds_list_create(),		[-1,1],		ds_list_create()],
-	[SPELLS.constant,			/* SPELL.CONSTANT,			*/" CONSTANT ",			0,			ds_list_create(),		[-4,0],		ds_list_create()],
-	[SPELLS.caster,				/* SPELL.CASTER,			*/" CASTER ",			0,			ds_list_create(),		[-4,2],		ds_list_create()],
-	[SPELLS.construct_vector,	/* SPELL.CONSTRUCT_VECTOR,	*/" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 10, 7),	[-2,0],		new_ds_list(7, 6, 7)],
-	[SPELLS.construct_vector,	/* SPELL.CONSTRUCT_VECTOR,	*/" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 7, 8),	[-3, 1],	new_ds_list(-1, -1, -1)],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[1,-1],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[2,0],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[4,0],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[5,-1],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[4,-2],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[2,-2],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(13),		[6,0],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(17),		[8,0],		ds_list_create()],
-	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(18),		[10,0],		ds_list_create()]
+spell = new_ds_list(
+	new spell_part(SPELLS.add_motion,		" ADD MOTION ",			-1,			[1, 9, 11],	[0,0],		[9, -1, 2]		),
+	new spell_part(SPELLS.construct_vector,	" CONSTRUCT VECTOR ",	0,			[3, 4, 5],	[1,1],		[-1, -1, -1]	),
+	new spell_part(SPELLS.mana_source,		" MANA SOURCE ",		12345678,	[],			[3,-1],		[]				),
+	new spell_part(SPELLS.constant,			" CONSTANT ",			0,			[],			[0,2],		[]				),
+	new spell_part(SPELLS.constant,			" CONSTANT ",			0,			[],			[2,2],		[]				),
+	new spell_part(SPELLS.constant,			" CONSTANT ",			1,			[],			[3,1],		[]				),
+	new spell_part(SPELLS.constant,			" CONSTANT ",			0,			[],			[-1,1],		[]				),
+	new spell_part(SPELLS.constant,			" CONSTANT ",			0,			[],			[-4,0],		[]				),
+	new spell_part(SPELLS.caster,			" CASTER ",				0,			[],			[-4,2],		[]				),
+	new spell_part(SPELLS.construct_vector,	" CONSTRUCT VECTOR ",	0,			[6, 10, 7],	[-2,0],		[7, 6, 7]		),
+	new spell_part(SPELLS.construct_vector,	" CONSTRUCT VECTOR ",	0,			[6, 7, 8],	[-3, 1],	[-1, -1, -1]	),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[1,-1],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[2,0],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[4,0],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[5,-1],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[4,-2],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[2,-2],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[13],		[6,0],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[17],		[8,0],		[]				),
+	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[18],		[10,0],		[]				)
 )
 
-
-	
-children_number = ds_list_size(spell)
-var _bubble = 0
-
-for (var i = 0; i < children_number; i++) {
-	children[| i] = new_spell_tile(spell[| i][4][0], spell[| i][4][1], spell[| i][0], i)
-	if (children[| i].type != TYPE.COUNTER) {
-		_bubble = max(_bubble, children[| i].size)
+static set_bubble = function (_bubble) {
+	bubble_size = _bubble
+	hex_size = _bubble*2/sqrt(3)
+	for (var i = 0; i < children_number; i++) {
+		if is_struct(children[| i]) {
+			children[| i].set_size(_bubble)
+		}
 	}
 }
+	
+children_number = ds_list_size(spell)
 
-_bubble += 32
-bubble_size = _bubble
-hex_size = _bubble*2/sqrt(3)
+for (var i = 0; i < children_number; i++) {
+	children[| i] = new_spell_tile(spell[| i].pos_x, spell[| i].pos_y, spell[| i].tile, i)
+}
 
 for (i = 0; i < children_number; i++) {
 	with (children[| i]) {
-		set_size(_bubble)
 		get_children()	
-		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
 	}
 }
-
-////give bubble and hex size
-//for (i = 0; i < children_number; i++) {
-//	with (children[| i]) {
-//		event_user(1) //get children
-//		bubble_size = _bubble
-//		hex_size = _hex
-//		cell_size = size*2/sqrt(3)
-//		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
-
-
-//var _bubble = 0, _hex = 0, _s;
-//children_number = ds_list_size(spell)
-////create each trick circle
-//for (var i = 0; i < children_number; i++) {
-//	with (instance_create_depth(x, y, 0, obj_spell_part_hex)) { //create it
-//		x = room_width/2
-//		y = room_height/2
-//		index = i; //give index
-//		spell = other.id
-//		level = 0;
-//		other.children[| i] = id; //give id
-//		event_user(0) //get data
-//		//get bubble size
-//		if (size > _bubble) {
-//			if (type != TYPE.COUNTER) {
-//				_bubble = size	
-//			}
-//		}
-//		_s = other.spell[| i] //the tile
-//		if (_s[2] = -1) { //is a trick tile
-//			other.sprite_index = sprite_index
-//		}
-//	}
-//}
-////calculate hex size
-////_hex = _bubble*2/sqrt(3)
-//_bubble += 32 // add border
-//_hex = _bubble*2/sqrt(3)
-//bubble_size = _bubble
-//hex_size = _hex
-////give bubble and hex size
-//for (i = 0; i < children_number; i++) {
-//	with (children[| i]) {
-//		event_user(1) //get children
-//		bubble_size = _bubble
-//		hex_size = _hex
-//		cell_size = size*2/sqrt(3)
-//		other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
-//	}
-//}
 
 //get wire heads
 event_user(0)

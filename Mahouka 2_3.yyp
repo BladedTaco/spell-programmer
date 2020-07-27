@@ -8,7 +8,7 @@
     {"id":{"name":"spr_construct_vector","path":"sprites/spr_construct_vector/spr_construct_vector.yy",},"order":4,},
     {"id":{"name":"spr_constant","path":"sprites/spr_constant/spr_constant.yy",},"order":5,},
     {"id":{"name":"func_draw_later","path":"scripts/func_draw_later/func_draw_later.yy",},"order":1,},
-    {"id":{"name":"spell","path":"scripts/spell/spell.yy",},"order":3,},
+    {"id":{"name":"spell_part","path":"scripts/spell_part/spell_part.yy",},"order":3,},
     {"id":{"name":"spr_menu_null","path":"sprites/spr_menu_null/spr_menu_null.yy",},"order":6,},
     {"id":{"name":"spr_menu_circle","path":"sprites/spr_menu_circle/spr_menu_circle.yy",},"order":7,},
     {"id":{"name":"spr_menu_arrow","path":"sprites/spr_menu_arrow/spr_menu_arrow.yy",},"order":8,},

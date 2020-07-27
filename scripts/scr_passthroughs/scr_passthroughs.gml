@@ -34,7 +34,7 @@ function new_ds_list() {
 
 //--------------------------------------------------------------------------------------------------
 
-///@func new_ds_list(value, n)
+///@func new_ds_list_size(value, n)
 ///@param value - the value to populate the list with
 ///@param n - the amount of times to add it
 ///@desc creates a ds_list with the given value n times

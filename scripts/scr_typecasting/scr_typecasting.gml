@@ -7,7 +7,12 @@
 
 function array_to_list(_array) {
 	var _ret = new_ds_list()
-	new_ds_list_size()
+	
+	for (var i = 0; i < array_length(_array); i++) {
+		ds_list_add(_ret, _array[i])
+	}	
+	
+	return _ret
 }
 
 //--------------------------------------------------------------------------------------------------

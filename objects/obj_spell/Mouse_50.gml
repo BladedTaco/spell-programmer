@@ -62,7 +62,7 @@ switch (drag_action) {
 					draw_circle_curve(mouse_x, mouse_y, 20, 90, 360*hover_time/hover_max, 20)	
 					if (hover_time == hover_max) {
 						//create new tile
-						_other = set_tile(id, _m[0], _m[1], SPELL.CONNECTOR)
+						_other = set_tile(id, _m[0], _m[1], SPELLS.wire)
 						//add connector to path
 						drag_path[drag_path_length] = new connector(
 							_other, drag_tile,

@@ -21,7 +21,7 @@ function check_ports() {
 					_lst = get_path(id, input_tile[| o])
 					if (ds_list_size(_lst) = 0) {
 						input_tile[| o] = noone
-						ds_list_replace(_s[5], o, -1)
+						ds_list_replace(_s.inputs, o, -1)
 					}
 					ds_list_destroy(_lst)
 				}
