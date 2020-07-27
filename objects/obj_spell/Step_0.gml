@@ -19,3 +19,9 @@ if (update_wires > 0) {
 		}	
 	}
 }
+
+if (keyboard_check_pressed(vk_shift)) {
+	for (var i = 0; i < children_number; i++ ) {
+		show_debug_message(children[| i])	
+	}
+}

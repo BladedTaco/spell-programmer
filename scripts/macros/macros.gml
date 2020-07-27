@@ -33,17 +33,17 @@ function macros() {
 		WIRE
 	}
 
-	enum SPELL {
-		ADD_MOTION,
-		CASTER,
-		CONSTRUCT_VECTOR,
-		CONSTANT,
-		MANA,
-		TEST,
-		TEST2,
-		CONNECTOR,
-		EMPTY
-	}
+	//enum SPELL {
+	//	ADD_MOTION,
+	//	CASTER,
+	//	CONSTRUCT_VECTOR,
+	//	CONSTANT,
+	//	MANA,
+	//	TEST,
+	//	TEST2,
+	//	CONNECTOR,
+	//	EMPTY
+	//}
 
 	enum COLOUR {
 		CONSTANT = c_red,

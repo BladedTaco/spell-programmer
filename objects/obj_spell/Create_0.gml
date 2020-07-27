@@ -65,7 +65,7 @@ spell = new_ds_list(
 	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[18],		[10,0],		[]				)
 )
 
-static set_bubble = function (_bubble) {
+set_bubble = function (_bubble) {
 	bubble_size = _bubble
 	hex_size = _bubble*2/sqrt(3)
 	for (var i = 0; i < children_number; i++) {

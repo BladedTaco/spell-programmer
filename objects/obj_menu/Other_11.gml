@@ -187,21 +187,25 @@ switch (menu_data[selected]) {
 		child.value += power(10, value)
 		child.value = min(child.value, child.max_val - (child.max_val - child.small_max_val)*(child.radius <= 1))
 		name = string_replace_all(string_format(child.value, 7 - 4*(child.radius <= 1), 0), " ", "0")
+		child.get_size()
 	break;
 	case MENU.VAL_BIG_UP:
 		child.value += 5*power(10, value)
 		child.value = min(child.value, child.max_val - (child.max_val - child.small_max_val)*(child.radius <= 1))
 		name = string_replace_all(string_format(child.value, 7 - 4*(child.radius <= 1), 0), " ", "0")
+		child.get_size()
 	break;
 	case MENU.VAL_DOWN:
 		child.value -= power(10, value)
 		child.value = max(child.value, 0)
 		name = string_replace_all(string_format(child.value, 7 - 4*(child.radius <= 1), 0), " ", "0")
+		child.get_size()
 	break;
 	case MENU.VAL_BIG_DOWN:
 		child.value -= 5*power(10, value)
 		child.value = max(child.value, 0)
 		name = string_replace_all(string_format(child.value, 7 - 4*(child.radius <= 1), 0), " ", "0")
+		child.get_size()
 	break;
 	case MENU.VAL_LEFT:
 		value += 1

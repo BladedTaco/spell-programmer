@@ -61,6 +61,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 			if (value >= small_max_val) {
 				radius = 2;
 			}
+			set_size(spell.bubble_size)	
 		} else {
 			if (type = TYPE.WIRE) {
 				size -= 15
@@ -102,7 +103,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		}
 		
 		pos_x = _spell.pos_x
-		pos_y = _spell.pos_x
+		pos_y = _spell.pos_y
 	}
 	
 	static get_children = function () {
@@ -226,7 +227,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	}
 
 	static toString = function () {
-		return "Spell Tile '" + name + "' at {" + string(x) + ", " + string(y) + "}"
+		return "Spell Tile '" + name + "' at {" + string(pos_x) + ", " + string(pos_y) + "}"
 	}
 	
 	
