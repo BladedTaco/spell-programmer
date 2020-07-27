@@ -1,10 +1,10 @@
-///@functrion new_spell_tile(px, py, data, index)
+///@func new_spell_tile(px, py, data, index)
 ///@param px - the x coordinate in the hex grid
 ///@param py - the y coordinate in the hex grid
 ///@param data - the struct containing the tile data
 ///@param *index - the index of the tile, if unset will be largest untaken
 ///@desc creates and returns a new spell tile of the given paramaters
-function new_spell_tile(_px, _py, _data, _index) {
+function new_spell_tile(_px, _py, _data, _index) {	
 	return new _data.type(_px, _py, _data, _index)
 }
 
@@ -16,6 +16,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	index = is_undefined(_index) ? other.children_number : _index
 	
 	//pull info from _data
+	data =				_data	
 	type =				undefined
 	sprite_index = 		_data.sprite_index 
 	image_blend = 		_data.image_blend 
@@ -46,6 +47,16 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	small_max_val = power(2, 9) - 1;
 	max_val = power(2, 23) - 1;
 	zero_angle = 0;
+	
+	//a function to handle bubble_size and so on
+	//make it call on init
+	//static bubble = function () {
+		
+	//}
+	
+	static update_spell = function () {
+		spell.spell[| index] = [data, name, value, ds_list_create(), [pos_x, pos_y], new_ds_list_size(-1, input_number)] 
+	}
 	
 	static get_size = function () {
 		size = base_size;

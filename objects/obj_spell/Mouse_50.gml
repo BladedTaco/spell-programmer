@@ -20,7 +20,7 @@ if mouse_check_button_released(mb_left) {
 switch (drag_action) {
 	case DRAG.NONE: break;
 	case DRAG.CONNECTOR:
-		if instance_exists(drag_tile) {
+		if is_struct(drag_tile) {
 			draw_later
 				draw_connector(
 					mouse_x, mouse_y, x + drag_tile.pos_x*bubble_size, y + drag_tile.pos_y*hex_size*HEX_MUL,

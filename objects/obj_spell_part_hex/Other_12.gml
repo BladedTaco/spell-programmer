@@ -1,4 +1,7 @@
 /// @description get wire data
+
+/*
+
 if (type = TYPE.WIRE) {
 	if (ds_exists(input_tile, ds_type_list) and ds_exists(children, ds_type_list)) {
 		var _l = ds_list_size(input_tile)

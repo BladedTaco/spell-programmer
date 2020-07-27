@@ -63,12 +63,12 @@ function cell_data() {
 function cell_empty() {
 
 	var _id = cell_data(argument[0], argument[1], argument[2])
-	if (instance_exists(_id)) {
+	if (is_struct(_id)) {
 		if (_id.type = TYPE.WIRE) {
 			return argument[3] //return the given
 		}
 	}
-	return instance_exists(_id)
+	return is_struct(_id)
 
 
 }

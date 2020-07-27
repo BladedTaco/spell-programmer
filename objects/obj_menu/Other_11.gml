@@ -17,7 +17,7 @@ switch (menu_data[selected]) {
 			menu_data = [MENU.TILE_EMPTY, MENU.TILE_META, MENU.TILE_BASIC, MENU.TILE_CONSTANT, MENU.TILE_CONVERTER, MENU.TILE_MANA]
 			menu_options = ["EMPTY", "META", "BASIC", "CONSTANT", "CONVERTER", "MANA"]
 			menu_sprite = [spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null]
-			menu_active = [instance_exists(child), true, true, true, true, true];
+			menu_active = [is_struct(child), true, true, true, true, true];
 			menu_length = 6;
 			name = "TILE"
 		}
@@ -147,7 +147,7 @@ switch (menu_data[selected]) {
 	case MENU.GROUP: //add or remove tile from group
 		var _id = cell_data(spell, pos_x, pos_y)
 		var _p = -1;
-		if (instance_exists(_id)) {
+		if (is_struct(_id)) {
 			if (point_distance(
 					mouse_x, mouse_y,
 					spell.x + _id.pos_x*_id.bubble_size,
@@ -265,7 +265,7 @@ switch (menu_data[selected]) {
 		}
 		//get the tile
 		_id = cell_data(spell, pos_x + _mx, pos_y + _my)
-		if (!instance_exists(_id)) { //create a connector if cell is empty
+		if (!is_struct(_id)) { //create a connector if cell is empty
 			_id = set_tile(spell, pos_x + _mx, pos_y + _my, SPELL.CONNECTOR)
 			_id.name = child.name
 			_id.image_blend = child.image_blend

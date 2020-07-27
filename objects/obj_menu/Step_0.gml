@@ -1,5 +1,5 @@
 /// @description 
-if (instance_exists(child)) {
+if (is_struct(child)) {
 	with (child) {
 		//value += (keyboard_check(vk_up) - keyboard_check(vk_down))*power(10, other.value)
 		

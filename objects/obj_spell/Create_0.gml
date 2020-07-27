@@ -95,16 +95,17 @@ ds_list_add(spell,
 	[SPELLS.caster,				/* SPELL.CASTER,			*/" CASTER ",			0,			ds_list_create(),		[-4,2],		ds_list_create()],
 	[SPELLS.construct_vector,	/* SPELL.CONSTRUCT_VECTOR,	*/" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 10, 7),	[-2,0],		new_ds_list(7, 6, 7)],
 	[SPELLS.construct_vector,	/* SPELL.CONSTRUCT_VECTOR,	*/" CONSTRUCT VECTOR ",	0,			new_ds_list(6, 7, 8),	[-3, 1],	new_ds_list(-1, -1, -1)],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[1,-1],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[2,0],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[4,0],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[5,-1],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[4,-2],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[2,-2],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(13),		[6,0],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(17),		[8,0],		ds_list_create()],
-	[SPELLS.wire,			/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(18),		[10,0],		ds_list_create()]
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[1,-1],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[2,0],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[4,0],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[5,-1],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[4,-2],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(2),			[2,-2],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(13),		[6,0],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(17),		[8,0],		ds_list_create()],
+	[SPELLS.wire,				/* SPELL.CONNECTOR,			*/" CONNECTOR ",		0,			new_ds_list(18),		[10,0],		ds_list_create()]
 )
+
 
 	
 children_number = ds_list_size(spell)

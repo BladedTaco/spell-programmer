@@ -1,5 +1,7 @@
 /// @description 
 
+/*
+
 index = -1;
 tile = SPELL.MANA
 type = TYPE.BASIC

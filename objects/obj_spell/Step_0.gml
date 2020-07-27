@@ -14,7 +14,7 @@ if (update_wires > 0) {
 		event_user(0)
 		for (var i = 0; i < array_length_1d(wire_heads); i++) {
 			with (wire_heads[i]) {
-				event_user(2)	
+				get_wire_data()	
 			}
 		}	
 	}

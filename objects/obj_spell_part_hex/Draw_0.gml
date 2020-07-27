@@ -1,5 +1,7 @@
 /// @description 
 
+/*
+
 //make trick extend out
 //after that make nested
 //draw everything as a clockwise and anticlocwise surface

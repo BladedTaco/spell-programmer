@@ -1,4 +1,7 @@
 /// @description get data
+
+/*
+
 var _array = obj_spell.spell
 
 _array = _array[| index] //get spell

@@ -24,11 +24,11 @@ function set_tile() {
 		var _child = cell_data(id, _mx, _my)
 		var i = 0;
 
-		if (instance_exists(_child)) { //tile currently in space
+		if (is_struct(_child)) { //tile currently in space
 			//change the existing tile
 			if (argument[3] = SPELL.EMPTY) {
 				//destroy the child (it handles its own cleanup)
-				instance_destroy(_child)
+				_child.destroy()
 				//calculate new size 
 				size = 10;
 				for (i = 0; i < children_number; i++) {
@@ -54,29 +54,8 @@ function set_tile() {
 			//change/make the entry
 			ds_list_add(spell, [argument[3], "", 0, -1, [_mx, _my], -1])
 			//make a new tile
-			with (instance_create_depth(0, 0, 0, obj_spell_part_hex)) {
-				ds_list_add(other.children, id) //give id
-				//copypasta
-				index = i; //give index
-				spell = other.id
-				level = 0;
-				event_user(0) //get data
-				//get bubble size
-				if (size > other.bubble_size) {
-					if (type != TYPE.COUNTER) {
-						other.bubble_size = size
-					}
-				}
-			
-				//copypasta pt 2
-				bubble_size = other.bubble_size 
-				hex_size = other.hex_size 
-				cell_size = size*2/sqrt(3)
-				other.size = max(other.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
-				//update entry
-				children = ds_list_create()
-				input_tile = new_ds_list_size(noone, input_number)
-				other.spell[| i] = [argument[3], name, value, ds_list_create(), [_mx, _my], new_ds_list_size(-1, input_number)] 
+			with (new_spell_tile(_mx, _my, argument[3], i)) {
+				update_spell()
 			}
 			return children[| i]
 		}
@@ -131,7 +110,7 @@ function set_tile_output() {
 			event_user(0)
 			for (i = 0; i < array_length_1d(wire_heads); i++) {
 				with (wire_heads[i]) {
-					event_user(2)	
+					get_wire_data()
 				}
 			}
 			if (_diff) check_ports(id)
@@ -207,7 +186,7 @@ function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
 				event_user(0)
 				for (i = 0; i < array_length_1d(wire_heads); i++) {
 					with (wire_heads[i]) {
-						event_user(2)	
+						get_wire_data()
 					}
 				}
 				if (_diff) check_ports(id)
@@ -247,7 +226,7 @@ function reposition_tile() {
 	
 		//trim outputs
 		for (i = 0; i < 6; i++) {
-			if (instance_exists(_tiles[i])) {
+			if (is_struct(_tiles[i])) {
 				with (_tiles[i]) {
 					if (cell_distance(pos_x, pos_y, argument[1], argument[2]) > 1) {
 						//check for inputs to argument tile

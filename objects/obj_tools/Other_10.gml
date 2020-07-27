@@ -61,7 +61,7 @@ context_buttons =
 							event_user(0)
 							for (i = 0; i < array_length(wire_heads); i++) {
 								with (wire_heads[i]) {
-									event_user(2)	
+									get_wire_data()	
 								}
 							}
 							check_ports(id)
