@@ -5,6 +5,8 @@
 ///		set_tile_output
 ///		force_tile_output
 ///		reposition_tile
+///		expand_tile
+///		shrink_tile
 
 //--------------------------------------------------------------------------------------------------
 
@@ -244,4 +246,25 @@ function reposition_tile() {
 		check_ports(spell)
 	}
 			//ds_list_add(spell, [argument[3], "", 0, -1, [_mx, _my], -1])
+}
+
+//--------------------------------------------------------------------------------------------------
+
+///@func expand_tile()
+///@desc expands a tile by 1 radius, call with the tile
+function expand_tile () {
+	if cell_ring_empty(spell, pos_x, pos_y, radius) {
+		radius++
+		
+		return true
+	}
+	return false
+}
+
+//--------------------------------------------------------------------------------------------------
+
+///@func shrink_tile()
+///@desc shrinks a tile by 1 radius, call with the tile
+function shrink_tile () {
+	radius--
 }

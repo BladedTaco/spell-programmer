@@ -4,6 +4,8 @@
 ///		cell_data
 ///		cell_empty
 ///		cell_distance
+///		cell_ring
+///		cell_ring_empty
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13,25 +15,6 @@
 ///@param cell_y - the y position of the cell
 ///@desc returns the id of the tile in the cell, use with spell object
 function cell_data() {
-
-	//with (argument[0]) {
-	//	var _id = instance_nearest(
-	//		x + argument[1]*bubble_size,
-	//		y + argument[2]*hex_size*HEX_MUL,
-	//		obj_spell_part_hex
-	//	)
-	//	if (instance_exists(_id)) {
-	//		if (point_distance(x, y, _id.x, _id.y) > 20) {
-	//			_id = noone;
-	//		}
-	//		//if ((_id.pos_x != argument[1]) or (_id.pos_y != argument[2])) {
-	//		//	_id = noone;
-	//		//}
-	//	}
-	//}
-
-	//return _id
-
 	with (argument[0]) {
 		var _child = noone;
 	
@@ -42,10 +25,7 @@ function cell_data() {
 			}
 		}
 	}
-
 	return _child;
-
-
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -57,7 +37,6 @@ function cell_data() {
 ///@param wire - what wires should return
 ///@desc returns whether there is a tile in the cell, use with spell object
 function cell_empty() {
-
 	var _id = cell_data(argument[0], argument[1], argument[2])
 	if (is_struct(_id)) {
 		if (_id.type = TYPE.WIRE) {
@@ -65,8 +44,6 @@ function cell_empty() {
 		}
 	}
 	return is_struct(_id)
-
-
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -77,12 +54,102 @@ function cell_empty() {
 ///@param c2_x - the second cells x position
 ///@param c2_y - the second cells y position
 ///@desc returns the distance betweent the two cells
-function cell_distance() {
-
-
-	return	max(ceil(abs(argument[0] - argument[2])/2), abs(argument[1] - argument[3]),
-				ceil(-abs(argument[0] - argument[2])/2 + abs(argument[1] - argument[3]))
+function cell_distance(c1_x, c1_y, c2_x, c2_y) {
+	return	max(ceil(abs(c1_x - c2_x)/2), abs(c1_y - c2_y),
+				ceil(-abs(c1_x - c2_x)/2 + abs(c1_y - c2_y))
 			)
-
-
 }
+
+//--------------------------------------------------------------------------------------------------
+
+///@func cell_ring(spell, x, y, radius)
+///@param spell - the spell object
+///@param x - the x coordinate of the centre of the ring of tiles
+///@param y - the y coordinate of the centre of the ring of tiles
+///@param radius - the radius of the ring of tiles, 0 is the tile, 1 is a ring
+///@desc returns an array that holds the tiles in the given ring
+function cell_ring(_spell, _x, _y, _rad) {
+	//multipliers
+	var _mx, _my;
+	_mx = [1, -1, -1, 1]
+	_my = [1, 1, -1, -1]
+	
+	//vars
+	var _ret = []
+	_ret[_rad*6 - 1] = noone //init array size
+	var i, o, j = 0;
+	var _off = _rad % 2
+	
+	//do 4 segments: +-x, +-y
+	for (o = 0; o < 4; o++) {
+		for (i = (_my[o] > 0); i < _rad; i++) {
+			// / arm, starting from horizontally equal, and moving down-left
+			_ret[j++] = cell_data(_spell, _x + _mx[o]*(_rad - i), _y + _my[o]*i)
+		}
+		for (i = (_mx[o] > 0); i < 1 + (_rad div 2); i++) {
+			// _ arm, starting from vertically equal, and moving right
+			_ret[j++] = cell_data(_spell, _x + _mx[o]*(2*i + _off), _y + _my[o]*_rad)
+		}
+	}
+	return _ret
+}	
+
+//--------------------------------------------------------------------------------------------------
+
+///@func cell_ring_empty(spell, x, y, radius)
+///@param spell - the spell object
+///@param x - the x coordinate of the centre of the ring of tiles
+///@param y - the y coordinate of the centre of the ring of tiles
+///@param radius - the radius of the ring of tiles, 0 is the tile, 1 is a ring
+///@desc returns if any tiles are in the given ring, wires not counted
+function cell_ring_empty(_spell, _x, _y, _rad) {
+	//multipliers
+	var _mx, _my;
+	_mx = [1, -1, -1, 1]
+	_my = [1, 1, -1, -1]
+	
+	//vars
+	var i, o;
+	var _off = _rad % 2
+	
+	//do 4 segments: +-x, +-y
+	for (o = 0; o < 4; o++) {
+		for (i = (_my[o] > 0); i < _rad; i++) {
+			// / arm, starting from horizontally equal, and moving down-left
+			if cell_empty(_spell, _x + _mx[o]*(_rad - i), _y + _my[o]*i, false) { return false }
+		}
+		for (i = (_mx[o] > 0); i < 1 + (_rad div 2); i++) {
+			// _ arm, starting from vertically equal, and moving right
+			if cell_empty(_spell, _x + _mx[o]*(2*i + _off), _y + _my[o]*_rad, false) { return false }
+		}
+	}
+	return true
+}	
+
+//--------------------------------------------------------------------------------------------------
+
+function cell_ring_values(_x, _y, _rad) {
+	//multipliers
+	var _mx, _my;
+	_mx = [1, -1, -1, 1]
+	_my = [1, 1, -1, -1]
+	
+	//vars
+	var _ret = []
+	_ret[_rad*6 - 1] = noone //init array size
+	var i, o, j = 0;
+	var _off = _rad % 2
+	
+	//do 4 segments: +-x, +-y
+	for (o = 0; o < 4; o++) {
+		for (i = (_my[o] > 0); i < _rad; i++) {
+			// / arm, starting from horizontally equal, and moving down-left
+			_ret[j++] = [_x + _mx[o]*(2*_rad - i), _y + _my[o]*i]
+		}
+		for (i = (_mx[o] > 0); i < 1 + (_rad div 2); i++) {
+			// _ arm, starting from vertically equal, and moving right
+			_ret[j++] = [_x + _mx[o]*(2*i + _off), _y + _my[o]*_rad]
+		}
+	}
+	return _ret
+}	

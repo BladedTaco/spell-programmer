@@ -10,7 +10,6 @@ function macros() {
 	#macro debug:DEBUG_MODE true
 	#macro SHADERS true
 	#macro no_shaders:SHADERS false
-	#macro COUNTER_SIZE (base_size + 20 + max(0, (string_length(string(int_to_bin(value))) - 8)*10))
 	#macro SPELLS global.spells
 	#macro BUBBLE 32
 	#endregion macros

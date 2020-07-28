@@ -36,11 +36,12 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	children_number = 0
 	input_tile = ds_list_create()
 	value = 0
-	
-	//need to incorporate
 	bubble_size = size + BUBBLE
 	hex_size = bubble_size*2/sqrt(3)
 	cell_size = size*2/sqrt(3)
+	radius = 1;
+	
+	//need to incorporate
 	group_colour = COLOUR.EMPTY;	
 	
 	//maybe?
@@ -52,15 +53,30 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		spell.spell[| index] = new spell_part(data, name, value, [], [pos_x, pos_y], []) 
 	}
 	
+	static check_radius = function () {
+		//TODO, expand to be any radius
+		if (value > small_max_val) and (radius == 1) {
+			//expand if possible
+			if !expand_tile() {
+				value = small_max_val	
+			}
+		} else if (value < small_max_val) and (radius == 2) {
+			//shrink
+			shrink_tile()
+		}
+	}
+	
 	static get_size = function () {
 		size = base_size;
-		if (type = TYPE.COUNTER) {
-			//size = base_size + string_length(string(value))*20
-			size = COUNTER_SIZE
-			// THIS IS ALSO IN OBJ_MENU.STEP
-			if (value >= small_max_val) {
-				radius = 2;
+		if (type = TYPE.BIN_COUNTER) or (type = TYPE.COUNTER) {
+			if (type = TYPE.COUNTER) {
+				size = base_size + string_length(string(value))*20
+			} else {
+				size = base_size + 20 + max(0, (string_length(string(int_to_bin(value))) - 10)*10)
 			}
+			
+			check_radius()
+			
 			set_size(spell.bubble_size)	
 		} else {
 			if (type = TYPE.WIRE) {

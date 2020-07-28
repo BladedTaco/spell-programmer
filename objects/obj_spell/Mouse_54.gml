@@ -23,3 +23,8 @@ if !(instance_exists(obj_menu)) {
 		event_user(0)
 	}
 }
+
+
+show_debug_message(cell_ring_values(mouse_to_tile(id)[0], mouse_to_tile(id)[1], 1))
+show_debug_message(cell_ring_values(mouse_to_tile(id)[0], mouse_to_tile(id)[1], 2))
+show_debug_message(cell_ring_values(mouse_to_tile(id)[0], mouse_to_tile(id)[1], 3))
