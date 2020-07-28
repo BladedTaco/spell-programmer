@@ -59,6 +59,7 @@
     {"id":{"name":"obj_tools","path":"objects/obj_tools/obj_tools.yy",},"order":5,},
     {"id":{"name":"shd_circle","path":"shaders/shd_circle/shd_circle.yy",},"order":13,},
     {"id":{"name":"shd_random","path":"shaders/shd_random/shd_random.yy",},"order":14,},
+    {"id":{"name":"mahouka_ideas","path":"notes/mahouka_ideas/mahouka_ideas.yy",},"order":2,},
     {"id":{"name":"shd_random_alpha","path":"shaders/shd_random_alpha/shd_random_alpha.yy",},"order":15,},
     {"id":{"name":"shd_perlin_noise","path":"shaders/shd_perlin_noise/shd_perlin_noise.yy",},"order":16,},
     {"id":{"name":"shd_noise_movement","path":"shaders/shd_noise_movement/shd_noise_movement.yy",},"order":17,},
