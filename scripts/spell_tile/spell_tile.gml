@@ -45,8 +45,10 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	group_colour = COLOUR.EMPTY;	
 	
 	//maybe?
-	small_max_val = power(2, 9) - 1;
-	max_val = power(2, 23) - 1;
+	//small_max_val = power(2, 9) - 1;
+	//max_val = power(2, 23) - 1;
+	max_val = [0, power(2, 9) - 1, power(2, 23) - 1, power(2, 32) - 1]
+	max_radius = 3
 	zero_angle = 0;
 	
 	static update_spell = function () {
@@ -54,13 +56,13 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	}
 	
 	static check_radius = function () {
-		//TODO, expand to be any radius
-		if (value > small_max_val) and (radius == 1) {
+		if (value > max_val[radius]) {
 			//expand if possible
 			if !expand_tile() {
-				value = small_max_val	
+				//if not possible, clamp value
+				value = max_val[radius]
 			}
-		} else if (value < small_max_val) and (radius == 2) {
+		} else if (value < max_val[radius - 1]) {
 			//shrink
 			shrink_tile()
 		}

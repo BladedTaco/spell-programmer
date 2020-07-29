@@ -44,7 +44,7 @@ function cell_empty() {
 			return argument[3] //return the given
 		}
 	}
-	return is_struct(_id)
+	return !is_struct(_id)
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -97,13 +97,16 @@ function cell_ring(_spell, _x, _y, _rad) {
 
 //--------------------------------------------------------------------------------------------------
 
-///@func cell_ring_empty(spell, x, y, radius)
+///@func cell_ring_empty(spell, x, y, radius, *wire)
 ///@param spell - the spell object
 ///@param x - the x coordinate of the centre of the ring of tiles
 ///@param y - the y coordinate of the centre of the ring of tiles
 ///@param radius - the radius of the ring of tiles, 0 is the tile, 1 is a ring
-///@desc returns if any tiles are in the given ring, wires not counted
-function cell_ring_empty(_spell, _x, _y, _rad) {
+///@param *wire - if a wire should be counted as occupying the space
+///@desc returns if any tiles are in the given ring, wires treated as given
+function cell_ring_empty(_spell, _x, _y, _rad, _wire) {
+	_wire = is_undefined(_wire) ? true : !_wire
+	
 	//multipliers
 	var _mx, _my;
 	_mx = [1, -1, -1, 1]
@@ -117,11 +120,11 @@ function cell_ring_empty(_spell, _x, _y, _rad) {
 	for (o = 0; o < 4; o++) {
 		for (i = (_my[o] < 0); i < _rad; i++) {
 			// / arm, starting from horizontally equal, and moving down-left
-			if cell_empty(_spell, _x + _mx[o]*(2*_rad - i), _y + _my[o]*i, false) { return false }
+			if !cell_empty(_spell, _x + _mx[o]*(2*_rad - i), _y + _my[o]*i, _wire) { return false }
 		}
 		for (i = max(0, (_mx[o] < 0) - _off); i < 1 + (_rad div 2); i++) {
 			// _ arm, starting from vertically equal, and moving right
-			if cell_empty(_spell, _x + _mx[o]*(2*i + _off), _y + _my[o]*_rad, false) { return false }
+			if !cell_empty(_spell, _x + _mx[o]*(2*i + _off), _y + _my[o]*_rad, _wire) { return false }
 		}
 	}
 	return true

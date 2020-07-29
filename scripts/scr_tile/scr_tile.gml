@@ -253,9 +253,16 @@ function reposition_tile() {
 ///@func expand_tile()
 ///@desc expands a tile by 1 radius, call with the tile
 function expand_tile () {
-	if cell_ring_empty(spell, pos_x, pos_y, radius) {
+	if cell_ring_empty(spell, pos_x, pos_y, radius + 1, false) and (radius < max_radius) {
 		radius++
-		
+		var _tiles = cell_ring_values(pos_x, pos_y, radius)
+		for (var i = 0; i < array_length(_tiles); i++) {
+			if (cell_empty(spell, _tiles[i][0], _tiles[i][1], false)) {
+				//no wire tile in space
+				
+			}
+			//connect the wire tile to the source
+		}
 		return true
 	}
 	return false
@@ -266,5 +273,11 @@ function expand_tile () {
 ///@func shrink_tile()
 ///@desc shrinks a tile by 1 radius, call with the tile
 function shrink_tile () {
-	radius--
+	if (radius > 1) {
+		radius--
+		
+	} else {
+		radius = 1
+		value = max_val[0]
+	}
 }
