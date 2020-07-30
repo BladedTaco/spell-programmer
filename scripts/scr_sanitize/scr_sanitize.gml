@@ -63,7 +63,7 @@ function check_for_loops_structs(source, dest, connectors, connecter_number) {
 	//check if any children connect recursively
 	for (var i = 0; i < source.children_number; i++) {
 		//check if they connect
-		if (source.children[| i] == dest.id) { //the source fathers the destination
+		if (source.children[| i] == dest) { //the source fathers the destination
 			return true
 		}
 		//check their children
@@ -76,7 +76,7 @@ function check_for_loops_structs(source, dest, connectors, connecter_number) {
 	for (i = 0; i < connecter_number; i++) {
 		if (connectors[@ i].dest == source) { //this tile
 			//check if they connect
-			if (connectors[@ i].source == dest.id) { //the source fathers the destination
+			if (connectors[@ i].source == dest) { //the source fathers the destination
 				return true
 			}
 			//check their children

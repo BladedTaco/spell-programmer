@@ -77,7 +77,7 @@ switch (menu_data[selected]) {
 					pos_x = other.pos_x
 					pos_y = other.pos_y
 					spell = _menu.spell
-					child = other.id
+					child = other
 					parent = _menu	
 					menu_options = _menu.child.inputs
 					menu_length = array_length_1d(menu_options)
@@ -85,7 +85,7 @@ switch (menu_data[selected]) {
 						menu_active[i] = (other.image_blend == _menu.child.input_colour[i])
 						_destroy = min(_destroy, !menu_active[i]) //destroy on no valid inputs
 						menu_sprite[i] = spr_menu_null
-						if (_menu.child.input_tile[| i] = other.id) { //already in list
+						if (_menu.child.input_tile[| i] = other) { //already in list
 							menu_sprite[i] = spr_menu_circle	
 						}
 						menu_angle[i] = 0
@@ -297,7 +297,7 @@ switch (menu_data[selected]) {
 	
 	case MENU.INPUT: //toggle input
 		var _index = selected;
-		var _child = child.id
+		var _child = child
 		var _menu = id
 		var _c, _s;
 		with (parent.child) {
@@ -309,7 +309,7 @@ switch (menu_data[selected]) {
 				//replace previous
 				_c = input_tile[| _index]
 				with (obj_menu) {
-					if (child.id = _c) {
+					if (child = _c) {
 						menu_sprite[_index] = spr_menu_null
 					}
 				}

@@ -69,6 +69,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		}
 	}
 	
+	///@func get_size()
+	///@desc gets the size of the tile, and handles changes caused by a size change
 	static get_size = function () {
 		size = base_size;
 		if (type = TYPE.BIN_COUNTER) or (type = TYPE.COUNTER) {

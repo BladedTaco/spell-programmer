@@ -93,7 +93,7 @@ function set_tile_output() {
 				ds_list_add(_data, argument[1].index)
 				//set children
 				with (argument[2]) {
-					ds_list_add(children, argument[1].id)
+					ds_list_add(children, argument[1])
 					children_number++
 				}
 			}
@@ -293,8 +293,13 @@ function shrink_tile () {
 	if (radius > 1) {
 		radius--
 		var _tiles = cell_ring_values(pos_x, pos_y, radius)
+		var _tile;
 		for (var i = 0; i < array_length(_tiles); i++) {
-			cell_data(spell, _tiles[i][0], _tiles[i][1]).immutable = false
+			_tile = cell_data(spell, _tiles[i][0], _tiles[i][1])
+			_tile.immutable = false
+			if (_tile.children_number = 1) {
+				_tile.destroy()
+			}	
 		}
 	} else {
 		radius = 1

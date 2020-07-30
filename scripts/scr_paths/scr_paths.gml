@@ -8,8 +8,8 @@
 //--------------------------------------------------------------------------------------------------
 
 ///@func get_path(head, tile)
-///@param head - an obj_spell_hex wire instance
-///@param tile - an obj_spell_hex instance (Can't be a wire)
+///@param head - a spell tile wire instance
+///@param tile - a spell tile instance (Can't be a wire)
 ///@desc gives the path from the head to the tile through wires as a ds_list that must be destroyed later
 function get_path() {
 	// This is done via a Depth-First Search Algorithm
@@ -28,7 +28,7 @@ function get_path() {
 
 	while (true) { //repeat forever, it will exit itself
 		//dive down from brach
-		while (((_list[| i].type = TYPE.WIRE) or (_list[| i].id = _wire)) and (_list[| i].children_number > 0)) {
+		while (((_list[| i].type = TYPE.WIRE) or (_list[| i] = _wire)) and (_list[| i].children_number > 0)) {
 			//add the children
 			ds_list_add(_list, _list[| i].children[| _index[| i]])
 			ds_list_add(_index, 0)
