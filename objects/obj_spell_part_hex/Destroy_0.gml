@@ -82,7 +82,7 @@ with (spell) {
 		}
 	}
 	//update wires next frame
-	update_wires = 2
+	update_wire_delay  = 2
 }
 
 if (type = TYPE.WIRE) {

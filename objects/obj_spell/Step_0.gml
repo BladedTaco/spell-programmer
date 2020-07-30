@@ -7,16 +7,10 @@ if (!keyboard_check(vk_shift)) {
 	true_age++;
 }
 
-if (update_wires > 0) {
-	update_wires--
-	if (update_wires = 0) {
-		//update wires
-		event_user(0)
-		for (var i = 0; i < array_length_1d(wire_heads); i++) {
-			with (wire_heads[i]) {
-				get_wire_data()	
-			}
-		}	
+if (update_wire_delay  > 0) {
+	update_wire_delay --
+	if (update_wire_delay  = 0) {
+		update_wires()
 	}
 }
 

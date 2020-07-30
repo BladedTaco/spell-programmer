@@ -37,7 +37,7 @@ spell_surface = -1;
 size = 0;
 surface_size = 4096//2048;
 half_surface_size = surface_size/2;
-update_wires = 0
+update_wire_delay = 0
 wire_heads = []; //the heads of the different wire connectors
 
 //vertically is each tile/circle
@@ -65,6 +65,7 @@ spell = new_ds_list(
 	new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[18],		[10,0],		[]				)
 )
 
+
 set_bubble = function (_bubble) {
 	bubble_size = _bubble
 	hex_size = _bubble*2/sqrt(3)
@@ -75,11 +76,25 @@ set_bubble = function (_bubble) {
 	}
 }
 	
+update_wires = function () {
+	event_user(0)
+	for (var i = 0; i < array_length(wire_heads); i++) {
+		with (wire_heads[i]) {
+			get_wire_data()	
+		}
+	}	
+}
+	
 children_number = ds_list_size(spell)
+
+init = true
 
 for (var i = 0; i < children_number; i++) {
 	children[| i] = new_spell_tile(spell[| i].pos_x, spell[| i].pos_y, spell[| i].tile, i)
 }
+
+init = false
+
 
 for (i = 0; i < children_number; i++) {
 	with (children[| i]) {

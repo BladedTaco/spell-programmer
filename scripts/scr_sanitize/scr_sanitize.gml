@@ -38,17 +38,10 @@ function check_ports() {
 ///@desc returns whether creating the given connection causes any loops
 function check_for_loops(source, dest) {
 
-	//source has no links, no loops
-	if (source.children_number <= 0) {
-		return false //no loops
-	}
-	//the above is redundant but I dont wanna touch it in case it isnt
-
-
 	//check if any children connect recursively
 	for (var i = 0; i < source.children_number; i++) {
 		//check if they connect
-		if (source.children[| i] == dest.id) { //the source fathers the destination
+		if (source.children[| i] == dest) { //the source fathers the destination
 			return true
 		}
 		//check their children

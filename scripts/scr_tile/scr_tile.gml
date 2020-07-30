@@ -55,11 +55,8 @@ function set_tile() {
 			}
 			//change/make the entry
 			ds_list_add(spell, [argument[3], "", 0, -1, [_mx, _my], -1])
-			//make a new tile
-			with (new_spell_tile(_mx, _my, argument[3], i)) {
-				update_spell()
-			}
-			return children[| i]
+			//make a new tile and return it
+			return new_spell_tile(_mx, _my, argument[3], i)
 		}
 	}
 }
@@ -171,7 +168,7 @@ function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
 			ds_list_add(_data, _source.index)
 			//set children
 			with (_dest) {
-				ds_list_add(children, _source.id)
+				ds_list_add(children, _source)
 				children_number++
 			}
 		}
@@ -225,16 +222,16 @@ function reposition_tile() {
 					if (cell_distance(pos_x, pos_y, argument[1], argument[2]) > 1) {
 						//check for inputs to argument tile
 						for (o = 0; o < children_number; o++) {
-							if (children[| o] == other.id) {
-								set_tile_output(spell, other.id, id)
+							if (children[| o] == other) {
+								set_tile_output(spell, other, self)
 								break;
 							}
 						}
 						if (o < children_number) continue; //skip rest if above loop broke
 						//check for outputs to argument tile
 						for (o = 0; o < other.children_number; o++) {
-							if (other.children[| o] == id) {
-								set_tile_output(spell, id, other.id)
+							if (other.children[| o] == self) {
+								set_tile_output(spell, self, other)
 								break;
 							}
 						}
@@ -253,16 +250,36 @@ function reposition_tile() {
 ///@func expand_tile()
 ///@desc expands a tile by 1 radius, call with the tile
 function expand_tile () {
-	if cell_ring_empty(spell, pos_x, pos_y, radius + 1, false) and (radius < max_radius) {
+	if cell_ring_empty(spell, pos_x, pos_y, radius, false) and (radius < max_radius) {
 		radius++
-		var _tiles = cell_ring_values(pos_x, pos_y, radius)
+		var _tiles = cell_ring_values(pos_x, pos_y, radius - 1)
+		var _tile;
 		for (var i = 0; i < array_length(_tiles); i++) {
 			if (cell_empty(spell, _tiles[i][0], _tiles[i][1], false)) {
-				//no wire tile in space
-				
+				//no wire tile in space, create it and set it as output
+				_tile = set_tile(spell, _tiles[i][0], _tiles[i][1], SPELLS.wire)
+				_tile.immutable = true
+				force_tile_output(spell,
+					cell_data(spell, 
+						_tiles[i][0] - (1 + (_tiles[i][1] == pos_y)) * -1*sign((_tiles[i][0] < pos_x) - 0.5),
+						_tiles[i][1] - (_tiles[i][1] != pos_y) * -1*sign((_tiles[i][1] < pos_y) - 0.5)
+					),
+					_tile
+				)
+			} else {
+				//get the wire tile in the space and set it as output
+				_tile = cell_data(spell, _tiles[i][0], _tiles[i][1])
+				_tile.immutable = true
+				force_tile_output(spell,
+					cell_data(spell, 
+						_tiles[i][0] - (1 + (_tiles[i][1] == pos_y)) * -1*sign((_tiles[i][0] < pos_x) - 0.5),
+						_tiles[i][1] - (_tiles[i][1] != pos_y) * -1*sign((_tiles[i][1] < pos_y) - 0.5)
+					),
+					_tile
+				)
 			}
-			//connect the wire tile to the source
 		}
+		spell.update_wires()
 		return true
 	}
 	return false
@@ -275,7 +292,10 @@ function expand_tile () {
 function shrink_tile () {
 	if (radius > 1) {
 		radius--
-		
+		var _tiles = cell_ring_values(pos_x, pos_y, radius)
+		for (var i = 0; i < array_length(_tiles); i++) {
+			cell_data(spell, _tiles[i][0], _tiles[i][1]).immutable = false
+		}
 	} else {
 		radius = 1
 		value = max_val[0]

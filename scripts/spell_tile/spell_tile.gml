@@ -43,6 +43,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	
 	//need to incorporate
 	group_colour = COLOUR.EMPTY;	
+	immutable = false;
 	
 	//maybe?
 	//small_max_val = power(2, 9) - 1;
@@ -77,7 +78,9 @@ function spell_tile(_px, _py, _data, _index) constructor {
 				size = base_size + 20 + max(0, (string_length(string(int_to_bin(value))) - 10)*10)
 			}
 			
-			check_radius()
+			if (!spell.init) {
+				check_radius()
+			}
 			
 			set_size(spell.bubble_size)	
 		} else {
@@ -105,6 +108,12 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	static get_data = function () {
 		
 		var _spell = spell.spell[| index] //get spell
+		
+		//if no spell there, make a default one
+		if (!is_struct(_spell)) {
+			update_spell()	
+			_spell = spell.spell[| index]
+		}
 		
 		tile = _spell.tile
 		name = _spell.name
@@ -149,19 +158,19 @@ function spell_tile(_px, _py, _data, _index) constructor {
 					if (self == other) continue;
 					//replace inputs with default
 					if (ds_exists(input_tile, ds_type_list)) {
-						_index = ds_list_find_index(input_tile, other.id)
+						_index = ds_list_find_index(input_tile, other)
 						while (_index > -1) {
 							ds_list_replace(input_tile, _index, noone)	
 							//remove from obj_spell as well
 							_s = spell.spell[| index]
 							ds_list_replace(_s.inputs, _index, -1) 
 							//get next index
-							_index = ds_list_find_index(input_tile, other.id)
+							_index = ds_list_find_index(input_tile, other)
 						}
 					}
 					//remove children
 					if (ds_exists(children, ds_type_list)) {
-						_index = ds_list_find_index(children, other.id)
+						_index = ds_list_find_index(children, other)
 						while (_index > -1) { //for every child relationship found
 							//remove it
 							ds_list_delete(children, _index)	
@@ -169,7 +178,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 							//remove from obj_spell as well
 							_s = spell.spell[| index]
 							ds_list_delete(_s.children, _index) //remove connection
-							_index = ds_list_find_index(children, other.id)
+							_index = ds_list_find_index(children, other)
 						}
 					}
 					//decrease superior indices
@@ -211,7 +220,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 					}
 				}
 				//update wires next frame
-				update_wires = 2
+				update_wire_delay = 2
 			}
 
 			if (type = TYPE.WIRE) {

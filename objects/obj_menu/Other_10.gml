@@ -7,6 +7,7 @@ menu_active = [true, false, false, false, false, false];
 */
 
 if (is_struct(child)) {
+	menu_active[0] = !child.immutable //cant change immutable tiles
 	menu_active[1] = child.type != TYPE.TRICK; //Set Output - not a trick tile
 	menu_active[2] = (child.type == TYPE.COUNTER) or (child.type == TYPE.BIN_COUNTER); //Set Value - Counters only
 	menu_active[3] = (array_length_1d(child.inputs) > 0); //Set Ports - Takes Inputs
