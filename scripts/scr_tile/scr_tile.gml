@@ -302,6 +302,7 @@ function shrink_tile () {
 				_tile.destroy()
 			}	
 		}
+		value = max_val[radius - 1] + 1
 	} else {
 		radius = 1
 		value = max_val[0]
