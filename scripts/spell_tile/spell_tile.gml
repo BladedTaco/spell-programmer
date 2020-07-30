@@ -52,6 +52,11 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	max_radius = 3
 	zero_angle = 0;
 	
+	static move = function (_x, _y) {
+		pos_x = _x
+		pos_y = _y
+	}
+	
 	static update_spell = function () {
 		spell.spell[| index] = new spell_part(data, name, value, [], [pos_x, pos_y], []) 
 	}

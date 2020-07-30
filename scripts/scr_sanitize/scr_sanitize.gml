@@ -18,7 +18,7 @@ function check_ports() {
 			_s = spell[| i]
 			with (children[| i]) {
 				for (var o = 0; o < input_number; o++) {
-					_lst = get_path(id, input_tile[| o])
+					_lst = get_path(self, input_tile[| o])
 					if (ds_list_size(_lst) = 0) {
 						input_tile[| o] = noone
 						ds_list_replace(_s.inputs, o, -1)

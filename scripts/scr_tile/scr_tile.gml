@@ -212,8 +212,9 @@ function reposition_tile() {
 					cell_data(spell, pos_x + 1, pos_y - 1)
 				]
 			
-		//move
+		//move data
 		spell.spell[| index].move(argument[1], argument[2])
+		move(argument[1], argument[2])
 		
 		//trim outputs
 		for (i = 0; i < 6; i++) {

@@ -102,7 +102,7 @@ if (keyboard_check(vk_shift) and global.debug) {
 			draw_set_colour(c_white)
 			draw_text(x - size, y - size - 23, _str)
 			//draw name
-			_str = string(index) + ": " + string(id)
+			_str = string(index) + ": " + string(self)
 			draw_set_colour(c_gray)
 			draw_rectangle(x - size, y - size - 45, x - size + string_width(_str), y - size-30, false)
 			draw_set_colour(c_white)
