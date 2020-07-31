@@ -67,6 +67,7 @@ spell = new_ds_list(
 
 
 set_bubble = function (_bubble) {
+	size = 0
 	bubble_size = _bubble
 	hex_size = _bubble*2/sqrt(3)
 	for (var i = 0; i < children_number; i++) {

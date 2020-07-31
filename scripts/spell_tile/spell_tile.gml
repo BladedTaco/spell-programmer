@@ -44,6 +44,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	//need to incorporate
 	group_colour = COLOUR.EMPTY;	
 	immutable = false;
+	variable_size = false;
 	
 	//maybe?
 	//small_max_val = power(2, 9) - 1;
@@ -78,7 +79,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	///@desc gets the size of the tile, and handles changes caused by a size change
 	static get_size = function () {
 		size = base_size;
-		if (type = TYPE.BIN_COUNTER) or (type = TYPE.COUNTER) {
+		if (variable_size) {
 			if (type = TYPE.COUNTER) {
 				size = base_size + string_length(string(value))*20
 			} else {
@@ -158,11 +159,13 @@ function spell_tile(_px, _py, _data, _index) constructor {
 			//clear input list
 			ds_list_destroy(input_tile)
 			ds_list_destroy(children)
+			
 			//remove from existing input lists
-			var _index, _s;
+			var _index, _s, _b = 0;
 			for (var i = 0; i < spell.children_number; i++) {
 				with (spell.children[| i]) {
 					if (self == other) continue;
+					_b = max(_b, size*!variable_size)
 					//replace inputs with default
 					if (ds_exists(input_tile, ds_type_list)) {
 						_index = ds_list_find_index(input_tile, other)
@@ -194,6 +197,9 @@ function spell_tile(_px, _py, _data, _index) constructor {
 					}
 				}
 			}
+			
+			//recalculate bubble size
+			spell.set_bubble(_b + BUBBLE)
 
 			var _ds;
 			var _i = index;
@@ -345,6 +351,7 @@ function converter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _d
 function bin_counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
 	type = TYPE.BIN_COUNTER
 	bin_value = int_to_bin(value)
+	variable_size = true
 	
 	static draw = function () {
 		base_draw()
@@ -406,6 +413,7 @@ function bin_counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, 
 
 function counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, _index) constructor {
 	type = TYPE.COUNTER
+	variable_size = true
 	
 	static draw = function () {
 		base_draw()

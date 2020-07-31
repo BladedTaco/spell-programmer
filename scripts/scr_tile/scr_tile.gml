@@ -298,9 +298,12 @@ function shrink_tile () {
 		for (var i = 0; i < array_length(_tiles); i++) {
 			_tile = cell_data(spell, _tiles[i][0], _tiles[i][1])
 			_tile.immutable = false
-			if (_tile.children_number = 1) {
+			if (_tile.children_number = 1) and (_tile.colour_number = 0) {
 				_tile.destroy()
-			}	
+			} else if (_tile.colour_number = 0) {
+				//remove output
+				set_tile_output(spell, self, _tile)	
+			}
 		}
 		value = max_val[radius - 1] + 1
 	} else {

@@ -13,10 +13,6 @@ if (start) {
 drag_diff_x = mouse_x - drag_last_x
 drag_diff_y = mouse_y - drag_last_y
 
-if mouse_check_button_released(mb_left) {
-	show_debug_message("released")
-}
-
 switch (drag_action) {
 	case DRAG.NONE: break;
 	case DRAG.CONNECTOR:

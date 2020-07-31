@@ -197,11 +197,13 @@ switch (menu_data[selected]) {
 		child.value -= power(10, value)
 		child.get_size()
 		name = string_replace_all(string_format(child.value, string_length(child.max_val[child.radius]), 0), " ", "0")
+		value = clamp(value, 0, string_length(name) - 1)
 	break;
 	case MENU.VAL_BIG_DOWN:
 		child.value -= 5*power(10, value)
 		child.get_size()
 		name = string_replace_all(string_format(child.value, string_length(child.max_val[child.radius]), 0), " ", "0")
+		value = clamp(value, 0, string_length(name) - 1)
 	break;
 	case MENU.VAL_LEFT:
 		value += 1
