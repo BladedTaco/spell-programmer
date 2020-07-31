@@ -213,7 +213,6 @@ function reposition_tile() {
 				]
 			
 		//move data
-		spell.spell[| index].move(argument[1], argument[2])
 		move(argument[1], argument[2])
 		
 		//trim outputs

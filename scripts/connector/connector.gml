@@ -11,6 +11,8 @@ function connector(_other, _self, _name, _col, _size, _alt_size, _scale) constru
 	age = 0
 	scale = is_undefined(_scale) ? 1 : _scale
 	
+	///@func draw()
+	///@desc draws the connector
 	static draw = function () {
 		//doesnt check for instances existing
 		with (source.spell) {

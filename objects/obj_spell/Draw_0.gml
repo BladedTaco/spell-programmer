@@ -41,22 +41,9 @@ for (i = 0; i < _max; i++) {
 for (var i = 0; i < children_number; i++) {
 	with (children[| i]) {
 		//update position
-		x = other.half_surface_size + bubble_size*pos_x
-		y = other.half_surface_size + hex_size*pos_y*HEX_MUL
-			
-		if (group_colour != COLOUR.EMPTY) {
-			//back polygon backing group colour
-			draw_set_colour(group_colour)
-			draw_polygon(x, y, hex_size + 100, 90, 6, true)
-		}
-		
-		//back polygon backing
-		draw_set_colour(group_colour)
-		draw_polygon(x, y, cell_size, 90, 6, true)
-			
-		//front polygon
-		draw_set_colour(image_blend)
-		draw_polygon(x, y, cell_size, 90, 6, false)
+		update_pos()
+		//draw backing hexagons
+		draw_backing()
 	}
 }
 
@@ -69,9 +56,9 @@ for (var i = 0; i < children_number; i++) {
 				draw_connector(other.x, other.y, x, y, other.connector_name[o], image_blend, size, other.size, spell.age, 1)
 			}
 		}
+		//draw_connectors()
 	}
 }
-	
 	
 	
 var _str;
@@ -82,44 +69,42 @@ for (var i = 0; i < children_number; i++) {
 		draw()
 	}
 }
-	
-	
+
+//debug, draw tile data
 if (keyboard_check(vk_shift) and global.debug) {
 	//draw each tiles data
 	var _str;
 	for (var i = 0; i < children_number; i++) {
 		with (children[| i]) {
-			//draw input list
-			_str = list_to_string(input_tile)
-			draw_set_colour(c_gray)
-			draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
-			draw_set_colour(c_white)
-			draw_text(x - size, y - size - 8, _str)
-			//draw children list
-			_str = list_to_string(children)
-			draw_set_colour(c_gray)
-			draw_rectangle(x - size, y - size - 30, x - size + string_width(_str), y - size-15, false)
-			draw_set_colour(c_white)
-			draw_text(x - size, y - size - 23, _str)
-			//draw name
-			_str = string(index) + ": " + string(self)
-			draw_set_colour(c_gray)
-			draw_rectangle(x - size, y - size - 45, x - size + string_width(_str), y - size-30, false)
-			draw_set_colour(c_white)
-			draw_text(x - size, y - size - 38, _str)
+			draw_debug()
+			////draw input list
+			//_str = list_to_string(input_tile)
+			//draw_set_colour(c_gray)
+			//draw_rectangle(x - size, y - size - 15, x - size + string_width(_str), y - size, false)
+			//draw_set_colour(c_white)
+			//draw_text(x - size, y - size - 8, _str)
+			////draw children list
+			//_str = list_to_string(children)
+			//draw_set_colour(c_gray)
+			//draw_rectangle(x - size, y - size - 30, x - size + string_width(_str), y - size-15, false)
+			//draw_set_colour(c_white)
+			//draw_text(x - size, y - size - 23, _str)
+			////draw name
+			//_str = string(index) + ": " + string(self.name)
+			//draw_set_colour(c_gray)
+			//draw_rectangle(x - size, y - size - 45, x - size + string_width(_str), y - size-30, false)
+			//draw_set_colour(c_white)
+			//draw_text(x - size, y - size - 38, _str)
 		}
 	}
 	//draw wire heads
-	for (i = 0; i < array_length_1d(wire_heads); i++) {
+	for (i = 0; i < array_length(wire_heads); i++) {
 		with (wire_heads[i]) {
 			draw_sprite(spr_menu_null, 0, x, y)	
 		}
 	}
 }
 
-	
-
-	
 surface_reset_target();
 
 if (global.shaders) {

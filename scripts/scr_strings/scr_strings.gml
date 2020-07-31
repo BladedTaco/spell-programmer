@@ -4,6 +4,7 @@
 ///		string_spaced
 ///		int_to_bin
 ///		list_to_string
+///		list_to_string_func
 ///		array_concat
 
 //--------------------------------------------------------------------------------------------------
@@ -99,6 +100,27 @@ function list_to_string() {
 		}	
 		return string_delete(_ret, string_length(_ret) - 1, 2) + _end
 	}
+}
+
+//--------------------------------------------------------------------------------------------------
+
+///@func list_to_string_func(ds_list, func)
+///@param ds_list - a ds_list
+///@param func - a function to use to get the string
+///@desc returns a string composed of the values in a ds list
+function list_to_string_func(_list, _func) {
+
+	var _ret = "["
+	var _sep = ", "
+	var _end = "]"
+	var _tab = ""
+	var _l = [];
+
+	for (var i = 0; i < ds_list_size(_list); i++) {
+		_ret += _tab + string_replace_all(string_replace_all(_func(_list[| i]), "{ { ", "["), " },  }", "]") + _sep
+	}	
+	return string_delete(_ret, string_length(_ret) - 1, 2) + _end
+
 }
 
 //--------------------------------------------------------------------------------------------------

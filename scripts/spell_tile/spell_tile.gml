@@ -45,6 +45,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	group_colour = COLOUR.EMPTY;	
 	immutable = false;
 	variable_size = false;
+	connectors = ds_list_create()
 	
 	//maybe?
 	//small_max_val = power(2, 9) - 1;
@@ -53,15 +54,34 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	max_radius = 3
 	zero_angle = 0;
 	
+	///@func move(x, y)
+	///@param x - the x coordinate to move to
+	///@param y - the y coordinate to move to
+	///@desc moves the tile to the given coordinate
 	static move = function (_x, _y) {
 		pos_x = _x
 		pos_y = _y
+		//update spell
+		spell.spell[| index].pos = [_x, _y]
+		spell.spell[| index].pos_x = _x
+		spell.spell[| index].pos_y = _y
 	}
 	
+	///@func update_pos()
+	///@desc updates the position of the tile
+	static update_pos = function () {
+		x = other.half_surface_size + bubble_size*pos_x
+		y = other.half_surface_size + hex_size*pos_y*HEX_MUL
+	}
+	
+	///@func update_spell()
+	///@desc adds the spell tile to the spell object
 	static update_spell = function () {
 		spell.spell[| index] = new spell_part(data, name, value, [], [pos_x, pos_y], []) 
 	}
 	
+	///@func check_radius()
+	///@desc checks for radius changes in variable size tiles
 	static check_radius = function () {
 		if (value > max_val[radius]) {
 			//expand if possible
@@ -106,6 +126,9 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		}
 	}
 	
+	///@func set_size(bubble)
+	///@param bubble - the bubble size to use
+	///@desc gets the proper size values relating to the grid
 	static set_size = function (_bubble) {
 		bubble_size = _bubble
 		hex_size = bubble_size*2/sqrt(3)
@@ -113,6 +136,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		spell.size = max(spell.size, point_distance(0, 0, bubble_size*pos_x, hex_size*pos_y*HEX_MUL) + cell_size + 60)
 	}
 	
+	///@func get_data()
+	///@desc pulls data from the spell object to override default values
 	static get_data = function () {
 		
 		var _spell = spell.spell[| index] //get spell
@@ -141,6 +166,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		pos_y = _spell.pos_y
 	}
 	
+	///@func get_children()
+	///@desc retrieves the id of each child from their index
 	static get_children = function () {
 		//get the id of each child
 		for (var i = 0; i < children_number; i++) {
@@ -155,6 +182,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		}
 	}
 	
+	///@func destroy()
+	///@desc removes all references to spell tile and cleans up data structures
 	static destroy = function () {
 			//clear input list
 			ds_list_destroy(input_tile)
@@ -245,7 +274,10 @@ function spell_tile(_px, _py, _data, _index) constructor {
 			}
 	}
 	
-	static base_draw = function () {
+	#region Drawing functions
+	///@func draw_base()
+	///@desc the base draw that all tiles have to do
+	static draw_base = function () {
 		//backing circle
 		draw_set_colour(COLOUR.EMPTY)
 		draw_circle(x, y, size, false)
@@ -258,22 +290,66 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		draw_circle_outline(x, y, size)
 	}
 	
+	///@func draw()
+	///@desc performs the draw based on the type of tile, is overriden by children
 	static draw = function () {
-		base_draw()
+		draw_base()
 
 		//draw name and its ring
 		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)
 		draw_circle_outline(x, y, size - 20)
 	}
+		
+	///@func draw_backing()
+	///@desc draws the backing of the spell tile
+	static draw_backing = function () {
+		if (group_colour != COLOUR.EMPTY) {
+			//back polygon backing group colour
+			draw_set_colour(group_colour)
+			draw_polygon(x, y, hex_size + 100, 90, 6, true)
+		}
+		
+		//back polygon backing
+		draw_set_colour(group_colour)
+		draw_polygon(x, y, cell_size, 90, 6, true)
+			
+		//front polygon
+		draw_set_colour(image_blend)
+		draw_polygon(x, y, cell_size, 90, 6, false)	
+	}
+		
+	///@func draw_connectors()
+	///@desc draws all the connectors originating from this tile
+	static draw_connectors = function () {
+		for (var i = 0; i < ds_list_size(connectors); i++) {
+			connectors[| i].draw()	
+		}
+	}
+	
+	///@func draw_debug()
+	///@desc draws the debug info for the tile above it
+	static draw_debug = function () {
+		var _info = [
+			list_to_string_func(input_tile, function(x) { return string(x.index)}), 
+			list_to_string_func(children, function(x) { return string(x.index)}), 
+			string(index)
+		]
+		for (var i = 1; i < 4; i++) {
+			//draw debug
+			draw_set_colour(c_gray)
+			draw_rectangle(x - size, y - size - i*15, x - size + string_width(_info[i-1]), y - size, false)
+			draw_set_colour(c_white)
+			draw_text(x - size, y - size - i*15 + 7, _info[i-1])
+		}
+	}
+	
+	#endregion Drawing functions
 
+	///@func toString()
+	///@desc the string representation of the struct
 	static toString = function () {
 		return "Spell Tile '" + name + "' at {" + string(pos_x) + ", " + string(pos_y) + "}"
 	}
-	
-	
-	////init
-	//get_data()
-	//get_size()
 }
 
 
@@ -281,7 +357,7 @@ function basic_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 	type = TYPE.BASIC
 	
 	static draw = function () {
-		base_draw()
+		draw_base()
 
 		//draw name and its ring
 		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)
@@ -299,7 +375,7 @@ function trick_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 	other.sprite_index = sprite_index
 	
 	static draw = function () {
-		base_draw()
+		draw_base()
 		
 		//name and rings
 		draw_set_colour(image_blend)
@@ -326,7 +402,7 @@ function converter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _d
 	type = TYPE.CONVERTER
 	
 	static draw = function () {
-		base_draw()
+		draw_base()
 		//name and rings
 		draw_set_colour(image_blend)
 		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
@@ -354,7 +430,7 @@ function bin_counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, 
 	variable_size = true
 	
 	static draw = function () {
-		base_draw()
+		draw_base()
 		draw_set_colour(image_blend)
 		var _str, _sign = -1;
 		_str = "0"
@@ -416,7 +492,7 @@ function counter_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _dat
 	variable_size = true
 	
 	static draw = function () {
-		base_draw()
+		draw_base()
 		draw_set_colour(image_blend)
 		var _str, _sign = -1;
 		//draw the name and its ring
@@ -466,7 +542,7 @@ function shell_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data,
 	type = TYPE.SHELL
 	
 	static draw = function () {
-		base_draw()
+		draw_base()
 		//name and rings
 		draw_set_colour(image_blend)
 		draw_text_circle(x, y, name, size - 30, spell.age, 360, true, true)
@@ -560,7 +636,7 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 			image_blend = merge_colour(colours[i], colours[i+1], o)
 		}
 		
-		base_draw()
+		draw_base()
 
 		//draw name and its ring
 		draw_text_circle(x, y, name, size - 10, spell.age, 360, true)

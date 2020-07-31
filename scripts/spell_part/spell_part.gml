@@ -14,10 +14,4 @@ function spell_part (_tile, _name, _value, _children, _pos, _inputs) constructor
 	} else {
 		inputs = array_to_list(_inputs)
 	}
-	
-	static move = function(_x, _y) {
-		pos = [_x, _y]
-		pos_x = _x
-		pos_y = _y
-	}
 }

@@ -95,7 +95,7 @@
   "configs": {
     "name": "Default",
     "children": [
-      {"name":"debug","children":[],},
+      {"name":"no_debug","children":[],},
       {"name":"no_shaders","children":[],},
     ],
   },

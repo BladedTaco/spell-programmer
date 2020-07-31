@@ -6,8 +6,8 @@ function macros() {
 
 	#region macros
 	#macro HEX_MUL 1.5
-	#macro DEBUG_MODE false
-	#macro debug:DEBUG_MODE true
+	#macro DEBUG_MODE true
+	#macro no_debug:DEBUG_MODE false
 	#macro SHADERS true
 	#macro no_shaders:SHADERS false
 	#macro SPELLS global.spells
