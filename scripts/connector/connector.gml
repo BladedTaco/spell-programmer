@@ -1,5 +1,3 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 ///@func connector(_other, _self, _name, _col, _size, _alt_size, *_scale) 
 function connector(_other, _self, _name, _col, _size, _alt_size, _scale) constructor {
 	source = _self

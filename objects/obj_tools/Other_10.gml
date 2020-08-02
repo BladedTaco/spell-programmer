@@ -1,5 +1,5 @@
 /// @description Create Buttons
-// You can write your code in this editor
+// This is where all the buttons are created
 var _sz = 1.5*40*2/sqrt(3)
 
 buttons =	
@@ -55,10 +55,10 @@ context_buttons =
 						drag_path_length_max = 0
 						//COPYPASTA, TODO REFACTOR
 							//recalculate all connectors and update wires
-							event_user(1)	
+							get_connector_names()
 							//update wires
 							//update wire heads |Slightly inefficient, wire paths done twice
-							event_user(0)
+							get_wire_heads()
 							for (i = 0; i < array_length(wire_heads); i++) {
 								with (wire_heads[i]) {
 									get_wire_data()	

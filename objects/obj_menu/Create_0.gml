@@ -25,4 +25,31 @@ name = string(pos_x) + "," + string(pos_y)
 single = false; //only performs a single action
 group = -1;
 
-//show_debug_message(id)
+///@func init(spell, pos_x, pos_y)
+///@param spell - the spell object
+///@param pos_x - the x coordinate of the menu child tile
+///@param pos_y - the y coordinate of the menu child tile
+///@desc properly initializes the base menu tile
+init = function(_spell, _x, _y) {
+	pos_x = _x
+	pos_y = _y
+	spell = _spell
+	child = cell_data(spell, _x, _y)
+	if (is_struct(child)) {
+		menu_active[0] = !child.immutable //cant change immutable tiles
+		menu_active[1] = child.type != TYPE.TRICK; //Set Output - not a trick tile
+		menu_active[2] = child.variable_size; //Set Value - Counters only
+		menu_active[3] = (child.input_number > 0); //Set Ports - Takes Inputs
+		menu_active[4] = !child.immutable; //Move Tile - there is a child
+		menu_active[5] = !child.immutable; //Select Group - there is a child
+	}
+	//get the length of the menu
+	menu_length = array_length(menu_active)
+	while (menu_active[menu_length - 1] == false) {
+		menu_length -= 1;	
+	}
+
+	name = string(pos_x) + "," + string(pos_y)
+	active = true;
+	life = 0;
+}

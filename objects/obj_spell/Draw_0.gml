@@ -51,12 +51,12 @@ for (var i = 0; i < children_number; i++) {
 for (var i = 0; i < children_number; i++) {
 	with (children[| i]) {
 		//draw connectors
-		for (var o = 0; o < children_number; o++) {
-			with (children[| o]) {
-				draw_connector(other.x, other.y, x, y, other.connector_name[o], image_blend, size, other.size, spell.age, 1)
-			}
-		}
-		//draw_connectors()
+		//for (var o = 0; o < children_number; o++) {
+		//	with (children[| o]) {
+		//		draw_connector(other.x, other.y, x, y, other.connector_name[o], image_blend, size, other.size, spell.age, 1)
+		//	}
+		//}
+		draw_connectors()
 	}
 }
 	

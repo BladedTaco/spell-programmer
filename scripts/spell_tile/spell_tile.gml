@@ -47,6 +47,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	variable_size = false;
 	connectors = ds_list_create()
 	
+	//need to remove
+	
 	//maybe?
 	//small_max_val = power(2, 9) - 1;
 	//max_val = power(2, 23) - 1;
@@ -269,7 +271,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 				with (spell) {
 					check_ports(id)
 					//recalculate all connectors and update wires
-					event_user(1)	
+					get_connector_names()
 				}
 			}
 	}
@@ -570,6 +572,8 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 	colour_number = 0
 	colours = []
 	
+	///@func get_wire_data()
+	///@desc updates the wires, called only by wire heads
 	static get_wire_data = function () {
 		if (ds_exists(input_tile, ds_type_list) and ds_exists(children, ds_type_list)) {
 			var _l = ds_list_size(input_tile)

@@ -15,7 +15,7 @@ if (active) { //if active
 		pos_x = _cx[0]
 		pos_y = _cx[1]
 		selected = 5
-		event_user(1)
+		event_user(0)
 		if (single) {
 			instance_destroy();	
 			exit;
@@ -42,7 +42,7 @@ if (active) { //if active
 	
 		//execute menu command
 		if (selected >= 0) {
-			event_user(1)
+			event_user(0)
 			if (single) {
 				instance_destroy();	
 			}

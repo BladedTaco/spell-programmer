@@ -100,11 +100,11 @@ function set_tile_output() {
 		}
 	
 		//recalculate all connectors and update wires
-		event_user(1)	
+		get_connector_names()
 		//update wires
 		if (argument[2].type = TYPE.WIRE) {
 			//update wire heads |Slightly inefficient, wire paths done twice
-			event_user(0)
+			get_wire_heads()
 			for (i = 0; i < array_length_1d(wire_heads); i++) {
 				with (wire_heads[i]) {
 					get_wire_data()
@@ -175,11 +175,11 @@ function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
 	
 		if (_weak) {
 			//recalculate all connectors and update wires
-			event_user(1)	
+			get_connector_names()
 			//update wires
 			if (_dest.type = TYPE.WIRE) {
 				//update wire heads |Slightly inefficient, wire paths done twice
-				event_user(0)
+				get_wire_heads()
 				for (i = 0; i < array_length_1d(wire_heads); i++) {
 					with (wire_heads[i]) {
 						get_wire_data()
