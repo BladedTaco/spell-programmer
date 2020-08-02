@@ -39,10 +39,10 @@ switch (drag_action) {
 					draw_circle_curve(mouse_x, mouse_y, 20, 90, 360*hover_time/hover_max, 20)	
 					if (hover_time == hover_max) {
 						//add connector to path
-						drag_path[drag_path_length] = new connector(
-							_other, drag_tile,
-							drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20
+						drag_path[drag_path_length] = new connector(_other, drag_tile).override(
+							drag_tile.name, drag_tile.image_blend, 20, 20, 1
 						)
+						
 						drag_path_length++
 						drag_path_length_max = drag_path_length
 						obj_tools.set_context()

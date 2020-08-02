@@ -49,7 +49,7 @@ context_buttons =
 				,function(){ 
 					with (spell) {
 						for (var i = 0; i < drag_path_length; i++) {
-							force_tile_output(id, drag_path[i].source, drag_path[i].dest, true, true)
+							force_tile_output(drag_path[i].source, drag_path[i].dest, true)
 						}
 						drag_path_length = 0
 						drag_path_length_max = 0

@@ -2,8 +2,6 @@
 
 /// Functions:
 ///		set_tile
-///		set_tile_output
-///		force_tile_output
 ///		reposition_tile
 ///		expand_tile
 ///		shrink_tile
@@ -63,136 +61,6 @@ function set_tile() {
 
 //--------------------------------------------------------------------------------------------------
 
-///@func set_tile_output(spell, source, dest)
-///@param spell - the spell object
-///@param source - the tile to set the output of
-///@param dest - the tile to input into
-///@desc sets the output of one tile into another, or removes it if it exists
-function set_tile_output() {
-	with (argument[0]) { //with the spell object
-		//add the input into the spell array
-		var _data, _diff;
-		_data = spell[| argument[2].index].children
-		_diff = false;
-		//check if it already exists
-		for (var i = argument[2].children_number - 1; i >= 0; i--) {
-			if (_data[| i] == argument[1].index) { //connection already exists
-				_diff = true;
-				//remove the connection and children
-				ds_list_delete(_data, i)
-				with (argument[2]) {
-					children_number--
-					ds_list_delete(children, i)
-				}
-			}
-		}
-		//if it doesnt already exist, create it
-		if (!_diff) {
-			//check for lööps brötha
-			if (!check_for_loops(argument[1], argument[2])) {
-				ds_list_add(_data, argument[1].index)
-				//set children
-				with (argument[2]) {
-					ds_list_add(children, argument[1])
-					children_number++
-				}
-			}
-		}
-	
-		//recalculate all connectors and update wires
-		get_connector_names()
-		//update wires
-		if (argument[2].type = TYPE.WIRE) {
-			//update wire heads |Slightly inefficient, wire paths done twice
-			get_wire_heads()
-			for (i = 0; i < array_length_1d(wire_heads); i++) {
-				with (wire_heads[i]) {
-					get_wire_data()
-				}
-			}
-			if (_diff) check_ports(id)
-		}
-	}
-}
-
-//--------------------------------------------------------------------------------------------------
-
-///@func force_tile_output(spell, source, dest, *unsafe, *weak)
-///@param spell - the spell object
-///@param source - the tile to set the output of
-///@param dest - the tile to input into
-///@param unsafe - if loop checking should be ignored
-///@param weak - if recalculating wires and stuff should be ignored
-///@desc sets the output of one tile into another, forcing the connection if it doesnt create loops
-///yes, nö lööps brötha
-///will trim any connections beforehand, so if the new connection cant be made, will remove the old one
-function force_tile_output(_spell, _source, _dest, _unsafe, _weak) {
-	_unsafe = is_undefined(_unsafe) ? false : _unsafe
-	_weak = is_undefined(_weak) ? false : _weak
-	with (_spell) { //with the spell object
-		//add the input into the spell array
-		var _data, _diff;
-		_data = spell[| _dest.index].children
-		_diff = false // if a connection has been removed
-		//remove any existing connections between the two tiles
-		//source to dest
-		for (var i = _dest.children_number - 1; i >= 0; i--) {
-			if (_data[| i] == _source.index) { //connection already exists
-				//remove the connection and children
-				ds_list_delete(_data, i)
-				_diff = true
-				with (_dest) {
-					children_number--
-					ds_list_delete(children, i)
-				}
-				break;
-			}
-		}
-		//dest to source
-		if (!_diff) { //there can only be a connection one way
-			for (var i = _source.children_number - 1; i >= 0; i--) {
-				if (spell[| _source.index].children[| i] == _dest.index) { //connection already exists
-					//remove the connection and children
-					ds_list_delete(spell[| _source.index].children, i)
-					with (_source) {
-						children_number--
-						ds_list_delete(children, i)
-					}
-					break;
-				}
-			}
-		}
-		//create the connection
-		//check for lööps brötha
-		if (_unsafe or !check_for_loops(_source, _dest)) {
-			ds_list_add(_data, _source.index)
-			//set children
-			with (_dest) {
-				ds_list_add(children, _source)
-				children_number++
-			}
-		}
-	
-		if (_weak) {
-			//recalculate all connectors and update wires
-			get_connector_names()
-			//update wires
-			if (_dest.type = TYPE.WIRE) {
-				//update wire heads |Slightly inefficient, wire paths done twice
-				get_wire_heads()
-				for (i = 0; i < array_length_1d(wire_heads); i++) {
-					with (wire_heads[i]) {
-						get_wire_data()
-					}
-				}
-				if (_diff) check_ports(id)
-			}
-		}
-	}
-}
-
-//--------------------------------------------------------------------------------------------------
-
 ///@func reposition_tile(tile, new_cell_x, new_cell_y)
 ///@param tile - the tile object to move
 ///@param new_cell_x - the x position of the cell to move the tile to
@@ -223,7 +91,7 @@ function reposition_tile() {
 						//check for inputs to argument tile
 						for (o = 0; o < children_number; o++) {
 							if (children[| o] == other) {
-								set_tile_output(spell, other, self)
+								set_tile_output(other, self)
 								break;
 							}
 						}
@@ -231,7 +99,7 @@ function reposition_tile() {
 						//check for outputs to argument tile
 						for (o = 0; o < other.children_number; o++) {
 							if (other.children[| o] == self) {
-								set_tile_output(spell, self, other)
+								set_tile_output(self, other)
 								break;
 							}
 						}
@@ -259,7 +127,7 @@ function expand_tile () {
 				//no wire tile in space, create it and set it as output
 				_tile = set_tile(spell, _tiles[i][0], _tiles[i][1], SPELLS.wire)
 				_tile.immutable = true
-				force_tile_output(spell,
+				force_tile_output(
 					cell_data(spell, 
 						_tiles[i][0] - (1 + (_tiles[i][1] == pos_y)) * -1*sign((_tiles[i][0] < pos_x) - 0.5),
 						_tiles[i][1] - (_tiles[i][1] != pos_y) * -1*sign((_tiles[i][1] < pos_y) - 0.5)
@@ -270,7 +138,7 @@ function expand_tile () {
 				//get the wire tile in the space and set it as output
 				_tile = cell_data(spell, _tiles[i][0], _tiles[i][1])
 				_tile.immutable = true
-				force_tile_output(spell,
+				force_tile_output(
 					cell_data(spell, 
 						_tiles[i][0] - (1 + (_tiles[i][1] == pos_y)) * -1*sign((_tiles[i][0] < pos_x) - 0.5),
 						_tiles[i][1] - (_tiles[i][1] != pos_y) * -1*sign((_tiles[i][1] < pos_y) - 0.5)
@@ -301,7 +169,7 @@ function shrink_tile () {
 				_tile.destroy()
 			} else if (_tile.colour_number = 0) {
 				//remove output
-				set_tile_output(spell, self, _tile)	
+				set_tile_output(self, _tile)	
 			}
 		}
 		value = max_val[radius - 1] + 1

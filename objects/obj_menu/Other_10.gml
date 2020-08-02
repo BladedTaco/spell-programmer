@@ -294,7 +294,7 @@ switch (menu_data[selected]) {
 		
 		}
 		//add the connection
-		set_tile_output(spell, child, _id)
+		set_tile_output(child, _id)
 	break;
 	
 	case MENU.INPUT: //toggle input

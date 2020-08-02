@@ -4,6 +4,7 @@
 ///		instance_create
 ///		new_ds_list
 ///		new_ds_list_size
+///		ds_list_delete_value
 
 //--------------------------------------------------------------------------------------------------
 
@@ -47,4 +48,14 @@ function new_ds_list_size() {
 	}
 
 	return _list
+}
+
+//--------------------------------------------------------------------------------------------------
+
+///@func ds_list_delete_value(list, value)
+///@param list - the ds_list to remove the value from
+///@param value - the value to remove
+///@desc removes the first occurence of the value from the ds_list
+function ds_list_delete_value(_list, _value) {
+	ds_list_delete(_list, ds_list_find_index(_list, _value))
 }
