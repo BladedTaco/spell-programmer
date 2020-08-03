@@ -39,7 +39,7 @@ switch (drag_action) {
 					draw_circle_curve(mouse_x, mouse_y, 20, 90, 360*hover_time/hover_max, 20)	
 					if (hover_time == hover_max) {
 						//add connector to path
-						drag_path[drag_path_length] = new connector(_other, drag_tile).override(
+						drag_path[drag_path_length] = new connector(drag_tile, _other).override(
 							drag_tile.name, drag_tile.image_blend, 20, 20, 1
 						)
 						
@@ -61,7 +61,7 @@ switch (drag_action) {
 						_other = set_tile(id, _m[0], _m[1], SPELLS.wire)
 						//add connector to path
 						drag_path[drag_path_length] = new connector(
-							_other, drag_tile,
+							drag_tile, _other, 
 							drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20
 						)
 						drag_path_length++

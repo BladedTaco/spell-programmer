@@ -67,7 +67,7 @@ function draw_connector() {
 
 	shader_reset(); //reset shader
 
-	if (_str != "") {
+	if (_string != "") {
 		//set textured shader
 		shader_set(shd_clip_circle_rotate)
 		var u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_circle")

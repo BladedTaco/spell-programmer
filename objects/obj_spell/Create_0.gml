@@ -91,6 +91,18 @@
 			}
 		}	
 	}
+	
+	///@func get_connector(source, dest)
+	get_connector = function (_source, _dest) {
+		with (_source) {
+			for (var i = 0; i < ds_list_size(connectors); i++) {
+				if (connectors[| i].dest = _dest) {
+					return connectors[| i]	
+				}
+			}
+		}
+	}
+	
 
 	///@func get_wire_heads()
 	get_wire_heads = function () {
@@ -186,6 +198,8 @@
 								other.connector_name[o] = " "	
 							}
 						}
+						//connectors[| o].name = other.connector_name[o]
+						spell.get_connector(self, other).name = other.connector_name[o]
 					}
 				}	
 			}

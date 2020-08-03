@@ -46,6 +46,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	immutable = false;
 	variable_size = false;
 	connectors = ds_list_create()
+	names = -1
 	
 	//need to remove
 	
@@ -174,12 +175,14 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		//get the id of each child
 		for (var i = 0; i < children_number; i++) {
 			children[| i] = spell.children[| children[| i]]
+			ds_list_add(children[| i].connectors, new connector(children[| i], self))
 		}
 
 		//get the id of each input
 		for (i = 0; i < ds_list_size(input_tile); i++) {
 			if (input_tile[| i] > 0) {
 				input_tile[| i] = spell.children[| input_tile[| i]];
+				//connectors[| i].
 			}
 		}
 	}
@@ -190,6 +193,9 @@ function spell_tile(_px, _py, _data, _index) constructor {
 			//clear input list
 			ds_list_destroy(input_tile)
 			ds_list_destroy(children)
+			ds_list_destroy(connectors)
+			if (ds_exists(names, ds_type_list)) { ds_list_destroy(names) }
+			if (ds_exists(colours, ds_type_list)) { ds_list_destroy(colours) }
 			
 			//remove from existing input lists
 			var _index, _s, _b = 0;
@@ -570,7 +576,30 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 	type = TYPE.WIRE
 	colour_cycle = false
 	colour_number = 0
-	colours = []
+	colours = ds_list_create()
+	names = ds_list_create()
+	
+	///@func add_name(source, name)
+	///@param source - where the name is coming from
+	///@param name - the name to add
+	///@desc adds the given name and updates the tiles name
+	static add_name = function (_source, _name) {
+		ds_list_add(names, _name)
+		ds_list_add(colours, _source.image_blend)
+		colour_number++
+		get_name()
+	}
+	
+	
+	///@func get_name()
+	///@desc updates the name of the tile
+	static get_name = function () {
+		name = "  " + names[| 0]
+		for (var i = 0; i < ds_list_size(names); i++) {
+			name += " + " + names[| i]	
+		}
+	}	
+	
 	
 	///@func get_wire_data()
 	///@desc updates the wires, called only by wire heads
@@ -637,7 +666,7 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 				o = o*o*o*o //(o - 1)^4
 				o = 1 - 8*o //1 - 8(o - 1)^4
 			}
-			image_blend = merge_colour(colours[i], colours[i+1], o)
+			image_blend = merge_colour(colours[| i], colours[| (i+1)%colour_number], o)
 		}
 		
 		draw_base()
