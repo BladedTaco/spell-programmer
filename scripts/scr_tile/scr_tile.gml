@@ -29,13 +29,6 @@ function set_tile() {
 			if (argument[3] = SPELLS.empty) {
 				//destroy the child (it handles its own cleanup)
 				_child.destroy()
-				//calculate new size 
-				size = 10;
-				for (i = 0; i < children_number; i++) {
-					with (children[| i]) {
-						get_size()
-					}
-				}
 				return noone; //return no tile
 			} else {
 				//delete tile, then replace

@@ -14,4 +14,9 @@ function spell_part (_tile, _name, _value, _children, _pos, _inputs) constructor
 	} else {
 		inputs = array_to_list(_inputs)
 	}
+	
+	static toString = function () {
+		return "SPELL PART: " + name + " at " + string(pos) + ", {value: " + string(value) + 
+		", children: " + list_to_string(children) + ", inputs: " + list_to_string(inputs) + "}"
+	}
 }

@@ -48,7 +48,7 @@ function connector(_source, _dest) constructor {
 		with (dest) {
 			children_number--
 			ds_list_delete_value(children, other.source)
-			ds_list_delete_value(spell.spell[| dest.index].children, other.source.index)
+			ds_list_delete_value(spell.spell[| index].children, other.source.index)
 		}
 		
 		//remove self from source

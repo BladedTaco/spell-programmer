@@ -77,7 +77,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		} else {
 			//remove name	
 			for (var i = 0; i < ds_list_size(name_paths); i++) {
-				if (name_paths[| i][1][| 0] == _goal and name_paths[| i][0] == _name) {
+				if (ds_exists(name_paths, ds_type_list) and ds_exists(name_paths[| i][1], ds_type_list))
+				and	(name_paths[| i][1][| 0] == _goal and name_paths[| i][0] == _name) {
 					//connector path to clean
 					_path = name_paths[| i][1]
 					for (var i = 1; i < ds_list_size(_path); i++) {
@@ -259,90 +260,6 @@ function spell_tile(_px, _py, _data, _index) constructor {
 				if (ds_exists(names, ds_type_list)) { ds_list_destroy(names) }
 				if (ds_exists(colours, ds_type_list)) { ds_list_destroy(colours) }
 			}
-			
-			//remove from existing input lists
-			//var _index, _s, _b = 0;
-			//for (var i = 0; i < spell.children_number; i++) {
-			//	with (spell.children[| i]) {
-			//		if (self == other) continue;
-			//		_b = max(_b, size*!variable_size)
-			//		//replace inputs with default
-			//		if (ds_exists(input_tile, ds_type_list)) {
-			//			_index = ds_list_find_index(input_tile, other)
-			//			while (_index > -1) {
-			//				ds_list_replace(input_tile, _index, noone)	
-			//				//remove from obj_spell as well
-			//				_s = spell.spell[| index]
-			//				ds_list_replace(_s.inputs, _index, -1) 
-			//				//get next index
-			//				_index = ds_list_find_index(input_tile, other)
-			//			}
-			//		}
-			//		//remove children
-			//		if (ds_exists(children, ds_type_list)) {
-			//			_index = ds_list_find_index(children, other)
-			//			while (_index > -1) { //for every child relationship found
-			//				//remove it
-			//				ds_list_delete(children, _index)	
-			//				children_number--
-			//				//remove from obj_spell as well
-			//				_s = spell.spell[| index]
-			//				ds_list_delete(_s.children, _index) //remove connection
-			//				_index = ds_list_find_index(children, other)
-			//			}
-			//		}
-			//		//decrease superior indices
-			//		if (index > other.index) {
-			//			index-- 
-			//		}
-			//	}
-			//}
-			
-			////recalculate bubble size
-			//spell.set_bubble(_b + BUBBLE)
-
-			//var _ds;
-			//var _i = index;
-			////shift indexes down in spell
-			//with (spell) {
-			//	//delete own entry
-			//	var _s = spell[| _i]
-			//	ds_list_destroy(_s.children)
-			//	ds_list_destroy(_s.inputs)
-			//	ds_list_delete(spell, _i)
-			//	ds_list_delete(children, _i)
-			//	children_number--
-			//	//handle all other entries
-			//	for (var i = 0; i < children_number; i++) {
-			//		_s = spell[| i] //get the tile data
-			//		//get the connections ds list
-			//		_ds = _s.children
-			//		//reduce superior entries
-			//		for (var o = 0; o < ds_list_size(_ds); o++) {
-			//			if (_ds[| o] > _i) {
-			//				_ds[| o] -= 1	
-			//			}
-			//		}
-			//		//get the inputs ds list
-			//		_ds = _s.inputs
-			//		//reduce superior entries
-			//		for (var o = 0; o < ds_list_size(_ds); o++) {
-			//			if (_ds[| o] > _i) {
-			//				_ds[| o] -= 1	
-			//			}
-			//		}
-			//	}
-			//	//update wires next frame
-			//	update_wire_delay = 2
-			//}
-
-			//if (type = TYPE.WIRE) {
-			//	with (spell) {
-			//		check_ports(id)
-			//		//recalculate all connectors and update wires
-			//		get_connector_names()
-			//	}
-			//}
 	}
 	
 	#region Drawing functions
@@ -401,14 +318,14 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	///@desc draws the debug info for the tile above it
 	static draw_debug = function () {
 		var _info = [
-			list_to_string_func(input_tile, function(x) { return string(x.index)}), 
-			list_to_string_func(children, function(x) { return string(x.index)}), 
-			string(index)
+			"inputs: " + list_to_string_func(input_tile, function(x) { return is_struct(x) ? string(x.index) : "X"}), 
+			"children: " + list_to_string_func(children, function(x) { return is_struct(x) ? string(x.index) : "X"}), 
+			"index: " + string(index)
 		]
 		for (var i = 1; i < 4; i++) {
 			//draw debug
 			draw_set_colour(c_gray)
-			draw_rectangle(x - size, y - size - i*15, x - size + string_width(_info[i-1]), y - size, false)
+			draw_rectangle(x - size, y - size - i*15, x - size + string_width(_info[i-1]), y - size - (i-1)*15, false)
 			draw_set_colour(c_white)
 			draw_text(x - size, y - size - i*15 + 7, _info[i-1])
 		}
