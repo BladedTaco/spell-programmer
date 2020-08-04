@@ -20,7 +20,6 @@ function button(_x, _y, _sprite, _col, _message, _action, _size, _facing, _activ
 	active_colour = merge_colour(image_blend, c_black, 0.7)
 	base_colour = image_blend
 	spell = other.spell
-	show_debug_message(spell)
 	
 	static update = function() {
 		//@desc call to update the buttons look	

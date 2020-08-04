@@ -54,15 +54,15 @@
 		new spell_part(SPELLS.caster,			" CASTER ",				0,			[],			[-4,2],		[]				),
 		new spell_part(SPELLS.construct_vector,	" CONSTRUCT VECTOR ",	0,			[6, 10, 7],	[-2,0],		[7, 6, 7]		),
 		new spell_part(SPELLS.construct_vector,	" CONSTRUCT VECTOR ",	0,			[6, 7, 8],	[-3, 1],	[-1, -1, -1]	),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[1,-1],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[2,0],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[4,0],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[5,-1],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[4,-2],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[2],		[2,-2],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[13],		[6,0],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[17],		[8,0],		[]				),
-		new spell_part(SPELLS.wire,				" CONNECTOR ",			0,			[18],		[10,0],		[]				)
+		new spell_part(SPELLS.wire,				"",						0,			[2],		[1,-1],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[2],		[2,0],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[2],		[4,0],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[2],		[5,-1],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[2],		[4,-2],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[2],		[2,-2],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[13],		[6,0],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[17],		[8,0],		[]				),
+		new spell_part(SPELLS.wire,				"",						0,			[18],		[10,0],		[]				)
 	)
 #endregion variable declaration
 
@@ -81,6 +81,16 @@
 		}
 	}
 
+	///@func get_bubble()
+	///@desc updates all children to the correct sizes after finding that size
+	get_bubble = function () {
+		size = 0
+		for (var i = 0; i < children_number; i++) {
+			size = max(size, children[| i].size*!children[| i].variable_size)
+		}
+		set_bubble(size + BUBBLE)
+	}
+	
 	///@func update_wires()
 	///@desc updates all wire tiles
 	update_wires = function () {
@@ -101,10 +111,11 @@
 				}
 			}
 		}
+		return noone
 	}
-	
 
 	///@func get_wire_heads()
+	///@desc TODO REMOVE
 	get_wire_heads = function () {
 		var i, o, j, _wire, _wire_head;
 		_wire = [];
@@ -147,73 +158,17 @@
 	}
 
 	///@func get_connector_names()
+	///@desc call on spell init to get conenctor names
 	get_connector_names = function () {
-		/// @description get connector names
-		var i, o, j, k, _lst, _str;
-
-		// remove all wire inputs
-		for (i = 0; i < children_number; i++) {
+		for (var i = 0; i < children_number; i++) {
 			with (children[| i]) { //with each tile
-				if (type = TYPE.WIRE) {
-					inputs = []	
-					ds_list_clear(input_tile)
+				for (var o = 0; o < input_number; o++) { //for each input
+					if (is_struct(input_tile[| o])) {
+						input_tile[| o].propogate_name(self, inputs[o], true)
+					}
 				}
 			}
 		}
-		//TODO optimize this into a scipt that only changes affected tiles
-		//for every tile, give its children the correct connector names
-		for (i = 0; i < children_number; i++) {
-			with (children[| i]) { //with each tile
-				for (o = 0; o < children_number; o++) {
-					with (children[| o]) { //with its children
-						if (type = TYPE.WIRE) { ///wire
-							//set name for each run of wires
-							_str = []
-							for (j = 0; j < other.input_number; j++) {
-								_str[j] = ""
-								_lst = get_wire_path(self, other.input_tile[| j])
-								for (k = 0; k < ds_list_size(_lst); k++) {
-									ds_list_add(_lst[| k].input_tile, other)
-									_lst[| k].inputs[array_length_1d(_lst[| k].inputs)] = j
-								}
-								ds_list_destroy(_lst)
-								//add input name if input found
-								if (k > 0) {
-									_str[j] = other.inputs[j]
-								}
-							}
-							other.connector_name[o] = "  " + array_concat(_str, " + ", "")
-						} else {
-							if (ds_list_find_index(other.input_tile, self) > -1) { //in list
-								other.connector_name[o] = " " //add initial one
-								//check for all values
-								for (j = 0; j < other.input_number; j++) {
-									if (other.input_tile[| j] == self) {
-										other.connector_name[o] += other.inputs[j] + " + "
-										//show_debug_message(other.connector_name[o])
-									}
-								}
-								other.connector_name[o] = string_delete(other.connector_name[o], string_length(other.connector_name[o])-2, 3) + " "
-							} else {
-								other.connector_name[o] = " "	
-							}
-						}
-						//connectors[| o].name = other.connector_name[o]
-						spell.get_connector(self, other).name = other.connector_name[o]
-					}
-				}	
-			}
-		}
-
-		// update wires
-		for (i = 0; i < array_length_1d(wire_heads); i++) {
-			with (wire_heads[i]) { //with each tile
-				get_wire_data()
-			}
-		}
-
-		//give wires their final outputs in the inputs array as inputs = outputs
-		//get the connector names from that	
 	}
 #endregion functions
 

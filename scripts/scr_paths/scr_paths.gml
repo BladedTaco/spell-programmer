@@ -8,7 +8,7 @@
 //--------------------------------------------------------------------------------------------------
 
 ///@func get_path(head, tile)
-///@param head - a spell tile wire instance
+///@param head - a spell tile instance
 ///@param tile - a spell tile instance (Can't be a wire)
 ///@desc gives the path from the head to the tile through wires as a ds_list that must be destroyed later
 function get_path() {

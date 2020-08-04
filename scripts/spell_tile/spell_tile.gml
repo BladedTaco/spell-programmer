@@ -47,6 +47,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	variable_size = false;
 	connectors = ds_list_create()
 	names = -1
+	name_paths = ds_list_create()
 	
 	//need to remove
 	
@@ -56,6 +57,42 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	max_val = [0, power(2, 9) - 1, power(2, 23) - 1, power(2, 32) - 1]
 	max_radius = 3
 	zero_angle = 0;
+	
+	///@func propogate_name(goal, name, connect)
+	///@param {tile} goal - the tile that has this tile as an input_tile
+	///@param {string} name - the name to propogate
+	///@param {bool} connect - if it is a connection being made
+	///@desc propogates a names addition or removal
+	static propogate_name = function (_goal, _name, _connect) {
+		if (_connect) {
+			var _path = get_path(_goal, self)
+			for (var i = 1; i < ds_list_size(_path); i++) {
+				//give tile name
+				_path[| i].add_name(self, _name)
+				//give connector name
+				spell.get_connector(_path[| i], _path[| i-1]).add_name(_name)
+			}
+			spell.get_connector(self, _path[| ds_list_size(_path) - 1]).add_name(_name)
+			ds_list_add(name_paths, [_name, _path])
+		} else {
+			//remove name	
+			for (var i = 0; i < ds_list_size(name_paths); i++) {
+				if (name_paths[| i][1][| 0] == _goal and name_paths[| i][0] == _name) {
+					//connector path to clean
+					_path = name_paths[| i][1]
+					for (var i = 1; i < ds_list_size(_path); i++) {
+						//remove tile name
+						_path[| i].remove_name(self, _name)
+						//remove connector name
+						spell.get_connector(_path[| i], _path[| i-1]).remove_name(_name)
+					}
+					spell.get_connector(self, _path[| ds_list_size(_path) - 1]).remove_name(_name)
+					ds_list_destroy(_path)
+					break;
+				}
+			}
+		}
+	}
 	
 	///@func move(x, y)
 	///@param x - the x coordinate to move to
@@ -190,96 +227,122 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	///@func destroy()
 	///@desc removes all references to spell tile and cleans up data structures
 	static destroy = function () {
-			//clear input list
+			//destroy connectors
+			for (var i = ds_list_size(connectors); i > 0; i--) {
+				connectors[| i-1].destroy()	
+			}
+			
+			//remove from spell
+			with (spell) {
+				//delete own entry
+				var i = other.index
+				ds_list_destroy(spell[| i].children)
+				ds_list_destroy(spell[| i].inputs)
+				ds_list_delete(spell, i)
+				ds_list_delete(children, i)
+				children_number--
+				for (i = i; i < children_number; i++) {
+					children[| i].index -= 1	
+				}
+				get_bubble()
+			}	
+			
+			//clear ds lists
 			ds_list_destroy(input_tile)
 			ds_list_destroy(children)
 			ds_list_destroy(connectors)
-			if (ds_exists(names, ds_type_list)) { ds_list_destroy(names) }
-			if (ds_exists(colours, ds_type_list)) { ds_list_destroy(colours) }
+			for (var i = 0; i < ds_list_size(name_paths); i++) {
+				ds_list_destroy(name_paths[| 1])	
+			}
+			ds_list_destroy(name_paths)
+			if (type == TYPE.WIRE) {
+				if (ds_exists(names, ds_type_list)) { ds_list_destroy(names) }
+				if (ds_exists(colours, ds_type_list)) { ds_list_destroy(colours) }
+			}
 			
 			//remove from existing input lists
-			var _index, _s, _b = 0;
-			for (var i = 0; i < spell.children_number; i++) {
-				with (spell.children[| i]) {
-					if (self == other) continue;
-					_b = max(_b, size*!variable_size)
-					//replace inputs with default
-					if (ds_exists(input_tile, ds_type_list)) {
-						_index = ds_list_find_index(input_tile, other)
-						while (_index > -1) {
-							ds_list_replace(input_tile, _index, noone)	
-							//remove from obj_spell as well
-							_s = spell.spell[| index]
-							ds_list_replace(_s.inputs, _index, -1) 
-							//get next index
-							_index = ds_list_find_index(input_tile, other)
-						}
-					}
-					//remove children
-					if (ds_exists(children, ds_type_list)) {
-						_index = ds_list_find_index(children, other)
-						while (_index > -1) { //for every child relationship found
-							//remove it
-							ds_list_delete(children, _index)	
-							children_number--
-							//remove from obj_spell as well
-							_s = spell.spell[| index]
-							ds_list_delete(_s.children, _index) //remove connection
-							_index = ds_list_find_index(children, other)
-						}
-					}
-					//decrease superior indices
-					if (index > other.index) {
-						index-- 
-					}
-				}
-			}
+			//var _index, _s, _b = 0;
+			//for (var i = 0; i < spell.children_number; i++) {
+			//	with (spell.children[| i]) {
+			//		if (self == other) continue;
+			//		_b = max(_b, size*!variable_size)
+			//		//replace inputs with default
+			//		if (ds_exists(input_tile, ds_type_list)) {
+			//			_index = ds_list_find_index(input_tile, other)
+			//			while (_index > -1) {
+			//				ds_list_replace(input_tile, _index, noone)	
+			//				//remove from obj_spell as well
+			//				_s = spell.spell[| index]
+			//				ds_list_replace(_s.inputs, _index, -1) 
+			//				//get next index
+			//				_index = ds_list_find_index(input_tile, other)
+			//			}
+			//		}
+			//		//remove children
+			//		if (ds_exists(children, ds_type_list)) {
+			//			_index = ds_list_find_index(children, other)
+			//			while (_index > -1) { //for every child relationship found
+			//				//remove it
+			//				ds_list_delete(children, _index)	
+			//				children_number--
+			//				//remove from obj_spell as well
+			//				_s = spell.spell[| index]
+			//				ds_list_delete(_s.children, _index) //remove connection
+			//				_index = ds_list_find_index(children, other)
+			//			}
+			//		}
+			//		//decrease superior indices
+			//		if (index > other.index) {
+			//			index-- 
+			//		}
+			//	}
+			//}
 			
-			//recalculate bubble size
-			spell.set_bubble(_b + BUBBLE)
+			////recalculate bubble size
+			//spell.set_bubble(_b + BUBBLE)
 
-			var _ds;
-			var _i = index;
-			//shift indexes down in spell
-			with (spell) {
-				//delete own entry
-				var _s = spell[| _i]
-				ds_list_destroy(_s.children)
-				ds_list_destroy(_s.inputs)
-				ds_list_delete(spell, _i)
-				ds_list_delete(children, _i)
-				children_number--
-				//handle all other entries
-				for (var i = 0; i < children_number; i++) {
-					_s = spell[| i] //get the tile data
-					//get the connections ds list
-					_ds = _s.children
-					//reduce superior entries
-					for (var o = 0; o < ds_list_size(_ds); o++) {
-						if (_ds[| o] > _i) {
-							_ds[| o] -= 1	
-						}
-					}
-					//get the inputs ds list
-					_ds = _s.inputs
-					//reduce superior entries
-					for (var o = 0; o < ds_list_size(_ds); o++) {
-						if (_ds[| o] > _i) {
-							_ds[| o] -= 1	
-						}
-					}
-				}
-				//update wires next frame
-				update_wire_delay = 2
-			}
+			//var _ds;
+			//var _i = index;
+			////shift indexes down in spell
+			//with (spell) {
+			//	//delete own entry
+			//	var _s = spell[| _i]
+			//	ds_list_destroy(_s.children)
+			//	ds_list_destroy(_s.inputs)
+			//	ds_list_delete(spell, _i)
+			//	ds_list_delete(children, _i)
+			//	children_number--
+			//	//handle all other entries
+			//	for (var i = 0; i < children_number; i++) {
+			//		_s = spell[| i] //get the tile data
+			//		//get the connections ds list
+			//		_ds = _s.children
+			//		//reduce superior entries
+			//		for (var o = 0; o < ds_list_size(_ds); o++) {
+			//			if (_ds[| o] > _i) {
+			//				_ds[| o] -= 1	
+			//			}
+			//		}
+			//		//get the inputs ds list
+			//		_ds = _s.inputs
+			//		//reduce superior entries
+			//		for (var o = 0; o < ds_list_size(_ds); o++) {
+			//			if (_ds[| o] > _i) {
+			//				_ds[| o] -= 1	
+			//			}
+			//		}
+			//	}
+			//	//update wires next frame
+			//	update_wire_delay = 2
+			//}
 
-			if (type = TYPE.WIRE) {
-				with (spell) {
-					check_ports(id)
-					//recalculate all connectors and update wires
-					get_connector_names()
-				}
-			}
+			//if (type = TYPE.WIRE) {
+			//	with (spell) {
+			//		check_ports(id)
+			//		//recalculate all connectors and update wires
+			//		get_connector_names()
+			//	}
+			//}
 	}
 	
 	#region Drawing functions
@@ -586,7 +649,20 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 	static add_name = function (_source, _name) {
 		ds_list_add(names, _name)
 		ds_list_add(colours, _source.image_blend)
+		colour_cycle = true
 		colour_number++
+		get_name()
+	}
+	
+	///@func remove_name(source, name)
+	///@param source - where the name is coming from
+	///@param name - the name to add
+	///@desc removes the given name and updates the tiles name
+	static remove_name = function (_source, _name) {
+		ds_list_delete_value(names, _name)
+		ds_list_delete_value(colours, _source.image_blend)
+		colour_number--
+		colour_cycle = (colour_number > 0)
 		get_name()
 	}
 	
@@ -594,8 +670,12 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 	///@func get_name()
 	///@desc updates the name of the tile
 	static get_name = function () {
-		name = "  " + names[| 0]
-		for (var i = 0; i < ds_list_size(names); i++) {
+		if (ds_list_size(names) > 0) {
+			name = "  " + names[| 0]
+		} else {
+			name = ""	
+		}
+		for (var i = 1; i < ds_list_size(names); i++) {
 			name += " + " + names[| i]	
 		}
 	}	

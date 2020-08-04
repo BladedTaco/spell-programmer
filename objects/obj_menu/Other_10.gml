@@ -269,8 +269,8 @@ switch (menu_data[selected]) {
 		_id = cell_data(spell, pos_x + _mx, pos_y + _my)
 		if (!is_struct(_id)) { //create a connector if cell is empty
 			_id = set_tile(spell, pos_x + _mx, pos_y + _my, SPELLS.wire)
-			_id.name = child.name
-			_id.image_blend = child.image_blend
+			//_id.name = child.name
+			//_id.image_blend = child.image_blend
 			
 			//create child menu
 			with (instance_create_depth(x, y, depth - 1, obj_menu)) {
@@ -303,26 +303,29 @@ switch (menu_data[selected]) {
 		var _menu = id
 		var _c;
 		with (parent.child) {
-			if (_child = input_tile[| _index]) { //already in this spot in the list
+			if (_child == input_tile[| _index]) { //already in this spot in the list
+				//remove
 				ds_list_replace(input_tile, _index, noone)	
 				ds_list_replace(spell.spell[| index].inputs, _index, noone)	
 				_menu.menu_sprite[_index] = spr_menu_null
+				_child.propogate_name(self, inputs[_index], false)
 			} else { // not in this spot in the list
 				//replace previous
-				_c = input_tile[| _index]
-				with (obj_menu) {
-					if (child = _c) {
-						menu_sprite[_index] = spr_menu_null
-					}
+				//_c = input_tile[| _index]
+				//with (obj_menu) {
+				//	if (child = _c) {
+				//		menu_sprite[_index] = spr_menu_null
+				//	}
+				//}
+				if (is_struct(input_tile[| _index])) {
+					other.parent.menu_sprite[_index] = spr_menu_null
+					input_tile[| _index].propogate_name(self, inputs[_index], false)
 				}
 				ds_list_replace(input_tile, _index, _child)
 				ds_list_replace(spell.spell[| index].inputs, _index, _child.index)
 				_menu.menu_sprite[_index] = spr_menu_circle
+				_child.propogate_name(self, inputs[_index], true)
 			}
-		}
-		//recalculate connectors
-		with (spell) {
-			get_connector_names()
 		}
 	break;
 	

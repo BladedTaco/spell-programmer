@@ -21,7 +21,7 @@ function tile_data(){
 		,mana_source : 		new __spell_data(bin_counter_spell_tile,spr_mana,				COLOUR.MANA,		" MANA SOURCE ")
 		,test1 : 			new __spell_data(converter_spell_tile,	spr_mana,				COLOUR.VECTOR,		"TEST 5 SLOT",			["1", "2", "3", "4", "5"],			[COLOUR.TRICK, COLOUR.ENTITY, COLOUR.VECTOR, COLOUR.CONSTANT, COLOUR.MANA])
 		,test2 : 			new __spell_data(converter_spell_tile,	spr_constant,			COLOUR.VECTOR,		"TEST 4 SLOT",			["1", "2", "3", "4"],				[COLOUR.TRICK, COLOUR.ENTITY, COLOUR.VECTOR, COLOUR.CONSTANT])
-		,wire : 			new __spell_data(wire_spell_tile,		spr_shell,				COLOUR.WIRE,		" CONNECTOR ")
+		,wire : 			new __spell_data(wire_spell_tile,		spr_shell,				COLOUR.WIRE,		"")
 		,empty : -1
 	}
 }

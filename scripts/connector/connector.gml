@@ -36,30 +36,30 @@ function connector(_source, _dest) constructor {
 		}
 		ds_list_add(source.connectors, self)
 		
-		if (dest.type == TYPE.WIRE) {
-			update_connections()	
-		}
+		//if (dest.type == TYPE.WIRE) {
+		//	update_connections()	
+		//}
 	}
 	
 	///@func destroy()
 	///@desc removes references to connector, and cleans up data structures
 	static destroy = function () {
-		
-		ds_list_delete_value(spell.spell[| index].children, source.index)
+		//remove data from parent and spell
 		with (dest) {
 			children_number--
 			ds_list_delete_value(children, other.source)
+			ds_list_delete_value(spell.spell[| dest.index].children, other.source.index)
 		}
+		
+		//remove self from source
 		ds_list_delete_value(source.connectors, self)
 		
-		if (dest.type == TYPE.WIRE) {
-			update_connections()	
-		}
-		
+		//check for input tile disruptions
 		if (name != "") {
 			check_ports(spell)
 		}
 		
+		//clean up ds lists
 		ds_list_destroy(names)
 	}
 	
@@ -71,37 +71,26 @@ function connector(_source, _dest) constructor {
 		get_name()
 	}
 	
+	///@func remove_name(name)
+	///@param name - the name to add
+	///@desc removes the given name and updates the connector
+	static remove_name = function (_name) {
+		ds_list_delete_value(names, _name)
+		get_name()
+	}
 	
 	///@func get_name()
 	///@desc updates the name of the connector
 	static get_name = function () {
-		name = "  " + names[| 0]
-		for (var i = 0; i < ds_list_size(names); i++) {
+		if (ds_list_size(names) > 0) {
+			name = "  " + names[| 0]
+		} else {
+			name = ""	
+		}
+		for (var i = 1; i < ds_list_size(names); i++) {
 			name += " + " + names[| i]	
 		}
 	}	
-	
-	///@func propogate_name(goal, name, connect)
-	///@param {tile} goal - the tile that has this tile as an input_tile
-	///@param {string} name - the name to propogate
-	///@param {bool} connect - if it is a connection being made
-	///@desc propogates a names addition or removal
-	static propogate_name = function (_goal, _name, _connect) {
-		if (_connect) {
-			ds_list_add(names, _name)
-			get_name()
-			var _path = get_wire_path(self, _goal)
-			ds_list_add(_path, _goal)
-			//handle no wire / first connection
-			spell.get_connector(self, _path[| 0]).add_name(_name)
-			for (var i = 0; i < ds_list_size(_path) - 1; i++) {
-				//give tile name
-				_path[| i].add_name(self, _name)
-				//give connector name
-				spell.get_connector(_path[| i], _path[| i+1]).add_name(_name)
-			}
-		}
-	}
 	
 	///@func update_connections()
 	///@desc updates the names and colours of wires and such
@@ -143,5 +132,9 @@ function connector(_source, _dest) constructor {
 		age = ++age mod 360
 	}
 	
+	
+	static toString = function () {
+		return "CONNECTOR from " + string(source) + " to " + string(dest) + ". name = " + name	
+	}
 	
 }
