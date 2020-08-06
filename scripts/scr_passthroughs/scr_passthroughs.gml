@@ -5,6 +5,7 @@
 ///		new_ds_list
 ///		new_ds_list_size
 ///		ds_list_delete_value
+///		ds_list_replace_value
 
 //--------------------------------------------------------------------------------------------------
 
@@ -58,4 +59,15 @@ function new_ds_list_size() {
 ///@desc removes the first occurence of the value from the ds_list
 function ds_list_delete_value(_list, _value) {
 	ds_list_delete(_list, ds_list_find_index(_list, _value))
+}
+
+//--------------------------------------------------------------------------------------------------
+
+///@func ds_list_replace_value(list, value, new_val)
+///@param list - the ds_list to remove the value from
+///@param value - the value to replace
+///@param new_val - the value to fill the slot with
+///@desc removes the first occurence of the value from the ds_list
+function ds_list_replace_value(_list, _value, _new) {
+	ds_list_replace(_list, ds_list_find_index(_list, _value), _new)
 }

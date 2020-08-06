@@ -83,12 +83,12 @@ function connector(_source, _dest) constructor {
 	///@desc updates the name of the connector
 	static get_name = function () {
 		if (ds_list_size(names) > 0) {
-			name = "  " + names[| 0]
+			name = "  " + names[| 0].name
 		} else {
 			name = ""	
 		}
 		for (var i = 1; i < ds_list_size(names); i++) {
-			name += " + " + names[| i]	
+			name += " + " + names[| i].name
 		}
 	}	
 	

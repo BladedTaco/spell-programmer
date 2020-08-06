@@ -301,7 +301,6 @@ switch (menu_data[selected]) {
 		var _index = selected;
 		var _child = child
 		var _menu = id
-		var _c;
 		with (parent.child) {
 			if (_child == input_tile[| _index]) { //already in this spot in the list
 				//remove
@@ -310,17 +309,12 @@ switch (menu_data[selected]) {
 				_menu.menu_sprite[_index] = spr_menu_null
 				_child.propogate_name(self, inputs[_index], false)
 			} else { // not in this spot in the list
-				//replace previous
-				//_c = input_tile[| _index]
-				//with (obj_menu) {
-				//	if (child = _c) {
-				//		menu_sprite[_index] = spr_menu_null
-				//	}
-				//}
+				//remove previous if it exists
 				if (is_struct(input_tile[| _index])) {
 					other.parent.menu_sprite[_index] = spr_menu_null
 					input_tile[| _index].propogate_name(self, inputs[_index], false)
 				}
+				//add this one
 				ds_list_replace(input_tile, _index, _child)
 				ds_list_replace(spell.spell[| index].inputs, _index, _child.index)
 				_menu.menu_sprite[_index] = spr_menu_circle

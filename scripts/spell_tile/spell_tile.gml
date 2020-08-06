@@ -60,36 +60,43 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	
 	///@func propogate_name(goal, name, connect)
 	///@param {tile} goal - the tile that has this tile as an input_tile
-	///@param {string} name - the name to propogate
-	///@param {bool} connect - if it is a connection being made
+	///@param {string/struct} name - the name to propogate
+	///@param {true/false} connect - if it is a connection being made
 	///@desc propogates a names addition or removal
 	static propogate_name = function (_goal, _name, _connect) {
 		if (_connect) {
 			var _path = get_path(_goal, self)
+			var _data = {name: _name, goal: _goal, tile: other}
 			for (var i = 1; i < ds_list_size(_path); i++) {
 				//give tile name
-				_path[| i].add_name(self, _name)
+				_path[| i].add_name(_data)
 				//give connector name
-				spell.get_connector(_path[| i], _path[| i-1]).add_name(_name)
+				spell.get_connector(_path[| i], _path[| i-1]).add_name(_data)
 			}
-			spell.get_connector(self, _path[| ds_list_size(_path) - 1]).add_name(_name)
-			ds_list_add(name_paths, [_name, _path])
+			spell.get_connector(self, _path[| ds_list_size(_path) - 1]).add_name(_data)
+			ds_list_add(name_paths, [_data, _path])
 		} else {
 			//remove name	
 			for (var i = 0; i < ds_list_size(name_paths); i++) {
-				if (ds_exists(name_paths, ds_type_list) and ds_exists(name_paths[| i][1], ds_type_list))
-				and	(name_paths[| i][1][| 0] == _goal and name_paths[| i][0] == _name) {
-					//connector path to clean
-					_path = name_paths[| i][1]
-					for (var i = 1; i < ds_list_size(_path); i++) {
-						//remove tile name
-						_path[| i].remove_name(self, _name)
-						//remove connector name
-						spell.get_connector(_path[| i], _path[| i-1]).remove_name(_name)
+				//ds lists exist
+				if (ds_exists(name_paths, ds_type_list) and ds_exists(name_paths[| i][1], ds_type_list)) {
+					//either struct given, or parameters match struct data
+					if ((name_paths[| i][0] == _name) or 
+					(!is_struct(_name) and (name_paths[| i][0].name == _name) and (name_paths[| i][0].goal == _goal))) {
+						//ensure _name is the struct
+						_name = name_paths[| i][0]
+						//connector path to clean
+						_path = name_paths[| i][1]
+						for (var i = 1; i < ds_list_size(_path); i++) {
+							//remove tile name
+							_path[| i].remove_name(_name)
+							//remove connector name
+							spell.get_connector(_path[| i], _path[| i-1]).remove_name(_name)
+						}
+						spell.get_connector(self, _path[| ds_list_size(_path) - 1]).remove_name(_name)
+						ds_list_destroy(_path)
+						break;
 					}
-					spell.get_connector(self, _path[| ds_list_size(_path) - 1]).remove_name(_name)
-					ds_list_destroy(_path)
-					break;
 				}
 			}
 		}
@@ -228,38 +235,54 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	///@func destroy()
 	///@desc removes all references to spell tile and cleans up data structures
 	static destroy = function () {
-			//destroy connectors
-			for (var i = ds_list_size(connectors); i > 0; i--) {
-				connectors[| i-1].destroy()	
-			}
-			
-			//remove from spell
-			with (spell) {
-				//delete own entry
-				var i = other.index
-				ds_list_destroy(spell[| i].children)
-				ds_list_destroy(spell[| i].inputs)
-				ds_list_delete(spell, i)
-				ds_list_delete(children, i)
-				children_number--
-				for (i = i; i < children_number; i++) {
-					children[| i].index -= 1	
+		//check for port break
+		if (type == TYPE.WIRE) {
+			for (var i = 0; i < ds_list_size(names); i++) {
+				with (names[| i]) {
+					tile.propogate_name(goal, self, false)
+					ds_list_replace_value(goal.input_tile, tile, noone)	
+					ds_list_replace_value(goal.spell.spell[| goal.index].inputs, tile.index, noone)	
 				}
-				get_bubble()
-			}	
+			}
+		}
+		
+		//destroy connectors
+		for (var i = ds_list_size(connectors); i > 0; i--) {
+			connectors[| i-1].destroy()	
+		}
+		
+		//destroy children connectors
+		for (i = 0; i < children_number; i++) {
+			spell.get_connector(children[| i], self).destroy()
+		}
 			
-			//clear ds lists
-			ds_list_destroy(input_tile)
-			ds_list_destroy(children)
-			ds_list_destroy(connectors)
-			for (var i = 0; i < ds_list_size(name_paths); i++) {
-				ds_list_destroy(name_paths[| 1])	
+		//remove from spell
+		with (spell) {
+			//delete own entry
+			var i = other.index
+			ds_list_destroy(spell[| i].children)
+			ds_list_destroy(spell[| i].inputs)
+			ds_list_delete(spell, i)
+			ds_list_delete(children, i)
+			children_number--
+			for (i = i; i < children_number; i++) {
+				children[| i].index -= 1	
 			}
-			ds_list_destroy(name_paths)
-			if (type == TYPE.WIRE) {
-				if (ds_exists(names, ds_type_list)) { ds_list_destroy(names) }
-				if (ds_exists(colours, ds_type_list)) { ds_list_destroy(colours) }
-			}
+			get_bubble()
+		}	
+			
+		//clear ds lists
+		ds_list_destroy(input_tile)
+		ds_list_destroy(children)
+		ds_list_destroy(connectors)
+		for (var i = 0; i < ds_list_size(name_paths); i++) {
+			ds_list_destroy(name_paths[| 1])	
+		}
+		ds_list_destroy(name_paths)
+		if (type == TYPE.WIRE) {
+			if (ds_exists(names, ds_type_list)) { ds_list_destroy(names) }
+			if (ds_exists(colours, ds_type_list)) { ds_list_destroy(colours) }
+		}
 	}
 	
 	#region Drawing functions
@@ -559,41 +582,38 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 	colours = ds_list_create()
 	names = ds_list_create()
 	
-	///@func add_name(source, name)
-	///@param source - where the name is coming from
-	///@param name - the name to add
+	///@func add_name(name)
+	///@param {struct} name - the struct containing the name data
 	///@desc adds the given name and updates the tiles name
-	static add_name = function (_source, _name) {
+	static add_name = function (_name) {
 		ds_list_add(names, _name)
-		ds_list_add(colours, _source.image_blend)
+		ds_list_add(colours, _name.tile.image_blend)
 		colour_cycle = true
 		colour_number++
 		get_name()
 	}
 	
-	///@func remove_name(source, name)
-	///@param source - where the name is coming from
-	///@param name - the name to add
+	///@func remove_name(name)
+	///@param {struct} name - the struct containing the name data
 	///@desc removes the given name and updates the tiles name
-	static remove_name = function (_source, _name) {
+	static remove_name = function (_name) {
 		ds_list_delete_value(names, _name)
-		ds_list_delete_value(colours, _source.image_blend)
+		ds_list_delete_value(colours, _name.tile.image_blend)
 		colour_number--
 		colour_cycle = (colour_number > 0)
 		get_name()
 	}
 	
-	
 	///@func get_name()
 	///@desc updates the name of the tile
 	static get_name = function () {
 		if (ds_list_size(names) > 0) {
-			name = "  " + names[| 0]
+			name = "  " + names[| 0].name
 		} else {
 			name = ""	
 		}
 		for (var i = 1; i < ds_list_size(names); i++) {
-			name += " + " + names[| i]	
+			name += " + " + names[| i].name
 		}
 	}	
 	
