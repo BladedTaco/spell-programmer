@@ -44,6 +44,16 @@ function connector(_source, _dest) constructor {
 	///@func destroy()
 	///@desc removes references to connector, and cleans up data structures
 	static destroy = function () {
+		//cut off any connections that used this connector
+		for (var i = 0; i < ds_list_size(names); i++) {
+			with (names[| i]) { 
+				var _index = ds_list_find_index(goal.input_tile, tile)
+				ds_list_replace(goal.input_tile, _index, noone)	
+				ds_list_replace(goal.spell.spell[| goal.index].inputs, _index, -1)	
+				tile.propogate_name(goal, self, false)
+			}
+		}
+		
 		//remove data from parent and spell
 		with (dest) {
 			children_number--
@@ -53,11 +63,6 @@ function connector(_source, _dest) constructor {
 		
 		//remove self from source
 		ds_list_delete_value(source.connectors, self)
-		
-		//check for input tile disruptions
-		if (name != "") {
-			check_ports(spell)
-		}
 		
 		//clean up ds lists
 		ds_list_destroy(names)
