@@ -87,14 +87,15 @@ function spell_tile(_px, _py, _data, _index) constructor {
 						_name = name_paths[| i][0]
 						//connector path to clean
 						_path = name_paths[| i][1]
-						for (var i = 1; i < ds_list_size(_path); i++) {
+						for (var o = 1; o < ds_list_size(_path); o++) {
 							//remove tile name
-							_path[| i].remove_name(_name)
+							_path[| o].remove_name(_name)
 							//remove connector name
-							spell.get_connector(_path[| i], _path[| i-1]).remove_name(_name)
+							spell.get_connector(_path[| o], _path[| o-1]).remove_name(_name)
 						}
 						spell.get_connector(self, _path[| ds_list_size(_path) - 1]).remove_name(_name)
 						ds_list_destroy(_path)
+						ds_list_delete(name_paths, i)
 						break;
 					}
 				}
@@ -684,6 +685,8 @@ function wire_spell_tile(_px, _py, _data, _index) : spell_tile(_px, _py, _data, 
 				o = 1 - 8*o //1 - 8(o - 1)^4
 			}
 			image_blend = merge_colour(colours[| i], colours[| (i+1)%colour_number], o)
+		} else {
+			image_blend = COLOUR.WIRE	
 		}
 		
 		draw_base()

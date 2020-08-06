@@ -305,7 +305,7 @@ switch (menu_data[selected]) {
 			if (_child == input_tile[| _index]) { //already in this spot in the list
 				//remove
 				ds_list_replace(input_tile, _index, noone)	
-				ds_list_replace(spell.spell[| index].inputs, _index, noone)	
+				ds_list_replace(spell.spell[| index].inputs, _index, -1)	
 				_menu.menu_sprite[_index] = spr_menu_null
 				_child.propogate_name(self, inputs[_index], false)
 			} else { // not in this spot in the list
