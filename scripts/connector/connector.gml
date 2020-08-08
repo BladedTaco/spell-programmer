@@ -35,10 +35,6 @@ function connector(_source, _dest) constructor {
 			ds_list_add(children, other.source)
 		}
 		ds_list_add(source.connectors, self)
-		
-		//if (dest.type == TYPE.WIRE) {
-		//	update_connections()	
-		//}
 	}
 	
 	///@func destroy()
@@ -96,24 +92,6 @@ function connector(_source, _dest) constructor {
 			name += " + " + names[| i].name
 		}
 	}	
-	
-	///@func update_connections()
-	///@desc updates the names and colours of wires and such
-	static update_connections = function () {
-		with (spell) {
-			get_connector_names()
-			//update wires
-			if (other.dest.type = TYPE.WIRE) {
-				//update wire heads |Slightly inefficient, wire paths done twice
-				get_wire_heads()
-				for (var i = 0; i < array_length(wire_heads); i++) {
-					with (wire_heads[i]) {
-						get_wire_data()
-					}
-				}
-			}
-		}
-	}
 	
 	///@func draw()
 	///@desc draws the connector

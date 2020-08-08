@@ -311,7 +311,7 @@ switch (menu_data[selected]) {
 			} else { // not in this spot in the list
 				//remove previous if it exists
 				if (is_struct(input_tile[| _index])) {
-					other.parent.menu_sprite[_index] = spr_menu_null
+					other.get_menu(input_tile[| _index]).menu_sprite[_index] = spr_menu_null
 					input_tile[| _index].propogate_name(self, inputs[_index], false)
 				}
 				//add this one

@@ -140,7 +140,7 @@ function expand_tile () {
 				)
 			}
 		}
-		spell.update_wires()
+		//TODO MAYBE, UPDATE WIRES
 		return true
 	}
 	return false

@@ -53,3 +53,14 @@ init = function(_spell, _x, _y) {
 	active = true;
 	life = 0;
 }
+
+///@func get_menu(child)
+///@param child - the child the menu is responsible for
+///@desc returns the menu object for the child, if there are multiple retuns first found
+get_menu = function(_child) {
+	with (obj_menu) {
+		if (child == _child) {
+			return id	
+		}
+	}
+}

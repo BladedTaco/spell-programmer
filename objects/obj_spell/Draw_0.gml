@@ -97,12 +97,6 @@ if (keyboard_check(vk_shift) and global.debug) {
 			//draw_text(x - size, y - size - 38, _str)
 		}
 	}
-	//draw wire heads
-	for (i = 0; i < array_length(wire_heads); i++) {
-		with (wire_heads[i]) {
-			draw_sprite(spr_menu_null, 0, x, y)	
-		}
-	}
 }
 
 surface_reset_target();
@@ -239,17 +233,18 @@ if !(mouse_check_button(mb_middle) and global.debug) {
 x_diff = 0;
 y_diff = 0;
 
-if (keyboard_check(vk_shift) and global.debug) {
+if (keyboard_check(vk_control) and global.debug) {
+	_str = list_to_string(spell, true, false)
+	mouse_off = clamp(mouse_off + 50*(mouse_wheel_up() - mouse_wheel_down()), 0, string_height(_str))
 	//draw the spell objects data
 	draw_set_colour(c_white)
 	draw_set_halign(fa_left)
 	draw_set_valign(fa_top)
 	draw_set_alpha(0.7)
-	_str = list_to_string(spell, true, false)
-	draw_rectangle(10, 100 - age*3*(string_height(_str) div 1000), 10 + string_width(_str), 100 + string_height(_str), false)
+	draw_rectangle(10, 100 - mouse_off, 10 + string_width(_str), 100 + string_height(_str), false)
 	draw_set_alpha(1)
 	draw_set_colour(c_black)
-	draw_text(10, 100, _str)
+	draw_text(10, 100 - mouse_off, _str)
 }
 
 

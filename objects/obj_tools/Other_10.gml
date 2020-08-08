@@ -53,18 +53,6 @@ context_buttons =
 						}
 						drag_path_length = 0
 						drag_path_length_max = 0
-						//COPYPASTA, TODO REFACTOR
-							//recalculate all connectors and update wires
-							get_connector_names()
-							//update wires
-							//update wire heads |Slightly inefficient, wire paths done twice
-							get_wire_heads()
-							for (i = 0; i < array_length(wire_heads); i++) {
-								with (wire_heads[i]) {
-									get_wire_data()	
-								}
-							}
-							check_ports(id)
 					}
 					other.set_context(-1)
 				}, 30, 1

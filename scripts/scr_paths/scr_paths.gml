@@ -11,15 +11,13 @@
 ///@param head - a spell tile instance
 ///@param tile - a spell tile instance (Can't be a wire)
 ///@desc gives the path from the head to the tile through wires as a ds_list that must be destroyed later
-function get_path() {
+function get_path(_wire, _tile) {
 	// This is done via a Depth-First Search Algorithm
 	// Copied from get_wire_path()
 
 	//declare variables
 	var _list = ds_list_create()
 	var _index = ds_list_create()
-	var _wire = argument[0]
-	var _tile = argument[1]
 	var i = 0;
 
 	//add the first tile
@@ -123,11 +121,14 @@ function get_wireless_inputs() {
 
 	//replace any wires with all their children until there are no wires left
 	for (i = 0; i < ds_list_size(_list); i++) {
-		while (_list[| i].type = TYPE.WIRE) { //while there is a wire
+		while (_list[| i].type == TYPE.WIRE) { //while there is a wire
 			for (o = 0; o < _list[| i].children_number; o++) { 
 				ds_list_insert(_list, i+1, _list[| i].children[| o]) //add all its children after the wire
 			}
 			ds_list_delete(_list, i) //remove the wire object from the list.
+			if (o == 0) { //no children added, stop checking this branch
+				break	
+			}
 		}
 	}
 
