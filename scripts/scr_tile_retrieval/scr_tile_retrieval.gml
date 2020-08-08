@@ -30,7 +30,7 @@ function mouse_to_tile(_spell, _gap) {
 	
 	var _x, _y, _tx, _ty;
 
-	with (argument[0]) { //with the spell object
+	with (_spell) { //with the spell object
 		//get x and y cell position shifted up
 		_y = (mouse_y - y - lengthdir_y(hex_size/2, 30))/(HEX_MUL*hex_size)
 		_x = (mouse_x - x)/(2*bubble_size) + 0.5*(round(abs(_y)) mod 2 == 1)

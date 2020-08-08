@@ -27,7 +27,7 @@ switch (drag_action) {
 				
 				var _other = get_mouse_tile(id)
 				var _m = mouse_to_tile(id, 30)
-				if (_other != noone) and (cell_distance(drag_tile.pos_x, drag_tile.pos_y, _other.pos_x, _other.pos_y) == 1) {
+				if is_struct(_other) and (cell_distance(drag_tile.pos_x, drag_tile.pos_y, _other.pos_x, _other.pos_y) == 1) {
 					//check for lööps brötha
 					if ((hover_time == 0) and check_for_loops_structs(drag_tile, _other, drag_path, drag_path_length)) {
 						//loop found, show connection bad
@@ -39,7 +39,8 @@ switch (drag_action) {
 					draw_circle_curve(mouse_x, mouse_y, 20, 90, 360*hover_time/hover_max, 20)	
 					if (hover_time == hover_max) {
 						//add connector to path
-						drag_path[drag_path_length] = new connector(drag_tile, _other).override(
+						drag_path[drag_path_length] = new connector(drag_tile, _other)
+						drag_path[drag_path_length].override(
 							drag_tile.name, drag_tile.image_blend, 20, 20, 1
 						)
 						
@@ -60,9 +61,9 @@ switch (drag_action) {
 						//create new tile
 						_other = set_tile(id, _m[0], _m[1], SPELLS.wire)
 						//add connector to path
-						drag_path[drag_path_length] = new connector(
-							drag_tile, _other, 
-							drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20
+						drag_path[drag_path_length] = new connector(drag_tile, _other)
+						drag_path[drag_path_length].override( 
+							drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20, 1
 						)
 						drag_path_length++
 						drag_path_length_max = drag_path_length
@@ -86,10 +87,6 @@ switch (drag_action) {
 					draw_cross(mouse_x, mouse_y, 20, 3)
 				}
 				
-				//moved to regular draw event
-				//for (var i = 0; i < drag_path_length; i++) {
-				//	drag_path[i].draw()	
-				//}
 				
 			end_draw_later
 		} else {

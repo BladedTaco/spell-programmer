@@ -10,6 +10,7 @@ buttons =
 				if (active) {
 					//activate
 					spell.drag_path_length_max = 0 
+					spell.drag_path_length = 0
 					spell.movable = false
 					spell.drag_action = DRAG.CONNECTOR
 					other.set_context(0)

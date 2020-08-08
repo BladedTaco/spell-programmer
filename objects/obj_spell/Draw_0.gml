@@ -265,42 +265,15 @@ while (draw_queue_size > 0) {
 	f()
 }
 
+
+//draw connectors
 for (var i = 0; i < drag_path_length; i++) {
-	drag_path[i].draw()	
+	//drag_path[i].draw()	
+	with (drag_path[i]) {
+		draw_connector(
+			spell.x + dest.x - spell.half_surface_size,   spell.y + dest.y - spell.half_surface_size, 
+			spell.x + source.x - spell.half_surface_size, spell.y + source.y - spell.half_surface_size, 
+			name, image_blend, size, alt_size, age, scale
+		)
+	}
 }
-//draw_set_colour(c_black)
-//for (var i = 0; i < 400; i++) {
-//	_px = mouse_x + (i%20)*4 - 40
-//	_py = mouse_y + (i div 20)*4 - 40
-//	if (point_in_hex(_px, _py, x, y, hex_size - 30, 90)) {
-//		draw_circle(_px, _py, 1, false)
-//	} else {
-//		draw_circle(_px, _py, 2, true)
-//	}
-//}
-
-
-//if keyboard_check_pressed(vk_up) {
-//	surface_save(spell_surface, "output.png")
-//}
-
-
-////circle test debug
-//draw_text_circle(
-//				50, 100, "01234567", 40,	
-//				_dir, 360, true, false, true, true
-//			)
-//draw_text_circle(
-//				150, 100, "0123456789", 40,
-//				180, 360, true, false, true, true
-//			)
-			
-//draw_line(0, 100, 300, 100)
-//draw_line(50, 0, 50, 200)
-//draw_line(150, 0, 150, 200)
-
-//draw_line(0, 50, 150, 200) 
-//draw_line(0, 150, 150, 0) 
-
-//draw_line(100, 50, 250, 200) 
-//draw_line(100, 150, 250, 0) 
