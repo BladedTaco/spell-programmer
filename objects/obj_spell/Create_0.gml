@@ -42,6 +42,7 @@
 
 	//vertically is each tile/circle
 
+	if (instance_number(obj_spell) == 1) { //first spell object TOOD FIX
 	spell = new_ds_list(
 		new spell_part(SPELLS.add_motion,		" ADD MOTION ",			-1,			[1, 9, 11],	[0,0],		[9, -1, 2]		),
 		new spell_part(SPELLS.construct_vector,	" CONSTRUCT VECTOR ",	0,			[3, 4, 5],	[1,1],		[-1, -1, -1]	),
@@ -64,6 +65,9 @@
 		new spell_part(SPELLS.wire,				"",						0,			[17],		[8,0],		[]				),
 		new spell_part(SPELLS.wire,				"",						0,			[18],		[10,0],		[]				)
 	)
+	} else {
+		spell = new_ds_list()	
+	}
 #endregion variable declaration
 
 #region functions
@@ -121,28 +125,30 @@
 #region setup	
 	children_number = ds_list_size(spell)
 
-	init = true
+	if (children_number > 0) {
+		init = true
 
-	for (var i = 0; i < children_number; i++) {
-		children[| i] = new_spell_tile(spell[| i].pos_x, spell[| i].pos_y, spell[| i].tile, i)
-	}
-
-	init = false
-
-
-	for (i = 0; i < children_number; i++) {
-		with (children[| i]) {
-			get_children()	
+		for (var i = 0; i < children_number; i++) {
+			children[| i] = new_spell_tile(spell[| i].pos_x, spell[| i].pos_y, spell[| i].tile, i)
 		}
-	}
 
-	//get base data
-	get_connector_names()
+		init = false
 
-	//create tools menu
-	with (instance_create(room_width + 360, 110, obj_tools)) {
-		spell = other.id
-		active = true
-		event_user(0)
+
+		for (i = 0; i < children_number; i++) {
+			with (children[| i]) {
+				get_children()	
+			}
+		}
+
+		//get base data
+		get_connector_names()
+
+		//create tools menu
+		with (instance_create(room_width + 360, 110, obj_tools)) {
+			spell = other.id
+			active = true
+			event_user(0)
+		}
 	}
 #endregion setup

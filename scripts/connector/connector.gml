@@ -24,6 +24,7 @@ function connector(_source, _dest) constructor {
 		size = _size
 		alt_size = _alt_size
 		scale = _scale
+		return self
 	}
 	
 	///@func connect()
@@ -35,6 +36,7 @@ function connector(_source, _dest) constructor {
 			ds_list_add(children, other.source)
 		}
 		ds_list_add(source.connectors, self)
+		return self
 	}
 	
 	///@func destroy()

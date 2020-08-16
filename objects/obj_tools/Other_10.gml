@@ -16,6 +16,11 @@ buttons =
 					other.set_context(0)
 				} else {
 					//deactivate
+					with (spell) {
+						//reset drag path
+						drag_path_length = 0
+						drag_path_length_max = 0
+					}
 					other.set_context(-1)
 				}
 			}
@@ -49,9 +54,7 @@ context_buttons =
 			new button(_x - _sep,	_y + 0*_sz, spr_menu_circle, $30af40, "Accept"
 				,function(){ 
 					with (spell) {
-						for (var i = 0; i < drag_path_length; i++) {
-							force_tile_output(drag_path[i].source, drag_path[i].dest, true)
-						}
+						//reset drag path
 						drag_path_length = 0
 						drag_path_length_max = 0
 					}
@@ -60,6 +63,9 @@ context_buttons =
 			),
 			new button(_x + _sep,	_y + 1*_sz, spr_menu_null, c_red, "Discard"
 				,function(){ 
+					for (var i = 0; i < spell.drag_path_length; i++) {
+						spell.drag_path[i].destroy()
+					}
 					spell.drag_path_length = 0 
 					spell.drag_path_length_max = 0 
 					other.set_context(-1)
@@ -69,6 +75,7 @@ context_buttons =
 				,function(){ 
 					if (spell.drag_path_length > 0) {
 						spell.drag_path_length -= 1 
+						spell.drag_path[spell.drag_path_length].destroy()
 						toggle(active_check())
 						other.context_buttons[0][3].toggle(false)
 					}

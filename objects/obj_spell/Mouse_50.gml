@@ -29,7 +29,7 @@ switch (drag_action) {
 				var _m = mouse_to_tile(id, 30)
 				if is_struct(_other) and (cell_distance(drag_tile.pos_x, drag_tile.pos_y, _other.pos_x, _other.pos_y) == 1) {
 					//check for lööps brötha
-					if ((hover_time == 0) and check_for_loops_structs(drag_tile, _other, drag_path, drag_path_length)) {
+					if ((hover_time == 0) and check_for_loops(drag_tile, _other)) {
 						//loop found, show connection bad
 						hover_time = -infinity
 					}
@@ -39,12 +39,11 @@ switch (drag_action) {
 					draw_circle_curve(mouse_x, mouse_y, 20, 90, 360*hover_time/hover_max, 20)	
 					if (hover_time == hover_max) {
 						//add connector to path
-						drag_path[drag_path_length] = new connector(drag_tile, _other)
-						drag_path[drag_path_length].override(
-							drag_tile.name, drag_tile.image_blend, 20, 20, 1
-						)
+						//drag_path[drag_path_length++] = new connector(drag_tile, _other).override(
+						//	drag_tile.name, drag_tile.image_blend, 20, 20, 1
+						//)
+						drag_path[drag_path_length++] = new connector(drag_tile, _other).connect()
 						
-						drag_path_length++
 						drag_path_length_max = drag_path_length
 						obj_tools.set_context()
 						
@@ -60,12 +59,13 @@ switch (drag_action) {
 					if (hover_time == hover_max) {
 						//create new tile
 						_other = set_tile(id, _m[0], _m[1], SPELLS.wire)
+						//_other = new_spell_tile(_m[0], _m[1], SPELLS.wire)
+						drag_path[drag_path_length++] = _other
 						//add connector to path
-						drag_path[drag_path_length] = new connector(drag_tile, _other)
-						drag_path[drag_path_length].override( 
-							drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20, 1
-						)
-						drag_path_length++
+						drag_path[drag_path_length++] = new connector(drag_tile, _other).connect()
+						//drag_path[drag_path_length++] = new connector(drag_tile, _other).override( 
+						//	drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20, 1
+						//)
 						drag_path_length_max = drag_path_length
 						obj_tools.set_context()
 						

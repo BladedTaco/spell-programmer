@@ -60,7 +60,7 @@ for (var i = 0; i < children_number; i++) {
 	}
 }
 	
-	
+// tiles
 var _str;
 for (var i = 0; i < children_number; i++) {
 	with (children[| i]) {
@@ -68,6 +68,12 @@ for (var i = 0; i < children_number; i++) {
 		//event_perform(ev_draw, 0)
 		draw()
 	}
+}
+
+
+//draw tool data
+for (var i = 0; i < drag_path_length; i++) {
+	drag_path[i].draw()	
 }
 
 //debug, draw tile data
@@ -266,14 +272,15 @@ while (draw_queue_size > 0) {
 }
 
 
-//draw connectors
-for (var i = 0; i < drag_path_length; i++) {
-	//drag_path[i].draw()	
-	with (drag_path[i]) {
-		draw_connector(
-			spell.x + dest.x - spell.half_surface_size,   spell.y + dest.y - spell.half_surface_size, 
-			spell.x + source.x - spell.half_surface_size, spell.y + source.y - spell.half_surface_size, 
-			name, image_blend, size, alt_size, age, scale
-		)
-	}
-}
+////draw tool data
+//for (var i = 0; i < drag_path_length; i++) {
+//	drag_path[i].draw()	
+//	//with (drag_path[i]) {
+//	//	draw_connector(
+//	//		spell.x + dest.x - spell.half_surface_size,   spell.y + dest.y - spell.half_surface_size, 
+//	//		spell.x + source.x - spell.half_surface_size, spell.y + source.y - spell.half_surface_size, 
+//	//		name, image_blend, size, alt_size, age, scale
+//	//	)
+		
+//	//}
+//}

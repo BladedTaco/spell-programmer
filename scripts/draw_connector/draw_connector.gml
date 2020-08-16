@@ -10,34 +10,28 @@
 ///@param age - the age of the circle / animation index
 ///@param scale - the scale of the connector
 ///@desc draws a connecting rod from point a to b
-function draw_connector() {
+function draw_connector(_x1, _y1, _x2, _y2, _string, _colour, _size, _alt_size, _age, _scl) {
 
-	var _x1, _y1, _x2, _y2, _x3, _y3, _string, _colour, _size, _alt_size, _age, _len, _dir, _off, _spd, _scl;
+	var _x3, _y3, _len, _dir, _off, _spd;
 
 	var _s = 15
 
-
-	_x1 = argument[0]
-	_y1 = argument[1]
-	_x2 = argument[2]
-	_y2 = argument[3]
 	_x3 = min(_x1, _x2) - _s
 	_y3 = min(_y1, _y2) - _s
-	_string = argument[4]
-	if (_string = "") {
-		_string = " "	
-	}
-	_colour = argument[5]
-	_size = argument[6]
-	_alt_size = argument[7]
-	_age = argument[8]
-	_scl = argument[9]
 	_len = point_distance(_x1, _y1, _x2, _y2)
 	_dir = point_direction(_x1, _y1, _x2, _y2)
+	
+	if (_string = "") {
+		if (abs(_dir - 180) < 90) {
+			_string = "> > > > > "
+		} else {
+			_string = "< < < < < "
+		}
+	}
 	_off = string_width(_string)
 	_spd = _off/90
-
-
+	
+	//draw line
 
 	//set untextured shader
 	shader_set(shd_clip_circle_no_tex_rotate)
@@ -66,43 +60,42 @@ function draw_connector() {
 	_age = _age*_spd mod _off
 
 	shader_reset(); //reset shader
+	
+	//draw text fill
+	//set textured shader
+	shader_set(shd_clip_circle_rotate)
+	var u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_circle")
+	shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
+	u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_alt_circle")
+	shader_set_uniform_f(u_circle, _x2, _y2, _size - 1);
+	u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_dir")
+	shader_set_uniform_f(u_circle, -_dir)
+	u_circle = shader_get_uniform(shd_clip_circle_rotate, "v_circle")
+	shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
+	u_circle = shader_get_uniform(shd_clip_circle_rotate, "v_dir")
+	shader_set_uniform_f(u_circle, -_dir)
 
-	if (_string != "") {
-		//set textured shader
-		shader_set(shd_clip_circle_rotate)
-		var u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_circle")
-		shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
-		u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_alt_circle")
-		shader_set_uniform_f(u_circle, _x2, _y2, _size - 1);
-		u_circle = shader_get_uniform(shd_clip_circle_rotate, "u_dir")
-		shader_set_uniform_f(u_circle, -_dir)
-		u_circle = shader_get_uniform(shd_clip_circle_rotate, "v_circle")
-		shader_set_uniform_f(u_circle, _x1, _y1, _alt_size - 1);
-		u_circle = shader_get_uniform(shd_clip_circle_rotate, "v_dir")
-		shader_set_uniform_f(u_circle, -_dir)
+	//draw text
+	draw_set_colour(_colour)
+	draw_set_halign(fa_left)
+	draw_set_valign(fa_middle)
 
-		//draw text
-		draw_set_colour(_colour)
+	//flip text both ways if left half facing direction
+	if (abs(_dir - 180) < 90) {
+		draw_set_halign(fa_right)
+		var _str = string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl)
+		draw_text_transformed(
+			_x1 - _scl*_age,  _y1 + 0.5,
+			_str, -_scl, -_scl, 0
+		)
 		draw_set_halign(fa_left)
-		draw_set_valign(fa_middle)
-
-		//flip text both ways if left half facing direction
-		if (abs(_dir - 180) < 90) {
-			draw_set_halign(fa_right)
-			var _str = string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl)
-			draw_text_transformed(
-				_x1 - _scl*_age,  _y1 + 0.5,
-				_str, -_scl, -_scl, 0
-			)
-			draw_set_halign(fa_left)
-		} else { //draw text normally
-			var _str = string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl)
-			draw_text_transformed(
-				_x1 - _scl*_age,  _y1 + 0.5,
-				_str, _scl, _scl, 0
-			)
-		}
-		
-		shader_reset();
+	} else { //draw text normally
+		var _str = string_repeat(_string, 1 + ceil((_len - _size)/_off)/_scl)
+		draw_text_transformed(
+			_x1 - _scl*_age,  _y1 + 0.5,
+			_str, _scl, _scl, 0
+		)
 	}
+		
+	shader_reset();
 }

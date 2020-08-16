@@ -5,6 +5,9 @@
 
 //--------------------------------------------------------------------------------------------------
 
+///@desc array_to_list(array)
+///@param array - an array to turn into a ds_list
+///@desc populates a ds_list with the array contents and returns the ds_list
 function array_to_list(_array) {
 	var _ret = new_ds_list()
 	

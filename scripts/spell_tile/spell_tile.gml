@@ -1,10 +1,11 @@
-///@func new_spell_tile(px, py, data, index)
+///@func new_spell_tile(px, py, data, *index)
 ///@param px - the x coordinate in the hex grid
 ///@param py - the y coordinate in the hex grid
 ///@param data - the struct containing the tile data
 ///@param *index - the index of the tile, if unset will be largest untaken
 ///@desc creates and returns a new spell tile of the given paramaters
 function new_spell_tile(_px, _py, _data, _index) {	
+	if (0) { return argument[0] }
 	return new _data.type(_px, _py, _data, _index)
 }
 
@@ -128,6 +129,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	static update_spell = function () {
 		spell.spell[| index] = new spell_part(data, name, value, [], [pos_x, pos_y], []) 
 	}
+	static connect = function () {}//update_spell
 	
 	///@func check_radius()
 	///@desc checks for radius changes in variable size tiles

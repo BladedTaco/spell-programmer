@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_shell",
+    "path": "sprites/spr_shell/spr_shell.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
