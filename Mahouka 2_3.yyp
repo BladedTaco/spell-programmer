@@ -55,6 +55,7 @@
     {"id":{"name":"shd_inner_fill","path":"shaders/shd_inner_fill/shd_inner_fill.yy",},"order":9,},
     {"id":{"name":"shd_empty","path":"shaders/shd_empty/shd_empty.yy",},"order":10,},
     {"id":{"name":"shd_empty_threshold","path":"shaders/shd_empty_threshold/shd_empty_threshold.yy",},"order":11,},
+    {"id":{"name":"other_ideas","path":"notes/other_ideas/other_ideas.yy",},"order":3,},
     {"id":{"name":"shd_surface_empty","path":"shaders/shd_surface_empty/shd_surface_empty.yy",},"order":12,},
     {"id":{"name":"button","path":"scripts/button/button.yy",},"order":0,},
     {"id":{"name":"obj_tools","path":"objects/obj_tools/obj_tools.yy",},"order":5,},
