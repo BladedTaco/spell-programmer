@@ -235,6 +235,35 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		}
 	}
 	
+	///@func recreate()
+	///@desc recreates the connection after a destroy call, connector data is lost
+	static recreate = function () {
+		
+		input_tile = ds_list_create()
+		connectors = ds_list_create()
+		name_paths = ds_list_create()
+		if (type == TYPE.WIRE) {
+			names = ds_list_create()
+			colours = ds_list_create()
+		}
+		
+		children_number = 0
+		//children = ds_list_create()
+		
+		//set_tile(id, _m[0], _m[1], SPELLS.wire)
+		with (spell) {
+			children_number++	
+			ds_list_add(spell, [SPELLS.wire, "", 0, -1, [other.pos_x, other.pos_y], -1])
+			ds_list_add(children, other)
+			other.index = children_number - 1
+		}
+		
+		get_data()
+		get_size()
+		//children
+		return self
+	}
+	
 	///@func destroy()
 	///@desc removes all references to spell tile and cleans up data structures
 	static destroy = function () {
@@ -249,9 +278,9 @@ function spell_tile(_px, _py, _data, _index) constructor {
 			}
 		}
 		
-		//destroy connectors
-		for (var i = ds_list_size(connectors); i > 0; i--) {
-			connectors[| i-1].destroy()	
+		//destroy parent connectors
+		while (ds_list_size(connectors) > 0) {
+			connectors[| 0].destroy()	
 		}
 		
 		//destroy children connectors

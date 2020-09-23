@@ -53,6 +53,9 @@ context_buttons =
 		[ //Draw Connectors
 			new button(_x - _sep,	_y + 0*_sz, spr_menu_circle, $30af40, "Accept"
 				,function(){ 
+					for (var i = 0; i < spell.drag_path_length; i++) {
+						spell.drag_path[i].name = ""
+					}
 					with (spell) {
 						//reset drag path
 						drag_path_length = 0
@@ -74,8 +77,14 @@ context_buttons =
 			new button(_x - _sep,	_y + 2*_sz, spr_menu_arrow, c_fuchsia, "Undo"
 				,function(){ 
 					if (spell.drag_path_length > 0) {
+						//remove connector
 						spell.drag_path_length -= 1 
 						spell.drag_path[spell.drag_path_length].destroy()
+						//remove tile if applicable
+						if (instanceof(spell.drag_path[spell.drag_path_length - 1]) == "wire_spell_tile") {
+							spell.drag_path_length -= 1 
+							spell.drag_path[spell.drag_path_length].destroy()
+						}
 						toggle(active_check())
 						other.context_buttons[0][3].toggle(false)
 					}
@@ -84,7 +93,15 @@ context_buttons =
 			new button(_x + _sep,	_y + 3*_sz, spr_menu_arrow, c_olive, "Redo"
 				,function(){ 
 					if (spell.drag_path_length < spell.drag_path_length_max) {
+						//remove connector
+						spell.drag_path[spell.drag_path_length].recreate()
 						spell.drag_path_length += 1 
+						//remove tile if applicable
+						if (instanceof(spell.drag_path[spell.drag_path_length - 1]) == "wire_spell_tile") {
+							spell.drag_path[spell.drag_path_length].recreate()
+							spell.drag_path_length += 1 
+						}
+						
 						other.context_buttons[0][2].toggle(false)
 						toggle(active_check())
 					}

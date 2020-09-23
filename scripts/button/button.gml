@@ -1,5 +1,13 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+///@func button(x, y, sprite, colour, message, *action, *size, *facing, *active_check)
+///@param {real} x - the x centre of the button
+///@param {real} y - the y centre of the button
+///@param {sprite} sprite - the sprite to draw on the button
+///@param {colour} colour - the colour to draw the button in
+///@param {string} message - the mouseover text
+///@param {func} *action - the function to execute on button press
+///@param {real} *size - the size of the button
+///@param {real} *facing - the direction of the button corner
+///@param {func} *active_check - the function to check if the button is active
 function button(_x, _y, _sprite, _col, _message, _action, _size, _facing, _active_check) constructor {
 	if (false) return argument[0]
 	//used to avoid the wrong number of arguments error

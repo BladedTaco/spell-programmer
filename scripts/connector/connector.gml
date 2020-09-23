@@ -1,6 +1,6 @@
 ///@func connector(source, dest) 
-///@param source - the source of the connector
-///@param dest - the destination of the connector
+///@param {spell_tile} source - the source of the connector
+///@param {spell_tile} dest - the destination of the connector
 ///@desc gives the child a connector to its parent
 function connector(_source, _dest) constructor {
 	source = _source
@@ -39,31 +39,44 @@ function connector(_source, _dest) constructor {
 		return self
 	}
 	
+	///@func recreate()
+	///@desc recreates the connection after a destroy call
+	static recreate = function () {
+		//assumes that the tiles on both sides are remade first
+		names = ds_list_create()
+		return connect()
+	}
+	
 	///@func destroy()
 	///@desc removes references to connector, and cleans up data structures
 	static destroy = function () {
-		//cut off any connections that used this connector
-		for (var i = 0; i < ds_list_size(names); i++) {
-			with (names[| i]) { 
-				var _index = ds_list_find_index(goal.input_tile, tile)
-				ds_list_replace(goal.input_tile, _index, noone)	
-				ds_list_replace(goal.spell.spell[| goal.index].inputs, _index, -1)	
-				tile.propogate_name(goal, self, false)
+		// deleted multiple times
+		if (!ds_exists(names, ds_type_list)) {
+			//show_debug_message("Deleted multiple times: " + string(self))
+		} else {
+			//cut off any connections that used this connector
+			for (var i = 0; i < ds_list_size(names); i++) {
+				with (names[| i]) { 
+					var _index = ds_list_find_index(goal.input_tile, tile)
+					ds_list_replace(goal.input_tile, _index, noone)	
+					ds_list_replace(goal.spell.spell[| goal.index].inputs, _index, -1)	
+					tile.propogate_name(goal, self, false)
+				}
 			}
+		
+			//remove data from parent and spell
+			with (dest) {
+				children_number--
+				ds_list_delete_value(children, other.source)
+				ds_list_delete_value(spell.spell[| index].children, other.source.index)
+			}			
+		
+			//remove self from source
+			ds_list_delete_value(source.connectors, self)
+		
+			//clean up ds lists
+			ds_list_destroy(names)
 		}
-		
-		//remove data from parent and spell
-		with (dest) {
-			children_number--
-			ds_list_delete_value(children, other.source)
-			ds_list_delete_value(spell.spell[| index].children, other.source.index)
-		}
-		
-		//remove self from source
-		ds_list_delete_value(source.connectors, self)
-		
-		//clean up ds lists
-		ds_list_destroy(names)
 	}
 	
 	///@func add_name(name)
