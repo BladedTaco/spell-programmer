@@ -25,19 +25,23 @@ buttons =
 				}
 			}
 		),
-		new button(room_width - 50,	50 + 1*_sz, spr_add_motion, c_aqua, "TEST 1"
+		new button(room_width - 50,	50 + 1*_sz, spr_add_motion, c_aqua, "Layer"
 			,function(){ y += 5 }
 		),
-		new button(room_width - 90,	50 + 2*_sz, spr_add_motion, c_aqua, "TEST 12"
+		//Prefabs - Save | Load | Manage | Import
+		new button(room_width - 90,	50 + 2*_sz, spr_add_motion, c_aqua, "Prefabs"
 			,function(){ x += 5 }
 		),
-		new button(room_width - 50,	50 + 3*_sz, spr_add_motion, c_aqua, "TEST 123"
+		// Save/Load - Save | Load | Manage | Import
+		new button(room_width - 50,	50 + 3*_sz, spr_add_motion, c_aqua, "Save/Load"
 			,function(){ size += irandom(10) - 5 }
 		),
-		new button(room_width - 90,	50 + 4*_sz, spr_add_motion, c_aqua, "TEST 1234"
+		// Optimize - Trim Leaves | Shorten Wires | Bake constants | Freeze
+		new button(room_width - 90,	50 + 4*_sz, spr_add_motion, c_aqua, "Optimize"
 			,function(){ image_blend += 100 }
 		),
-		new button(room_width - 50,	50 + 5*_sz, spr_add_motion, c_aqua, "TEST 12345"
+		// Compile - Test | Export | 
+		new button(room_width - 50,	50 + 5*_sz, spr_add_motion, c_aqua, "Compile"
 			,function(){ rename(name + string(string_length(name))) }
 		)
 	]
@@ -115,4 +119,27 @@ context_buttons =
 				}, 30, 1
 			),
 		],
+		[ // Layer
+			new button(_x - _sep,	_y + 0*_sz, spr_menu_circle, $30af40, "Move up"
+				,function(){ 
+				}, 30, 1
+			),
+			new button(_x + _sep,	_y + 1*_sz, spr_menu_null, c_red, "Move down"
+				,function(){ 
+				}, 30, 1
+			),
+			new button(_x - _sep,	_y + 2*_sz, spr_menu_arrow, c_fuchsia, "Delete Layer"
+				,function(){ 
+				}, 30, 1
+			),
+			new button(_x + _sep,	_y + 3*_sz, spr_menu_arrow, c_olive, "New Layer"
+				,function(){ 
+				}, 30, 1
+			),
+			new button(_x - _sep,	_y + 4*_sz, spr_menu_null, c_red, "Reorder Layers"
+				,function(){
+				}, 30, 1
+			),
+		],
+		
 	]
