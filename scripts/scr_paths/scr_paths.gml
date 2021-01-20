@@ -126,6 +126,7 @@ function get_wireless_inputs() {
 				ds_list_insert(_list, i+1, _list[| i].children[| o]) //add all its children after the wire
 			}
 			ds_list_delete(_list, i) //remove the wire object from the list.
+			i-- // dont advance i counter
 			if (o == 0) { //no children added, stop checking this branch
 				break	
 			}

@@ -25,8 +25,8 @@
   "gridY": 0,
   "frames": [
     {"compositeImage":{"FrameId":{"name":"50fdc9c8-d1ff-4e06-9a75-1282de60c52e","path":"sprites/spr_add_motion/spr_add_motion.yy",},"LayerId":null,"resourceVersion":"1.0","name":"composite","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"50fdc9c8-d1ff-4e06-9a75-1282de60c52e","path":"sprites/spr_add_motion/spr_add_motion.yy",},"LayerId":{"name":"654c691b-42d6-4eda-936e-ac80b6b66a66","path":"sprites/spr_add_motion/spr_add_motion.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
         {"FrameId":{"name":"50fdc9c8-d1ff-4e06-9a75-1282de60c52e","path":"sprites/spr_add_motion/spr_add_motion.yy",},"LayerId":{"name":"799f9c6c-d011-4671-ada9-108f094d9cde","path":"sprites/spr_add_motion/spr_add_motion.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+        {"FrameId":{"name":"50fdc9c8-d1ff-4e06-9a75-1282de60c52e","path":"sprites/spr_add_motion/spr_add_motion.yy",},"LayerId":{"name":"654c691b-42d6-4eda-936e-ac80b6b66a66","path":"sprites/spr_add_motion/spr_add_motion.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_add_motion","path":"sprites/spr_add_motion/spr_add_motion.yy",},"resourceVersion":"1.0","name":"50fdc9c8-d1ff-4e06-9a75-1282de60c52e","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
@@ -45,7 +45,7 @@
             {"id":"244d97eb-ae1d-4515-8ff7-8c307dfff97d","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"50fdc9c8-d1ff-4e06-9a75-1282de60c52e","path":"sprites/spr_add_motion/spr_add_motion.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
+    "visibleRange": null,
     "lockOrigin": false,
     "showBackdrop": true,
     "showBackdropImage": false,

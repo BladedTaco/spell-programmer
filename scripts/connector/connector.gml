@@ -55,8 +55,8 @@ function connector(_source, _dest) constructor {
 			//show_debug_message("Deleted multiple times: " + string(self))
 		} else {
 			//cut off any connections that used this connector
-			for (var i = 0; i < ds_list_size(names); i++) {
-				with (names[| i]) { 
+			while (ds_list_size(names) > 0) {
+				with (names[| 0]) { 
 					var _index = ds_list_find_index(goal.input_tile, tile)
 					ds_list_replace(goal.input_tile, _index, noone)	
 					ds_list_replace(goal.spell.spell[| goal.index].inputs, _index, -1)	

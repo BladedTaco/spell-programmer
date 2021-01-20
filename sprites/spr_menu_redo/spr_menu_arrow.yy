@@ -60,7 +60,7 @@
     "eventStubScript": null,
     "parent": {"name":"spr_menu_arrow","path":"sprites/spr_menu_arrow/spr_menu_arrow.yy",},
     "resourceVersion": "1.3",
-    "name": "spr_menu_arrow",
+    "name": "",
     "tags": [],
     "resourceType": "GMSequence",
   },

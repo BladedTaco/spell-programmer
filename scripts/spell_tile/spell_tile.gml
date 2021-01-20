@@ -308,7 +308,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		ds_list_destroy(children)
 		ds_list_destroy(connectors)
 		for (var i = 0; i < ds_list_size(name_paths); i++) {
-			ds_list_destroy(name_paths[| 1])	
+			ds_list_destroy(name_paths[| i][1])	
 		}
 		ds_list_destroy(name_paths)
 		if (type == TYPE.WIRE) {
