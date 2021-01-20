@@ -19,5 +19,13 @@ set_context = function (_context) {
 		buttons[_c].toggle(false)
 		spell.movable = true
 		spell.drag_action = DRAG.NONE
+		spell.menu_available = true;
+	}
+}
+
+deactivate_menus = function () {
+	spell.menu_available = false;	
+	with (obj_menu) {
+		instance_destroy();	
 	}
 }

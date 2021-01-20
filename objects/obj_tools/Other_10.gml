@@ -13,6 +13,7 @@ buttons =
 					spell.drag_path_length = 0
 					spell.movable = false
 					spell.drag_action = DRAG.CONNECTOR
+					other.deactivate_menus()
 					other.set_context(0)
 				} else {
 					//deactivate

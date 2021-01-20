@@ -11,6 +11,7 @@
 	x_diff = 0;
 	y_diff = 0;
 	movable = true;
+	menu_available = true;
 
 	//drag variables
 	drag_action = DRAG.NONE

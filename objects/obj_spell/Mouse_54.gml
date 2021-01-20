@@ -1,5 +1,5 @@
 /// @description create menu
-if !(instance_exists(obj_menu)) {
+if (menu_available and !instance_exists(obj_menu)) {
 	var _m = mouse_to_tile(id)
 	var _mx = _m[0]
 	var _my = _m[1]
