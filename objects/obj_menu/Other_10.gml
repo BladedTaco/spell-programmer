@@ -140,6 +140,7 @@ switch (menu_data[selected]) {
 			left_click_action = 2
 			left_click_only = false;
 			group = new_ds_list(child);
+			selected = 1
 		}
 	break;
 	
@@ -174,8 +175,9 @@ switch (menu_data[selected]) {
 	
 	break;
 	case MENU.PACKAGE_GROUP: //Add a colour region to all the tiles in the group
+		var _col = make_colour_hsv(random(256), 256, 128 + random(64));
 		for (var i = 0; i < ds_list_size(group); i++) {
-			group[| i].group_colour = make_colour_hsv(random(256), 256, 256)
+			group[| i].group_colour = _col
 			show_debug_message(group[| i].group_colour)
 		}
 	break;

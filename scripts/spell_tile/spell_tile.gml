@@ -322,7 +322,8 @@ function spell_tile(_px, _py, _data, _index) constructor {
 	///@desc the base draw that all tiles have to do
 	static draw_base = function () {
 		//backing circle
-		draw_set_colour(COLOUR.EMPTY)
+		//draw_set_colour(COLOUR.EMPTY)
+		draw_set_colour(group_colour)
 		draw_circle(x, y, size, false)
 	
 		//draw the sprite
@@ -349,7 +350,7 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		if (group_colour != COLOUR.EMPTY) {
 			//back polygon backing group colour
 			draw_set_colour(group_colour)
-			draw_polygon(x, y, hex_size + 100, 90, 6, true)
+			draw_polygon(x, y, hex_size, 90, 6, true)
 		}
 		
 		//back polygon backing
@@ -375,9 +376,10 @@ function spell_tile(_px, _py, _data, _index) constructor {
 		var _info = [
 			"inputs: " + list_to_string_func(input_tile, function(x) { return is_struct(x) ? string(x.index) : "X"}), 
 			"children: " + list_to_string_func(children, function(x) { return is_struct(x) ? string(x.index) : "X"}), 
-			"index: " + string(index)
+			"index: " + string(index),
+			"colour: " + string(group_colour)
 		]
-		for (var i = 1; i < 4; i++) {
+		for (var i = 1; i <= array_length(_info); i++) {
 			//draw debug
 			draw_set_colour(c_gray)
 			draw_rectangle(x - size, y - size - i*15, x - size + string_width(_info[i-1]), y - size - (i-1)*15, false)
