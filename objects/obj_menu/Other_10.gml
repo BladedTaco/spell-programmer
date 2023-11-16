@@ -100,6 +100,9 @@ switch (menu_data[selected]) {
 				}
 			}
 		}
+		if (ds_list_size(_tile) == 0) {
+			active = true;
+		}
 		ds_list_destroy(_tile)
 	break;
 	
