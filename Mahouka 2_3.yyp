@@ -48,6 +48,7 @@
     {"id":{"name":"spr_menu_redo","path":"sprites/spr_menu_redo/spr_menu_redo.yy",},"order":10,},
     {"id":{"name":"scr_tile","path":"scripts/scr_tile/scr_tile.yy",},"order":1,},
     {"id":{"name":"connector","path":"scripts/connector/connector.yy",},"order":1,},
+    {"id":{"name":"fnt_main","path":"fonts/fnt_main/fnt_main.yy",},"order":9,},
     {"id":{"name":"shd_clip","path":"shaders/shd_clip/shd_clip.yy",},"order":0,},
     {"id":{"name":"scr_tile_output","path":"scripts/scr_tile_output/scr_tile_output.yy",},"order":8,},
     {"id":{"name":"shd_clip_circle","path":"shaders/shd_clip_circle/shd_clip_circle.yy",},"order":1,},

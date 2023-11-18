@@ -1,6 +1,6 @@
 {
   "ConfigValues": {
-    "no_debug": {"option_html5_loadingbar":"Use Default","option_html5_index":"use_default","option_html5_browser_title":"Spell Programmer","option_html5_webgl":"2","option_html5_usebuiltinfont":"true",},
+    "no_debug": {"option_html5_loadingbar":"Use Default","option_html5_index":"use_default","option_html5_browser_title":"Spell Programmer","option_html5_webgl":"2","option_html5_usebuiltinfont":"false",},
   },
   "option_html5_browser_title": "Created with GameMaker Studio 2",
   "option_html5_version": "1.0.0.0",

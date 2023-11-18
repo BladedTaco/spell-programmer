@@ -8,9 +8,3 @@ if (!global.pause and !keyboard_check(vk_shift)) {
 }
 
 
-//if (mouse_check_button_pressed(mb_left)) {
-//	event_perform(ev_mouse, ev_left_button)	
-//	show_debug_overlay(true)
-//} else {
-//	show_debug_overlay(false)	
-//}

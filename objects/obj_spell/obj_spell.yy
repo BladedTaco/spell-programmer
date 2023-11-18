@@ -29,6 +29,8 @@
     {"isDnD":false,"eventNum":0,"eventType":1,"collisionObjectId":null,"parent":{"name":"obj_spell","path":"objects/obj_spell/obj_spell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":50,"eventType":6,"collisionObjectId":null,"parent":{"name":"obj_spell","path":"objects/obj_spell/obj_spell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":56,"eventType":6,"collisionObjectId":null,"parent":{"name":"obj_spell","path":"objects/obj_spell/obj_spell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":2,"eventType":3,"collisionObjectId":null,"parent":{"name":"obj_spell","path":"objects/obj_spell/obj_spell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":1,"eventType":3,"collisionObjectId":null,"parent":{"name":"obj_spell","path":"objects/obj_spell/obj_spell.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],

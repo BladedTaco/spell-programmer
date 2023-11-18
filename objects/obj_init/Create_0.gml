@@ -1,6 +1,8 @@
 /// @description 
 macros()
 
+draw_set_font(fnt_main)
+
 draw_set_circle_precision(64)
 
 show_debug_overlay(global.debug)

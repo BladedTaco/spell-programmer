@@ -1,5 +1,7 @@
 /// @description develop the spell
 #region variable declaration
+	menu_exists = false;
+
 	children = ds_list_create(); //init child array
 	children_number = 0;
 	age = 0; //how long the circle has been visible
