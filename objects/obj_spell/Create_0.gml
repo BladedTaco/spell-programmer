@@ -61,10 +61,10 @@
 		new spell_part(SPELLS.wire,				"",						0,			[2],		[4,0],		[]				),
 		new spell_part(SPELLS.wire,				"",						0,			[2],		[5,-1],		[]				),
 		new spell_part(SPELLS.wire,				"",						0,			[2],		[4,-2],		[]				),
-		new spell_part(SPELLS.wire,				"",						0,			[2],		[2,-2],		[]				),
-		new spell_part(SPELLS.wire,				"",						0,			[13],		[6,0],		[]				),
-		new spell_part(SPELLS.wire,				"",						0,			[17],		[8,0],		[]				),
-		new spell_part(SPELLS.wire,				"",						0,			[18],		[10,0],		[]				)
+		new spell_part(SPELLS.wire,				"",						0,			[2],		[2,-2],		[]				)//,
+		//new spell_part(SPELLS.wire,				"",						0,			[13],		[6,0],		[]				),
+		//new spell_part(SPELLS.wire,				"",						0,			[17],		[8,0],		[]				),
+		//new spell_part(SPELLS.wire,				"",						0,			[18],		[10,0],		[]				)
 	)
 	} else {
 		spell = new_ds_list()	

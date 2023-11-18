@@ -9,7 +9,7 @@
   "persistent": false,
   "parentObjectId": null,
   "physicsObject": false,
-  "physicsSensor": false,
+  "physicsSensor": true,
   "physicsShape": 1,
   "physicsGroup": 0,
   "physicsDensity": 0.5,

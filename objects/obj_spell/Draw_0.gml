@@ -2,7 +2,8 @@
 //set dir
 var _dir = age
 var _sub_dir = sub_age
-draw_sprite_ext(spr_add_motion, 0, 25, 25, 1, 1, _dir, c_white, 1)
+// Draw spinning sprite based on age
+//draw_sprite_ext(spr_add_motion, 0, 25, 25, 1, 1, _dir, c_white, 1)
 
 //create and prep the surface
 if (!surface_exists(spell_surface)) {
@@ -163,8 +164,8 @@ if (global.shaders) {
 	shader_reset()
 	surface_reset_target();
 
-	if (keyboard_check(vk_space)) {
-		draw_surface(noise_surface, 0, 0)
+	if (global.forces or keyboard_check(vk_space)) {
+		draw_surface_ext(noise_surface, x - surface_size/2, y - surface_size / 2, 1, 1, 0, c_gray, 0.95)
 	}
 
 	//create particle surface if needed
@@ -229,7 +230,7 @@ if (global.shaders) {
 	shader_reset();
 }
 
-if !(mouse_check_button(mb_middle) and global.debug) {
+if !(mouse_check_button(mb_middle) or global.wind) {
 	//draw the spell_surface
 	shader_set(shd_alpha_spell)
 	draw_surface(spell_surface, x - half_surface_size, y - half_surface_size)

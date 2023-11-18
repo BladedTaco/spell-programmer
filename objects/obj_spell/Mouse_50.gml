@@ -42,7 +42,8 @@ switch (drag_action) {
 						//drag_path[drag_path_length++] = new connector(drag_tile, _other).override(
 						//	drag_tile.name, drag_tile.image_blend, 20, 20, 1
 						//)
-						drag_path[drag_path_length++] = new connector(drag_tile, _other).connect()
+						var _connector = new connector(drag_tile, _other);
+						drag_path[drag_path_length++] = _connector.connect()
 						
 						drag_path_length_max = drag_path_length
 						obj_tools.set_context()
@@ -62,7 +63,8 @@ switch (drag_action) {
 						//_other = new_spell_tile(_m[0], _m[1], SPELLS.wire)
 						drag_path[drag_path_length++] = _other
 						//add connector to path
-						drag_path[drag_path_length++] = new connector(drag_tile, _other).connect()
+						var _connector = new connector(drag_tile, _other)
+						drag_path[drag_path_length++] = _connector.connect()
 						//drag_path[drag_path_length++] = new connector(drag_tile, _other).override( 
 						//	drag_tile.name, /*c_white*/drag_tile.image_blend, 20, 20, 1
 						//)

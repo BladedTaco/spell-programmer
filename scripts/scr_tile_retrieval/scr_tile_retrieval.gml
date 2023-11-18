@@ -51,7 +51,7 @@ function mouse_to_tile(_spell, _gap) {
 		_p2 = point_distance(_x, _y, (_tx - 1)*_scl,	(_ty - 1)*HEX_MUL) //up left
 		_p3 = point_distance(_x, _y, (_tx + 1)*_scl,	(_ty - 1)*HEX_MUL) //up right
 
-		if (keyboard_check(vk_shift)) {
+		if (global.debug and keyboard_check(vk_shift)) {
 			draw_set_colour(c_black)
 			draw_line_width(mouse_x, mouse_y,	
 						x + _tx*bubble_size,	   y + _ty*HEX_MUL*hex_size, 5
@@ -127,7 +127,7 @@ function pos_to_tile() {
 		_p2 = point_distance(_x, _y, (_tx - 1)*_scl,	(_ty - 1)*HEX_MUL) //up left
 		_p3 = point_distance(_x, _y, (_tx + 1)*_scl,	(_ty - 1)*HEX_MUL) //up right
 
-		if (keyboard_check(vk_shift)) {
+		if (global.debug and keyboard_check(vk_shift)) {
 			draw_set_colour(c_black)
 			draw_line_width(x + _x*bubble_size, y + _y*HEX_MUL*hex_size, x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, 5)
 			draw_text(x + _tx*bubble_size,		y + _ty*HEX_MUL*hex_size, _p1)

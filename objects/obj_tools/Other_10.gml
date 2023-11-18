@@ -2,9 +2,11 @@
 // This is where all the buttons are created
 var _sz = 1.5*40*2/sqrt(3)
 
+var _col = merge_colour(c_aqua, c_blue, 0.7);
+
 buttons =	
 	[
-		new button(room_width - 90,	50 + 0*_sz, spr_tool_wire, c_aqua, "DRAW CONNECTORS"
+		new button(room_width - 90,	50 + 0*_sz, spr_tool_wire, _col, "Draw Connectors"
 			,function(){ 
 				toggle()
 				if (active) {
@@ -15,31 +17,103 @@ buttons =
 					spell.drag_action = DRAG.CONNECTOR
 					other.deactivate_menus()
 					other.set_context(0)
+					var _wire_btn = other.context_buttons[0][4];
+					if (_wire_btn and !_wire_btn.active) {
+						_wire_btn.action();
+						//method(self, _wire_btn.action)()
+					}
 				} else {
 					//deactivate
-					method(self, other.context_buttons[0][1].action)() 
+					other.context_buttons[0][1].action();
+					//method(self, other.context_buttons[0][1].action)() 
 				}
 			}
 		),
-		new button(room_width - 50,	50 + 1*_sz, spr_add_motion, c_aqua, "Layer"
-			,function(){ y += 5 }
+			
+		
+		new button(room_width - 50,	50 + 1*_sz, spr_tool_spell, _col, "Hide Spell"
+			,function(){
+				rename(global.wind ? "Hide Spell" : "Show Spell");
+				global.wind = !global.wind 
+			}
 		),
 		//Prefabs - Save | Load | Manage | Import
-		new button(room_width - 90,	50 + 2*_sz, spr_add_motion, c_aqua, "Prefabs"
-			,function(){ x += 5 }
+		new button(room_width - 90,	50 + 2*_sz, spr_tool_force, _col, "View Force Field"
+			,function(){ 
+				rename(global.forces ? "View Force Field" : "Hide Force Field");
+				global.forces = !global.forces 
+			}
 		),
 		// Save/Load - Save | Load | Manage | Import
-		new button(room_width - 50,	50 + 3*_sz, spr_add_motion, c_aqua, "Save/Load"
-			,function(){ size += irandom(10) - 5 }
+		new button(room_width - 50,	50 + 3*_sz, spr_tool_pause, _col, "Pause Spinning"
+			,function(){
+				rename(global.pause ? "Pause Spinning" : "Unpause Spinning");
+				global.pause = !global.pause
+			}
 		),
 		// Optimize - Trim Leaves | Shorten Wires | Bake constants | Freeze
-		new button(room_width - 90,	50 + 4*_sz, spr_add_motion, c_aqua, "Optimize"
-			,function(){ image_blend += 100 }
+		new button(room_width - 90,	50 + 4*_sz, spr_tool_center, _col, "Center View"
+			,function(){ 
+				if (instance_exists(obj_spell)) { 
+					with (obj_spell) {
+						//move any menus
+						if (instance_exists(obj_menu)) {
+							with (obj_menu) {
+								x -= other.x - room_width / 2
+								y -= other.y - room_height / 2
+							}
+						} 
+						// Move Spell
+						x = room_width / 2
+						y = room_height / 2
+					} 
+				} 
+			}
 		),
 		// Compile - Test | Export | 
-		new button(room_width - 50,	50 + 5*_sz, spr_add_motion, c_aqua, "Compile"
-			,function(){ rename(name + string(string_length(name))) }
+		new button(room_width - 50,	50 + 5*_sz, spr_tool_reset, _col, "Reset"
+			,function(){
+				if (os_browser == browser_not_a_browser) {
+					// destroy menus
+					with (obj_menu) {
+						instance_destroy(self)	
+					}
+					// destroy spell
+					with (obj_spell) {
+						instance_destroy(self)	
+					}
+				
+					//// destroy tool menu
+					//instance_destroy(obj_tools)	
+				
+					// recreate spell
+					instance_create(room_width/2, room_height/2, obj_spell)
+				} else {
+					room_restart()
+				}
+			}
 		)
+		
+		
+		//new button(room_width - 50,	50 + 1*_sz, spr_add_motion, _col, "Layer"
+		//	,function(){ y += 5 }
+		//),
+		////Prefabs - Save | Load | Manage | Import
+		//new button(room_width - 90,	50 + 2*_sz, spr_add_motion, _col, "Prefabs"
+		//	,function(){ x += 5 }
+		//),
+		//// Save/Load - Save | Load | Manage | Import
+		//new button(room_width - 50,	50 + 3*_sz, spr_add_motion, _col, "Save/Load"
+		//	,function(){ size += irandom(10) - 5 }
+		//),
+		//// Optimize - Trim Leaves | Shorten Wires | Bake constants | Freeze
+		//new button(room_width - 90,	50 + 4*_sz, spr_add_motion, _col, "Optimize"
+		//	,function(){ image_blend += 100 }
+		//),
+		//// Compile - Test | Export | 
+		//new button(room_width - 50,	50 + 5*_sz, spr_add_motion, _col, "Compile"
+		//	,function(){ rename(name + string(string_length(name))) }
+		//)
 	]
 
 
@@ -108,11 +182,12 @@ context_buttons =
 					}
 				}, 30, 1, function () { return spell.drag_path_length >= spell.drag_path_length_max }
 			),
-			new button(_x - _sep,	_y + 4*_sz, spr_tool_sub_wire, c_red, "Create Wires"
+			new button(_x - _sep,	_y + 4*_sz, spr_tool_sub_wire, c_red, "Allow Wire Creation"
 				,function(){ 
 					//do stuff later
 					toggle()
 					spell.drag_empty = active
+					rename(name == "Allow Wire Creation" ? "Disallow Wire Creation" : "Allow Wire Creation" )
 				}, 30, 1
 			),
 		],

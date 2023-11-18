@@ -18,6 +18,9 @@ function macros() {
 	global.debug = DEBUG_MODE
 	global.shaders = SHADERS
 	tile_data()
+	global.wind = false;
+	global.pause = false;
+	global.forces = false;
 	#endregion globals
 
 	#region enums

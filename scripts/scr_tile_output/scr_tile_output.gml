@@ -18,7 +18,8 @@ function set_tile_output( _source, _dest) {
 		//else create it if it doesnt
 		//check for lööps brötha
 		if (!check_for_loops(_source, _dest)) {
-			new connector(_source, _dest).connect()
+			var _connector = new connector(_source, _dest);
+			_connector.connect()
 		}
 	}
 }
@@ -41,7 +42,8 @@ function force_tile_output(_source, _dest, _unsafe) {
 	
 	//check for lööps brötha
 	if (_unsafe or !check_for_loops(_source, _dest)) {
-		new connector(_source, _dest).connect()
+		var _connector = new connector(_source, _dest);
+		_connector.connect()
 	}
 }
 
@@ -58,7 +60,8 @@ function add_connector(_source, _dest, _unsafe) {
 	
 	//check for lööps brötha, then add connection
 	if (_unsafe or !check_for_loops(_source, _dest)) {
-		new connector(_source, _dest).connect()
+		var _connector = new connector(_source, _dest);
+		_connector.connect()
 		return true
 	}
 	return false

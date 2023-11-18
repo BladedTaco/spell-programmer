@@ -8,7 +8,7 @@ menu_options = ["Set Tile", "Set Output", "Set Value", "Set Ports", "Move Tile",
 menu_sprite = [spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null, spr_menu_null]
 menu_active = [true, false, false, false, false, false];
 menu_angle = [0, 0, 0, 0, 0, 0];
-menu_length = 6;
+menu_length = 5;
 
 parent = noone;
 child = noone;
@@ -41,7 +41,7 @@ init = function(_spell, _x, _y) {
 		menu_active[2] = child.variable_size; //Set Value - Counters only
 		menu_active[3] = (child.input_number > 0); //Set Ports - Takes Inputs
 		menu_active[4] = !child.immutable; //Move Tile - there is a child
-		menu_active[5] = !child.immutable; //Select Group - there is a child
+		//menu_active[5] = !child.immutable; //Select Group - there is a child
 	}
 	//get the length of the menu
 	menu_length = array_length(menu_active)
